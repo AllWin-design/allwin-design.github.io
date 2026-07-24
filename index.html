@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0E151C">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="description" content="用整季資料重建球隊評分，算出每場比賽的勝率與分差分佈。僅供資訊參考及娛樂用途。">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>WNBA 賽事預測</title>
+<style>
+:root{
+  --ink:#0E151C; --surface:#17222D; --surface2:#1E2C39;
+  --line:#2A3B49; --home:#E9A13B; --away:#45BFD6;
+  --chalk:#E9EFF3; --muted:#7C919F;
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+  --cjk:"PingFang TC","Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--ink); color:var(--chalk);
+  font-family:var(--cjk); font-size:15px; line-height:1.5;
+  padding:0 0 48px; max-width:520px; margin:0 auto;
+  -webkit-font-smoothing:antialiased;
+}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+
+header{padding:22px 18px 14px;border-bottom:1px solid var(--line)}
+.eyebrow{font-size:11px;letter-spacing:.18em;color:var(--muted);text-transform:uppercase}
+h1{font-size:25px;font-weight:800;letter-spacing:-.02em;margin-top:5px}
+h1 .d{font-family:var(--mono);color:var(--home)}
+.sub{color:var(--muted);font-size:13px;margin-top:4px}
+
+.receipt{
+  margin:14px 18px 0;padding:11px 13px;
+  background:var(--surface);border:1px solid var(--line);border-radius:9px;
+  font-size:12.5px;color:var(--muted);
+}
+.receipt b{color:var(--chalk);font-weight:600}
+.receipt .num{color:var(--home)}
+
+section{margin-top:26px}
+.shead{
+  display:flex;align-items:baseline;gap:9px;
+  padding:0 18px 9px;border-bottom:1px solid var(--line);
+}
+.shead h2{font-size:13px;font-weight:700;letter-spacing:.04em}
+.shead span{font-size:11.5px;color:var(--muted)}
+
+.card{
+  margin:12px 18px;background:var(--surface);
+  border:1px solid var(--line);border-radius:12px;overflow:hidden;
+}
+.teams{padding:15px 15px 4px}
+.row{display:flex;align-items:center;gap:10px;padding:5px 0}
+.dot{width:3px;height:19px;border-radius:2px;flex:none}
+.row.a .dot{background:var(--away)} .row.h .dot{background:var(--home)}
+.tname{flex:1;font-size:15.5px;font-weight:600;letter-spacing:-.01em}
+.tscore{font-size:19px;font-weight:700}
+.row.a .tscore{color:var(--away)} .row.h .tscore{color:var(--home)}
+
+.bar{display:flex;height:5px;margin:11px 15px 0;border-radius:3px;overflow:hidden;background:var(--surface2)}
+.bar i{display:block;height:100%}
+.bar .ba{background:var(--away)} .bar .bh{background:var(--home)}
+.barlab{display:flex;justify-content:space-between;padding:6px 15px 0;font-size:11.5px;color:var(--muted)}
+
+.curve{display:block;width:100%;height:74px;margin-top:6px}
+.axis{display:flex;justify-content:space-between;padding:0 15px 12px;font-size:10.5px;color:var(--muted)}
+
+.meta{
+  display:flex;gap:0;border-top:1px solid var(--line);background:var(--surface2);
+}
+.meta div{flex:1;padding:10px 12px;border-right:1px solid var(--line)}
+.meta div:last-child{border-right:0}
+.mk{font-size:10.5px;color:var(--muted);letter-spacing:.03em}
+.mv{font-size:14.5px;font-weight:700;margin-top:2px}
+
+.tag{
+  display:inline-block;margin:0 15px 13px;padding:3px 9px;border-radius:5px;
+  font-size:11.5px;font-weight:600;
+}
+.tag.close{background:rgba(124,145,159,.16);color:var(--muted)}
+.tag.strong{background:rgba(233,161,59,.14);color:var(--home)}
+
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{padding:9px 18px;text-align:right;border-bottom:1px solid var(--line)}
+th:first-child,td:first-child{text-align:left}
+th{font-size:11px;color:var(--muted);font-weight:500;letter-spacing:.03em}
+td.said{color:var(--muted)} td.was{color:var(--home);font-weight:700}
+
+.res{display:flex;align-items:center;gap:11px;padding:9px 18px;border-bottom:1px solid var(--line);font-size:13px}
+.res .m{width:34px;font-size:11px;color:var(--muted)}
+.res .t{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.res .s{color:var(--muted);font-size:12px}
+.res .f{width:17px;text-align:center;font-weight:700}
+.res .f.y{color:var(--home)} .res .f.n{color:var(--muted)}
+
+footer{margin:30px 18px 0;padding-top:16px;border-top:1px solid var(--line);
+  font-size:11.5px;color:var(--muted);line-height:1.65}
+footer b{color:#9db0bd;font-weight:600}
+</style>
+</head>
+<body>
+<header>
+  <div class="eyebrow">WNBA · 賽事預測</div>
+  <h1><span class="d num">7/19</span> 共 <span class="d num">3</span> 場</h1>
+  <div class="sub">用整季資料重建的球隊評分，算出每場的機率分佈</div>
+</header>
+<div class="receipt">模型說有<b>七成</b>把握的那些比賽，實際打完命中 <b class="num">100%</b>（4 場）。宣稱幾成就真的是幾成，這一欄我們攤開來給你看。</div>
+<section>
+  <div class="shead"><h2>今日賽事</h2><span>曲線越寬代表越難算</span></div>
+  
+<article class="card">
+  <div class="teams">
+    <div class="row a"><i class="dot"></i><span class="tname">Los Angeles Sparks</span>
+      <span class="tscore num">86</span></div>
+    <div class="row h"><i class="dot"></i><span class="tname">Dallas Wings</span>
+      <span class="tscore num">96</span></div>
+  </div>
+  <div class="bar"><i class="ba" style="width:23.1%"></i><i class="bh" style="width:76.9%"></i></div>
+  <div class="barlab"><span class="num">23%</span><span>勝率</span><span class="num">77%</span></div>
+  <svg class="curve" viewBox="0 0 300 74" preserveAspectRatio="none" aria-hidden="true">
+  <path d="M150.0,68.0 L150.0,23.7 L154.2,21.4 L158.3,19.2 L162.5,17.1 L166.7,15.3 L170.8,13.7 L175.0,12.4 L179.2,11.3 L183.3,10.6 L187.5,10.1 L191.7,10.0 L195.8,10.2 L200.0,10.7 L204.2,11.6 L208.3,12.7 L212.5,14.1 L216.7,15.7 L220.8,17.6 L225.0,19.7 L229.2,22.0 L233.3,24.4 L237.5,26.9 L241.7,29.4 L245.8,32.0 L250.0,34.7 L254.2,37.3 L258.3,39.8 L262.5,42.3 L266.7,44.7 L270.8,47.0 L275.0,49.1 L279.2,51.2 L283.3,53.1 L287.5,54.8 L291.7,56.5 L295.8,57.9 L300.0,59.3 L300.0,68.0 Z" fill="var(--home)" opacity=".16"/>
+  <path d="M0.0,67.8 L4.2,67.8 L8.3,67.7 L12.5,67.6 L16.7,67.6 L20.8,67.4 L25.0,67.3 L29.2,67.1 L33.3,66.9 L37.5,66.7 L41.7,66.4 L45.8,66.0 L50.0,65.6 L54.2,65.1 L58.3,64.5 L62.5,63.9 L66.7,63.1 L70.8,62.3 L75.0,61.3 L79.2,60.2 L83.3,58.9 L87.5,57.6 L91.7,56.1 L95.8,54.4 L100.0,52.6 L104.2,50.7 L108.3,48.6 L112.5,46.4 L116.7,44.1 L120.8,41.7 L125.0,39.2 L129.2,36.6 L133.3,34.0 L137.5,31.4 L141.7,28.8 L145.8,26.2 L150.0,23.7 L154.2,21.4 L158.3,19.2 L162.5,17.1 L166.7,15.3 L170.8,13.7 L175.0,12.4 L179.2,11.3 L183.3,10.6 L187.5,10.1 L191.7,10.0 L195.8,10.2 L200.0,10.7 L204.2,11.6 L208.3,12.7 L212.5,14.1 L216.7,15.7 L220.8,17.6 L225.0,19.7 L229.2,22.0 L233.3,24.4 L237.5,26.9 L241.7,29.4 L245.8,32.0 L250.0,34.7 L254.2,37.3 L258.3,39.8 L262.5,42.3 L266.7,44.7 L270.8,47.0 L275.0,49.1 L279.2,51.2 L283.3,53.1 L287.5,54.8 L291.7,56.5 L295.8,57.9 L300.0,59.3" fill="none" stroke="var(--home)" stroke-width="1.6"/>
+  <line x1="150.0" y1="4" x2="150.0" y2="68.0" stroke="var(--line)" stroke-width="1" stroke-dasharray="2 3"/>
+</svg>
+  <div class="axis"><span>客隊贏 35</span><span>平手</span><span>主隊贏 35</span></div>
+  <span class="tag strong">模型看好 Dallas Wings</span>
+  <div class="meta">
+    <div><div class="mk">預期分差</div><div class="mv num">9.6 分</div></div>
+    <div><div class="mk">預期總分</div><div class="mv num">182</div></div>
+    
+  </div>
+</article>
+<article class="card">
+  <div class="teams">
+    <div class="row a"><i class="dot"></i><span class="tname">Chicago Sky</span>
+      <span class="tscore num">85</span></div>
+    <div class="row h"><i class="dot"></i><span class="tname">Atlanta Dream</span>
+      <span class="tscore num">95</span></div>
+  </div>
+  <div class="bar"><i class="ba" style="width:24.1%"></i><i class="bh" style="width:75.9%"></i></div>
+  <div class="barlab"><span class="num">24%</span><span>勝率</span><span class="num">76%</span></div>
+  <svg class="curve" viewBox="0 0 300 74" preserveAspectRatio="none" aria-hidden="true">
+  <path d="M150.0,68.0 L150.0,22.7 L154.2,20.5 L158.3,18.4 L162.5,16.4 L166.7,14.7 L170.8,13.2 L175.0,12.0 L179.2,11.1 L183.3,10.4 L187.5,10.1 L191.7,10.0 L195.8,10.3 L200.0,10.8 L204.2,11.7 L208.3,12.8 L212.5,14.2 L216.7,15.8 L220.8,17.7 L225.0,19.7 L229.2,21.9 L233.3,24.3 L237.5,26.7 L241.7,29.2 L245.8,31.7 L250.0,34.3 L254.2,36.8 L258.3,39.3 L262.5,41.8 L266.7,44.1 L270.8,46.4 L275.0,48.6 L279.2,50.6 L283.3,52.5 L287.5,54.2 L291.7,55.9 L295.8,57.4 L300.0,58.7 L300.0,68.0 Z" fill="var(--home)" opacity=".16"/>
+  <path d="M0.0,67.8 L4.2,67.7 L8.3,67.6 L12.5,67.5 L16.7,67.4 L20.8,67.3 L25.0,67.1 L29.2,66.9 L33.3,66.6 L37.5,66.3 L41.7,66.0 L45.8,65.6 L50.0,65.1 L54.2,64.5 L58.3,63.9 L62.5,63.2 L66.7,62.3 L70.8,61.4 L75.0,60.3 L79.2,59.2 L83.3,57.8 L87.5,56.4 L91.7,54.8 L95.8,53.1 L100.0,51.2 L104.2,49.3 L108.3,47.1 L112.5,44.9 L116.7,42.6 L120.8,40.2 L125.0,37.7 L129.2,35.2 L133.3,32.6 L137.5,30.1 L141.7,27.5 L145.8,25.1 L150.0,22.7 L154.2,20.5 L158.3,18.4 L162.5,16.4 L166.7,14.7 L170.8,13.2 L175.0,12.0 L179.2,11.1 L183.3,10.4 L187.5,10.1 L191.7,10.0 L195.8,10.3 L200.0,10.8 L204.2,11.7 L208.3,12.8 L212.5,14.2 L216.7,15.8 L220.8,17.7 L225.0,19.7 L229.2,21.9 L233.3,24.3 L237.5,26.7 L241.7,29.2 L245.8,31.7 L250.0,34.3 L254.2,36.8 L258.3,39.3 L262.5,41.8 L266.7,44.1 L270.8,46.4 L275.0,48.6 L279.2,50.6 L283.3,52.5 L287.5,54.2 L291.7,55.9 L295.8,57.4 L300.0,58.7" fill="none" stroke="var(--home)" stroke-width="1.6"/>
+  <line x1="150.0" y1="4" x2="150.0" y2="68.0" stroke="var(--line)" stroke-width="1" stroke-dasharray="2 3"/>
+</svg>
+  <div class="axis"><span>客隊贏 35</span><span>平手</span><span>主隊贏 35</span></div>
+  <span class="tag strong">模型看好 Atlanta Dream</span>
+  <div class="meta">
+    <div><div class="mk">預期分差</div><div class="mv num">9.4 分</div></div>
+    <div><div class="mk">預期總分</div><div class="mv num">180</div></div>
+    
+  </div>
+</article>
+<article class="card">
+  <div class="teams">
+    <div class="row a"><i class="dot"></i><span class="tname">Connecticut Sun</span>
+      <span class="tscore num">82</span></div>
+    <div class="row h"><i class="dot"></i><span class="tname">Phoenix Mercury</span>
+      <span class="tscore num">85</span></div>
+  </div>
+  <div class="bar"><i class="ba" style="width:42.3%"></i><i class="bh" style="width:57.7%"></i></div>
+  <div class="barlab"><span class="num">42%</span><span>勝率</span><span class="num">58%</span></div>
+  <svg class="curve" viewBox="0 0 300 74" preserveAspectRatio="none" aria-hidden="true">
+  <path d="M150.0,68.0 L150.0,11.1 L154.2,10.5 L158.3,10.1 L162.5,10.0 L166.7,10.1 L170.8,10.4 L175.0,11.0 L179.2,11.7 L183.3,12.7 L187.5,13.9 L191.7,15.2 L195.8,16.8 L200.0,18.4 L204.2,20.3 L208.3,22.2 L212.5,24.2 L216.7,26.3 L220.8,28.5 L225.0,30.7 L229.2,32.9 L233.3,35.1 L237.5,37.3 L241.7,39.4 L245.8,41.6 L250.0,43.6 L254.2,45.6 L258.3,47.5 L262.5,49.3 L266.7,51.0 L270.8,52.7 L275.0,54.2 L279.2,55.6 L283.3,56.9 L287.5,58.1 L291.7,59.3 L295.8,60.3 L300.0,61.2 L300.0,68.0 Z" fill="var(--home)" opacity=".16"/>
+  <path d="M0.0,65.2 L4.2,64.7 L8.3,64.2 L12.5,63.6 L16.7,62.9 L20.8,62.2 L25.0,61.4 L29.2,60.5 L33.3,59.4 L37.5,58.3 L41.7,57.1 L45.8,55.8 L50.0,54.4 L54.2,52.9 L58.3,51.3 L62.5,49.6 L66.7,47.8 L70.8,45.9 L75.0,44.0 L79.2,41.9 L83.3,39.8 L87.5,37.7 L91.7,35.5 L95.8,33.3 L100.0,31.0 L104.2,28.8 L108.3,26.7 L112.5,24.6 L116.7,22.5 L120.8,20.6 L125.0,18.7 L129.2,17.0 L133.3,15.5 L137.5,14.1 L141.7,12.9 L145.8,11.9 L150.0,11.1 L154.2,10.5 L158.3,10.1 L162.5,10.0 L166.7,10.1 L170.8,10.4 L175.0,11.0 L179.2,11.7 L183.3,12.7 L187.5,13.9 L191.7,15.2 L195.8,16.8 L200.0,18.4 L204.2,20.3 L208.3,22.2 L212.5,24.2 L216.7,26.3 L220.8,28.5 L225.0,30.7 L229.2,32.9 L233.3,35.1 L237.5,37.3 L241.7,39.4 L245.8,41.6 L250.0,43.6 L254.2,45.6 L258.3,47.5 L262.5,49.3 L266.7,51.0 L270.8,52.7 L275.0,54.2 L279.2,55.6 L283.3,56.9 L287.5,58.1 L291.7,59.3 L295.8,60.3 L300.0,61.2" fill="none" stroke="var(--home)" stroke-width="1.6"/>
+  <line x1="150.0" y1="4" x2="150.0" y2="68.0" stroke="var(--line)" stroke-width="1" stroke-dasharray="2 3"/>
+</svg>
+  <div class="axis"><span>客隊贏 35</span><span>平手</span><span>主隊贏 35</span></div>
+  <span class="tag close">勢均力敵</span>
+  <div class="meta">
+    <div><div class="mk">預期分差</div><div class="mv num">3.0 分</div></div>
+    <div><div class="mk">預期總分</div><div class="mv num">166</div></div>
+    
+  </div>
+</article>
+</section>
+
+<section>
+  <div class="shead"><h2>信心指數準不準</h2><span>已結算 13 場</span></div>
+  <table>
+    <tr><th>模型說</th><th>場次</th><th>宣稱</th><th>實際</th></tr>
+    <tr><td>五成半上下</td><td class="num">6</td><td class="num said">54%</td><td class="num was">67%</td></tr><tr><td>七成</td><td class="num">4</td><td class="num said">75%</td><td class="num was">100%</td></tr>
+  </table>
+</section>
+
+<section>
+  <div class="shead"><h2>最近的預測</h2><span>對過答案的</span></div>
+  <div class="res"><span class="m num">07/18</span><span class="t">New York Liberty</span><span class="s num">88-108</span><span class="f n">✕</span></div><div class="res"><span class="m num">07/18</span><span class="t">Minnesota Lynx</span><span class="s num">93-101</span><span class="f y">✓</span></div><div class="res"><span class="m num">07/18</span><span class="t">Golden State Valkyries</span><span class="s num">69-74</span><span class="f y">✓</span></div><div class="res"><span class="m num">07/17</span><span class="t">Indiana Fever</span><span class="s num">107-110</span><span class="f y">✓</span></div><div class="res"><span class="m num">07/17</span><span class="t">Atlanta Dream</span><span class="s num">111-92</span><span class="f y">✓</span></div><div class="res"><span class="m num">07/17</span><span class="t">Chicago Sky</span><span class="s num">82-96</span><span class="f y">✓</span></div>
+</section>
+<footer>
+  <b>怎麼讀這些數字</b><br>
+  勝率是模型認為某隊獲勝的機率，不是保證。曲線畫的是分差可能落在哪，
+  越寬代表這場越難預測 —— 籃球單場的分差標準差大約 13 分，
+  所以就算模型看好某隊贏 10 分，實際打出 20 分或反而輸球都很常見。<br><br>
+  所有內容由統計模型與歷史數據產生，僅供資訊參考及娛樂用途。
+</footer>
+<script>
+// 註冊離線快取。用 file:// 直接開時瀏覽器不允許，靜靜略過即可。
+if ("serviceWorker" in navigator && location.protocol.startsWith("http")) {
+  window.addEventListener("load", function () {
+    navigator.serviceWorker.register("sw.js").catch(function () {});
+  });
+}
+</script>
+</body>
+</html>

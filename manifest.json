@@ -1,0 +1,35 @@
+{
+  "name": "AI 籃球賽事預測",
+  "short_name": "籃球預測",
+  "description": "用整季資料重建球隊評分，算出每場比賽的勝率與分差分佈。僅供資訊參考及娛樂用途。",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0E151C",
+  "theme_color": "#0E151C",
+  "lang": "zh-Hant",
+  "categories": [
+    "sports"
+  ],
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
