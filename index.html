@@ -25,18 +25,34 @@ body{background:var(--ink);color:var(--chalk);font-family:var(--cjk);
   -webkit-font-smoothing:antialiased}
 .num{font-family:var(--mono);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
 
-header{padding:22px 18px 14px;border-bottom:1px solid var(--line)}
+header{padding:22px 18px 12px}
 .eyebrow{font-size:11px;letter-spacing:.18em;color:var(--muted);text-transform:uppercase}
 h1{font-size:25px;font-weight:800;letter-spacing:-.02em;margin-top:5px}
 h1 .d{font-family:var(--mono);color:var(--home)}
 .sub{color:var(--muted);font-size:13px;margin-top:4px}
 
+/* 日期選擇：橫向捲動的日期籤 */
+.dates{display:flex;gap:7px;overflow-x:auto;padding:12px 18px 14px;
+  border-bottom:1px solid var(--line);scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.dates::-webkit-scrollbar{display:none}
+.chip{flex:none;padding:7px 12px;border-radius:8px;background:var(--surface);
+  border:1px solid var(--line);cursor:pointer;text-align:center;min-width:62px;
+  transition:background .12s,border-color .12s}
+.chip .cd{font-size:13px;font-weight:700;font-family:var(--mono)}
+.chip .cn{font-size:10.5px;color:var(--muted);margin-top:1px}
+.chip.on{background:rgba(233,161,59,.13);border-color:var(--home)}
+.chip.on .cd{color:var(--home)}
+.chip .cr{font-size:10.5px;margin-top:1px;letter-spacing:.5px}
+.chip .cr b{color:var(--home);font-weight:700}
+.chip .cr i{color:var(--muted);font-style:normal}
+
 .receipt{margin:14px 18px 0;padding:11px 13px;background:var(--surface);
   border:1px solid var(--line);border-radius:9px;font-size:12.5px;color:var(--muted)}
 .receipt b{color:var(--chalk);font-weight:600}
 .receipt .num{color:var(--home)}
+.receipt.warn{border-color:var(--home)}
 
-section{margin-top:26px}
+section{margin-top:24px}
 .shead{display:flex;align-items:baseline;gap:9px;padding:0 18px 9px;
   border-bottom:1px solid var(--line)}
 .shead h2{font-size:13px;font-weight:700;letter-spacing:.04em}
@@ -80,14 +96,6 @@ th:first-child,td:first-child{text-align:left}
 th{font-size:11px;color:var(--muted);font-weight:500;letter-spacing:.03em}
 td.said{color:var(--muted)}td.was{color:var(--home);font-weight:700}
 
-.res{display:flex;align-items:center;gap:11px;padding:9px 18px;
-  border-bottom:1px solid var(--line);font-size:13px}
-.res .m{width:34px;font-size:11px;color:var(--muted)}
-.res .t{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.res .s{color:var(--muted);font-size:12px}
-.res .f{width:17px;text-align:center;font-weight:700}
-.res .f.y{color:var(--home)}.res .f.n{color:var(--muted)}
-
 .deep{border-top:1px solid var(--line);background:var(--surface2);padding:13px 15px}
 .dtitle{font-size:11px;letter-spacing:.1em;color:var(--muted);margin:11px 0 7px}
 .dtitle:first-child{margin-top:0}
@@ -120,17 +128,18 @@ footer b{color:#9db0bd;font-weight:600}
 <body>
 <header>
   <div class="eyebrow">WNBA · 賽事預測</div>
-  <h1><span class="d num">7/22</span> 共 <span class="d num">6</span> 場</h1>
-  <div class="sub">今天沒有排賽，以下是最近一輪的預測</div>
-</header><div class="receipt" style="border-color:var(--home)">今天<b>沒有比賽</b>。下次有賽事時這裡會自動更新。</div>
-<div class="receipt">模型說有<b>七成</b>把握的那些比賽，實際打完命中 <b class="num">91%</b>（11 場）。宣稱幾成就真的是幾成，這一欄我們攤開來給你看。</div>
+  <h1 id="hd"></h1>
+  <div class="sub" id="sub"></div>
+</header>
+<div class="dates" id="dates"></div>
+<div id="offday"></div>
+<div id="receipt"></div>
 <section>
-  <div class="shead"><h2>最近一輪</h2><span>曲線越寬代表越難算</span></div>
-  <article class="card"><div class="teams"><div class="row a"><i class="dot"></i><span class="tname">Phoenix Mercury</span><span class="tscore num">85</span></div><div class="row h"><i class="dot"></i><span class="tname">Los Angeles Sparks</span><span class="tscore num">87</span></div></div><div class="bar"><i class="ba" style="width:45.1%"></i><i class="bh" style="width:54.9%"></i></div><div class="barlab"><span class="num">45%</span><span>勝率</span><span class="num">55%</span></div><svg class="curve" viewBox="0 0 300 74" preserveAspectRatio="none" aria-hidden="true"><path d="M150.0,68.0 L150.0,10.4 L154.2,10.1 L158.3,10.0 L162.5,10.2 L166.7,10.7 L170.8,11.5 L175.0,12.5 L179.2,13.8 L183.3,15.4 L187.5,17.1 L191.7,19.0 L195.8,21.1 L200.0,23.3 L204.2,25.6 L208.3,28.0 L212.5,30.5 L216.7,32.9 L220.8,35.4 L225.0,37.9 L229.2,40.3 L233.3,42.6 L237.5,44.9 L241.7,47.0 L245.8,49.1 L250.0,51.0 L254.2,52.8 L258.3,54.5 L262.5,56.1 L266.7,57.5 L270.8,58.8 L275.0,60.0 L279.2,61.0 L283.3,62.0 L287.5,62.9 L291.7,63.6 L295.8,64.3 L300.0,64.8 L300.0,68.0 Z" fill="var(--home)" opacity=".16"/><path d="M0.0,66.3 L4.2,66.0 L8.3,65.6 L12.5,65.1 L16.7,64.6 L20.8,63.9 L25.0,63.2 L29.2,62.4 L33.3,61.5 L37.5,60.5 L41.7,59.4 L45.8,58.2 L50.0,56.8 L54.2,55.3 L58.3,53.7 L62.5,51.9 L66.7,50.0 L70.8,48.1 L75.0,45.9 L79.2,43.7 L83.3,41.4 L87.5,39.1 L91.7,36.6 L95.8,34.2 L100.0,31.7 L104.2,29.2 L108.3,26.8 L112.5,24.4 L116.7,22.2 L120.8,20.0 L125.0,18.0 L129.2,16.2 L133.3,14.6 L137.5,13.2 L141.7,12.0 L145.8,11.1 L150.0,10.4 L154.2,10.1 L158.3,10.0 L162.5,10.2 L166.7,10.7 L170.8,11.5 L175.0,12.5 L179.2,13.8 L183.3,15.4 L187.5,17.1 L191.7,19.0 L195.8,21.1 L200.0,23.3 L204.2,25.6 L208.3,28.0 L212.5,30.5 L216.7,32.9 L220.8,35.4 L225.0,37.9 L229.2,40.3 L233.3,42.6 L237.5,44.9 L241.7,47.0 L245.8,49.1 L250.0,51.0 L254.2,52.8 L258.3,54.5 L262.5,56.1 L266.7,57.5 L270.8,58.8 L275.0,60.0 L279.2,61.0 L283.3,62.0 L287.5,62.9 L291.7,63.6 L295.8,64.3 L300.0,64.8" fill="none" stroke="var(--home)" stroke-width="1.6"/><line x1="150.0" y1="4" x2="150.0" y2="68" stroke="var(--line)" stroke-width="1" stroke-dasharray="2 3"/></svg><div class="axis"><span>客隊贏 35</span><span>平手</span><span>主隊贏 35</span></div><span class="tag close">勢均力敵</span><div class="meta"><div><div class="mk">預期分差</div><div class="mv num">1.7 分</div></div><div><div class="mk">預期總分</div><div class="mv num">172</div></div><div><div class="mk">實際比分</div><div class="mv num">86.0-82.0　沒中</div></div></div></article><article class="card"><div class="teams"><div class="row a"><i class="dot"></i><span class="tname">Minnesota Lynx</span><span class="tscore num">90</span></div><div class="row h"><i class="dot"></i><span class="tname">Seattle Storm</span><span class="tscore num">86</span></div></div><div class="bar"><i class="ba" style="width:64.5%"></i><i class="bh" style="width:35.5%"></i></div><div class="barlab"><span class="num">64%</span><span>勝率</span><span class="num">36%</span></div><svg class="curve" viewBox="0 0 300 74" preserveAspectRatio="none" aria-hidden="true"><path d="M0.0,68.0 L0.0,63.2 L4.2,62.4 L8.3,61.4 L12.5,60.4 L16.7,59.2 L20.8,57.9 L25.0,56.5 L29.2,54.9 L33.3,53.2 L37.5,51.4 L41.7,49.4 L45.8,47.3 L50.0,45.1 L54.2,42.8 L58.3,40.4 L62.5,37.9 L66.7,35.4 L70.8,32.9 L75.0,30.4 L79.2,27.8 L83.3,25.4 L87.5,23.0 L91.7,20.8 L95.8,18.6 L100.0,16.7 L104.2,15.0 L108.3,13.5 L112.5,12.2 L116.7,11.2 L120.8,10.5 L125.0,10.1 L129.2,10.0 L133.3,10.2 L137.5,10.7 L141.7,11.5 L145.8,12.5 L150.0,13.9 L150.0,68.0 Z" fill="var(--away)" opacity=".16"/><path d="M0.0,63.2 L4.2,62.4 L8.3,61.4 L12.5,60.4 L16.7,59.2 L20.8,57.9 L25.0,56.5 L29.2,54.9 L33.3,53.2 L37.5,51.4 L41.7,49.4 L45.8,47.3 L50.0,45.1 L54.2,42.8 L58.3,40.4 L62.5,37.9 L66.7,35.4 L70.8,32.9 L75.0,30.4 L79.2,27.8 L83.3,25.4 L87.5,23.0 L91.7,20.8 L95.8,18.6 L100.0,16.7 L104.2,15.0 L108.3,13.5 L112.5,12.2 L116.7,11.2 L120.8,10.5 L125.0,10.1 L129.2,10.0 L133.3,10.2 L137.5,10.7 L141.7,11.5 L145.8,12.5 L150.0,13.9 L154.2,15.4 L158.3,17.2 L162.5,19.2 L166.7,21.4 L170.8,23.7 L175.0,26.1 L179.2,28.6 L183.3,31.1 L187.5,33.6 L191.7,36.2 L195.8,38.7 L200.0,41.1 L204.2,43.5 L208.3,45.7 L212.5,47.9 L216.7,50.0 L220.8,51.9 L225.0,53.7 L229.2,55.4 L233.3,56.9 L237.5,58.3 L241.7,59.5 L245.8,60.7 L250.0,61.7 L254.2,62.6 L258.3,63.4 L262.5,64.1 L266.7,64.7 L270.8,65.2 L275.0,65.7 L279.2,66.1 L283.3,66.4 L287.5,66.7 L291.7,66.9 L295.8,67.1 L300.0,67.3" fill="none" stroke="var(--away)" stroke-width="1.6"/><line x1="150.0" y1="4" x2="150.0" y2="68" stroke="var(--line)" stroke-width="1" stroke-dasharray="2 3"/></svg><div class="axis"><span>客隊贏 35</span><span>平手</span><span>主隊贏 35</span></div><span class="tag strong">模型看好 Minnesota Lynx</span><div class="meta"><div><div class="mk">預期分差</div><div class="mv num">5.0 分</div></div><div><div class="mk">預期總分</div><div class="mv num">176</div></div><div><div class="mk">實際比分</div><div class="mv num">86.0-76.0　命中</div></div></div></article><article class="card"><div class="teams"><div class="row a"><i class="dot"></i><span class="tname">Chicago Sky</span><span class="tscore num">88</span></div><div class="row h"><i class="dot"></i><span class="tname">New York Liberty</span><span class="tscore num">89</span></div></div><div class="bar"><i class="ba" style="width:45.7%"></i><i class="bh" style="width:54.3%"></i></div><div class="barlab"><span class="num">46%</span><span>勝率</span><span class="num">54%</span></div><svg class="curve" viewBox="0 0 300 74" preserveAspectRatio="none" aria-hidden="true"><path d="M150.0,68.0 L150.0,10.3 L154.2,10.0 L158.3,10.0 L162.5,10.3 L166.7,10.9 L170.8,11.7 L175.0,12.8 L179.2,14.1 L183.3,15.6 L187.5,17.4 L191.7,19.3 L195.8,21.4 L200.0,23.6 L204.2,25.9 L208.3,28.3 L212.5,30.8 L216.7,33.2 L220.8,35.7 L225.0,38.1 L229.2,40.5 L233.3,42.8 L237.5,45.1 L241.7,47.2 L245.8,49.2 L250.0,51.1 L254.2,52.9 L258.3,54.6 L262.5,56.1 L266.7,57.6 L270.8,58.9 L275.0,60.0 L279.2,61.1 L283.3,62.0 L287.5,62.9 L291.7,63.6 L295.8,64.3 L300.0,64.8 L300.0,68.0 Z" fill="var(--home)" opacity=".16"/><path d="M0.0,66.2 L4.2,65.8 L8.3,65.4 L12.5,64.9 L16.7,64.3 L20.8,63.7 L25.0,62.9 L29.2,62.1 L33.3,61.2 L37.5,60.1 L41.7,59.0 L45.8,57.7 L50.0,56.3 L54.2,54.7 L58.3,53.1 L62.5,51.3 L66.7,49.4 L70.8,47.4 L75.0,45.2 L79.2,43.0 L83.3,40.7 L87.5,38.3 L91.7,35.9 L95.8,33.5 L100.0,31.0 L104.2,28.5 L108.3,26.2 L112.5,23.8 L116.7,21.6 L120.8,19.5 L125.0,17.5 L129.2,15.8 L133.3,14.2 L137.5,12.9 L141.7,11.8 L145.8,10.9 L150.0,10.3 L154.2,10.0 L158.3,10.0 L162.5,10.3 L166.7,10.9 L170.8,11.7 L175.0,12.8 L179.2,14.1 L183.3,15.6 L187.5,17.4 L191.7,19.3 L195.8,21.4 L200.0,23.6 L204.2,25.9 L208.3,28.3 L212.5,30.8 L216.7,33.2 L220.8,35.7 L225.0,38.1 L229.2,40.5 L233.3,42.8 L237.5,45.1 L241.7,47.2 L245.8,49.2 L250.0,51.1 L254.2,52.9 L258.3,54.6 L262.5,56.1 L266.7,57.6 L270.8,58.9 L275.0,60.0 L279.2,61.1 L283.3,62.0 L287.5,62.9 L291.7,63.6 L295.8,64.3 L300.0,64.8" fill="none" stroke="var(--home)" stroke-width="1.6"/><line x1="150.0" y1="4" x2="150.0" y2="68" stroke="var(--line)" stroke-width="1" stroke-dasharray="2 3"/></svg><div class="axis"><span>客隊贏 35</span><span>平手</span><span>主隊贏 35</span></div><span class="tag close">勢均力敵</span><div class="meta"><div><div class="mk">預期分差</div><div class="mv num">1.5 分</div></div><div><div class="mk">預期總分</div><div class="mv num">177</div></div><div><div class="mk">實際比分</div><div class="mv num">94.0-95.0　命中</div></div></div></article><article class="card"><div class="teams"><div class="row a"><i class="dot"></i><span class="tname">Las Vegas Aces</span><span class="tscore num">83</span></div><div class="row h"><i class="dot"></i><span class="tname">Washington Mystics</span><span class="tscore num">80</span></div></div><div class="bar"><i class="ba" style="width:57.2%"></i><i class="bh" style="width:42.8%"></i></div><div class="barlab"><span class="num">57%</span><span>勝率</span><span class="num">43%</span></div><svg class="curve" viewBox="0 0 300 74" preserveAspectRatio="none" aria-hidden="true"><path d="M0.0,68.0 L0.0,64.4 L4.2,63.8 L8.3,63.0 L12.5,62.2 L16.7,61.3 L20.8,60.2 L25.0,59.1 L29.2,57.8 L33.3,56.4 L37.5,54.9 L41.7,53.2 L45.8,51.4 L50.0,49.5 L54.2,47.5 L58.3,45.3 L62.5,43.1 L66.7,40.8 L70.8,38.4 L75.0,35.9 L79.2,33.5 L83.3,31.0 L87.5,28.5 L91.7,26.1 L95.8,23.8 L100.0,21.5 L104.2,19.4 L108.3,17.4 L112.5,15.7 L116.7,14.1 L120.8,12.8 L125.0,11.7 L129.2,10.8 L133.3,10.3 L137.5,10.0 L141.7,10.0 L145.8,10.4 L150.0,10.9 L150.0,68.0 Z" fill="var(--away)" opacity=".16"/><path d="M0.0,64.4 L4.2,63.8 L8.3,63.0 L12.5,62.2 L16.7,61.3 L20.8,60.2 L25.0,59.1 L29.2,57.8 L33.3,56.4 L37.5,54.9 L41.7,53.2 L45.8,51.4 L50.0,49.5 L54.2,47.5 L58.3,45.3 L62.5,43.1 L66.7,40.8 L70.8,38.4 L75.0,35.9 L79.2,33.5 L83.3,31.0 L87.5,28.5 L91.7,26.1 L95.8,23.8 L100.0,21.5 L104.2,19.4 L108.3,17.4 L112.5,15.7 L116.7,14.1 L120.8,12.8 L125.0,11.7 L129.2,10.8 L133.3,10.3 L137.5,10.0 L141.7,10.0 L145.8,10.4 L150.0,10.9 L154.2,11.8 L158.3,12.9 L162.5,14.3 L166.7,15.9 L170.8,17.7 L175.0,19.7 L179.2,21.8 L183.3,24.1 L187.5,26.4 L191.7,28.9 L195.8,31.3 L200.0,33.8 L204.2,36.3 L208.3,38.7 L212.5,41.1 L216.7,43.4 L220.8,45.7 L225.0,47.8 L229.2,49.8 L233.3,51.7 L237.5,53.5 L241.7,55.1 L245.8,56.6 L250.0,58.0 L254.2,59.3 L258.3,60.4 L262.5,61.4 L266.7,62.3 L270.8,63.2 L275.0,63.9 L279.2,64.5 L283.3,65.0 L287.5,65.5 L291.7,65.9 L295.8,66.3 L300.0,66.6" fill="none" stroke="var(--away)" stroke-width="1.6"/><line x1="150.0" y1="4" x2="150.0" y2="68" stroke="var(--line)" stroke-width="1" stroke-dasharray="2 3"/></svg><div class="axis"><span>客隊贏 35</span><span>平手</span><span>主隊贏 35</span></div><span class="tag close">勢均力敵</span><div class="meta"><div><div class="mk">預期分差</div><div class="mv num">2.5 分</div></div><div><div class="mk">預期總分</div><div class="mv num">163</div></div><div><div class="mk">實際比分</div><div class="mv num">99.0-100.0　沒中</div></div></div></article><article class="card"><div class="teams"><div class="row a"><i class="dot"></i><span class="tname">Connecticut Sun</span><span class="tscore num">83</span></div><div class="row h"><i class="dot"></i><span class="tname">Indiana Fever</span><span class="tscore num">92</span></div></div><div class="bar"><i class="ba" style="width:26.2%"></i><i class="bh" style="width:73.8%"></i></div><div class="barlab"><span class="num">26%</span><span>勝率</span><span class="num">74%</span></div><svg class="curve" viewBox="0 0 300 74" preserveAspectRatio="none" aria-hidden="true"><path d="M150.0,68.0 L150.0,20.7 L154.2,18.6 L158.3,16.7 L162.5,15.0 L166.7,13.5 L170.8,12.2 L175.0,11.3 L179.2,10.6 L183.3,10.1 L187.5,10.0 L191.7,10.2 L195.8,10.6 L200.0,11.4 L204.2,12.4 L208.3,13.6 L212.5,15.1 L216.7,16.9 L220.8,18.8 L225.0,20.9 L229.2,23.1 L233.3,25.4 L237.5,27.9 L241.7,30.3 L245.8,32.8 L250.0,35.3 L254.2,37.8 L258.3,40.2 L262.5,42.6 L266.7,44.9 L270.8,47.1 L275.0,49.1 L279.2,51.1 L283.3,52.9 L287.5,54.6 L291.7,56.2 L295.8,57.6 L300.0,58.9 L300.0,68.0 Z" fill="var(--home)" opacity=".16"/><path d="M0.0,67.7 L4.2,67.6 L8.3,67.5 L12.5,67.3 L16.7,67.2 L20.8,67.0 L25.0,66.8 L29.2,66.5 L33.3,66.2 L37.5,65.8 L41.7,65.4 L45.8,64.9 L50.0,64.3 L54.2,63.6 L58.3,62.9 L62.5,62.0 L66.7,61.1 L70.8,60.0 L75.0,58.8 L79.2,57.5 L83.3,56.0 L87.5,54.4 L91.7,52.7 L95.8,50.9 L100.0,48.9 L104.2,46.9 L108.3,44.7 L112.5,42.4 L116.7,40.0 L120.8,37.6 L125.0,35.1 L129.2,32.6 L133.3,30.1 L137.5,27.6 L141.7,25.2 L145.8,22.9 L150.0,20.7 L154.2,18.6 L158.3,16.7 L162.5,15.0 L166.7,13.5 L170.8,12.2 L175.0,11.3 L179.2,10.6 L183.3,10.1 L187.5,10.0 L191.7,10.2 L195.8,10.6 L200.0,11.4 L204.2,12.4 L208.3,13.6 L212.5,15.1 L216.7,16.9 L220.8,18.8 L225.0,20.9 L229.2,23.1 L233.3,25.4 L237.5,27.9 L241.7,30.3 L245.8,32.8 L250.0,35.3 L254.2,37.8 L258.3,40.2 L262.5,42.6 L266.7,44.9 L270.8,47.1 L275.0,49.1 L279.2,51.1 L283.3,52.9 L287.5,54.6 L291.7,56.2 L295.8,57.6 L300.0,58.9" fill="none" stroke="var(--home)" stroke-width="1.6"/><line x1="150.0" y1="4" x2="150.0" y2="68" stroke="var(--line)" stroke-width="1" stroke-dasharray="2 3"/></svg><div class="axis"><span>客隊贏 35</span><span>平手</span><span>主隊贏 35</span></div><span class="tag strong">模型看好 Indiana Fever</span><div class="meta"><div><div class="mk">預期分差</div><div class="mv num">8.7 分</div></div><div><div class="mk">預期總分</div><div class="mv num">175</div></div><div><div class="mk">實際比分</div><div class="mv num">88.0-123.0　命中</div></div></div></article><article class="card"><div class="teams"><div class="row a"><i class="dot"></i><span class="tname">Dallas Wings</span><span class="tscore num">89</span></div><div class="row h"><i class="dot"></i><span class="tname">Portland Fire</span><span class="tscore num">87</span></div></div><div class="bar"><i class="ba" style="width:54.3%"></i><i class="bh" style="width:45.7%"></i></div><div class="barlab"><span class="num">54%</span><span>勝率</span><span class="num">46%</span></div><svg class="curve" viewBox="0 0 300 74" preserveAspectRatio="none" aria-hidden="true"><path d="M0.0,68.0 L0.0,64.8 L4.2,64.3 L8.3,63.6 L12.5,62.9 L16.7,62.0 L20.8,61.1 L25.0,60.0 L29.2,58.9 L33.3,57.6 L37.5,56.1 L41.7,54.6 L45.8,52.9 L50.0,51.1 L54.2,49.2 L58.3,47.2 L62.5,45.1 L66.7,42.8 L70.8,40.5 L75.0,38.1 L79.2,35.7 L83.3,33.2 L87.5,30.8 L91.7,28.3 L95.8,25.9 L100.0,23.6 L104.2,21.4 L108.3,19.3 L112.5,17.4 L116.7,15.6 L120.8,14.1 L125.0,12.8 L129.2,11.7 L133.3,10.9 L137.5,10.3 L141.7,10.0 L145.8,10.0 L150.0,10.3 L150.0,68.0 Z" fill="var(--away)" opacity=".16"/><path d="M0.0,64.8 L4.2,64.3 L8.3,63.6 L12.5,62.9 L16.7,62.0 L20.8,61.1 L25.0,60.0 L29.2,58.9 L33.3,57.6 L37.5,56.1 L41.7,54.6 L45.8,52.9 L50.0,51.1 L54.2,49.2 L58.3,47.2 L62.5,45.1 L66.7,42.8 L70.8,40.5 L75.0,38.1 L79.2,35.7 L83.3,33.2 L87.5,30.8 L91.7,28.3 L95.8,25.9 L100.0,23.6 L104.2,21.4 L108.3,19.3 L112.5,17.4 L116.7,15.6 L120.8,14.1 L125.0,12.8 L129.2,11.7 L133.3,10.9 L137.5,10.3 L141.7,10.0 L145.8,10.0 L150.0,10.3 L154.2,10.9 L158.3,11.8 L162.5,12.9 L166.7,14.2 L170.8,15.8 L175.0,17.5 L179.2,19.5 L183.3,21.6 L187.5,23.8 L191.7,26.2 L195.8,28.5 L200.0,31.0 L204.2,33.5 L208.3,35.9 L212.5,38.3 L216.7,40.7 L220.8,43.0 L225.0,45.2 L229.2,47.4 L233.3,49.4 L237.5,51.3 L241.7,53.1 L245.8,54.7 L250.0,56.3 L254.2,57.7 L258.3,59.0 L262.5,60.1 L266.7,61.2 L270.8,62.1 L275.0,62.9 L279.2,63.7 L283.3,64.3 L287.5,64.9 L291.7,65.4 L295.8,65.8 L300.0,66.2" fill="none" stroke="var(--away)" stroke-width="1.6"/><line x1="150.0" y1="4" x2="150.0" y2="68" stroke="var(--line)" stroke-width="1" stroke-dasharray="2 3"/></svg><div class="axis"><span>客隊贏 35</span><span>平手</span><span>主隊贏 35</span></div><span class="tag close">勢均力敵</span><div class="meta"><div><div class="mk">預期分差</div><div class="mv num">1.5 分</div></div><div><div class="mk">預期總分</div><div class="mv num">176</div></div><div><div class="mk">實際比分</div><div class="mv num">101.0-97.0　命中</div></div></div></article>
+  <div class="shead"><h2 id="glabel">今日賽事</h2><span>曲線越寬代表越難算</span></div>
+  <div id="games"></div>
 </section>
 <section id="deepwrap"></section>
-<section><div class="shead"><h2>信心指數準不準</h2><span>已結算 26 場</span></div><table><tr><th>模型說</th><th>場次</th><th>宣稱</th><th>實際</th></tr><tr><td>五成半上下</td><td class="num">9</td><td class="num said">54%</td><td class="num was">67%</td></tr><tr><td>六成</td><td class="num">5</td><td class="num said">64%</td><td class="num was">40%</td></tr><tr><td>七成</td><td class="num">11</td><td class="num said">75%</td><td class="num was">91%</td></tr></table></section>
-<section><div class="shead"><h2>最近的預測</h2><span>對過答案的</span></div><div class="res"><span class="m num">07/22</span><span class="t">Los Angeles Sparks</span><span class="s num">86.0-82.0</span><span class="f n">✕</span></div><div class="res"><span class="m num">07/22</span><span class="t">Minnesota Lynx</span><span class="s num">86.0-76.0</span><span class="f y">✓</span></div><div class="res"><span class="m num">07/22</span><span class="t">New York Liberty</span><span class="s num">94.0-95.0</span><span class="f y">✓</span></div><div class="res"><span class="m num">07/22</span><span class="t">Las Vegas Aces</span><span class="s num">99.0-100.0</span><span class="f n">✕</span></div><div class="res"><span class="m num">07/22</span><span class="t">Indiana Fever</span><span class="s num">88.0-123.0</span><span class="f y">✓</span></div></section>
+<section id="calib"></section>
 <footer>
   <b>怎麼讀這些數字</b><br>
   勝率是模型認為某隊獲勝的機率，不是保證。曲線畫的是分差可能落在哪，
@@ -140,6 +149,10 @@ footer b{color:#9db0bd;font-weight:600}
 </footer>
 <script>
 var LOCKED = false;
+var DATA   = {"days":{"2026-07-14":[{"h":"Connecticut Sun","a":"Portland Fire","hp":84.8,"ap":83.6,"php":54.0,"mg":1.2,"sd":11.95,"st":1,"ok":1,"sc":"87-90"},{"h":"Toronto Tempo","a":"Washington Mystics","hp":85.7,"ap":86.5,"php":48.2,"mg":-0.8,"sd":13.5,"st":1,"ok":1,"sc":"79-62"}],"2026-07-15":[{"h":"Chicago Sky","a":"Seattle Storm","hp":86.6,"ap":84.1,"php":56.5,"mg":2.5,"sd":15.28,"st":1,"ok":1,"sc":"90-95"},{"h":"Minnesota Lynx","a":"Los Angeles Sparks","hp":95.3,"ap":85.2,"php":78.5,"mg":10.1,"sd":12.8,"st":1,"ok":1,"sc":"87-96"},{"h":"Indiana Fever","a":"Golden State Valkyries","hp":83.9,"ap":82.2,"php":54.4,"mg":1.7,"sd":15.38,"st":1,"ok":0,"sc":"88-75"}],"2026-07-16":[{"h":"Washington Mystics","a":"Portland Fire","hp":85.3,"ap":79.0,"php":68.4,"mg":6.3,"sd":13.15,"st":1,"ok":0,"sc":"75-56"},{"h":"Dallas Wings","a":"New York Liberty","hp":89.0,"ap":85.1,"php":61.2,"mg":3.9,"sd":13.71,"st":0,"ok":0,"sc":""}],"2026-07-17":[{"h":"Indiana Fever","a":"Seattle Storm","hp":92.5,"ap":84.2,"php":74.5,"mg":8.3,"sd":12.6,"st":1,"ok":1,"sc":"107-110"},{"h":"Toronto Tempo","a":"Atlanta Dream","hp":86.8,"ap":94.0,"php":29.2,"mg":-7.2,"sd":13.15,"st":1,"ok":1,"sc":"111-92"},{"h":"Chicago Sky","a":"Los Angeles Sparks","hp":92.2,"ap":90.4,"php":54.5,"mg":1.8,"sd":15.92,"st":1,"ok":1,"sc":"82-96"},{"h":"Phoenix Mercury","a":"Connecticut Sun","hp":83.9,"ap":80.0,"php":60.7,"mg":3.9,"sd":14.36,"st":1,"ok":0,"sc":"96-83"}],"2026-07-18":[{"h":"Indiana Fever","a":"New York Liberty","hp":89.6,"ap":91.0,"php":46.6,"mg":-1.4,"sd":16.41,"st":1,"ok":0,"sc":"88-108"},{"h":"Minnesota Lynx","a":"Portland Fire","hp":93.2,"ap":81.0,"php":81.9,"mg":12.2,"sd":13.38,"st":1,"ok":1,"sc":"93-101"},{"h":"Golden State Valkyries","a":"Washington Mystics","hp":78.4,"ap":69.4,"php":75.8,"mg":9.0,"sd":12.86,"st":1,"ok":1,"sc":"69-74"}],"2026-07-19":[{"h":"Dallas Wings","a":"Los Angeles Sparks","hp":93.7,"ap":85.0,"php":73.7,"mg":8.7,"sd":13.72,"st":1,"ok":1,"sc":"82.0-90.0"},{"h":"Atlanta Dream","a":"Chicago Sky","hp":92.2,"ap":86.8,"php":65.4,"mg":5.4,"sd":13.63,"st":1,"ok":1,"sc":"91.0-93.0"},{"h":"Phoenix Mercury","a":"Connecticut Sun","hp":83.2,"ap":82.1,"php":53.2,"mg":1.1,"sd":13.7,"st":1,"ok":1,"sc":"63.0-72.0"}],"2026-07-20":[{"h":"Toronto Tempo","a":"Las Vegas Aces","hp":87.3,"ap":91.9,"php":36.6,"mg":-4.6,"sd":13.43,"st":1,"ok":1,"sc":"109.0-83.0"},{"h":"Dallas Wings","a":"New York Liberty","hp":89.4,"ap":84.7,"php":63.6,"mg":4.7,"sd":13.51,"st":1,"ok":1,"sc":"99.0-98.0"},{"h":"Golden State Valkyries","a":"Washington Mystics","hp":77.8,"ap":69.2,"php":73.8,"mg":8.6,"sd":13.5,"st":1,"ok":0,"sc":"90.0-82.0"},{"h":"Seattle Storm","a":"Minnesota Lynx","hp":85.3,"ap":88.0,"php":42.4,"mg":-2.7,"sd":14.09,"st":1,"ok":1,"sc":"105.0-102.0"}],"2026-07-22":[{"h":"Los Angeles Sparks","a":"Phoenix Mercury","hp":87.0,"ap":85.3,"php":54.9,"mg":1.7,"sd":13.81,"st":1,"ok":0,"sc":"86.0-82.0"},{"h":"Seattle Storm","a":"Minnesota Lynx","hp":85.5,"ap":90.5,"php":35.5,"mg":-5.0,"sd":13.45,"st":1,"ok":1,"sc":"86.0-76.0"},{"h":"New York Liberty","a":"Chicago Sky","hp":89.4,"ap":87.9,"php":54.3,"mg":1.5,"sd":13.89,"st":1,"ok":1,"sc":"94.0-95.0"},{"h":"Washington Mystics","a":"Las Vegas Aces","hp":80.3,"ap":82.8,"php":42.8,"mg":-2.5,"sd":13.78,"st":1,"ok":0,"sc":"99.0-100.0"},{"h":"Indiana Fever","a":"Connecticut Sun","hp":91.8,"ap":83.1,"php":73.8,"mg":8.7,"sd":13.65,"st":1,"ok":1,"sc":"88.0-123.0"},{"h":"Portland Fire","a":"Dallas Wings","hp":87.4,"ap":88.9,"php":45.7,"mg":-1.5,"sd":13.89,"st":1,"ok":1,"sc":"101.0-97.0"}]},"order":["2026-07-22","2026-07-20","2026-07-19","2026-07-18","2026-07-17","2026-07-16","2026-07-15","2026-07-14"],"calibration":[{"label":"五成半上下","n":9,"said":54.2,"was":66.7},{"label":"六成","n":5,"said":64.4,"was":40.0},{"label":"七成","n":11,"said":74.9,"was":90.9}],"settled":26};
+var TODAY  = "2026-07-24";
+var PREM   = null;
+var cur    = DATA.order[0];
 
 function esc(s){
   return String(s==null?"":s).replace(/[&<>"]/g,function(c){
@@ -148,52 +161,152 @@ function esc(s){
 }
 function sign(v){ return (v>0?"+":"") + v; }
 
+/* 分差分布曲線。x 軸 -35~35 分，主隊領先為正，只填模型看好的那一側。 */
+function curveSVG(margin, sd, homeFav){
+  var W=300, H=74, LO=-35, HI=35, N=72;
+  var peak = 1/(sd*Math.sqrt(2*Math.PI)), pts=[];
+  for(var i=0;i<=N;i++){
+    var x = LO + (HI-LO)*i/N;
+    var y = Math.exp(-Math.pow(x-margin,2)/(2*sd*sd))/(sd*Math.sqrt(2*Math.PI));
+    pts.push([(x-LO)/(HI-LO)*W, H-6-(y/peak)*(H-16)]);
+  }
+  var line = "M"+pts.map(function(p){return p[0].toFixed(1)+","+p[1].toFixed(1);}).join(" L");
+  var zx = (0-LO)/(HI-LO)*W;
+  var side = pts.filter(function(p){ return homeFav ? p[0]>=zx : p[0]<=zx; });
+  var fill = "";
+  if(side.length){
+    fill = "M"+side[0][0].toFixed(1)+","+(H-6)+" L"+
+      side.map(function(p){return p[0].toFixed(1)+","+p[1].toFixed(1);}).join(" L")+
+      " L"+side[side.length-1][0].toFixed(1)+","+(H-6)+" Z";
+  }
+  var c = homeFav ? "var(--home)" : "var(--away)";
+  return '<svg class="curve" viewBox="0 0 300 74" preserveAspectRatio="none" aria-hidden="true">'+
+    '<path d="'+fill+'" fill="'+c+'" opacity=".16"/>'+
+    '<path d="'+line+'" fill="none" stroke="'+c+'" stroke-width="1.6"/>'+
+    '<line x1="'+zx.toFixed(1)+'" y1="4" x2="'+zx.toFixed(1)+'" y2="68" '+
+    'stroke="var(--line)" stroke-width="1" stroke-dasharray="2 3"/></svg>';
+}
+
+function gameCard(g){
+  var homeFav = g.mg > 0;
+  var hp = Math.max(3, Math.min(97, g.php));
+  var pick = homeFav ? g.h : g.a;
+  var tag = Math.abs(g.mg) < 4
+    ? '<span class="tag close">勢均力敵</span>'
+    : '<span class="tag strong">模型看好 '+esc(pick)+'</span>';
+  var settled = "";
+  if(g.st){
+    settled = '<div><div class="mk">實際比分</div><div class="mv num">'+
+      esc(g.sc)+'　'+(g.ok?"命中":"沒中")+'</div></div>';
+  }
+  return '<article class="card"><div class="teams">'+
+    '<div class="row a"><i class="dot"></i><span class="tname">'+esc(g.a)+
+    '</span><span class="tscore num">'+g.ap.toFixed(0)+'</span></div>'+
+    '<div class="row h"><i class="dot"></i><span class="tname">'+esc(g.h)+
+    '</span><span class="tscore num">'+g.hp.toFixed(0)+'</span></div></div>'+
+    '<div class="bar"><i class="ba" style="width:'+(100-hp).toFixed(1)+'%"></i>'+
+    '<i class="bh" style="width:'+hp.toFixed(1)+'%"></i></div>'+
+    '<div class="barlab"><span class="num">'+(100-hp).toFixed(0)+'%</span>'+
+    '<span>勝率</span><span class="num">'+hp.toFixed(0)+'%</span></div>'+
+    curveSVG(g.mg, g.sd, homeFav)+
+    '<div class="axis"><span>客隊贏 35</span><span>平手</span><span>主隊贏 35</span></div>'+
+    tag+
+    '<div class="meta">'+
+    '<div><div class="mk">預期分差</div><div class="mv num">'+Math.abs(g.mg).toFixed(1)+' 分</div></div>'+
+    '<div><div class="mk">預期總分</div><div class="mv num">'+(g.hp+g.ap).toFixed(0)+'</div></div>'+
+    settled+'</div></article>';
+}
+
+function renderChips(){
+  var html = DATA.order.map(function(d){
+    var games = DATA.days[d];
+    var done = games.filter(function(g){ return g.st; });
+    var hit  = done.filter(function(g){ return g.ok; }).length;
+    var line = done.length
+      ? '<div class="cr"><b>'+hit+'</b><i>/'+done.length+'</i></div>'
+      : '<div class="cr"><i>未開打</i></div>';
+    var md = d.slice(5).replace("-","/");
+    return '<div class="chip'+(d===cur?" on":"")+'" data-d="'+d+'">'+
+      '<div class="cd">'+md+'</div>'+
+      '<div class="cn">'+games.length+' 場</div>'+line+'</div>';
+  }).join("");
+  var box = document.getElementById("dates");
+  box.innerHTML = html;
+  box.querySelectorAll(".chip").forEach(function(el){
+    el.addEventListener("click", function(){ select(el.getAttribute("data-d")); });
+  });
+}
+
+function renderHeader(){
+  var d = cur.split("-");
+  var n = DATA.days[cur].length;
+  var isToday = cur >= TODAY;
+  document.getElementById("hd").innerHTML =
+    '<span class="d num">'+parseInt(d[1],10)+'/'+parseInt(d[2],10)+
+    '</span> 共 <span class="d num">'+n+'</span> 場';
+  document.getElementById("sub").textContent = isToday
+    ? "用整季資料重建的球隊評分，算出每場的機率分布"
+    : "以下是 "+cur+" 的預測";
+  var off = document.getElementById("offday");
+  var noneToday = !DATA.days[TODAY];
+  off.innerHTML = (isToday || !noneToday) ? "" :
+    '<div class="receipt warn">今天<b>沒有比賽</b>。下次有賽事時這裡會自動更新。</div>';
+}
+
+function renderDay(){
+  document.getElementById("games").innerHTML =
+    DATA.days[cur].map(gameCard).join("");
+  document.getElementById("glabel").textContent =
+    (cur >= TODAY) ? "今日賽事" : "當日賽事";
+  renderDeep();
+}
+
+/* ---- 深度版 ---- */
 function bucketRow(label,pct){
   var w = Math.max(0, Math.min(100, pct*2.6));
   return '<div class="bk"><span class="bl">'+esc(label)+'</span>'+
-         '<span class="bb"><i style="width:'+w.toFixed(1)+'%"></i></span>'+
-         '<span class="bv num">'+pct.toFixed(1)+'%</span></div>';
+    '<span class="bb"><i style="width:'+w.toFixed(1)+'%"></i></span>'+
+    '<span class="bv num">'+pct.toFixed(1)+'%</span></div>';
 }
 function ratingLine(name,off,def){
   if(off==null&&def==null) return "";
   return '<div class="krow"><span>'+esc(name)+'</span><b class="num">進攻 '+
-         sign(off)+'　防守 '+sign(def)+'</b></div>';
+    sign(off)+'　防守 '+sign(def)+'</b></div>';
 }
 
-function renderDeep(data){
-  var host=document.getElementById("deepwrap");
-  if(!data||!data.games||!data.games.length){ host.innerHTML=""; return; }
-  var html='<div class="shead"><h2>深度解析</h2><span>納入市場共識修正</span></div>';
+function renderDeep(){
+  var host = document.getElementById("deepwrap");
+  if(LOCKED){ host.innerHTML = lockHTML(); return; }
+  if(!PREM || !PREM.days || !PREM.days[cur]){ host.innerHTML = ""; return; }
 
-  data.games.forEach(function(g){
+  var html = '<div class="shead"><h2>深度解析</h2><span>納入市場共識修正</span></div>';
+  PREM.days[cur].forEach(function(g){
     var b=g.blend, s=[];
     s.push('<div class="dtitle">'+esc(g.away)+' ＠ '+esc(g.home)+'</div>');
     s.push('<div class="krow"><span>修正後預期比分</span><b class="num">'+
       b.away_proj.toFixed(1)+' － '+b.home_proj.toFixed(1)+'</b></div>');
     s.push('<div class="krow"><span>修正後勝率</span><b>'+esc(b.pick)+
       ' <span class="num">'+b.prob.toFixed(1)+'%</span></b></div>');
-    if(g.shift!=null&&Math.abs(g.shift)>=0.3){
+    if(g.shift!=null && Math.abs(g.shift)>=0.3){
       s.push('<div class="krow"><span>與純模型的差距</span><b class="num">'+
         sign(g.shift)+' 分</b></div>');
     }
     s.push('<div class="krow"><span>預期總分</span><b class="num">'+
       b.total.toFixed(1)+'</b></div>');
 
-    var r=g.ratings||{};
-    s.push(ratingLine(g.home,r.home_off,r.home_def));
-    s.push(ratingLine(g.away,r.away_off,r.away_def));
+    var r = g.ratings || {};
+    s.push(ratingLine(g.home, r.home_off, r.home_def));
+    s.push(ratingLine(g.away, r.away_off, r.away_def));
 
-    if(g.rest&&(g.rest.home||g.rest.away)){
+    if(g.rest && (g.rest.home || g.rest.away)){
       s.push('<div class="krow"><span>休息狀態</span><b>'+
         esc(g.home)+' '+esc(g.rest.home||"－")+'　'+
         esc(g.away)+' '+esc(g.rest.away||"－")+'</b></div>');
     }
-
-    if(g.buckets&&g.buckets.length){
+    if(g.buckets && g.buckets.length){
       s.push('<div class="dtitle">分差落在哪一區間</div>');
       s.push(g.buckets.map(function(row){ return bucketRow(row[0],row[1]); }).join(""));
     }
-
     var ih=(g.injuries&&g.injuries.home)||[], ia=(g.injuries&&g.injuries.away)||[];
     if(ih.length||ia.length){
       var t='<div class="dtitle">傷兵名單</div><div class="inj">';
@@ -201,43 +314,29 @@ function renderDeep(data){
       if(ia.length) t+='<b>'+esc(g.away)+'</b>：'+ia.map(esc).join("、");
       s.push(t+'</div>');
     }
-
-    if(g.history&&g.history.length){
-      s.push('<div class="dtitle">今天預測怎麼移動</div><div class="inj">'+
+    if(g.history && g.history.length){
+      s.push('<div class="dtitle">當天預測怎麼移動</div><div class="inj">'+
         g.history.map(function(h){
           return esc(h.t)+'　'+esc(h.winner)+' '+h.prob+'%（分差 '+sign(h.margin)+'）';
         }).join("<br>")+'</div>');
     }
-
-    html+='<article class="card"><div class="deep">'+s.join("")+'</div></article>';
+    html += '<article class="card"><div class="deep">'+s.join("")+'</div></article>';
   });
 
-  if(data.calibration&&data.calibration.length){
-    html+='<div class="shead"><h2>完整校準表</h2><span>已結算 '+data.settled+' 場</span></div>'+
+  if(PREM.calibration && PREM.calibration.length){
+    html += '<div class="shead"><h2>完整校準表</h2><span>已結算 '+PREM.settled+' 場</span></div>'+
       '<table><tr><th>模型說</th><th>場次</th><th>宣稱</th><th>實際</th></tr>'+
-      data.calibration.map(function(c){
+      PREM.calibration.map(function(c){
         return '<tr><td>'+esc(c.label)+'</td><td class="num">'+c.n+
           '</td><td class="num said">'+c.said.toFixed(0)+'%</td>'+
           '<td class="num was">'+c.was.toFixed(0)+'%</td></tr>';
       }).join("")+'</table>';
   }
-
-  if(data.results&&data.results.length){
-    html+='<div class="shead"><h2>全部歷史</h2><span>'+data.results.length+' 場</span></div>'+
-      data.results.map(function(r){
-        return '<div class="res"><span class="m num">'+esc(r.date)+'</span>'+
-          '<span class="t">'+esc(r.pick)+'</span>'+
-          '<span class="s num">'+esc(r.score)+'</span>'+
-          '<span class="f '+(r.ok?"y":"n")+'">'+(r.ok?"✓":"✕")+'</span></div>';
-      }).join("");
-  }
-
-  host.innerHTML=html;
+  host.innerHTML = html;
 }
 
-function renderLock(){
-  document.getElementById("deepwrap").innerHTML=
-    '<div class="shead"><h2>深度解析</h2><span>進階內容</span></div>'+
+function lockHTML(){
+  return '<div class="shead"><h2>深度解析</h2><span>進階內容</span></div>'+
     '<div class="lock"><h3>看得更深一層</h3>'+
     '<p>免費版是模型自己的判斷。深度解析再加上市場共識修正，以及每場的完整拆解。</p>'+
     '<ul><li>納入市場共識後的修正預測</li>'+
@@ -246,15 +345,41 @@ function renderLock(){
     '<li>休息天數與背靠背</li>'+
     '<li>傷兵名單</li>'+
     '<li>當天預測的移動軌跡</li>'+
-    '<li>完整校準表與全部歷史戰績</li></ul></div>';
+    '<li>完整校準表</li></ul></div>';
 }
 
-if(LOCKED){
-  renderLock();
-}else{
+function renderCalib(){
+  if(!DATA.calibration || !DATA.calibration.length) return;
+  document.getElementById("calib").innerHTML =
+    '<div class="shead"><h2>信心指數準不準</h2><span>已結算 '+DATA.settled+' 場</span></div>'+
+    '<table><tr><th>模型說</th><th>場次</th><th>宣稱</th><th>實際</th></tr>'+
+    DATA.calibration.map(function(c){
+      return '<tr><td>'+esc(c.label)+'</td><td class="num">'+c.n+
+        '</td><td class="num said">'+c.said.toFixed(0)+'%</td>'+
+        '<td class="num was">'+c.was.toFixed(0)+'%</td></tr>';
+    }).join("")+'</table>';
+
+  var pool = DATA.calibration.filter(function(c){ return c.n>=4; });
+  if(!pool.length) pool = DATA.calibration;
+  var best = pool.reduce(function(a,b){ return b.said>a.said?b:a; });
+  document.getElementById("receipt").innerHTML =
+    '<div class="receipt">模型說有<b>'+esc(best.label)+'</b>把握的那些比賽，實際打完命中 '+
+    '<b class="num">'+best.was.toFixed(0)+'%</b>（'+best.n+' 場）。'+
+    '宣稱幾成就真的是幾成，這一欄我們攤開來給你看。</div>';
+}
+
+function select(d){
+  cur = d;
+  renderChips(); renderHeader(); renderDay();
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+
+renderChips(); renderHeader(); renderDay(); renderCalib();
+
+if(!LOCKED){
   fetch("premium.json?v="+Date.now())
     .then(function(r){ return r.ok?r.json():null; })
-    .then(function(d){ if(d) renderDeep(d); })
+    .then(function(d){ if(d){ PREM=d; renderDeep(); } })
     .catch(function(){});
 }
 
