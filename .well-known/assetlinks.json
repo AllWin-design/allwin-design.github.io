@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "io.github.allwin_design.twa",
+        "sha256_cert_fingerprints": ["E2:35:2B:CF:37:8F:BD:02:86:95:D5:C0:BB:CC:64:DB:8A:CE:F3:84:73:C7:5D:F5:A4:D3:BA:E5:61:0F:DA:53"]
+      }
+    }]
