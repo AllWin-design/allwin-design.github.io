@@ -122,6 +122,7 @@ td.said{color:var(--muted)}td.was{color:var(--home);font-weight:700}
 .lock li{padding:3px 0 3px 16px;position:relative}
 .lock li:before{content:"·";position:absolute;left:5px;color:var(--home)}
 
+.rec{font-size:11px;color:var(--muted);flex:none;margin-right:2px}
 .tname.tap{cursor:pointer;border-bottom:1px dotted rgba(124,145,159,.5)}
 .thead{display:flex;align-items:center;gap:10px;margin:14px 18px 0;padding:10px 12px;
   background:var(--surface);border:1px solid var(--line);border-radius:9px;
@@ -170,9 +171,10 @@ footer b{color:#9db0bd;font-weight:600}
 </footer>
 <script>
 var LOCKED = false;
-var DATA   = {"days":{"2026-07-14":[{"h":"Connecticut Sun","a":"Portland Fire","hp":84.8,"ap":83.6,"php":54.0,"mg":1.2,"sd":11.95,"st":1,"ok":1,"sc":"87-90"},{"h":"Toronto Tempo","a":"Washington Mystics","hp":85.7,"ap":86.5,"php":48.2,"mg":-0.8,"sd":13.5,"st":1,"ok":1,"sc":"79-62"}],"2026-07-15":[{"h":"Chicago Sky","a":"Seattle Storm","hp":86.6,"ap":84.1,"php":56.5,"mg":2.5,"sd":15.28,"st":1,"ok":1,"sc":"90-95"},{"h":"Minnesota Lynx","a":"Los Angeles Sparks","hp":95.3,"ap":85.2,"php":78.5,"mg":10.1,"sd":12.8,"st":1,"ok":1,"sc":"87-96"},{"h":"Indiana Fever","a":"Golden State Valkyries","hp":83.9,"ap":82.2,"php":54.4,"mg":1.7,"sd":15.38,"st":1,"ok":0,"sc":"88-75"}],"2026-07-16":[{"h":"Washington Mystics","a":"Portland Fire","hp":85.3,"ap":79.0,"php":68.4,"mg":6.3,"sd":13.15,"st":1,"ok":0,"sc":"75-56"},{"h":"Dallas Wings","a":"New York Liberty","hp":89.0,"ap":85.1,"php":61.2,"mg":3.9,"sd":13.71,"st":0,"ok":0,"sc":""}],"2026-07-17":[{"h":"Indiana Fever","a":"Seattle Storm","hp":92.5,"ap":84.2,"php":74.5,"mg":8.3,"sd":12.6,"st":1,"ok":1,"sc":"107-110"},{"h":"Toronto Tempo","a":"Atlanta Dream","hp":86.8,"ap":94.0,"php":29.2,"mg":-7.2,"sd":13.15,"st":1,"ok":1,"sc":"111-92"},{"h":"Chicago Sky","a":"Los Angeles Sparks","hp":92.2,"ap":90.4,"php":54.5,"mg":1.8,"sd":15.92,"st":1,"ok":1,"sc":"82-96"},{"h":"Phoenix Mercury","a":"Connecticut Sun","hp":83.9,"ap":80.0,"php":60.7,"mg":3.9,"sd":14.36,"st":1,"ok":0,"sc":"96-83"}],"2026-07-18":[{"h":"Indiana Fever","a":"New York Liberty","hp":89.6,"ap":91.0,"php":46.6,"mg":-1.4,"sd":16.41,"st":1,"ok":0,"sc":"88-108"},{"h":"Minnesota Lynx","a":"Portland Fire","hp":93.2,"ap":81.0,"php":81.9,"mg":12.2,"sd":13.38,"st":1,"ok":1,"sc":"93-101"},{"h":"Golden State Valkyries","a":"Washington Mystics","hp":78.4,"ap":69.4,"php":75.8,"mg":9.0,"sd":12.86,"st":1,"ok":1,"sc":"69-74"}],"2026-07-19":[{"h":"Dallas Wings","a":"Los Angeles Sparks","hp":93.7,"ap":85.0,"php":73.7,"mg":8.7,"sd":13.72,"st":1,"ok":1,"sc":"82.0-90.0"},{"h":"Atlanta Dream","a":"Chicago Sky","hp":92.2,"ap":86.8,"php":65.4,"mg":5.4,"sd":13.63,"st":1,"ok":1,"sc":"91.0-93.0"},{"h":"Phoenix Mercury","a":"Connecticut Sun","hp":83.2,"ap":82.1,"php":53.2,"mg":1.1,"sd":13.7,"st":1,"ok":1,"sc":"63.0-72.0"}],"2026-07-20":[{"h":"Toronto Tempo","a":"Las Vegas Aces","hp":87.3,"ap":91.9,"php":36.6,"mg":-4.6,"sd":13.43,"st":1,"ok":1,"sc":"109.0-83.0"},{"h":"Dallas Wings","a":"New York Liberty","hp":89.4,"ap":84.7,"php":63.6,"mg":4.7,"sd":13.51,"st":1,"ok":1,"sc":"99.0-98.0"},{"h":"Golden State Valkyries","a":"Washington Mystics","hp":77.8,"ap":69.2,"php":73.8,"mg":8.6,"sd":13.5,"st":1,"ok":0,"sc":"90.0-82.0"},{"h":"Seattle Storm","a":"Minnesota Lynx","hp":85.3,"ap":88.0,"php":42.4,"mg":-2.7,"sd":14.09,"st":1,"ok":1,"sc":"105.0-102.0"}],"2026-07-22":[{"h":"Los Angeles Sparks","a":"Phoenix Mercury","hp":87.0,"ap":85.3,"php":54.9,"mg":1.7,"sd":13.81,"st":1,"ok":0,"sc":"86.0-82.0"},{"h":"Seattle Storm","a":"Minnesota Lynx","hp":85.5,"ap":90.5,"php":35.5,"mg":-5.0,"sd":13.45,"st":1,"ok":1,"sc":"86.0-76.0"},{"h":"New York Liberty","a":"Chicago Sky","hp":89.4,"ap":87.9,"php":54.3,"mg":1.5,"sd":13.89,"st":1,"ok":1,"sc":"94.0-95.0"},{"h":"Washington Mystics","a":"Las Vegas Aces","hp":80.3,"ap":82.8,"php":42.8,"mg":-2.5,"sd":13.78,"st":1,"ok":0,"sc":"99.0-100.0"},{"h":"Indiana Fever","a":"Connecticut Sun","hp":91.8,"ap":83.1,"php":73.8,"mg":8.7,"sd":13.65,"st":1,"ok":1,"sc":"88.0-123.0"},{"h":"Portland Fire","a":"Dallas Wings","hp":87.4,"ap":88.9,"php":45.7,"mg":-1.5,"sd":13.89,"st":1,"ok":1,"sc":"101.0-97.0"}]},"order":["2026-07-22","2026-07-20","2026-07-19","2026-07-18","2026-07-17","2026-07-16","2026-07-15","2026-07-14"],"calibration":[{"label":"五成半上下","n":9,"said":54.2,"was":66.7},{"label":"六成","n":5,"said":64.4,"was":40.0},{"label":"七成","n":11,"said":74.9,"was":90.9}],"settled":26,"strata":[{"label":"看好主隊","n":17,"rate":70.6},{"label":"看好客隊","n":9,"rate":77.8},{"label":"大熱門 65%以上","n":14,"rate":85.7},{"label":"勢均力敵 58%以下","n":9,"rate":66.7}],"rolling":[{"at":"07/20","rate":75.0},{"at":"07/22","rate":70.0}]};
+var DATA   = {"days":{"2026-07-14":[{"h":"Connecticut Sun","a":"Portland Fire","hp":84.8,"ap":83.6,"php":54.0,"mg":1.2,"sd":11.95,"st":1,"ok":1,"sc":"87-90"},{"h":"Toronto Tempo","a":"Washington Mystics","hp":85.7,"ap":86.5,"php":48.2,"mg":-0.8,"sd":13.5,"st":1,"ok":1,"sc":"79-62"}],"2026-07-15":[{"h":"Chicago Sky","a":"Seattle Storm","hp":86.6,"ap":84.1,"php":56.5,"mg":2.5,"sd":15.28,"st":1,"ok":1,"sc":"90-95"},{"h":"Minnesota Lynx","a":"Los Angeles Sparks","hp":95.3,"ap":85.2,"php":78.5,"mg":10.1,"sd":12.8,"st":1,"ok":1,"sc":"87-96"},{"h":"Indiana Fever","a":"Golden State Valkyries","hp":83.9,"ap":82.2,"php":54.4,"mg":1.7,"sd":15.38,"st":1,"ok":0,"sc":"88-75"}],"2026-07-16":[{"h":"Washington Mystics","a":"Portland Fire","hp":85.3,"ap":79.0,"php":68.4,"mg":6.3,"sd":13.15,"st":1,"ok":0,"sc":"75-56"},{"h":"Dallas Wings","a":"New York Liberty","hp":89.0,"ap":85.1,"php":61.2,"mg":3.9,"sd":13.71,"st":0,"ok":0,"sc":""}],"2026-07-17":[{"h":"Indiana Fever","a":"Seattle Storm","hp":92.5,"ap":84.2,"php":74.5,"mg":8.3,"sd":12.6,"st":1,"ok":1,"sc":"107-110"},{"h":"Toronto Tempo","a":"Atlanta Dream","hp":86.8,"ap":94.0,"php":29.2,"mg":-7.2,"sd":13.15,"st":1,"ok":1,"sc":"111-92"},{"h":"Chicago Sky","a":"Los Angeles Sparks","hp":92.2,"ap":90.4,"php":54.5,"mg":1.8,"sd":15.92,"st":1,"ok":1,"sc":"82-96"},{"h":"Phoenix Mercury","a":"Connecticut Sun","hp":83.9,"ap":80.0,"php":60.7,"mg":3.9,"sd":14.36,"st":1,"ok":0,"sc":"96-83"}],"2026-07-18":[{"h":"Indiana Fever","a":"New York Liberty","hp":89.6,"ap":91.0,"php":46.6,"mg":-1.4,"sd":16.41,"st":1,"ok":0,"sc":"88-108"},{"h":"Minnesota Lynx","a":"Portland Fire","hp":93.2,"ap":81.0,"php":81.9,"mg":12.2,"sd":13.38,"st":1,"ok":1,"sc":"93-101"},{"h":"Golden State Valkyries","a":"Washington Mystics","hp":78.4,"ap":69.4,"php":75.8,"mg":9.0,"sd":12.86,"st":1,"ok":1,"sc":"69-74"}],"2026-07-19":[{"h":"Dallas Wings","a":"Los Angeles Sparks","hp":93.7,"ap":85.0,"php":73.7,"mg":8.7,"sd":13.72,"st":1,"ok":1,"sc":"82.0-90.0"},{"h":"Atlanta Dream","a":"Chicago Sky","hp":92.2,"ap":86.8,"php":65.4,"mg":5.4,"sd":13.63,"st":1,"ok":1,"sc":"91.0-93.0"},{"h":"Phoenix Mercury","a":"Connecticut Sun","hp":83.2,"ap":82.1,"php":53.2,"mg":1.1,"sd":13.7,"st":1,"ok":1,"sc":"63.0-72.0"}],"2026-07-20":[{"h":"Toronto Tempo","a":"Las Vegas Aces","hp":87.3,"ap":91.9,"php":36.6,"mg":-4.6,"sd":13.43,"st":1,"ok":1,"sc":"109.0-83.0"},{"h":"Dallas Wings","a":"New York Liberty","hp":89.4,"ap":84.7,"php":63.6,"mg":4.7,"sd":13.51,"st":1,"ok":1,"sc":"99.0-98.0"},{"h":"Golden State Valkyries","a":"Washington Mystics","hp":77.8,"ap":69.2,"php":73.8,"mg":8.6,"sd":13.5,"st":1,"ok":0,"sc":"90.0-82.0"},{"h":"Seattle Storm","a":"Minnesota Lynx","hp":85.3,"ap":88.0,"php":42.4,"mg":-2.7,"sd":14.09,"st":1,"ok":1,"sc":"105.0-102.0"}],"2026-07-22":[{"h":"Los Angeles Sparks","a":"Phoenix Mercury","hp":87.0,"ap":85.3,"php":54.9,"mg":1.7,"sd":13.81,"st":1,"ok":0,"sc":"86.0-82.0"},{"h":"Seattle Storm","a":"Minnesota Lynx","hp":85.5,"ap":90.5,"php":35.5,"mg":-5.0,"sd":13.45,"st":1,"ok":1,"sc":"86.0-76.0"},{"h":"New York Liberty","a":"Chicago Sky","hp":89.4,"ap":87.9,"php":54.3,"mg":1.5,"sd":13.89,"st":1,"ok":1,"sc":"94.0-95.0"},{"h":"Washington Mystics","a":"Las Vegas Aces","hp":80.3,"ap":82.8,"php":42.8,"mg":-2.5,"sd":13.78,"st":1,"ok":0,"sc":"99.0-100.0"},{"h":"Indiana Fever","a":"Connecticut Sun","hp":91.8,"ap":83.1,"php":73.8,"mg":8.7,"sd":13.65,"st":1,"ok":1,"sc":"88.0-123.0"},{"h":"Portland Fire","a":"Dallas Wings","hp":87.4,"ap":88.9,"php":45.7,"mg":-1.5,"sd":13.89,"st":1,"ok":1,"sc":"101.0-97.0"}]},"order":["2026-07-22","2026-07-20","2026-07-19","2026-07-18","2026-07-17","2026-07-16","2026-07-15","2026-07-14"],"calibration":[{"label":"五成半上下","n":9,"said":54.2,"was":66.7},{"label":"六成","n":5,"said":64.4,"was":40.0},{"label":"七成","n":11,"said":74.9,"was":90.9}],"settled":26,"strata":[{"label":"看好主隊","n":17,"rate":70.6},{"label":"看好客隊","n":9,"rate":77.8},{"label":"大熱門 65%以上","n":14,"rate":85.7},{"label":"勢均力敵 58%以下","n":9,"rate":66.7}],"rolling":[{"at":"07/20","rate":75.0},{"at":"07/22","rate":70.0}],"records":{"Indiana Fever":{"w":19,"l":11,"pf":95.7,"pa":88.7},"Minnesota Lynx":{"w":25,"l":6,"pf":90.3,"pa":81.6},"Golden State Valkyries":{"w":20,"l":8,"pf":81.8,"pa":76.4},"Las Vegas Aces":{"w":19,"l":10,"pf":90.7,"pa":86.8},"Dallas Wings":{"w":20,"l":9,"pf":90.8,"pa":85.9},"Atlanta Dream":{"w":17,"l":11,"pf":88.6,"pa":84.9},"New York Liberty":{"w":17,"l":13,"pf":88.4,"pa":86.3},"Chicago Sky":{"w":9,"l":20,"pf":87.8,"pa":90.3},"Washington Mystics":{"w":15,"l":13,"pf":80.3,"pa":82.5},"Phoenix Mercury":{"w":12,"l":18,"pf":83.9,"pa":86.2},"Portland Fire":{"w":11,"l":18,"pf":84.8,"pa":90.4},"Seattle Storm":{"w":7,"l":24,"pf":82.0,"pa":86.5},"Los Angeles Sparks":{"w":12,"l":16,"pf":88.2,"pa":91.6},"Connecticut Sun":{"w":8,"l":21,"pf":79.7,"pa":86.5},"Toronto Tempo":{"w":10,"l":18,"pf":87.3,"pa":91.9}}};
 var TODAY  = "2026-07-25";
-var BUILD  = "202607251318";   /* 每次產生網站都會變，當作 premium.json 的快取版號 */
+var BUILD  = "202607251347";   /* 每次產生網站都會變，當作快取版號 */
+var API    = "";     /* 空字串＝讀同目錄的 premium.json；有值＝走驗證端點 */
 var PREM   = null;
 var cur    = DATA.order[0];
 
@@ -248,6 +250,12 @@ function gameCard(g){
     settled = '<div><div class="mk">實際比分</div><div class="mv num">'+
       esc(g.sc)+'　'+(g.ok?"命中":"沒中")+'</div></div>';
   }
+  var R = DATA.records || {};
+  function recLine(name){
+    var r = R[name];
+    if(!r) return "";
+    return '<span class="rec num">'+r.w+'勝'+r.l+'敗</span>';
+  }
   var extra = "";
   if(g.hf || g.af || g.h2h){
     extra = '<div class="deep">';
@@ -265,9 +273,9 @@ function gameCard(g){
   }
   return '<article class="card"><div class="teams">'+
     '<div class="row a"><i class="dot"></i><span class="tname tap" data-team="'+esc(g.a)+
-    '">'+esc(g.a)+'</span><span class="tscore num">'+g.ap.toFixed(0)+'</span></div>'+
+    '">'+esc(g.a)+'</span>'+recLine(g.a)+'<span class="tscore num">'+g.ap.toFixed(0)+'</span></div>'+
     '<div class="row h"><i class="dot"></i><span class="tname tap" data-team="'+esc(g.h)+
-    '">'+esc(g.h)+'</span><span class="tscore num">'+g.hp.toFixed(0)+'</span></div></div>'+
+    '">'+esc(g.h)+'</span>'+recLine(g.h)+'<span class="tscore num">'+g.hp.toFixed(0)+'</span></div></div>'+
     '<div class="bar"><i class="ba" style="width:'+(100-hp).toFixed(1)+'%"></i>'+
     '<i class="bh" style="width:'+hp.toFixed(1)+'%"></i></div>'+
     '<div class="barlab"><span class="num">'+(100-hp).toFixed(0)+'%</span>'+
@@ -543,6 +551,37 @@ function renderDeep(){
         '</b> 個回合、每百回合 <b class="num">'+L.avg_rtg+
         '</b> 分。節奏欄位是該隊每場的回合數，數字大代表打得快。</div>';
     }
+
+    /* 戰績與主客分離 */
+    if(L.teams.some(function(t){ return t.w!=null; })){
+      html += '<div class="shead"><h2>戰績與主客表現</h2><span>主客判若兩隊的球隊值得留意</span></div>'+
+        '<table><tr><th>球隊</th><th>戰績</th><th>得/失</th><th>主場</th><th>客場</th></tr>'+
+        L.teams.filter(function(t){ return t.w!=null; }).map(function(t){
+          function wl(x){ return x ? x.w+"-"+x.l : "－"; }
+          return '<tr><td>'+esc(t.team)+'</td>'+
+            '<td class="num was">'+t.w+'-'+t.l+'</td>'+
+            '<td class="num">'+t.pf.toFixed(1)+'/'+t.pa.toFixed(1)+'</td>'+
+            '<td class="num">'+wl(t.home)+'</td>'+
+            '<td class="num">'+wl(t.away)+'</td></tr>';
+        }).join("")+'</table>';
+    }
+
+    /* 四要素：籃球分析描述一支球隊的標準框架 */
+    if(L.teams.some(function(t){ return t.ff; })){
+      html += '<div class="shead"><h2>四要素</h2><span>進攻／防守各四個維度</span></div>'+
+        '<table><tr><th>球隊</th><th>命中率</th><th>失誤率</th><th>進攻籃板</th><th>罰球率</th></tr>'+
+        L.teams.filter(function(t){ return t.ff; }).map(function(t){
+          var f=t.ff;
+          return '<tr><td>'+esc(t.team)+'</td>'+
+            '<td class="num was">'+(f.efg!=null?f.efg.toFixed(1):"－")+'</td>'+
+            '<td class="num">'+(f.tov!=null?f.tov.toFixed(1):"－")+'</td>'+
+            '<td class="num">'+(f.oreb!=null?f.oreb.toFixed(1):"－")+'</td>'+
+            '<td class="num">'+(f.ftr!=null?f.ftr.toFixed(1):"－")+'</td></tr>';
+        }).join("")+'</table>'+
+        '<div class="receipt">命中率是把三分算 1.5 顆的有效命中率；失誤率是每百回合失誤數；'+
+        '進攻籃板率是自家進攻籃板佔可搶籃板的比例。'+
+        '<b>兩隊綜合評分一樣，靠的可能是完全不同的東西</b> —— 這張表看得出打法。</div>';
+    }
   }
 
   var rep = PREM.league && PREM.league.model_report;
@@ -606,6 +645,8 @@ function lockHTML(){
     '<li>缺陣影響：換算成缺掉多少場均得分</li>'+
     '<li>當天預測的移動軌跡</li>'+
     '<li>全聯盟實力評分與節奏排行</li>'+
+    '<li>戰績與主客場分離表現</li>'+
+    '<li>四要素：命中率／失誤率／進攻籃板／罰球率</li>'+
     '<li>模型自我檢驗：走勢前推回測的完整成績</li>'+
     '<li>偏誤漂移分析與回測走勢圖</li>'+
     '<li>完整校準表</li></ul></div>';
@@ -660,12 +701,49 @@ function select(d){
 
 renderChips(); renderHeader(); renderDay(); renderStrata(); renderCalib();
 
-if(!LOCKED){
-  fetch("premium.json?v="+BUILD)
-    .then(function(r){ return r.ok?r.json():null; })
-    .then(function(d){ if(d){ PREM=d; renderDeep(); } })
-    .catch(function(){});
+/* 取得付費內容。
+   API 模式下資料不在公開網站上 —— 要先拿 Google Play 的購買憑證，
+   由後端驗證通過才會回傳。沒買過就顯示上鎖畫面。 */
+function getPurchaseToken(){
+  /* Digital Goods API：TWA 裡向 Google Play 問「這個人買過嗎」。
+     一般瀏覽器沒有這個 API，直接視為未購買。 */
+  if(!("getDigitalGoodsService" in window)) return Promise.resolve(null);
+  return window.getDigitalGoodsService("https://play.google.com/billing")
+    .then(function(svc){
+      if(!svc || !svc.listPurchases) return null;
+      return svc.listPurchases().then(function(list){
+        return (list && list.length) ? (list[0].purchaseToken || null) : null;
+      });
+    })
+    .catch(function(){ return null; });
 }
+
+function loadPremium(){
+  if(LOCKED){ renderDeep(); return; }
+
+  if(!API){
+    fetch("premium.json?v="+BUILD)
+      .then(function(r){ return r.ok?r.json():null; })
+      .then(function(d){ if(d){ PREM=d; renderDeep(); } })
+      .catch(function(){});
+    return;
+  }
+
+  /* 先顯示上鎖畫面，驗證通過再換掉 */
+  document.getElementById("deepwrap").innerHTML = lockHTML();
+  getPurchaseToken().then(function(token){
+    if(!token) return null;
+    return fetch(API, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({token: token, v: BUILD})
+    }).then(function(r){ return r.ok ? r.json() : null; });
+  }).then(function(d){
+    if(d){ PREM = d; renderDeep(); }
+  }).catch(function(){});
+}
+
+loadPremium();
 
 if("serviceWorker" in navigator && location.protocol.indexOf("http")===0){
   window.addEventListener("load",function(){
