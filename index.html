@@ -122,6 +122,23 @@ td.said{color:var(--muted)}td.was{color:var(--home);font-weight:700}
 .lock li{padding:3px 0 3px 16px;position:relative}
 .lock li:before{content:"·";position:absolute;left:5px;color:var(--home)}
 
+.tname.tap{cursor:pointer;border-bottom:1px dotted rgba(124,145,159,.5)}
+.thead{display:flex;align-items:center;gap:10px;margin:14px 18px 0;padding:10px 12px;
+  background:var(--surface);border:1px solid var(--line);border-radius:9px;
+  font-size:12.5px;color:var(--muted)}
+.thead b{color:var(--home)}
+.back{background:none;border:1px solid var(--line);color:var(--chalk);
+  border-radius:7px;padding:5px 9px;font-size:12px;cursor:pointer;font-family:inherit}
+.gdate{margin:16px 18px -4px;font-size:11.5px;color:var(--muted);letter-spacing:.05em}
+
+.form{display:flex;align-items:center;gap:5px;flex-wrap:wrap;padding:2px 0 4px}
+.fm{display:inline-block;width:22px;text-align:center;font-size:11px;font-weight:700;
+  padding:2px 0;border-radius:4px}
+.fm.w{background:rgba(233,161,59,.18);color:var(--home)}
+.fm.l{background:rgba(124,145,159,.14);color:var(--muted)}
+.fmn{font-size:11px;color:var(--muted);margin-left:4px}
+.spark{display:block;width:calc(100% - 36px);height:52px;margin:12px 18px 0}
+
 footer{margin:30px 18px 0;padding-top:16px;border-top:1px solid var(--line);
   font-size:11.5px;color:var(--muted);line-height:1.65}
 footer b{color:#9db0bd;font-weight:600}
@@ -136,11 +153,13 @@ footer b{color:#9db0bd;font-weight:600}
 <div class="dates" id="dates"></div>
 <div id="offday"></div>
 <div id="receipt"></div>
+<div id="teamhead"></div>
 <section>
   <div class="shead"><h2 id="glabel">今日賽事</h2><span>曲線越寬代表越難算</span></div>
   <div id="games"></div>
 </section>
 <section id="deepwrap"></section>
+<section id="strata"></section>
 <section id="calib"></section>
 <footer>
   <b>怎麼讀這些數字</b><br>
@@ -151,9 +170,9 @@ footer b{color:#9db0bd;font-weight:600}
 </footer>
 <script>
 var LOCKED = false;
-var DATA   = {"days":{"2026-07-14":[{"h":"Connecticut Sun","a":"Portland Fire","hp":84.8,"ap":83.6,"php":54.0,"mg":1.2,"sd":11.95,"st":1,"ok":1,"sc":"87-90"},{"h":"Toronto Tempo","a":"Washington Mystics","hp":85.7,"ap":86.5,"php":48.2,"mg":-0.8,"sd":13.5,"st":1,"ok":1,"sc":"79-62"}],"2026-07-15":[{"h":"Chicago Sky","a":"Seattle Storm","hp":86.6,"ap":84.1,"php":56.5,"mg":2.5,"sd":15.28,"st":1,"ok":1,"sc":"90-95"},{"h":"Minnesota Lynx","a":"Los Angeles Sparks","hp":95.3,"ap":85.2,"php":78.5,"mg":10.1,"sd":12.8,"st":1,"ok":1,"sc":"87-96"},{"h":"Indiana Fever","a":"Golden State Valkyries","hp":83.9,"ap":82.2,"php":54.4,"mg":1.7,"sd":15.38,"st":1,"ok":0,"sc":"88-75"}],"2026-07-16":[{"h":"Washington Mystics","a":"Portland Fire","hp":85.3,"ap":79.0,"php":68.4,"mg":6.3,"sd":13.15,"st":1,"ok":0,"sc":"75-56"},{"h":"Dallas Wings","a":"New York Liberty","hp":89.0,"ap":85.1,"php":61.2,"mg":3.9,"sd":13.71,"st":0,"ok":0,"sc":""}],"2026-07-17":[{"h":"Indiana Fever","a":"Seattle Storm","hp":92.5,"ap":84.2,"php":74.5,"mg":8.3,"sd":12.6,"st":1,"ok":1,"sc":"107-110"},{"h":"Toronto Tempo","a":"Atlanta Dream","hp":86.8,"ap":94.0,"php":29.2,"mg":-7.2,"sd":13.15,"st":1,"ok":1,"sc":"111-92"},{"h":"Chicago Sky","a":"Los Angeles Sparks","hp":92.2,"ap":90.4,"php":54.5,"mg":1.8,"sd":15.92,"st":1,"ok":1,"sc":"82-96"},{"h":"Phoenix Mercury","a":"Connecticut Sun","hp":83.9,"ap":80.0,"php":60.7,"mg":3.9,"sd":14.36,"st":1,"ok":0,"sc":"96-83"}],"2026-07-18":[{"h":"Indiana Fever","a":"New York Liberty","hp":89.6,"ap":91.0,"php":46.6,"mg":-1.4,"sd":16.41,"st":1,"ok":0,"sc":"88-108"},{"h":"Minnesota Lynx","a":"Portland Fire","hp":93.2,"ap":81.0,"php":81.9,"mg":12.2,"sd":13.38,"st":1,"ok":1,"sc":"93-101"},{"h":"Golden State Valkyries","a":"Washington Mystics","hp":78.4,"ap":69.4,"php":75.8,"mg":9.0,"sd":12.86,"st":1,"ok":1,"sc":"69-74"}],"2026-07-19":[{"h":"Dallas Wings","a":"Los Angeles Sparks","hp":93.7,"ap":85.0,"php":73.7,"mg":8.7,"sd":13.72,"st":1,"ok":1,"sc":"82.0-90.0"},{"h":"Atlanta Dream","a":"Chicago Sky","hp":92.2,"ap":86.8,"php":65.4,"mg":5.4,"sd":13.63,"st":1,"ok":1,"sc":"91.0-93.0"},{"h":"Phoenix Mercury","a":"Connecticut Sun","hp":83.2,"ap":82.1,"php":53.2,"mg":1.1,"sd":13.7,"st":1,"ok":1,"sc":"63.0-72.0"}],"2026-07-20":[{"h":"Toronto Tempo","a":"Las Vegas Aces","hp":87.3,"ap":91.9,"php":36.6,"mg":-4.6,"sd":13.43,"st":1,"ok":1,"sc":"109.0-83.0"},{"h":"Dallas Wings","a":"New York Liberty","hp":89.4,"ap":84.7,"php":63.6,"mg":4.7,"sd":13.51,"st":1,"ok":1,"sc":"99.0-98.0"},{"h":"Golden State Valkyries","a":"Washington Mystics","hp":77.8,"ap":69.2,"php":73.8,"mg":8.6,"sd":13.5,"st":1,"ok":0,"sc":"90.0-82.0"},{"h":"Seattle Storm","a":"Minnesota Lynx","hp":85.3,"ap":88.0,"php":42.4,"mg":-2.7,"sd":14.09,"st":1,"ok":1,"sc":"105.0-102.0"}],"2026-07-22":[{"h":"Los Angeles Sparks","a":"Phoenix Mercury","hp":87.0,"ap":85.3,"php":54.9,"mg":1.7,"sd":13.81,"st":1,"ok":0,"sc":"86.0-82.0"},{"h":"Seattle Storm","a":"Minnesota Lynx","hp":85.5,"ap":90.5,"php":35.5,"mg":-5.0,"sd":13.45,"st":1,"ok":1,"sc":"86.0-76.0"},{"h":"New York Liberty","a":"Chicago Sky","hp":89.4,"ap":87.9,"php":54.3,"mg":1.5,"sd":13.89,"st":1,"ok":1,"sc":"94.0-95.0"},{"h":"Washington Mystics","a":"Las Vegas Aces","hp":80.3,"ap":82.8,"php":42.8,"mg":-2.5,"sd":13.78,"st":1,"ok":0,"sc":"99.0-100.0"},{"h":"Indiana Fever","a":"Connecticut Sun","hp":91.8,"ap":83.1,"php":73.8,"mg":8.7,"sd":13.65,"st":1,"ok":1,"sc":"88.0-123.0"},{"h":"Portland Fire","a":"Dallas Wings","hp":87.4,"ap":88.9,"php":45.7,"mg":-1.5,"sd":13.89,"st":1,"ok":1,"sc":"101.0-97.0"}]},"order":["2026-07-22","2026-07-20","2026-07-19","2026-07-18","2026-07-17","2026-07-16","2026-07-15","2026-07-14"],"calibration":[{"label":"五成半上下","n":9,"said":54.2,"was":66.7},{"label":"六成","n":5,"said":64.4,"was":40.0},{"label":"七成","n":11,"said":74.9,"was":90.9}],"settled":26};
+var DATA   = {"days":{"2026-07-14":[{"h":"Connecticut Sun","a":"Portland Fire","hp":84.8,"ap":83.6,"php":54.0,"mg":1.2,"sd":11.95,"st":1,"ok":1,"sc":"87-90"},{"h":"Toronto Tempo","a":"Washington Mystics","hp":85.7,"ap":86.5,"php":48.2,"mg":-0.8,"sd":13.5,"st":1,"ok":1,"sc":"79-62"}],"2026-07-15":[{"h":"Chicago Sky","a":"Seattle Storm","hp":86.6,"ap":84.1,"php":56.5,"mg":2.5,"sd":15.28,"st":1,"ok":1,"sc":"90-95"},{"h":"Minnesota Lynx","a":"Los Angeles Sparks","hp":95.3,"ap":85.2,"php":78.5,"mg":10.1,"sd":12.8,"st":1,"ok":1,"sc":"87-96"},{"h":"Indiana Fever","a":"Golden State Valkyries","hp":83.9,"ap":82.2,"php":54.4,"mg":1.7,"sd":15.38,"st":1,"ok":0,"sc":"88-75"}],"2026-07-16":[{"h":"Washington Mystics","a":"Portland Fire","hp":85.3,"ap":79.0,"php":68.4,"mg":6.3,"sd":13.15,"st":1,"ok":0,"sc":"75-56"},{"h":"Dallas Wings","a":"New York Liberty","hp":89.0,"ap":85.1,"php":61.2,"mg":3.9,"sd":13.71,"st":0,"ok":0,"sc":""}],"2026-07-17":[{"h":"Indiana Fever","a":"Seattle Storm","hp":92.5,"ap":84.2,"php":74.5,"mg":8.3,"sd":12.6,"st":1,"ok":1,"sc":"107-110"},{"h":"Toronto Tempo","a":"Atlanta Dream","hp":86.8,"ap":94.0,"php":29.2,"mg":-7.2,"sd":13.15,"st":1,"ok":1,"sc":"111-92"},{"h":"Chicago Sky","a":"Los Angeles Sparks","hp":92.2,"ap":90.4,"php":54.5,"mg":1.8,"sd":15.92,"st":1,"ok":1,"sc":"82-96"},{"h":"Phoenix Mercury","a":"Connecticut Sun","hp":83.9,"ap":80.0,"php":60.7,"mg":3.9,"sd":14.36,"st":1,"ok":0,"sc":"96-83"}],"2026-07-18":[{"h":"Indiana Fever","a":"New York Liberty","hp":89.6,"ap":91.0,"php":46.6,"mg":-1.4,"sd":16.41,"st":1,"ok":0,"sc":"88-108"},{"h":"Minnesota Lynx","a":"Portland Fire","hp":93.2,"ap":81.0,"php":81.9,"mg":12.2,"sd":13.38,"st":1,"ok":1,"sc":"93-101"},{"h":"Golden State Valkyries","a":"Washington Mystics","hp":78.4,"ap":69.4,"php":75.8,"mg":9.0,"sd":12.86,"st":1,"ok":1,"sc":"69-74"}],"2026-07-19":[{"h":"Dallas Wings","a":"Los Angeles Sparks","hp":93.7,"ap":85.0,"php":73.7,"mg":8.7,"sd":13.72,"st":1,"ok":1,"sc":"82.0-90.0"},{"h":"Atlanta Dream","a":"Chicago Sky","hp":92.2,"ap":86.8,"php":65.4,"mg":5.4,"sd":13.63,"st":1,"ok":1,"sc":"91.0-93.0"},{"h":"Phoenix Mercury","a":"Connecticut Sun","hp":83.2,"ap":82.1,"php":53.2,"mg":1.1,"sd":13.7,"st":1,"ok":1,"sc":"63.0-72.0"}],"2026-07-20":[{"h":"Toronto Tempo","a":"Las Vegas Aces","hp":87.3,"ap":91.9,"php":36.6,"mg":-4.6,"sd":13.43,"st":1,"ok":1,"sc":"109.0-83.0"},{"h":"Dallas Wings","a":"New York Liberty","hp":89.4,"ap":84.7,"php":63.6,"mg":4.7,"sd":13.51,"st":1,"ok":1,"sc":"99.0-98.0"},{"h":"Golden State Valkyries","a":"Washington Mystics","hp":77.8,"ap":69.2,"php":73.8,"mg":8.6,"sd":13.5,"st":1,"ok":0,"sc":"90.0-82.0"},{"h":"Seattle Storm","a":"Minnesota Lynx","hp":85.3,"ap":88.0,"php":42.4,"mg":-2.7,"sd":14.09,"st":1,"ok":1,"sc":"105.0-102.0"}],"2026-07-22":[{"h":"Los Angeles Sparks","a":"Phoenix Mercury","hp":87.0,"ap":85.3,"php":54.9,"mg":1.7,"sd":13.81,"st":1,"ok":0,"sc":"86.0-82.0"},{"h":"Seattle Storm","a":"Minnesota Lynx","hp":85.5,"ap":90.5,"php":35.5,"mg":-5.0,"sd":13.45,"st":1,"ok":1,"sc":"86.0-76.0"},{"h":"New York Liberty","a":"Chicago Sky","hp":89.4,"ap":87.9,"php":54.3,"mg":1.5,"sd":13.89,"st":1,"ok":1,"sc":"94.0-95.0"},{"h":"Washington Mystics","a":"Las Vegas Aces","hp":80.3,"ap":82.8,"php":42.8,"mg":-2.5,"sd":13.78,"st":1,"ok":0,"sc":"99.0-100.0"},{"h":"Indiana Fever","a":"Connecticut Sun","hp":91.8,"ap":83.1,"php":73.8,"mg":8.7,"sd":13.65,"st":1,"ok":1,"sc":"88.0-123.0"},{"h":"Portland Fire","a":"Dallas Wings","hp":87.4,"ap":88.9,"php":45.7,"mg":-1.5,"sd":13.89,"st":1,"ok":1,"sc":"101.0-97.0"}]},"order":["2026-07-22","2026-07-20","2026-07-19","2026-07-18","2026-07-17","2026-07-16","2026-07-15","2026-07-14"],"calibration":[{"label":"五成半上下","n":9,"said":54.2,"was":66.7},{"label":"六成","n":5,"said":64.4,"was":40.0},{"label":"七成","n":11,"said":74.9,"was":90.9}],"settled":26,"strata":[{"label":"看好主隊","n":17,"rate":70.6},{"label":"看好客隊","n":9,"rate":77.8},{"label":"大熱門 65%以上","n":14,"rate":85.7},{"label":"勢均力敵 58%以下","n":9,"rate":66.7}],"rolling":[{"at":"07/20","rate":75.0},{"at":"07/22","rate":70.0}]};
 var TODAY  = "2026-07-25";
-var BUILD  = "202607250632";   /* 每次產生網站都會變，當作 premium.json 的快取版號 */
+var BUILD  = "202607250809";   /* 每次產生網站都會變，當作 premium.json 的快取版號 */
 var PREM   = null;
 var cur    = DATA.order[0];
 
@@ -192,6 +211,31 @@ function curveSVG(margin, sd, homeFav){
     'stroke="var(--line)" stroke-width="1" stroke-dasharray="2 3"/></svg>';
 }
 
+/* 迷你走勢圖。用 SVG 直接畫，不引任何圖表庫。 */
+function sparkline(pts){
+  if(!pts || pts.length < 2) return "";
+  var W=300,H=52,lo=35,hi=95;
+  var xs=pts.map(function(p,i){ return i/(pts.length-1)*W; });
+  var ys=pts.map(function(p){ return H-6-((Math.min(hi,Math.max(lo,p.rate))-lo)/(hi-lo))*(H-16); });
+  var line="M"+xs.map(function(x,i){ return x.toFixed(1)+","+ys[i].toFixed(1); }).join(" L");
+  var fifty=H-6-((50-lo)/(hi-lo))*(H-16);
+  var dots=xs.map(function(x,i){ return '<circle cx="'+x.toFixed(1)+'" cy="'+ys[i].toFixed(1)+
+    '" r="2.6" fill="var(--home)"/>'; }).join("");
+  return '<svg class="spark" viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="none">'+
+    '<line x1="0" y1="'+fifty.toFixed(1)+'" x2="'+W+'" y2="'+fifty.toFixed(1)+
+    '" stroke="var(--line)" stroke-width="1" stroke-dasharray="3 3"/>'+
+    '<path d="'+line+'" fill="none" stroke="var(--home)" stroke-width="1.8"/>'+dots+'</svg>';
+}
+
+function formStrip(rows){
+  if(!rows || !rows.length) return "";
+  return rows.map(function(r){
+    return '<span class="fm '+(r.w?"w":"l")+'" title="'+esc(r.d)+'">'+
+      (r.w?"勝":"敗")+'</span>';
+  }).join("")+'<span class="fmn num">'+
+    rows.map(function(r){ return r.p+"-"+r.op; }).join("　")+'</span>';
+}
+
 function gameCard(g){
   var homeFav = g.mg > 0;
   var hp = Math.max(3, Math.min(97, g.php));
@@ -204,11 +248,26 @@ function gameCard(g){
     settled = '<div><div class="mk">實際比分</div><div class="mv num">'+
       esc(g.sc)+'　'+(g.ok?"命中":"沒中")+'</div></div>';
   }
+  var extra = "";
+  if(g.hf || g.af || g.h2h){
+    extra = '<div class="deep">';
+    if(g.hf){ extra += '<div class="dtitle">'+esc(g.h)+' 近 5 場</div>'+
+      '<div class="form">'+formStrip(g.hf)+'</div>'; }
+    if(g.af){ extra += '<div class="dtitle">'+esc(g.a)+' 近 5 場</div>'+
+      '<div class="form">'+formStrip(g.af)+'</div>'; }
+    if(g.h2h && g.h2h.length){
+      extra += '<div class="dtitle">本季交手</div><div class="inj">'+
+        g.h2h.map(function(r){
+          return esc(r.d)+'　'+esc(r.a)+' '+r.ap+' － '+r.hp+' '+esc(r.h);
+        }).join("<br>")+'</div>';
+    }
+    extra += '</div>';
+  }
   return '<article class="card"><div class="teams">'+
-    '<div class="row a"><i class="dot"></i><span class="tname">'+esc(g.a)+
-    '</span><span class="tscore num">'+g.ap.toFixed(0)+'</span></div>'+
-    '<div class="row h"><i class="dot"></i><span class="tname">'+esc(g.h)+
-    '</span><span class="tscore num">'+g.hp.toFixed(0)+'</span></div></div>'+
+    '<div class="row a"><i class="dot"></i><span class="tname tap" data-team="'+esc(g.a)+
+    '">'+esc(g.a)+'</span><span class="tscore num">'+g.ap.toFixed(0)+'</span></div>'+
+    '<div class="row h"><i class="dot"></i><span class="tname tap" data-team="'+esc(g.h)+
+    '">'+esc(g.h)+'</span><span class="tscore num">'+g.hp.toFixed(0)+'</span></div></div>'+
     '<div class="bar"><i class="ba" style="width:'+(100-hp).toFixed(1)+'%"></i>'+
     '<i class="bh" style="width:'+hp.toFixed(1)+'%"></i></div>'+
     '<div class="barlab"><span class="num">'+(100-hp).toFixed(0)+'%</span>'+
@@ -219,7 +278,7 @@ function gameCard(g){
     '<div class="meta">'+
     '<div><div class="mk">預期分差</div><div class="mv num">'+Math.abs(g.mg).toFixed(1)+' 分</div></div>'+
     '<div><div class="mk">預期總分</div><div class="mv num">'+(g.hp+g.ap).toFixed(0)+'</div></div>'+
-    settled+'</div></article>';
+    settled+'</div>'+extra+'</article>';
 }
 
 function renderChips(){
@@ -243,6 +302,14 @@ function renderChips(){
 }
 
 function renderHeader(){
+  if(curTeam){
+    var rows = teamGames(curTeam);
+    document.getElementById("hd").innerHTML =
+      '<span class="d num">'+rows.length+'</span> 場預測紀錄';
+    document.getElementById("sub").textContent = curTeam + " 本季";
+    document.getElementById("offday").innerHTML = "";
+    return;
+  }
   var d = cur.split("-");
   var n = DATA.days[cur].length;
   var isToday = cur >= TODAY;
@@ -258,17 +325,71 @@ function renderHeader(){
     '<div class="receipt warn">今天<b>沒有比賽</b>。下次有賽事時這裡會自動更新。</div>';
 }
 
+var curTeam = null;
+
+function teamGames(name){
+  /* 該隊本季所有預測，最新的排前面 */
+  var out = [];
+  DATA.order.forEach(function(d){
+    DATA.days[d].forEach(function(g){
+      if(g.h === name || g.a === name) out.push({d: d, g: g});
+    });
+  });
+  return out;
+}
+
+function bindTeamTaps(){
+  var host = document.getElementById("games");
+  host.querySelectorAll(".tap").forEach(function(el){
+    el.addEventListener("click", function(){
+      selectTeam(el.getAttribute("data-team"));
+    });
+  });
+}
+
 function renderDay(){
-  document.getElementById("games").innerHTML =
-    DATA.days[cur].map(gameCard).join("");
-  document.getElementById("glabel").textContent =
-    (cur >= TODAY) ? "今日賽事" : "當日賽事";
+  var host = document.getElementById("games");
+  if(curTeam){
+    var rows = teamGames(curTeam);
+    var done = rows.filter(function(r){ return r.g.st; });
+    var hit = done.filter(function(r){
+      var pick = r.g.mg>0 ? r.g.h : r.g.a;
+      return r.g.ok;
+    }).length;
+    document.getElementById("glabel").textContent = curTeam;
+    document.getElementById("teamhead").innerHTML =
+      '<div class="thead"><button class="back" id="backbtn">← 回到日期</button>'+
+      '<span>'+esc(curTeam)+'　本季 <b class="num">'+rows.length+'</b> 場預測'+
+      (done.length ? '，對過答案 <b class="num">'+hit+'/'+done.length+'</b>' : '')+
+      '</span></div>';
+    host.innerHTML = rows.map(function(r){
+      return '<div class="gdate num">'+r.d.slice(5).replace("-","/")+'</div>'+gameCard(r.g);
+    }).join("");
+    document.getElementById("backbtn").addEventListener("click", function(){
+      curTeam = null; renderHeader(); renderDay();
+    });
+  }else{
+    document.getElementById("teamhead").innerHTML = "";
+    host.innerHTML = DATA.days[cur].map(gameCard).join("");
+    document.getElementById("glabel").textContent =
+      (cur >= TODAY) ? "今日賽事" : "當日賽事";
+  }
+  bindTeamTaps();
   renderDeep();
+}
+
+function selectTeam(name){
+  curTeam = name;
+  renderHeader(); renderDay();
+  window.scrollTo({top:0, behavior:"smooth"});
 }
 
 /* ---- 深度版 ---- */
 /* full = 這一組數字的滿格值。機率分布類的最大值通常只有三成多，
    用 100 當滿格會讓所有長條都短到看不出差異，所以分組指定。 */
+/* rotations 在 premium.json 裡已經轉成隊名為鍵 */
+function rotByName(rot, name){ return rot[name] || null; }
+
 function bucketRow(label, pct, full){
   var w = Math.max(0, Math.min(100, pct / (full || 38) * 100));
   return '<div class="bk"><span class="bl2">'+esc(label)+'</span>'+
@@ -304,6 +425,38 @@ function renderDeep(){
     var r = g.ratings || {};
     s.push(ratingLine(g.home, r.home_off, r.home_def));
     s.push(ratingLine(g.away, r.away_off, r.away_def));
+
+    /* 攻守對位：把模型算預期得分的過程攤開來。
+       某隊預期得分 ≈ 聯盟平均 + 自己的進攻 + 對手的防守 */
+    var mu = g.matchup;
+    if(mu && mu.home_off!=null && mu.away_def!=null){
+      s.push('<div class="dtitle">攻守對位</div>');
+      s.push('<div class="krow"><span>'+esc(g.home)+' 進攻 vs '+esc(g.away)+' 防守</span>'+
+        '<b class="num">'+sign1(mu.home_off)+' / '+sign1(mu.away_def)+
+        ' → '+sign1(mu.home_off+mu.away_def)+'</b></div>');
+      s.push('<div class="krow"><span>'+esc(g.away)+' 進攻 vs '+esc(g.home)+' 防守</span>'+
+        '<b class="num">'+sign1(mu.away_off)+' / '+sign1(mu.home_def)+
+        ' → '+sign1(mu.away_off+mu.home_def)+'</b></div>');
+    }
+    if(g.exp_poss!=null){
+      s.push('<div class="krow"><span>預計回合數</span><b class="num">'+
+        g.exp_poss.toFixed(1)+' 回合</b></div>');
+    }
+
+    /* 輪替陣容：boxcache 裡的球員上場時間，以前只用來算缺陣，沒拿來展示 */
+    var rot = PREM.league && PREM.league.rotations;
+    if(rot){
+      [[g.home,"home"],[g.away,"away"]].forEach(function(pair){
+        var list = rotByName(rot, pair[0]);
+        if(list && list.length){
+          s.push('<div class="dtitle">'+esc(pair[0])+' 主要輪替</div><div class="inj">'+
+            list.map(function(p){
+              return esc(p.name)+'　<span class="num">'+p.min.toFixed(1)+
+                ' 分鐘 / '+p.pts.toFixed(1)+' 分</span>';
+            }).join("<br>")+'</div>');
+        }
+      });
+    }
 
     if(g.rest && (g.rest.home || g.rest.away)){
       s.push('<div class="krow"><span>休息狀態</span><b>'+
@@ -392,6 +545,35 @@ function renderDeep(){
     }
   }
 
+  var rep = PREM.league && PREM.league.model_report;
+  if(rep){
+    html += '<div class="shead"><h2>模型自我檢驗</h2><span>走勢前推回測，'+rep.n+' 場</span></div>'+
+      '<div class="receipt">每一場都只用「該場開打前」的資料重新算一次，'+
+      '不讓模型看到未來。這個數字通常比宣傳數字難看，但它才是真的。</div>'+
+      '<table>'+
+      '<tr><td>勝負命中率</td><td class="num was">'+rep.win_rate.toFixed(1)+'%</td></tr>'+
+      '<tr><td>近 30 場</td><td class="num">'+rep.recent30_win.toFixed(1)+'%</td></tr>'+
+      '<tr><td>分差平均誤差</td><td class="num">'+rep.margin_mae.toFixed(1)+' 分</td></tr>'+
+      '<tr><td>分差離散度</td><td class="num">±'+rep.margin_sd.toFixed(1)+' 分</td></tr>'+
+      '<tr><td>總分平均誤差</td><td class="num">'+rep.total_mae.toFixed(1)+' 分</td></tr>'+
+      '<tr><td>總分離散度</td><td class="num">±'+rep.total_sd.toFixed(1)+' 分</td></tr>'+
+      '</table>';
+    if(rep.segments && rep.segments.length){
+      html += '<div class="shead"><h2>偏誤會漂移</h2><span>整體平均會藏住階段性的偏差</span></div>'+
+        '<table><tr><th>期間</th><th>場次</th><th>分差偏誤</th></tr>'+
+        rep.segments.map(function(sg){
+          return '<tr><td>'+esc(sg.from)+'~'+esc(sg.to)+'</td><td class="num">'+sg.n+
+            '</td><td class="num was">'+sign1(sg.bias)+' 分</td></tr>';
+        }).join("")+'</table>'+
+        '<div class="receipt">正值代表那段期間模型低估主隊。'+
+        '四段數字不一樣，就表示偏誤是一陣一陣的，不是固定的。</div>';
+    }
+    if(rep.rolling && rep.rolling.length>1){
+      html += '<div class="shead"><h2>回測走勢</h2><span>每點是往前 30 場</span></div>'+
+        sparkline(rep.rolling);
+    }
+  }
+
   if(PREM.calibration && PREM.calibration.length){
     html += '<div class="shead"><h2>完整校準表</h2><span>已結算 '+PREM.settled+' 場</span></div>'+
       '<table><tr><th>模型說</th><th>場次</th><th>宣稱</th><th>實際</th></tr>'+
@@ -418,10 +600,36 @@ function lockHTML(){
     '<li>兩隊攻守評分對比</li>'+
     '<li>休息天數與背靠背</li>'+
     '<li>傷兵名單</li>'+
+    '<li>攻守對位拆解：預期得分是怎麼算出來的</li>'+
+    '<li>預計回合數</li>'+
+    '<li>兩隊主要輪替陣容與場均數據</li>'+
     '<li>缺陣影響：換算成缺掉多少場均得分</li>'+
     '<li>當天預測的移動軌跡</li>'+
     '<li>全聯盟實力評分與節奏排行</li>'+
+    '<li>模型自我檢驗：走勢前推回測的完整成績</li>'+
+    '<li>偏誤漂移分析與回測走勢圖</li>'+
     '<li>完整校準表</li></ul></div>';
+}
+
+function renderStrata(){
+  var host = document.getElementById("strata");
+  var h = "";
+  if(DATA.strata && DATA.strata.length){
+    h += '<div class="shead"><h2>哪種場合比較準</h2><span>攤開來看</span></div>'+
+      '<table><tr><th>場合</th><th>場次</th><th>命中率</th></tr>'+
+      DATA.strata.map(function(r){
+        return '<tr><td>'+esc(r.label)+'</td><td class="num">'+r.n+
+          '</td><td class="num was">'+r.rate.toFixed(0)+'%</td></tr>';
+      }).join("")+'</table>';
+  }
+  if(DATA.rolling && DATA.rolling.length>1){
+    var last = DATA.rolling[DATA.rolling.length-1];
+    h += '<div class="shead"><h2>近期走勢</h2><span>每點是往前 20 場的命中率</span></div>'+
+      sparkline(DATA.rolling)+
+      '<div class="axis"><span>'+esc(DATA.rolling[0].at)+'</span>'+
+      '<span>虛線 = 50%</span><span>'+esc(last.at)+'　'+last.rate.toFixed(0)+'%</span></div>';
+  }
+  host.innerHTML = h;
 }
 
 function renderCalib(){
@@ -445,12 +653,12 @@ function renderCalib(){
 }
 
 function select(d){
-  cur = d;
+  cur = d; curTeam = null;
   renderChips(); renderHeader(); renderDay();
   window.scrollTo({top:0, behavior:"smooth"});
 }
 
-renderChips(); renderHeader(); renderDay(); renderCalib();
+renderChips(); renderHeader(); renderDay(); renderStrata(); renderCalib();
 
 if(!LOCKED){
   fetch("premium.json?v="+BUILD)
