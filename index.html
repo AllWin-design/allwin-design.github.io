@@ -105,7 +105,9 @@ td.said{color:var(--muted)}td.was{color:var(--home);font-weight:700}
 .krow span{color:var(--muted);flex:none}
 .krow b{font-weight:700;text-align:right}
 .bk{display:flex;align-items:center;gap:8px;padding:3px 0;font-size:12.5px}
-.bk .bl{width:66px;color:var(--muted)}
+.bk .bl,.bk .bl2{color:var(--muted)}
+.bk .bl{width:66px}
+.bk .bl2{width:92px;flex:none}
 .bk .bb{flex:1;height:6px;background:rgba(42,59,73,.7);border-radius:3px;overflow:hidden}
 .bk .bb i{display:block;height:100%;background:var(--home)}
 .bk .bv{width:46px;text-align:right}
@@ -151,6 +153,7 @@ footer b{color:#9db0bd;font-weight:600}
 var LOCKED = false;
 var DATA   = {"days":{"2026-07-14":[{"h":"Connecticut Sun","a":"Portland Fire","hp":84.8,"ap":83.6,"php":54.0,"mg":1.2,"sd":11.95,"st":1,"ok":1,"sc":"87-90"},{"h":"Toronto Tempo","a":"Washington Mystics","hp":85.7,"ap":86.5,"php":48.2,"mg":-0.8,"sd":13.5,"st":1,"ok":1,"sc":"79-62"}],"2026-07-15":[{"h":"Chicago Sky","a":"Seattle Storm","hp":86.6,"ap":84.1,"php":56.5,"mg":2.5,"sd":15.28,"st":1,"ok":1,"sc":"90-95"},{"h":"Minnesota Lynx","a":"Los Angeles Sparks","hp":95.3,"ap":85.2,"php":78.5,"mg":10.1,"sd":12.8,"st":1,"ok":1,"sc":"87-96"},{"h":"Indiana Fever","a":"Golden State Valkyries","hp":83.9,"ap":82.2,"php":54.4,"mg":1.7,"sd":15.38,"st":1,"ok":0,"sc":"88-75"}],"2026-07-16":[{"h":"Washington Mystics","a":"Portland Fire","hp":85.3,"ap":79.0,"php":68.4,"mg":6.3,"sd":13.15,"st":1,"ok":0,"sc":"75-56"},{"h":"Dallas Wings","a":"New York Liberty","hp":89.0,"ap":85.1,"php":61.2,"mg":3.9,"sd":13.71,"st":0,"ok":0,"sc":""}],"2026-07-17":[{"h":"Indiana Fever","a":"Seattle Storm","hp":92.5,"ap":84.2,"php":74.5,"mg":8.3,"sd":12.6,"st":1,"ok":1,"sc":"107-110"},{"h":"Toronto Tempo","a":"Atlanta Dream","hp":86.8,"ap":94.0,"php":29.2,"mg":-7.2,"sd":13.15,"st":1,"ok":1,"sc":"111-92"},{"h":"Chicago Sky","a":"Los Angeles Sparks","hp":92.2,"ap":90.4,"php":54.5,"mg":1.8,"sd":15.92,"st":1,"ok":1,"sc":"82-96"},{"h":"Phoenix Mercury","a":"Connecticut Sun","hp":83.9,"ap":80.0,"php":60.7,"mg":3.9,"sd":14.36,"st":1,"ok":0,"sc":"96-83"}],"2026-07-18":[{"h":"Indiana Fever","a":"New York Liberty","hp":89.6,"ap":91.0,"php":46.6,"mg":-1.4,"sd":16.41,"st":1,"ok":0,"sc":"88-108"},{"h":"Minnesota Lynx","a":"Portland Fire","hp":93.2,"ap":81.0,"php":81.9,"mg":12.2,"sd":13.38,"st":1,"ok":1,"sc":"93-101"},{"h":"Golden State Valkyries","a":"Washington Mystics","hp":78.4,"ap":69.4,"php":75.8,"mg":9.0,"sd":12.86,"st":1,"ok":1,"sc":"69-74"}],"2026-07-19":[{"h":"Dallas Wings","a":"Los Angeles Sparks","hp":93.7,"ap":85.0,"php":73.7,"mg":8.7,"sd":13.72,"st":1,"ok":1,"sc":"82.0-90.0"},{"h":"Atlanta Dream","a":"Chicago Sky","hp":92.2,"ap":86.8,"php":65.4,"mg":5.4,"sd":13.63,"st":1,"ok":1,"sc":"91.0-93.0"},{"h":"Phoenix Mercury","a":"Connecticut Sun","hp":83.2,"ap":82.1,"php":53.2,"mg":1.1,"sd":13.7,"st":1,"ok":1,"sc":"63.0-72.0"}],"2026-07-20":[{"h":"Toronto Tempo","a":"Las Vegas Aces","hp":87.3,"ap":91.9,"php":36.6,"mg":-4.6,"sd":13.43,"st":1,"ok":1,"sc":"109.0-83.0"},{"h":"Dallas Wings","a":"New York Liberty","hp":89.4,"ap":84.7,"php":63.6,"mg":4.7,"sd":13.51,"st":1,"ok":1,"sc":"99.0-98.0"},{"h":"Golden State Valkyries","a":"Washington Mystics","hp":77.8,"ap":69.2,"php":73.8,"mg":8.6,"sd":13.5,"st":1,"ok":0,"sc":"90.0-82.0"},{"h":"Seattle Storm","a":"Minnesota Lynx","hp":85.3,"ap":88.0,"php":42.4,"mg":-2.7,"sd":14.09,"st":1,"ok":1,"sc":"105.0-102.0"}],"2026-07-22":[{"h":"Los Angeles Sparks","a":"Phoenix Mercury","hp":87.0,"ap":85.3,"php":54.9,"mg":1.7,"sd":13.81,"st":1,"ok":0,"sc":"86.0-82.0"},{"h":"Seattle Storm","a":"Minnesota Lynx","hp":85.5,"ap":90.5,"php":35.5,"mg":-5.0,"sd":13.45,"st":1,"ok":1,"sc":"86.0-76.0"},{"h":"New York Liberty","a":"Chicago Sky","hp":89.4,"ap":87.9,"php":54.3,"mg":1.5,"sd":13.89,"st":1,"ok":1,"sc":"94.0-95.0"},{"h":"Washington Mystics","a":"Las Vegas Aces","hp":80.3,"ap":82.8,"php":42.8,"mg":-2.5,"sd":13.78,"st":1,"ok":0,"sc":"99.0-100.0"},{"h":"Indiana Fever","a":"Connecticut Sun","hp":91.8,"ap":83.1,"php":73.8,"mg":8.7,"sd":13.65,"st":1,"ok":1,"sc":"88.0-123.0"},{"h":"Portland Fire","a":"Dallas Wings","hp":87.4,"ap":88.9,"php":45.7,"mg":-1.5,"sd":13.89,"st":1,"ok":1,"sc":"101.0-97.0"}]},"order":["2026-07-22","2026-07-20","2026-07-19","2026-07-18","2026-07-17","2026-07-16","2026-07-15","2026-07-14"],"calibration":[{"label":"五成半上下","n":9,"said":54.2,"was":66.7},{"label":"六成","n":5,"said":64.4,"was":40.0},{"label":"七成","n":11,"said":74.9,"was":90.9}],"settled":26};
 var TODAY  = "2026-07-25";
+var BUILD  = "202607250327";   /* 每次產生網站都會變，當作 premium.json 的快取版號 */
 var PREM   = null;
 var cur    = DATA.order[0];
 
@@ -262,9 +265,11 @@ function renderDay(){
 }
 
 /* ---- 深度版 ---- */
-function bucketRow(label,pct){
-  var w = Math.max(0, Math.min(100, pct*2.6));
-  return '<div class="bk"><span class="bl">'+esc(label)+'</span>'+
+/* full = 這一組數字的滿格值。機率分布類的最大值通常只有三成多，
+   用 100 當滿格會讓所有長條都短到看不出差異，所以分組指定。 */
+function bucketRow(label, pct, full){
+  var w = Math.max(0, Math.min(100, pct / (full || 38) * 100));
+  return '<div class="bk"><span class="bl2">'+esc(label)+'</span>'+
     '<span class="bb"><i style="width:'+w.toFixed(1)+'%"></i></span>'+
     '<span class="bv num">'+pct.toFixed(1)+'%</span></div>';
 }
@@ -303,9 +308,40 @@ function renderDeep(){
         esc(g.home)+' '+esc(g.rest.home||"－")+'　'+
         esc(g.away)+' '+esc(g.rest.away||"－")+'</b></div>');
     }
+    if(g.quadrants && g.quadrants.length){
+      s.push('<div class="dtitle">四種可能的結果</div>');
+      s.push(g.quadrants.map(function(q){ return bucketRow(q.label, q.p, 55); }).join(""));
+    }
+    if(g.thresholds && g.thresholds.length){
+      s.push('<div class="dtitle">'+esc(b.pick)+' 贏球幅度</div>');
+      s.push(g.thresholds.map(function(t){
+        return bucketRow("贏 "+t.t+" 分以上", t.p, 100);
+      }).join(""));
+    }
     if(g.buckets && g.buckets.length){
-      s.push('<div class="dtitle">分差落在哪一區間</div>');
-      s.push(g.buckets.map(function(row){ return bucketRow(row[0],row[1]); }).join(""));
+      s.push('<div class="dtitle">分差最可能落在</div>');
+      s.push(g.buckets.map(function(row){ return bucketRow(row[0],row[1],38); }).join(""));
+    }
+    if(g.home_scores && g.home_scores.rows){
+      s.push('<div class="dtitle">'+esc(g.home)+' 得分落點</div>');
+      s.push(g.home_scores.rows.map(function(t){ return bucketRow(t.label,t.p,38); }).join(""));
+    }
+    if(g.away_scores && g.away_scores.rows){
+      s.push('<div class="dtitle">'+esc(g.away)+' 得分落點</div>');
+      s.push(g.away_scores.rows.map(function(t){ return bucketRow(t.label,t.p,38); }).join(""));
+    }
+    if(g.totals && g.totals.length){
+      s.push('<div class="dtitle">兩隊合計得分落點</div>');
+      s.push(g.totals.map(function(t){ return bucketRow(t.label, t.p, 38); }).join(""));
+    }
+    if(g.spread_sd || g.total_sd){
+      s.push('<div class="dtitle">這場有多難算</div>');
+      s.push('<div class="krow"><span>分差不確定範圍</span><b class="num">±'+
+        g.spread_sd+' 分</b></div>');
+      s.push('<div class="krow"><span>總分不確定範圍</span><b class="num">±'+
+        g.total_sd+' 分</b></div>');
+      if(g.home_scores) s.push('<div class="krow"><span>單隊得分不確定範圍</span>'+
+        '<b class="num">±'+g.home_scores.sd+' 分</b></div>');
     }
     var ih=(g.injuries&&g.injuries.home)||[], ia=(g.injuries&&g.injuries.away)||[];
     if(ih.length||ia.length){
@@ -339,8 +375,13 @@ function lockHTML(){
   return '<div class="shead"><h2>深度解析</h2><span>進階內容</span></div>'+
     '<div class="lock"><h3>看得更深一層</h3>'+
     '<p>免費版是模型自己的判斷。深度解析再加上市場共識修正，以及每場的完整拆解。</p>'+
-    '<ul><li>納入市場共識後的修正預測</li>'+
+    '<ul><li>修正後的預期比分與勝率</li>'+
+    '<li>四種可能結果的機率（大勝／小勝／小敗／大敗）</li>'+
+    '<li>贏球幅度：贏 5／10／15／20 分以上的機率</li>'+
     '<li>分差落在各區間的完整機率</li>'+
+    '<li>兩隊各自的得分落點分布</li>'+
+    '<li>兩隊合計得分的落點分布</li>'+
+    '<li>這場有多難算：三種不確定範圍</li>'+
     '<li>兩隊攻守評分對比</li>'+
     '<li>休息天數與背靠背</li>'+
     '<li>傷兵名單</li>'+
@@ -377,7 +418,7 @@ function select(d){
 renderChips(); renderHeader(); renderDay(); renderCalib();
 
 if(!LOCKED){
-  fetch("premium.json?v="+Date.now())
+  fetch("premium.json?v="+BUILD)
     .then(function(r){ return r.ok?r.json():null; })
     .then(function(d){ if(d){ PREM=d; renderDeep(); } })
     .catch(function(){});
