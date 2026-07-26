@@ -185,6 +185,18 @@ td.said{color:var(--muted)}td.was{color:var(--home);font-weight:700}
   background:var(--home);color:#12181f;font-weight:700;font-size:12.5px;
   padding:9px 16px;border-radius:20px;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.4)}
 
+/* 下拉選單：選項多的時候比橫向捲動的膠囊好用 —— 一眼看到全部，不用左右滑 */
+.dd{margin:12px 18px 0;position:relative}
+.dd:after{content:"▾";position:absolute;right:13px;top:50%;transform:translateY(-50%);
+  color:var(--home);pointer-events:none;font-size:12px}
+.dd select{width:100%;appearance:none;-webkit-appearance:none;
+  background:var(--surface);color:var(--chalk);border:1px solid var(--line);
+  border-radius:9px;padding:11px 34px 11px 13px;font-size:13.5px;
+  font-family:inherit;cursor:pointer}
+.dd select:focus{outline:none;border-color:var(--home)}
+.dd label{display:block;font-size:10.5px;letter-spacing:.08em;color:var(--muted);
+  margin-bottom:5px;padding-left:2px}
+
 .hint{margin:12px 18px 0;font-size:12px;color:var(--muted);line-height:1.7}
 .empty{margin:26px 18px;padding:22px 16px;text-align:center;font-size:13px;
   color:var(--muted);border:1px dashed var(--line);border-radius:11px}
@@ -215,9 +227,9 @@ footer b{color:#9db0bd;font-weight:600}
 </footer>
 <script>
 var LOCKED = false;
-var DATA   = {"days":{"2026-07-14":[{"h":"Connecticut Sun","a":"Portland Fire","hp":84.8,"ap":83.6,"php":54.0,"mg":1.2,"sd":11.95,"st":1,"ok":1,"sc":"87-90","mb":1,"t":null,"v":null,"ct":null,"nt":0},{"h":"Toronto Tempo","a":"Washington Mystics","hp":85.7,"ap":86.5,"php":48.2,"mg":-0.8,"sd":13.5,"st":1,"ok":1,"sc":"79-62","mb":1,"t":null,"v":null,"ct":null,"nt":0}],"2026-07-15":[{"h":"Chicago Sky","a":"Seattle Storm","hp":86.6,"ap":84.1,"php":56.5,"mg":2.5,"sd":15.28,"st":1,"ok":1,"sc":"90-95","mb":1,"t":null,"v":null,"ct":null,"nt":0},{"h":"Minnesota Lynx","a":"Los Angeles Sparks","hp":95.3,"ap":85.2,"php":78.5,"mg":10.1,"sd":12.8,"st":1,"ok":1,"sc":"87-96","mb":1,"t":null,"v":null,"ct":null,"nt":0},{"h":"Indiana Fever","a":"Golden State Valkyries","hp":83.9,"ap":82.2,"php":54.4,"mg":1.7,"sd":15.38,"st":1,"ok":0,"sc":"88-75","mb":1,"t":null,"v":null,"ct":null,"nt":0}],"2026-07-16":[{"h":"Washington Mystics","a":"Portland Fire","hp":85.3,"ap":79.0,"php":68.4,"mg":6.3,"sd":13.15,"st":1,"ok":0,"sc":"75-56","mb":1,"t":null,"v":null,"ct":null,"nt":0},{"h":"Dallas Wings","a":"New York Liberty","hp":89.0,"ap":85.1,"php":61.2,"mg":3.9,"sd":13.71,"st":0,"ok":0,"sc":"","mb":0,"t":null,"v":null,"ct":null,"nt":0}],"2026-07-17":[{"h":"Indiana Fever","a":"Seattle Storm","hp":92.5,"ap":84.2,"php":74.5,"mg":8.3,"sd":12.6,"st":1,"ok":1,"sc":"107-110","mb":1,"t":null,"v":null,"ct":null,"nt":0},{"h":"Toronto Tempo","a":"Atlanta Dream","hp":86.8,"ap":94.0,"php":29.2,"mg":-7.2,"sd":13.15,"st":1,"ok":1,"sc":"111-92","mb":1,"t":null,"v":null,"ct":null,"nt":0},{"h":"Chicago Sky","a":"Los Angeles Sparks","hp":92.2,"ap":90.4,"php":54.5,"mg":1.8,"sd":15.92,"st":1,"ok":1,"sc":"82-96","mb":1,"t":null,"v":null,"ct":null,"nt":0},{"h":"Phoenix Mercury","a":"Connecticut Sun","hp":83.9,"ap":80.0,"php":60.7,"mg":3.9,"sd":14.36,"st":1,"ok":0,"sc":"96-83","mb":1,"t":null,"v":null,"ct":null,"nt":0}],"2026-07-18":[{"h":"Indiana Fever","a":"New York Liberty","hp":89.6,"ap":91.0,"php":46.6,"mg":-1.4,"sd":16.41,"st":1,"ok":0,"sc":"88-108","mb":1,"t":null,"v":null,"ct":null,"nt":0},{"h":"Minnesota Lynx","a":"Portland Fire","hp":93.2,"ap":81.0,"php":81.9,"mg":12.2,"sd":13.38,"st":1,"ok":1,"sc":"93-101","mb":1,"t":null,"v":null,"ct":null,"nt":0},{"h":"Golden State Valkyries","a":"Washington Mystics","hp":78.4,"ap":69.4,"php":75.8,"mg":9.0,"sd":12.86,"st":1,"ok":1,"sc":"69-74","mb":1,"t":null,"v":null,"ct":null,"nt":0}],"2026-07-19":[{"h":"Dallas Wings","a":"Los Angeles Sparks","hp":93.7,"ap":85.0,"php":73.7,"mg":8.7,"sd":13.72,"st":1,"ok":1,"sc":"82.0-90.0","mb":1,"t":null,"v":null,"ct":null,"nt":0},{"h":"Atlanta Dream","a":"Chicago Sky","hp":92.2,"ap":86.8,"php":65.4,"mg":5.4,"sd":13.63,"st":1,"ok":1,"sc":"91.0-93.0","mb":1,"t":null,"v":null,"ct":null,"nt":0},{"h":"Phoenix Mercury","a":"Connecticut Sun","hp":83.2,"ap":82.1,"php":53.2,"mg":1.1,"sd":13.7,"st":1,"ok":1,"sc":"63.0-72.0","mb":1,"t":null,"v":null,"ct":null,"nt":0}],"2026-07-20":[{"h":"Toronto Tempo","a":"Las Vegas Aces","hp":87.3,"ap":91.9,"php":36.6,"mg":-4.6,"sd":13.43,"st":1,"ok":1,"sc":"109.0-83.0","mb":1,"t":null,"v":null,"ct":null,"nt":0},{"h":"Dallas Wings","a":"New York Liberty","hp":89.4,"ap":84.7,"php":63.6,"mg":4.7,"sd":13.51,"st":1,"ok":1,"sc":"99.0-98.0","mb":1,"t":null,"v":null,"ct":null,"nt":0},{"h":"Golden State Valkyries","a":"Washington Mystics","hp":77.8,"ap":69.2,"php":73.8,"mg":8.6,"sd":13.5,"st":1,"ok":0,"sc":"90.0-82.0","mb":1,"t":null,"v":null,"ct":null,"nt":0},{"h":"Seattle Storm","a":"Minnesota Lynx","hp":85.3,"ap":88.0,"php":42.4,"mg":-2.7,"sd":14.09,"st":1,"ok":1,"sc":"105.0-102.0","mb":1,"t":null,"v":null,"ct":null,"nt":0}],"2026-07-22":[{"h":"Los Angeles Sparks","a":"Phoenix Mercury","hp":87.0,"ap":85.3,"php":54.9,"mg":1.7,"sd":13.81,"st":1,"ok":0,"sc":"86.0-82.0","mb":1,"t":null,"v":null,"ct":null,"nt":0},{"h":"Seattle Storm","a":"Minnesota Lynx","hp":85.5,"ap":90.5,"php":35.5,"mg":-5.0,"sd":13.45,"st":1,"ok":1,"sc":"86.0-76.0","mb":1,"t":null,"v":null,"ct":null,"nt":0},{"h":"New York Liberty","a":"Chicago Sky","hp":89.4,"ap":87.9,"php":54.3,"mg":1.5,"sd":13.89,"st":1,"ok":1,"sc":"94.0-95.0","mb":1,"t":null,"v":null,"ct":null,"nt":0},{"h":"Washington Mystics","a":"Las Vegas Aces","hp":80.3,"ap":82.8,"php":42.8,"mg":-2.5,"sd":13.78,"st":1,"ok":0,"sc":"99.0-100.0","mb":1,"t":null,"v":null,"ct":null,"nt":0},{"h":"Indiana Fever","a":"Connecticut Sun","hp":91.8,"ap":83.1,"php":73.8,"mg":8.7,"sd":13.65,"st":1,"ok":1,"sc":"88.0-123.0","mb":1,"t":null,"v":null,"ct":null,"nt":0},{"h":"Portland Fire","a":"Dallas Wings","hp":87.4,"ap":88.9,"php":45.7,"mg":-1.5,"sd":13.89,"st":1,"ok":1,"sc":"101.0-97.0","mb":1,"t":null,"v":null,"ct":null,"nt":0}]},"order":["2026-07-22","2026-07-20","2026-07-19","2026-07-18","2026-07-17","2026-07-16","2026-07-15","2026-07-14"],"calibration":[{"label":"五成半上下","n":9,"said":54.2,"was":66.7},{"label":"六成","n":5,"said":64.4,"was":40.0},{"label":"七成","n":11,"said":74.9,"was":90.9}],"settled":26,"strata":[{"label":"看好主隊","n":17,"rate":70.6},{"label":"看好客隊","n":9,"rate":77.8},{"label":"大熱門 65%以上","n":14,"rate":85.7},{"label":"勢均力敵 58%以下","n":9,"rate":66.7}],"rolling":[{"at":"07/20","rate":75.0},{"at":"07/22","rate":70.0}],"brier":{"n":26,"score":0.1866},"by_team":[{"team":"Chicago Sky","n":4,"hit":4,"rate":100.0},{"team":"Seattle Storm","n":4,"hit":4,"rate":100.0},{"team":"Minnesota Lynx","n":4,"hit":4,"rate":100.0},{"team":"Connecticut Sun","n":4,"hit":3,"rate":75.0},{"team":"Portland Fire","n":4,"hit":3,"rate":75.0},{"team":"Los Angeles Sparks","n":4,"hit":3,"rate":75.0},{"team":"Indiana Fever","n":4,"hit":2,"rate":50.0},{"team":"Washington Mystics","n":5,"hit":2,"rate":40.0}],"total_acc":{"n":26,"mae":18.3,"within10":30.8},"generated":"2026-07-26 03:15","gen_ts":1785035704,"records":{"Indiana Fever":{"w":19,"l":11,"pf":95.7,"pa":88.7,"st":{"w":true,"n":3}},"Minnesota Lynx":{"w":25,"l":6,"pf":90.3,"pa":81.6,"st":{"w":true,"n":7}},"Golden State Valkyries":{"w":20,"l":8,"pf":81.8,"pa":76.4,"st":{"w":false,"n":1}},"Las Vegas Aces":{"w":19,"l":10,"pf":90.7,"pa":86.8,"st":{"w":false,"n":1}},"Dallas Wings":{"w":20,"l":9,"pf":90.8,"pa":85.9,"st":{"w":true,"n":1}},"Atlanta Dream":{"w":17,"l":11,"pf":88.6,"pa":84.9,"st":{"w":true,"n":3}},"New York Liberty":{"w":17,"l":13,"pf":88.4,"pa":86.3,"st":{"w":true,"n":2}},"Chicago Sky":{"w":9,"l":20,"pf":87.8,"pa":90.3,"st":{"w":false,"n":2}},"Washington Mystics":{"w":15,"l":13,"pf":80.3,"pa":82.5,"st":{"w":true,"n":2}},"Phoenix Mercury":{"w":12,"l":18,"pf":83.9,"pa":86.2,"st":{"w":true,"n":2}},"Portland Fire":{"w":11,"l":18,"pf":84.8,"pa":90.4,"st":{"w":false,"n":2}},"Seattle Storm":{"w":7,"l":24,"pf":82.0,"pa":86.5,"st":{"w":false,"n":6}},"Los Angeles Sparks":{"w":12,"l":16,"pf":88.2,"pa":91.6,"st":{"w":false,"n":5}},"Connecticut Sun":{"w":8,"l":21,"pf":79.7,"pa":86.5,"st":{"w":false,"n":2}},"Toronto Tempo":{"w":10,"l":18,"pf":87.3,"pa":91.9,"st":{"w":false,"n":3}}},"meta":{"Atlanta Dream":{"logo":"https://a.espncdn.com/i/teamlogos/wnba/500/atl.png","color":"#e31837","alt":"#5091cc","abbr":"ATL"},"Chicago Sky":{"logo":"https://a.espncdn.com/i/teamlogos/wnba/500/chi.png","color":"#5091cd","alt":"#ffd520","abbr":"CHI"},"Connecticut Sun":{"logo":"https://a.espncdn.com/i/teamlogos/wnba/500/con.png","color":"#f05023","alt":"#0a2240","abbr":"CON"},"Dallas Wings":{"logo":"https://a.espncdn.com/i/teamlogos/wnba/500/dal.png","color":"#002b5c","alt":"#c4d600","abbr":"DAL"},"Golden State Valkyries":{"logo":"https://a.espncdn.com/i/teamlogos/wnba/500/gs.png","color":"#b38fcf","alt":"#000000","abbr":"GS"},"Indiana Fever":{"logo":"https://a.espncdn.com/i/teamlogos/wnba/500/ind.png","color":"#002d62","alt":"#e03a3e","abbr":"IND"},"Las Vegas Aces":{"logo":"https://a.espncdn.com/i/teamlogos/wnba/500/lv.png","color":"#a7a8aa","alt":"#000000","abbr":"LV"},"Los Angeles Sparks":{"logo":"https://a.espncdn.com/i/teamlogos/wnba/500/la.png","color":"#552583","alt":"#fdb927","abbr":"LA"},"Minnesota Lynx":{"logo":"https://a.espncdn.com/i/teamlogos/wnba/500/min.png","color":"#266092","alt":"#79bc43","abbr":"MIN"},"New York Liberty":{"logo":"https://a.espncdn.com/i/teamlogos/wnba/500/ny.png","color":"#86cebc","alt":"#000000","abbr":"NY"},"Phoenix Mercury":{"logo":"https://a.espncdn.com/i/teamlogos/wnba/500/phx.png","color":"#3c286e","alt":"#fa4b0a","abbr":"PHX"},"Portland Fire":{"logo":"https://a.espncdn.com/i/teamlogos/wnba/500/por.png","color":"#cee5eb","alt":"#000000","abbr":"POR"},"Seattle Storm":{"logo":"https://a.espncdn.com/i/teamlogos/wnba/500/sea.png","color":"#2c5235","alt":"#fee11a","abbr":"SEA"},"Toronto Tempo":{"logo":"https://a.espncdn.com/i/teamlogos/wnba/500/tor.png","color":"#33476D","alt":"#7B1B38","abbr":"TOR"},"Washington Mystics":{"logo":"https://a.espncdn.com/i/teamlogos/wnba/500/wsh.png","color":"#e03a3e","alt":"#002b5c","abbr":"WSH"}},"streaks":{"Indiana Fever":{"w":true,"n":3},"Minnesota Lynx":{"w":true,"n":7},"Golden State Valkyries":{"w":false,"n":1},"Las Vegas Aces":{"w":false,"n":1},"Dallas Wings":{"w":true,"n":1},"Atlanta Dream":{"w":true,"n":3},"New York Liberty":{"w":true,"n":2},"Chicago Sky":{"w":false,"n":2},"Washington Mystics":{"w":true,"n":2},"Phoenix Mercury":{"w":true,"n":2},"Portland Fire":{"w":false,"n":2},"Seattle Storm":{"w":false,"n":6},"Los Angeles Sparks":{"w":false,"n":5},"Connecticut Sun":{"w":false,"n":2},"Toronto Tempo":{"w":false,"n":3}}};
+var DATA   = {"days":{"2026-07-14":[{"h":"Connecticut Sun","a":"Portland Fire","hp":84.8,"ap":83.6,"php":54.0,"mg":1.2,"sd":11.95,"st":1,"ok":1,"sc":"87-90","mb":1,"t":null,"v":null,"ct":null,"nt":0},{"h":"Toronto Tempo","a":"Washington Mystics","hp":85.7,"ap":86.5,"php":48.2,"mg":-0.8,"sd":13.5,"st":1,"ok":1,"sc":"79-62","mb":1,"t":null,"v":null,"ct":null,"nt":0}],"2026-07-15":[{"h":"Chicago Sky","a":"Seattle Storm","hp":86.6,"ap":84.1,"php":56.5,"mg":2.5,"sd":15.28,"st":1,"ok":1,"sc":"90-95","mb":1,"t":null,"v":null,"ct":null,"nt":0},{"h":"Minnesota Lynx","a":"Los Angeles Sparks","hp":95.3,"ap":85.2,"php":78.5,"mg":10.1,"sd":12.8,"st":1,"ok":1,"sc":"87-96","mb":1,"t":null,"v":null,"ct":null,"nt":0},{"h":"Indiana Fever","a":"Golden State Valkyries","hp":83.9,"ap":82.2,"php":54.4,"mg":1.7,"sd":15.38,"st":1,"ok":0,"sc":"88-75","mb":1,"t":null,"v":null,"ct":null,"nt":0}],"2026-07-16":[{"h":"Washington Mystics","a":"Portland Fire","hp":85.3,"ap":79.0,"php":68.4,"mg":6.3,"sd":13.15,"st":1,"ok":0,"sc":"75-56","mb":1,"t":null,"v":null,"ct":null,"nt":0},{"h":"Dallas Wings","a":"New York Liberty","hp":89.0,"ap":85.1,"php":61.2,"mg":3.9,"sd":13.71,"st":0,"ok":0,"sc":"","mb":0,"t":null,"v":null,"ct":null,"nt":0}],"2026-07-17":[{"h":"Indiana Fever","a":"Seattle Storm","hp":92.5,"ap":84.2,"php":74.5,"mg":8.3,"sd":12.6,"st":1,"ok":1,"sc":"107-110","mb":1,"t":null,"v":null,"ct":null,"nt":0},{"h":"Toronto Tempo","a":"Atlanta Dream","hp":86.8,"ap":94.0,"php":29.2,"mg":-7.2,"sd":13.15,"st":1,"ok":1,"sc":"111-92","mb":1,"t":null,"v":null,"ct":null,"nt":0},{"h":"Chicago Sky","a":"Los Angeles Sparks","hp":92.2,"ap":90.4,"php":54.5,"mg":1.8,"sd":15.92,"st":1,"ok":1,"sc":"82-96","mb":1,"t":null,"v":null,"ct":null,"nt":0},{"h":"Phoenix Mercury","a":"Connecticut Sun","hp":83.9,"ap":80.0,"php":60.7,"mg":3.9,"sd":14.36,"st":1,"ok":0,"sc":"96-83","mb":1,"t":null,"v":null,"ct":null,"nt":0}],"2026-07-18":[{"h":"Indiana Fever","a":"New York Liberty","hp":89.6,"ap":91.0,"php":46.6,"mg":-1.4,"sd":16.41,"st":1,"ok":0,"sc":"88-108","mb":1,"t":null,"v":null,"ct":null,"nt":0},{"h":"Minnesota Lynx","a":"Portland Fire","hp":93.2,"ap":81.0,"php":81.9,"mg":12.2,"sd":13.38,"st":1,"ok":1,"sc":"93-101","mb":1,"t":null,"v":null,"ct":null,"nt":0},{"h":"Golden State Valkyries","a":"Washington Mystics","hp":78.4,"ap":69.4,"php":75.8,"mg":9.0,"sd":12.86,"st":1,"ok":1,"sc":"69-74","mb":1,"t":null,"v":null,"ct":null,"nt":0}],"2026-07-19":[{"h":"Dallas Wings","a":"Los Angeles Sparks","hp":93.7,"ap":85.0,"php":73.7,"mg":8.7,"sd":13.72,"st":1,"ok":1,"sc":"82.0-90.0","mb":1,"t":null,"v":null,"ct":null,"nt":0},{"h":"Atlanta Dream","a":"Chicago Sky","hp":92.2,"ap":86.8,"php":65.4,"mg":5.4,"sd":13.63,"st":1,"ok":1,"sc":"91.0-93.0","mb":1,"t":null,"v":null,"ct":null,"nt":0},{"h":"Phoenix Mercury","a":"Connecticut Sun","hp":83.2,"ap":82.1,"php":53.2,"mg":1.1,"sd":13.7,"st":1,"ok":1,"sc":"63.0-72.0","mb":1,"t":null,"v":null,"ct":null,"nt":0}],"2026-07-20":[{"h":"Toronto Tempo","a":"Las Vegas Aces","hp":87.3,"ap":91.9,"php":36.6,"mg":-4.6,"sd":13.43,"st":1,"ok":1,"sc":"109.0-83.0","mb":1,"t":null,"v":null,"ct":null,"nt":0},{"h":"Dallas Wings","a":"New York Liberty","hp":89.4,"ap":84.7,"php":63.6,"mg":4.7,"sd":13.51,"st":1,"ok":1,"sc":"99.0-98.0","mb":1,"t":null,"v":null,"ct":null,"nt":0},{"h":"Golden State Valkyries","a":"Washington Mystics","hp":77.8,"ap":69.2,"php":73.8,"mg":8.6,"sd":13.5,"st":1,"ok":0,"sc":"90.0-82.0","mb":1,"t":null,"v":null,"ct":null,"nt":0},{"h":"Seattle Storm","a":"Minnesota Lynx","hp":85.3,"ap":88.0,"php":42.4,"mg":-2.7,"sd":14.09,"st":1,"ok":1,"sc":"105.0-102.0","mb":1,"t":null,"v":null,"ct":null,"nt":0}],"2026-07-22":[{"h":"Los Angeles Sparks","a":"Phoenix Mercury","hp":87.0,"ap":85.3,"php":54.9,"mg":1.7,"sd":13.81,"st":1,"ok":0,"sc":"86.0-82.0","mb":1,"t":null,"v":null,"ct":null,"nt":0},{"h":"Seattle Storm","a":"Minnesota Lynx","hp":85.5,"ap":90.5,"php":35.5,"mg":-5.0,"sd":13.45,"st":1,"ok":1,"sc":"86.0-76.0","mb":1,"t":null,"v":null,"ct":null,"nt":0},{"h":"New York Liberty","a":"Chicago Sky","hp":89.4,"ap":87.9,"php":54.3,"mg":1.5,"sd":13.89,"st":1,"ok":1,"sc":"94.0-95.0","mb":1,"t":null,"v":null,"ct":null,"nt":0},{"h":"Washington Mystics","a":"Las Vegas Aces","hp":80.3,"ap":82.8,"php":42.8,"mg":-2.5,"sd":13.78,"st":1,"ok":0,"sc":"99.0-100.0","mb":1,"t":null,"v":null,"ct":null,"nt":0},{"h":"Indiana Fever","a":"Connecticut Sun","hp":91.8,"ap":83.1,"php":73.8,"mg":8.7,"sd":13.65,"st":1,"ok":1,"sc":"88.0-123.0","mb":1,"t":null,"v":null,"ct":null,"nt":0},{"h":"Portland Fire","a":"Dallas Wings","hp":87.4,"ap":88.9,"php":45.7,"mg":-1.5,"sd":13.89,"st":1,"ok":1,"sc":"101.0-97.0","mb":1,"t":null,"v":null,"ct":null,"nt":0}]},"order":["2026-07-22","2026-07-20","2026-07-19","2026-07-18","2026-07-17","2026-07-16","2026-07-15","2026-07-14"],"calibration":[{"label":"五成半上下","n":9,"said":54.2,"was":66.7},{"label":"六成","n":5,"said":64.4,"was":40.0},{"label":"七成","n":11,"said":74.9,"was":90.9}],"settled":26,"strata":[{"label":"看好主隊","n":17,"rate":70.6},{"label":"看好客隊","n":9,"rate":77.8},{"label":"大熱門 65%以上","n":14,"rate":85.7},{"label":"勢均力敵 58%以下","n":9,"rate":66.7}],"rolling":[{"at":"07/20","rate":75.0},{"at":"07/22","rate":70.0}],"brier":{"n":26,"score":0.1866},"by_team":[{"team":"Chicago Sky","n":4,"hit":4,"rate":100.0},{"team":"Seattle Storm","n":4,"hit":4,"rate":100.0},{"team":"Minnesota Lynx","n":4,"hit":4,"rate":100.0},{"team":"Connecticut Sun","n":4,"hit":3,"rate":75.0},{"team":"Portland Fire","n":4,"hit":3,"rate":75.0},{"team":"Los Angeles Sparks","n":4,"hit":3,"rate":75.0},{"team":"Indiana Fever","n":4,"hit":2,"rate":50.0},{"team":"Washington Mystics","n":5,"hit":2,"rate":40.0}],"total_acc":{"n":26,"mae":18.3,"within10":30.8},"generated":"2026-07-26 08:01","gen_ts":1785052875,"records":{"Indiana Fever":{"w":19,"l":11,"pf":95.7,"pa":88.7,"st":{"w":true,"n":3}},"Minnesota Lynx":{"w":25,"l":6,"pf":90.3,"pa":81.6,"st":{"w":true,"n":7}},"Golden State Valkyries":{"w":20,"l":8,"pf":81.8,"pa":76.4,"st":{"w":false,"n":1}},"Las Vegas Aces":{"w":19,"l":10,"pf":90.7,"pa":86.8,"st":{"w":false,"n":1}},"Dallas Wings":{"w":20,"l":9,"pf":90.8,"pa":85.9,"st":{"w":true,"n":1}},"Atlanta Dream":{"w":17,"l":11,"pf":88.6,"pa":84.9,"st":{"w":true,"n":3}},"New York Liberty":{"w":17,"l":13,"pf":88.4,"pa":86.3,"st":{"w":true,"n":2}},"Chicago Sky":{"w":9,"l":20,"pf":87.8,"pa":90.3,"st":{"w":false,"n":2}},"Washington Mystics":{"w":15,"l":13,"pf":80.3,"pa":82.5,"st":{"w":true,"n":2}},"Phoenix Mercury":{"w":12,"l":18,"pf":83.9,"pa":86.2,"st":{"w":true,"n":2}},"Portland Fire":{"w":11,"l":18,"pf":84.8,"pa":90.4,"st":{"w":false,"n":2}},"Seattle Storm":{"w":7,"l":24,"pf":82.0,"pa":86.5,"st":{"w":false,"n":6}},"Los Angeles Sparks":{"w":12,"l":16,"pf":88.2,"pa":91.6,"st":{"w":false,"n":5}},"Connecticut Sun":{"w":8,"l":21,"pf":79.7,"pa":86.5,"st":{"w":false,"n":2}},"Toronto Tempo":{"w":10,"l":18,"pf":87.3,"pa":91.9,"st":{"w":false,"n":3}}},"meta":{"Atlanta Dream":{"logo":"https://a.espncdn.com/i/teamlogos/wnba/500/atl.png","color":"#e31837","alt":"#5091cc","abbr":"ATL"},"Chicago Sky":{"logo":"https://a.espncdn.com/i/teamlogos/wnba/500/chi.png","color":"#5091cd","alt":"#ffd520","abbr":"CHI"},"Connecticut Sun":{"logo":"https://a.espncdn.com/i/teamlogos/wnba/500/con.png","color":"#f05023","alt":"#0a2240","abbr":"CON"},"Dallas Wings":{"logo":"https://a.espncdn.com/i/teamlogos/wnba/500/dal.png","color":"#002b5c","alt":"#c4d600","abbr":"DAL"},"Golden State Valkyries":{"logo":"https://a.espncdn.com/i/teamlogos/wnba/500/gs.png","color":"#b38fcf","alt":"#000000","abbr":"GS"},"Indiana Fever":{"logo":"https://a.espncdn.com/i/teamlogos/wnba/500/ind.png","color":"#002d62","alt":"#e03a3e","abbr":"IND"},"Las Vegas Aces":{"logo":"https://a.espncdn.com/i/teamlogos/wnba/500/lv.png","color":"#a7a8aa","alt":"#000000","abbr":"LV"},"Los Angeles Sparks":{"logo":"https://a.espncdn.com/i/teamlogos/wnba/500/la.png","color":"#552583","alt":"#fdb927","abbr":"LA"},"Minnesota Lynx":{"logo":"https://a.espncdn.com/i/teamlogos/wnba/500/min.png","color":"#266092","alt":"#79bc43","abbr":"MIN"},"New York Liberty":{"logo":"https://a.espncdn.com/i/teamlogos/wnba/500/ny.png","color":"#86cebc","alt":"#000000","abbr":"NY"},"Phoenix Mercury":{"logo":"https://a.espncdn.com/i/teamlogos/wnba/500/phx.png","color":"#3c286e","alt":"#fa4b0a","abbr":"PHX"},"Portland Fire":{"logo":"https://a.espncdn.com/i/teamlogos/wnba/500/por.png","color":"#cee5eb","alt":"#000000","abbr":"POR"},"Seattle Storm":{"logo":"https://a.espncdn.com/i/teamlogos/wnba/500/sea.png","color":"#2c5235","alt":"#fee11a","abbr":"SEA"},"Toronto Tempo":{"logo":"https://a.espncdn.com/i/teamlogos/wnba/500/tor.png","color":"#33476D","alt":"#7B1B38","abbr":"TOR"},"Washington Mystics":{"logo":"https://a.espncdn.com/i/teamlogos/wnba/500/wsh.png","color":"#e03a3e","alt":"#002b5c","abbr":"WSH"}},"streaks":{"Indiana Fever":{"w":true,"n":3},"Minnesota Lynx":{"w":true,"n":7},"Golden State Valkyries":{"w":false,"n":1},"Las Vegas Aces":{"w":false,"n":1},"Dallas Wings":{"w":true,"n":1},"Atlanta Dream":{"w":true,"n":3},"New York Liberty":{"w":true,"n":2},"Chicago Sky":{"w":false,"n":2},"Washington Mystics":{"w":true,"n":2},"Phoenix Mercury":{"w":true,"n":2},"Portland Fire":{"w":false,"n":2},"Seattle Storm":{"w":false,"n":6},"Los Angeles Sparks":{"w":false,"n":5},"Connecticut Sun":{"w":false,"n":2},"Toronto Tempo":{"w":false,"n":3}}};
 var TODAY  = "2026-07-26";
-var BUILD  = "202607260315";
+var BUILD  = "202607260801";
 var API    = "";
 var PREM   = null;
 
@@ -228,6 +240,7 @@ var PREM   = null;
    gi    解析分頁選的是第幾場 */
 var TAB = "games";
 var SUB = {deep: "sum", teams: "rating", model: "calib"};
+var ROTTEAM = null;   /* 陣容分頁目前選的球隊 */
 var cur = DATA.order[0];
 var curTeam = null;
 var gi = 0;
@@ -376,6 +389,15 @@ function bar(label, pct, full){
     '<span class="bv num">'+pct.toFixed(1)+'%</span></div>';
 }
 function kv(k,v){ return '<div class="krow"><span>'+esc(k)+'</span><b>'+v+'</b></div>'; }
+/* 下拉選單。opts 是 [[值, 顯示文字], ...]，選好之後由 bind() 接 change 事件。 */
+function dropdown(id, label, opts, cur){
+  return '<div class="dd">'+(label?'<label>'+esc(label)+'</label>':"")+
+    '<select id="'+id+'">'+opts.map(function(o){
+      return '<option value="'+esc(o[0])+'"'+(String(o[0])===String(cur)?' selected':'')+
+        '>'+esc(o[1])+'</option>';
+    }).join("")+'</select></div>';
+}
+
 function head(t,s){ return '<div class="shead"><h2>'+esc(t)+'</h2><span>'+esc(s||"")+'</span></div>'; }
 function formStrip(rows){
   if(!rows||!rows.length) return "";
@@ -552,9 +574,8 @@ function viewDeep(){
   var list=(PREM.days&&PREM.days[cur])||[];
   if(!list.length) return pre+'<div class="empty">這一天沒有可解析的場次。</div>';
 
-  var h=pre+'<div class="subs" id="gamesel">'+list.map(function(g,i){
-    return '<div class="sub'+(i===gi?" on":"")+'" data-gi="'+i+'">'+esc(g.away)+' ＠ '+esc(g.home)+'</div>';
-  }).join("")+'</div>';
+  var h=pre+dropdown("gamesel", "選擇比賽",
+    list.map(function(g,i){ return [i, g.away+" ＠ "+g.home]; }), gi);
 
   var tabs=[["sum","預測摘要"],["dist","機率分布"],["team","球隊狀況"]];
   h+='<div class="subs" id="deepsub">'+tabs.map(function(t){
@@ -700,6 +721,7 @@ function viewTeams(){
 
   var opts=[["rating","實力評分"]];
   if(L.teams.some(function(t){ return t.w!=null; })) opts.push(["record","戰績主客"]);
+  if(L.teams.some(function(t){ return t.seed!=null||t.conf; })) opts.push(["conf","分區排名"]);
   if(L.teams.some(function(t){ return t.ff; })) opts.push(["ff","四要素"]);
   if(L.teams.some(function(t){ return t.pace!=null; })) opts.push(["pace","節奏"]);
   if(L.rotations && Object.keys(L.rotations).length) opts.push(["rot","陣容"]);
@@ -729,6 +751,32 @@ function viewTeams(){
           '</td><td class="num">'+wl(t.home)+'</td><td class="num">'+wl(t.away)+'</td></tr>';
       }).join("")+'</table>';
   }
+  if(SUB.teams==="conf"){
+    /* 分區排名：ESPN standings 端點才有的官方分組與勝差，自己算 W-L 算不出來 */
+    var byConf={};
+    L.teams.forEach(function(t){
+      if(t.seed==null&&!t.conf) return;
+      var c=t.conf||"聯盟";
+      (byConf[c]=byConf[c]||[]).push(t);
+    });
+    Object.keys(byConf).sort().forEach(function(c){
+      var rows=byConf[c].slice().sort(function(a,b){
+        return (a.seed==null?99:a.seed)-(b.seed==null?99:b.seed);
+      });
+      h+=head(c,"依官方排名")+
+        '<table><tr><th>#</th><th>球隊</th><th>戰績</th><th>勝差</th><th>近10</th><th>連續</th></tr>'+
+        rows.map(function(t){
+          return '<tr><td class="num was">'+(t.seed!=null?t.seed:"\u2014")+'</td>'+
+            '<td>'+esc(t.team)+'</td>'+
+            '<td class="num">'+(t.w!=null?t.w+"-"+t.l:"\u2014")+'</td>'+
+            '<td class="num">'+(t.gb!=null?(t.gb===0?"\u2014":num(t.gb)):"\u2014")+'</td>'+
+            '<td class="num said">'+esc(t.l10||"\u2014")+'</td>'+
+            '<td class="num">'+esc(t.strk||"\u2014")+'</td></tr>';
+        }).join("")+'</table>';
+    });
+    h+='<div class="hint">排名與勝差來自聯盟官方分組。'+
+      '勝差是距離該分區龍頭還差幾場，「近10」是最近十場的勝敗。</div>';
+  }
   if(SUB.teams==="ff"){
     h+=head("四要素","描述一支球隊的標準框架")+
       '<table><tr><th>球隊</th><th>命中率</th><th>失誤率</th><th>進攻籃板</th><th>罰球率</th></tr>'+
@@ -748,9 +796,11 @@ function viewTeams(){
     var order=L.teams.map(function(t){ return t.team; })
       .filter(function(n){ return rot[n]; });
     names.forEach(function(n){ if(order.indexOf(n)<0) order.push(n); });
+    if(order.indexOf(ROTTEAM)<0) ROTTEAM=order[0];
+    h+=dropdown("rotsel","選擇球隊",order.map(function(n){ return [n,n]; }),ROTTEAM);
     h+=head("主要輪替陣容","場均上場時間與得分")+
-      order.map(function(n){
-        var l=rot[n];
+      [ROTTEAM].map(function(n){
+        var l=rot[n]||[];
         return '<article class="card"><div class="deep">'+
           '<div class="dtitle">'+esc(n)+'</div>'+
           l.map(function(pl){
@@ -797,9 +847,7 @@ function viewModel(){
   }
   if(!opts.some(function(o){ return o[0]===SUB.model; })) SUB.model=opts[0][0];
 
-  var h='<div class="subs" id="modelsub">'+opts.map(function(o){
-    return '<div class="sub'+(SUB.model===o[0]?" on":"")+'" data-s="'+o[0]+'">'+o[1]+'</div>';
-  }).join("")+'</div>';
+  var h=dropdown("modelsub", "看哪一項", opts, SUB.model);
 
   if(SUB.model==="calib"){
     /* 賽季總覽：一眼看完模型至今的成績 */
@@ -1022,21 +1070,29 @@ function bind(){
   });
   var back=$("backbtn");
   if(back) back.addEventListener("click",function(){ curTeam=null; render(); });
-  ["deepsub","teamsub","modelsub"].forEach(function(id){
+  ["deepsub","teamsub"].forEach(function(id){
     var box=$(id);
     if(!box) return;
-    var which=id==="deepsub"?"deep":(id==="teamsub"?"teams":"model");
+    var which=id==="deepsub"?"deep":"teams";
     box.querySelectorAll(".sub").forEach(function(el){
       el.addEventListener("click",function(){
         SUB[which]=el.getAttribute("data-s"); render();
       });
     });
   });
-  var gs=$("gamesel");
-  if(gs) gs.querySelectorAll(".sub").forEach(function(el){
-    el.addEventListener("click",function(){
-      gi=parseInt(el.getAttribute("data-gi"),10)||0; render();
-    });
+  /* 下拉選單：change 事件 */
+  var sel;
+  sel=$("gamesel");
+  if(sel&&sel.addEventListener) sel.addEventListener("change",function(){
+    gi=parseInt(sel.value,10)||0; render();
+  });
+  sel=$("modelsub");
+  if(sel&&sel.addEventListener) sel.addEventListener("change",function(){
+    SUB.model=sel.value; render();
+  });
+  sel=$("rotsel");
+  if(sel&&sel.addEventListener) sel.addEventListener("change",function(){
+    ROTTEAM=sel.value; render();
   });
 }
 
