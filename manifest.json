@@ -30,6 +30,66 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
+    },
+    {
+      "src": "icon-monochrome-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "monochrome"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "今日賽事",
+      "short_name": "賽事",
+      "description": "當天每場比賽的預測與機率",
+      "url": "./index.html#tab=games",
+      "icons": [
+        {
+          "src": "icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "逐場解析",
+      "short_name": "解析",
+      "description": "單場的機率分布與市場對照",
+      "url": "./index.html#tab=deep",
+      "icons": [
+        {
+          "src": "icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "球隊狀況",
+      "short_name": "球隊",
+      "description": "全聯盟評分、戰績與陣容",
+      "url": "./index.html#tab=teams",
+      "icons": [
+        {
+          "src": "icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "模型準確度",
+      "short_name": "模型",
+      "description": "預測說幾成、實際中幾成",
+      "url": "./index.html#tab=model",
+      "icons": [
+        {
+          "src": "icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
     }
   ]
 }

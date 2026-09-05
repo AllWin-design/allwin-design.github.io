@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0E151C">
+<title>目前沒有連線 — AI 籃球賽事預測</title>
+<style>
+/* 顏色與字體跟主畫面一致，不然斷線時會像跳到別的網站。
+   這頁刻意不引用外部檔案 —— 離線時什麼都載不到，
+   連 CSS 都要內嵌，否則會變成一片沒有樣式的白底黑字。 */
+:root{
+  --bg:#0E151C; --card:#151E27; --line:#22303C;
+  --fg:#E6EDF3; --mut:#8CA0B3; --acc:#E9A13B;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{
+  background:var(--bg); color:var(--fg);
+  font-family:system-ui,-apple-system,"Noto Sans TC","PingFang TC",
+              "Microsoft JhengHei",sans-serif;
+  display:flex; align-items:center; justify-content:center;
+  padding:24px; line-height:1.7;
+}
+.box{max-width:420px;width:100%;text-align:center}
+svg{width:96px;height:96px;margin-bottom:20px;opacity:.85}
+h1{font-size:20px;margin:0 0 10px;font-weight:700}
+p{margin:0 0 8px;color:var(--mut);font-size:14px}
+.card{
+  margin-top:22px;padding:14px 16px;text-align:left;
+  background:var(--card);border:1px solid var(--line);border-radius:12px;
+  font-size:13px;color:var(--mut);
+}
+.card b{color:var(--fg);font-weight:600}
+button{
+  margin-top:20px;padding:11px 26px;font-size:15px;font-weight:600;
+  color:#101820;background:var(--acc);border:0;border-radius:10px;
+  cursor:pointer;font-family:inherit;
+}
+button:active{opacity:.8}
+</style>
+</head>
+<body>
+<div class="box">
+  <!-- 主圖示的單色版，直接畫成 SVG，不依賴任何檔案 -->
+  <svg viewBox="0 0 512 512" fill="none" aria-hidden="true">
+    <path d="M102 325 C160 325 190 187 256 187 C322 187 352 325 410 325"
+          stroke="#8CA0B3" stroke-width="26" stroke-linecap="round"/>
+    <path d="M96 325 H416" stroke="#8CA0B3" stroke-width="26"
+          stroke-linecap="round"/>
+  </svg>
+
+  <h1>目前沒有連線</h1>
+  <p>裝置連上網路之後，這裡會自動回到最新的預測。</p>
+
+  <div class="card">
+    <b>為什麼會看到這一頁</b><br>
+    這是第一次開啟、或是快取被清掉了，所以手邊沒有可以顯示的資料。<br><br>
+    <b>平常不會這樣</b><br>
+    只要成功開啟過一次，之後就算沒有訊號也看得到上次載入的內容。
+  </div>
+
+  <button onclick="location.reload()">重新連線</button>
+</div>
+
+<script>
+// 連線一恢復就自動回主畫面，不必等使用者自己按。
+// 只在真的能取到東西時才跳，避免「有 Wi-Fi 但沒有網路」的情況下
+// 一直在這兩頁之間彈來彈去。
+addEventListener("online", function(){
+  fetch("./index.html", {method:"HEAD", cache:"no-store"})
+    .then(function(){ location.replace("./index.html"); })
+    .catch(function(){});
+});
+</script>
+</body>
+</html>
