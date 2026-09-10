@@ -10,6 +10,12 @@
 //     瀏覽器直接顯示錯誤頁 —— 在 TWA 裡就是 Chrome 恐龍，看起來像 App 壞了。
 //     第一次開就沒訊號的人只會看到那個。策略本身不動，只是把破口補上。
 //
+// v5（1.44）：加上 push / notificationclick 骨架。這版沒有發送端，
+//     所以這兩段永遠不會被觸發 —— 放進來的理由是 9/18 之後沒有補版本的
+//     機會，等十月接上伺服器推播時，才不必為了「service worker 少了
+//     handler」再推一次殼。快取策略完全沒動，CACHE 名稱刻意維持 v4：
+//     改名會讓所有人重新下載一整包，為了兩個用不到的 handler 不值得。
+//
 // 判斷有沒有變是比對 ETag（GitHub Pages 會送），沒有就退而比對長度。
 const CACHE = "hoops-v4";
 // v4 把 index.html 與 offline.html 加進預快取。
@@ -113,4 +119,91 @@ self.addEventListener("fetch", e => {
       }).catch(() => new Response("", { status: 503, statusText: "offline" }))
     )
   );
+});
+
+// ─────────────────────────────────────────────────────────────
+// 推播（骨架，這版沒有發送端）
+// ─────────────────────────────────────────────────────────────
+
+// 通知的預設內容。伺服器沒送 payload、或 payload 壞掉時用這組，
+// 總比跳出一則空白通知好 —— 空白通知會直接被使用者關掉通知權限。
+const NOTIFY_FALLBACK = {
+  title: "賽事更新",
+  body: "點開看今天的預測。",
+  url: "./#tab=games"
+};
+
+function parsePush(event) {
+  if (!event.data) return {};
+  // 送 JSON 是計畫中的格式，但純文字也要接得住：
+  // 發送端寫錯格式時，退成「標題用那段文字」比整則不顯示好。
+  try {
+    return event.data.json() || {};
+  } catch (e) {
+    try {
+      return { title: event.data.text() };
+    } catch (e2) {
+      return {};
+    }
+  }
+}
+
+// 只接受同源的目的地。payload 是外部來的，直接拿去 openWindow 等於讓
+// 發送端把使用者導去任何網站；萬一金鑰外流，那是最好用的一條路。
+function safeUrl(raw) {
+  if (!raw) return NOTIFY_FALLBACK.url;
+  try {
+    const u = new URL(raw, self.registration.scope);
+    if (u.origin !== self.location.origin) return NOTIFY_FALLBACK.url;
+    return u.href;
+  } catch (e) {
+    return NOTIFY_FALLBACK.url;
+  }
+}
+
+self.addEventListener("push", event => {
+  const d = parsePush(event);
+  const title = d.title || NOTIFY_FALLBACK.title;
+  const opts = {
+    body: d.body || NOTIFY_FALLBACK.body,
+    icon: "./icon-192.png",
+    // Android 狀態列的小圖示。只吃 alpha 通道、會被系統染成單色，
+    // 所以一定要用單色圖，拿 icon-192 來充數會變成一坨黑塊。
+    badge: "./icon-monochrome-512.png",
+    tag: d.tag || "hoops",          // 同 tag 會取代舊的，不會疊成一串
+    renotify: false,
+    data: { url: safeUrl(d.url) }
+  };
+  event.waitUntil(
+    self.registration.showNotification(title, opts).catch(
+      () => console.warn("[sw] showNotification 失敗，略過這則"))
+  );
+});
+
+self.addEventListener("notificationclick", event => {
+  event.notification.close();
+  const target = (event.notification.data && event.notification.data.url)
+    || NOTIFY_FALLBACK.url;
+  event.waitUntil(
+    self.clients.matchAll({ type: "window", includeUncontrolled: true })
+      .then(list => {
+        // App 已經開著就切過去並帶到指定分頁，不要再開一個新視窗。
+        for (const c of list) {
+          if (c.url.indexOf(self.location.origin) === 0 && "focus" in c) {
+            if ("navigate" in c) { try { c.navigate(target); } catch (e) {} }
+            return c.focus();
+          }
+        }
+        if (self.clients.openWindow) return self.clients.openWindow(target);
+        return null;
+      })
+  );
+});
+
+// 訂閱失效時瀏覽器會發這個事件（金鑰輪替、系統清資料）。
+// 這版沒有訂閱可以重新註冊，先留位置與紀錄；十月接上發送端時，
+// 這裡要重新 subscribe 並把新的 endpoint 送回伺服器 ——
+// 少了這段的症狀是「某些使用者某天起再也收不到通知，而且不會有人察覺」。
+self.addEventListener("pushsubscriptionchange", () => {
+  console.warn("[sw] 推播訂閱已失效，尚未實作重新註冊");
 });
