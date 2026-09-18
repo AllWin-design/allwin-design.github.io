@@ -16,6 +16,8 @@
 //     handler」再推一次殼。快取策略完全沒動，CACHE 名稱刻意維持 v4：
 //     改名會讓所有人重新下載一整包，為了兩個用不到的 handler 不值得。
 //
+// v6（1.48）：version.json 不走 service worker，理由見 fetch 事件最上面。
+//
 // 判斷有沒有變是比對 ETag（GitHub Pages 會送），沒有就退而比對長度。
 const CACHE = "hoops-v4";
 // v4 把 index.html 與 offline.html 加進預快取。
@@ -70,6 +72,14 @@ function lastResort() {
 
 self.addEventListener("fetch", e => {
   if (e.request.method !== "GET") return;
+
+  // v6（1.48）：version.json 完全不經過 service worker。
+  // 頁面每隔幾分鐘抓這個小檔（約 60 bytes）判斷有沒有新資料。
+  // 底下靜態檔那條是快取優先，被它接住就會永遠讀到第一次抓到的值 ——
+  // 提示再也不會出現，而且不會有任何錯誤訊息。
+  // 這裡直接 return（不呼叫 respondWith），交還給瀏覽器照原本的
+  // no-store 去抓。
+  if (new URL(e.request.url).pathname.endsWith("/version.json")) return;
 
   const isPage = e.request.mode === "navigate" ||
                  e.request.destination === "document" ||
