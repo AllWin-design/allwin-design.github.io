@@ -17,6 +17,7 @@
 //     改名會讓所有人重新下載一整包，為了兩個用不到的 handler 不值得。
 //
 // v6（1.48）：version.json 不走 service worker，理由見 fetch 事件最上面。
+// v7（1.51）：帶 _nosw=1 的請求同樣不走，那是頁面自己抓新內容用的。
 //
 // 判斷有沒有變是比對 ETag（GitHub Pages 會送），沒有就退而比對長度。
 const CACHE = "hoops-v4";
@@ -80,6 +81,11 @@ self.addEventListener("fetch", e => {
   // 這裡直接 return（不呼叫 respondWith），交還給瀏覽器照原本的
   // no-store 去抓。
   if (new URL(e.request.url).pathname.endsWith("/version.json")) return;
+
+  // v7（1.51）：帶 _nosw=1 的請求一律不碰。
+  // 頁面偵測到新資料時會自己抓一次 index.html 換掉內容，那一次必須是
+  // 真正的網路版本；被下面的快取優先接住就會拿到舊的，畫面等於沒更新。
+  if (e.request.url.indexOf("_nosw=1") !== -1) return;
 
   const isPage = e.request.mode === "navigate" ||
                  e.request.destination === "document" ||
