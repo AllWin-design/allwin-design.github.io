@@ -19,6 +19,9 @@
 // v6（1.48）：version.json 不走 service worker，理由見 fetch 事件最上面。
 // v7（1.51）：帶 _nosw=1 的請求同樣不走，那是頁面自己抓新內容用的。
 //
+// v8（1.64）：pushsubscriptionchange 真正重新訂閱，並接收頁面送來的推播設定。
+//     CACHE 名稱照舊不動。
+//
 // 判斷有沒有變是比對 ETag（GitHub Pages 會送），沒有就退而比對長度。
 const CACHE = "hoops-v4";
 // v4 把 index.html 與 offline.html 加進預快取。
@@ -216,10 +219,60 @@ self.addEventListener("notificationclick", event => {
   );
 });
 
-// 訂閱失效時瀏覽器會發這個事件（金鑰輪替、系統清資料）。
-// 這版沒有訂閱可以重新註冊，先留位置與紀錄；十月接上發送端時，
-// 這裡要重新 subscribe 並把新的 endpoint 送回伺服器 ——
-// 少了這段的症狀是「某些使用者某天起再也收不到通知，而且不會有人察覺」。
-self.addEventListener("pushsubscriptionchange", () => {
-  console.warn("[sw] 推播訂閱已失效，尚未實作重新註冊");
+// ─────────────────────────────────────────────────────────────
+// 訂閱失效後自動重訂（v8）
+// ─────────────────────────────────────────────────────────────
+// 瀏覽器發現訂閱失效（金鑰輪替、推播服務換 token、系統清資料）時會發
+// pushsubscriptionchange。沒處理的症狀：某些人某天起再也收不到通知，
+// 而且沒有任何人察覺 —— 伺服器只看到那筆訂閱 410 被刪掉。
+//
+// service worker 本身不知道推播網址和公鑰，這兩個由頁面每次開啟時
+// 用 postMessage 送過來，存在自己的快取裡（跟離線快取同一個 CACHE，
+// activate 清舊快取時才不會被刪）。
+//
+// 這不是唯一的防線：頁面每次開啟也會檢查訂閱，伺服器回 dead 就換新的。
+// 事件沒觸發（有些瀏覽器不發）或這裡失敗時，那條會接住。
+const PUSH_CFG = "./__push_cfg";
+
+self.addEventListener("message", e => {
+  const d = e.data || {};
+  if (d.type !== "push-cfg" || !d.url || !d.key) return;
+  e.waitUntil(caches.open(CACHE).then(c => c.put(PUSH_CFG,
+    new Response(JSON.stringify({ url: d.url, key: d.key }),
+                 { headers: { "Content-Type": "application/json" } }))));
+});
+
+function keyBytes(s) {
+  const pad = "=".repeat((4 - s.length % 4) % 4);
+  const raw = atob((s + pad).replace(/-/g, "+").replace(/_/g, "/"));
+  const out = new Uint8Array(raw.length);
+  for (let i = 0; i < raw.length; i++) out[i] = raw.charCodeAt(i);
+  return out;
+}
+
+self.addEventListener("pushsubscriptionchange", event => {
+  event.waitUntil((async () => {
+    const hit = await caches.open(CACHE).then(c => c.match(PUSH_CFG));
+    const cfg = hit ? await hit.json().catch(() => null) : null;
+    if (!cfg) { console.warn("[sw] 訂閱失效，但還沒收到推播設定，等下次開啟 App"); return; }
+
+    let sub = event.newSubscription || null;
+    if (!sub) {
+      const old = event.oldSubscription;
+      const key = (old && old.options && old.options.applicationServerKey)
+                  || keyBytes(cfg.key);
+      sub = await self.registration.pushManager.subscribe(
+        { userVisibleOnly: true, applicationServerKey: key });
+    }
+    const res = await fetch(cfg.url + "/push/subscribe", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        sub: sub.toJSON ? sub.toJSON() : sub,
+        old: event.oldSubscription ? event.oldSubscription.endpoint : null,
+        ua: "（背景重新訂閱）", via: "sw", ts: Date.now()
+      })
+    });
+    if (!res.ok) console.warn("[sw] 重新訂閱送不出去：" + res.status);
+  })().catch(err => console.warn("[sw] 重新訂閱失敗：" + (err && err.message || err))));
 });
