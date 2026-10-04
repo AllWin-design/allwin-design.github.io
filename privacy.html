@@ -6,10 +6,38 @@ body{background:#0E151C;color:#E9EFF3;font-family:"PingFang TC","Noto Sans TC","
 line-height:1.75;max-width:620px;margin:0 auto;padding:32px 20px 64px;font-size:15px}
 h1{font-size:22px;margin-bottom:6px}h2{font-size:15px;margin:26px 0 6px;color:#E9A13B}
 p,li{color:#C6D3DB}a{color:#45BFD6}small{color:#7C919F}
-ul{padding-left:1.3em;margin:6px 0}
+ul,ol{padding-left:1.3em;margin:6px 0}
+h3{font-size:14px;margin:16px 0 4px;color:#E9EFF3}
+.del{margin:22px 0 8px;padding:4px 16px 14px;border:1px solid rgba(233,161,59,.35);border-radius:11px;background:#141E27}
 </style></head><body>
 <h1>隱私權政策</h1>
 <small>最後更新：2026 年 10 月</small>
+
+<section class="del" id="delete">
+<h2>刪除資料 — AI 籃球賽事預測</h2>
+<p>只有開啟過通知的裝置，伺服器上才會有資料。沒開過通知的話，伺服器上沒有任何屬於您的資料。</p>
+
+<h3>在 App 內刪除</h3>
+<ol>
+<li>開啟 App，進入「賽事」分頁，找到最上方的「賽事提醒」卡片</li>
+<li>按「關閉通知並刪除資料」</li>
+</ol>
+<p>伺服器會立即刪除這台裝置的全部資料：推播位址、勾選的聯盟、瀏覽器版本資訊、登記方式、最後開啟時間，不保留任何紀錄。
+之後隨時可以按「重新開啟通知」。按下時如果沒有網路，會改由下面的自動刪除處理。</p>
+
+<h3>已解除安裝 App，或在系統設定關閉通知</h3>
+<p>推播位址會失效。伺服器下次對這台裝置發送通知時收到失效回應，會自動刪除該筆資料。
+不論是否有發送，資料最長只保留到最後一次開啟 App 後 1 年，期滿自動刪除。</p>
+
+<h3>保留的資料</h3>
+<ul>
+<li>因推播位址失效而自動刪除時，會保留一段由推播位址計算出的雜湊碼 90 天。它無法還原成推播位址，只用來防止已失效的位址被重新登記，期滿自動刪除。在 App 內按「關閉通知並刪除資料」則不會留下這段雜湊碼。</li>
+<li>Cloudflare Web Analytics 的瀏覽統計是匿名的彙總資料，不與個別裝置連結，因此無法、也不需要針對單一使用者刪除。</li>
+</ul>
+
+<h3>聯絡</h3>
+<p>其他刪除要求請來信：<a href="mailto:etet7575@gmail.com">etet7575@gmail.com</a></p>
+</section>
 
 <h2>我們不蒐集可識別您身分的個人資料</h2>
 <p>本應用程式不會要求註冊、不會請您登入，也不會蒐集姓名、電子郵件、電話、精確位置或任何可識別您身分的資訊。
@@ -28,14 +56,8 @@ ul{padding-left:1.3em;margin:6px 0}
 <li>最後一次開啟應用程式的時間：每次開啟都會更新，用來判斷這台裝置的通知是否還有效</li>
 <li>登記方式：在應用程式畫面中登記，或由應用程式在背景自動重新登記</li>
 </ul>
-<p>您可以隨時自行刪除這些資料：</p>
-<ul>
-<li>在應用程式的通知設定按「關閉通知並刪除資料」，伺服器上這台裝置的資料會立即刪除，之後仍可重新開啟</li>
-<li>只取消勾選某個聯盟，則是不再發送那個聯盟的通知，資料仍保留以便發送其他聯盟</li>
-<li>在系統設定關閉本應用程式的通知權限，或移除應用程式後，推播位址會失效，
-我們會在下一次發送失敗時自動把上述資料刪除</li>
-</ul>
-<p>推播位址失效後，我們只保留一段無法還原成推播位址的雜湊碼 90 天，用途僅限於避免已失效的位址被重新登記。</p>
+<p>只取消勾選某個聯盟，是不再發送那個聯盟的通知，資料仍會保留以便發送您勾選的其他聯盟。
+要刪除資料，以及各項資料的保留期限，請見本頁上方的<a href="#delete">「刪除資料」</a>。</p>
 
 <h2>使用統計</h2>
 <p>為了解應用程式的使用情形，我們使用 Cloudflare Web Analytics 統計匿名的瀏覽數據，例如瀏覽了哪些頁面、
