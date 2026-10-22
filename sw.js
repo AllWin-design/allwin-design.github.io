@@ -22,6 +22,12 @@
 // v8（1.64）：pushsubscriptionchange 真正重新訂閱，並接收頁面送來的推播設定。
 //     CACHE 名稱照舊不動。
 //
+// v9（2.00）：只處理自己網站的檔案。跨網域的請求（Worker 的即時比分、ESPN 的計分板、
+//     傷兵、賽程、排行）原本也落進「靜態檔：快取優先」那條 —— 第一次抓到的比分被存起來，
+//     之後永遠拿到同一份，即時比分就整個卡住（2026-10-22 實測：卡在一小時前的第二節）。
+//     這些是即時資料，一律交還給瀏覽器直接抓；啟用時順便把以前誤存的跨網域快取清掉。
+//     CACHE 名稱照舊不動。
+//
 // 判斷有沒有變是比對 ETag（GitHub Pages 會送），沒有就退而比對長度。
 const CACHE = "hoops-v4";
 // v4 把 index.html 與 offline.html 加進預快取。
@@ -48,6 +54,12 @@ self.addEventListener("activate", e => {
   e.waitUntil(
     caches.keys()
       .then(keys => Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k))))
+      // v9：清掉以前誤存的跨網域回應（即時比分、ESPN 資料）
+      .then(() => caches.open(CACHE))
+      .then(c => c.keys().then(reqs => Promise.all(reqs
+        .filter(r => new URL(r.url).origin !== self.location.origin)
+        .map(r => c.delete(r)))))
+      .catch(() => null)
       .then(() => self.clients.claim())
   );
 });
@@ -76,6 +88,9 @@ function lastResort() {
 
 self.addEventListener("fetch", e => {
   if (e.request.method !== "GET") return;
+
+  // v9（2.00）：跨網域的一律不碰（即時比分、ESPN 資料都是會變的），理由見檔案最上面
+  if (new URL(e.request.url).origin !== self.location.origin) return;
 
   // v6（1.48）：version.json 完全不經過 service worker。
   // 頁面每隔幾分鐘抓這個小檔（約 60 bytes）判斷有沒有新資料。

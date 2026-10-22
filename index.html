@@ -345,6 +345,30 @@ td.said{color:var(--muted)}td.was{color:var(--home);font-weight:700}
 .lpre{margin-left:6px;font-size:12px;color:var(--muted)}
 .spark{display:block;width:100%;height:44px;margin-top:6px}
 .slab{display:flex;justify-content:space-between;font-size:11px;color:var(--muted)}
+/* 【v2.00】各節比分、賽後數據、最新傷兵、每日回顧、賽程、走勢小圖 */
+.lsq{width:auto;margin:6px 0 2px;font-size:12px;border-collapse:collapse}
+.lsq th,.lsq td{padding:2px 7px;text-align:center;color:var(--muted);font-weight:400;border:0}
+.lsq td{color:var(--chalk)}
+.lsq td:first-child,.lsq th:first-child{text-align:left;padding-left:0;white-space:nowrap}
+.card .lsq{margin:4px 15px 8px}
+.live .lsq{margin:6px 0 2px}
+.boxs{padding:2px 15px 12px}
+.boxt td,.boxt th{font-size:12px}
+.injnew{margin:8px 15px 0;padding:8px 10px;border-radius:8px;background:rgba(239,68,68,.08);
+  border:1px solid rgba(239,68,68,.28);font-size:12.5px;line-height:1.6}
+.recap{margin:12px 18px 0;padding:11px 13px;background:var(--surface);border:1px solid var(--line);
+  border-radius:11px;font-size:13px}
+.recap summary{cursor:pointer;list-style:none}
+.recap summary::-webkit-details-marker{display:none}
+.rrow{display:flex;flex-wrap:wrap;gap:2px 8px;align-items:baseline;padding:7px 0 6px;
+  border-top:1px solid var(--line);margin-top:7px}
+.rok{color:#22c55e;font-weight:700}
+.rng{color:#ef4444;font-weight:700}
+.rpick{font-weight:600}
+.rsc{color:var(--muted);font-size:12px;width:100%}
+.srow{display:flex;justify-content:space-between;gap:10px;padding:9px 18px;
+  border-bottom:1px solid var(--line);font-size:13px}
+.mspark{width:64px;height:18px;vertical-align:middle}
 .actions{display:flex;gap:8px;padding:0 15px 13px}
 .act{flex:1;padding:8px;border-radius:8px;text-align:center;font-size:12px;
   background:var(--surface2);border:1px solid var(--line);color:var(--muted);
@@ -390,6 +414,92 @@ td.said{color:var(--muted)}td.was{color:var(--home);font-weight:700}
 footer{margin:30px 18px 0;padding-top:16px;border-top:1px solid var(--line);
   font-size:11.5px;color:var(--muted);line-height:1.65}
 footer b{color:#9db0bd;font-weight:600}
+/* ══ 【v2.00】新版介面 ══ */
+body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
+header{display:flex;align-items:center;flex-wrap:wrap;gap:8px 12px;padding:14px 18px 6px}
+header h1{order:1;flex:1;min-width:0;font-size:19px;margin:0}
+header .lgsw{order:2;margin:0}
+header .eyebrow,header #sub{display:none}
+footer{display:none}
+/* 底部選單 */
+.tabs{position:fixed;top:auto;bottom:0;left:0;right:0;max-width:520px;margin:0 auto;z-index:40;
+  border-top:1px solid var(--line);border-bottom:0;padding-bottom:env(safe-area-inset-bottom);
+  box-shadow:0 -6px 18px rgba(0,0,0,.25)}
+.tab{display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 2px 7px;
+  font-size:11px;border-bottom:0}
+.tab svg{width:23px;height:23px}
+.tab.on{border-bottom-color:transparent}
+.upd{bottom:calc(86px + env(safe-area-inset-bottom))}
+/* 日期列 */
+.dstrip{position:relative;display:flex;gap:6px;overflow-x:auto;padding:6px 18px 10px;
+  scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.dstrip::-webkit-scrollbar{display:none}
+.dchip{flex:none;min-width:58px;padding:6px 8px 5px;border-radius:11px;background:var(--surface);
+  border:1px solid var(--line);text-align:center;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.dchip .dw{font-size:10.5px;color:var(--muted)}
+.dchip .dday{font-size:15px;font-weight:700;line-height:1.35}
+.dchip .dn{font-size:10px;color:var(--muted);white-space:nowrap}
+.dchip.on{border-color:var(--home);background:rgba(233,161,59,.12)}
+.dchip.on .dday{color:var(--home)}
+.dchip.today .dw{color:var(--home);font-weight:700}
+.daybar{display:flex;align-items:center;flex-wrap:wrap;gap:4px 0;margin:0 18px 2px;
+  font-size:12.5px;color:var(--muted)}
+.daybar b{color:var(--chalk)}
+.daybar .sep{margin:0 8px;opacity:.5}
+.lv{color:#ef4444;font-weight:700}
+.gsep{margin:16px 18px 0}
+/* 精簡比賽卡 */
+.gc{margin:8px 18px;padding:10px 13px;background:var(--surface);border:1px solid var(--line);
+  border-radius:13px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.gc:active{background:var(--surface2)}
+.gc .gtop{display:flex;justify-content:space-between;align-items:center;gap:8px;min-height:18px;
+  font-size:11.5px;color:var(--muted);margin-bottom:4px}
+.gc .gtop .badge{margin-left:4px}
+.gc .gtop .ldot{width:7px;height:7px;margin-right:5px}
+.gc .tr{display:flex;align-items:center;gap:9px;padding:3px 0}
+.gc .tr .dot,.tgrid .dot,.tph .dot{width:4px;height:18px;background:var(--muted)}
+.gc .tr .tn{flex:1;min-width:0;font-size:15px;font-weight:600;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis}
+.gc .tr .sc{font-size:19px;font-weight:700;min-width:38px;text-align:right}
+.gc .tr.lose .sc,.gc .tr.lose .tn{color:var(--muted)}
+.gc .tr .pp{font-size:13.5px;color:var(--muted);min-width:42px;text-align:right}
+.gc .tr.fav .pp{color:var(--home);font-weight:700}
+.gc .mini{display:flex;height:4px;border-radius:2px;overflow:hidden;background:var(--surface2);margin-top:7px}
+.gc .mini i{display:block;height:100%}
+.gc .gbot{display:flex;align-items:center;flex-wrap:wrap;gap:4px 8px;margin-top:8px;font-size:12px;color:var(--muted)}
+.gc .gbot .badge{margin-left:0}
+.gc .pk{color:var(--home);font-weight:600}
+.gc .cf{color:var(--chalk);font-weight:600}
+.gc .chev{margin-left:auto;font-size:18px;line-height:1;color:var(--muted)}
+.badge.warn{background:rgba(239,68,68,.14);color:#f87171}
+.favmk{color:var(--home);font-size:12px;font-weight:400}
+.receipt.tap{cursor:pointer}
+.disc{margin:18px 18px 0;font-size:11px;color:var(--muted);text-align:center;line-height:1.7}
+/* 詳情與球隊頁 */
+.detbar{display:flex;align-items:center;gap:12px;margin:4px 18px 0}
+.detbar .mut{font-size:12.5px}
+.tph{margin:12px 18px 0;padding:14px 14px 12px;background:var(--surface);border:1px solid var(--line);border-radius:13px}
+.tph .tpn{display:flex;align-items:center;gap:10px;font-size:19px;font-weight:800}
+.tph .tpn .lg{width:30px;height:30px}
+.tph .tpn .star{margin-left:auto;font-size:22px}
+.tph .tps{display:flex;flex-wrap:wrap;gap:4px 16px;margin-top:9px;font-size:12.5px;color:var(--muted)}
+.tph .tps>span{white-space:nowrap}
+.tph .tps b{color:var(--chalk);font-family:var(--mono);margin-left:4px}
+.tptr{display:flex;align-items:center;gap:10px;margin-top:10px;font-size:12px}
+.tgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:12px 18px 0}
+.tgrid .tb{display:flex;align-items:center;gap:8px;padding:10px;background:var(--surface);
+  border:1px solid var(--line);border-radius:11px;font-size:13.5px;cursor:pointer;min-width:0;
+  -webkit-tap-highlight-color:transparent}
+.tgrid .tb:active{background:var(--surface2)}
+.tgrid .tbn{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tl{cursor:pointer;border-bottom:1px dotted rgba(124,145,159,.6)}
+.srow.tap{cursor:pointer}
+.srow.tap:active{background:var(--surface)}
+.gc .tr .rc{font-size:12.5px;color:var(--muted)}
+.subs+.shead{margin-top:12px}
+.card>.live{margin:10px 15px 0}
+.card .lockrow{margin:10px 15px 15px}
+.meta>div:nth-child(3){flex:1.5}
 </style>
 </head>
 <body>
@@ -410,9 +520,343 @@ footer b{color:#9db0bd;font-weight:600}
 </footer>
 <script>
 var LOCKED = false;
-var DATA   = {"days":{"2026-07-28":[{"h":"華盛頓神秘","a":"康乃狄克太陽","hp":87.1,"ap":75.1,"php":82.3,"mg":12.0,"sd":12.95,"st":1,"ok":1,"okm":null,"sc":"84-92","mb":0,"t":"2026-07-28T23:30Z","id":null,"v":"CareFirst Arena","ct":"Washington","nt":0,"po":0,"pr":0,"mv":0},{"h":"明尼蘇達山貓","a":"多倫多節奏","hp":100.3,"ap":82.3,"php":91.8,"mg":18.0,"sd":12.93,"st":1,"ok":1,"okm":null,"sc":"93-100","mb":0,"t":"2026-07-29T00:00Z","id":null,"v":"Target Center","ct":"Minneapolis","nt":0,"po":0,"pr":0,"mv":0},{"h":"西雅圖風暴","a":"印第安那狂熱","hp":87.2,"ap":97.9,"php":20.4,"mg":-10.7,"sd":12.93,"st":1,"ok":1,"okm":null,"sc":"105-95","mb":0,"t":"2026-07-29T01:30Z","id":null,"v":"Climate Pledge Arena","ct":"Seattle","nt":0,"po":0,"pr":0,"mv":0},{"h":"拉斯維加斯王牌","a":"波特蘭火焰","hp":93.5,"ap":85.9,"php":72.1,"mg":7.6,"sd":12.97,"st":1,"ok":1,"okm":null,"sc":"83-98","mb":0,"t":"2026-07-29T02:00Z","id":null,"v":"Michelob ULTRA Arena","ct":"Las Vegas","nt":0,"po":0,"pr":0,"mv":0},{"h":"洛杉磯火花","a":"紐約自由","hp":93.2,"ap":90.2,"php":59.2,"mg":3.0,"sd":12.89,"st":1,"ok":0,"okm":null,"sc":"113-109","mb":0,"t":"2026-07-29T02:00Z","id":null,"v":"crypto.com Arena","ct":"Los Angeles","nt":0,"po":0,"pr":0,"mv":0}],"2026-07-29":[{"h":"達拉斯飛翼","a":"亞特蘭大美夢","hp":90.3,"ap":89.9,"php":52.7,"mg":0.4,"sd":8.0,"st":1,"ok":0,"okm":0,"sc":"82-81","mb":1,"t":"2026-07-30T00:00Z","id":null,"v":"College Park Center","ct":"Arlington","nt":0,"po":0,"pr":0,"mv":1},{"h":"鳳凰城水星","a":"金州瓦爾基里","hp":76.7,"ap":78.4,"php":46.3,"mg":-1.7,"sd":18.3,"st":1,"ok":0,"okm":0,"sc":"89-91","mb":0,"t":"2026-07-30T02:00Z","id":null,"v":"Mortgage Matchup Center","ct":"Phoenix","nt":0,"po":0,"pr":0,"mv":0}],"2026-07-30":[{"h":"多倫多節奏","a":"明尼蘇達山貓","hp":86.3,"ap":98.1,"php":17.6,"mg":-11.8,"sd":12.68,"st":1,"ok":1,"okm":1,"sc":"104-72","mb":1,"t":"2026-07-31T00:00Z","id":null,"v":"Scotiabank Arena","ct":"Toronto","nt":0,"po":0,"pr":0,"mv":1},{"h":"芝加哥天空","a":"康乃狄克太陽","hp":89.9,"ap":84.7,"php":65.3,"mg":5.2,"sd":13.22,"st":1,"ok":1,"okm":1,"sc":"88-94","mb":1,"t":"2026-07-31T00:00Z","id":null,"v":"Wintrust Arena","ct":"Chicago","nt":0,"po":0,"pr":0,"mv":1},{"h":"拉斯維加斯王牌","a":"紐約自由","hp":92.9,"ap":87.8,"php":64.3,"mg":5.1,"sd":13.92,"st":1,"ok":1,"okm":1,"sc":"99-104","mb":1,"t":"2026-07-31T02:00Z","id":null,"v":"Michelob ULTRA Arena","ct":"Las Vegas","nt":0,"po":0,"pr":0,"mv":1}],"2026-07-31":[{"h":"亞特蘭大美夢","a":"西雅圖風暴","hp":93.3,"ap":84.4,"php":75.1,"mg":8.9,"sd":13.13,"st":1,"ok":1,"okm":1,"sc":"89-98","mb":1,"t":"2026-07-31T23:30Z","id":null,"v":"Gateway Center","ct":"College Park","nt":0,"po":0,"pr":0,"mv":1},{"h":"華盛頓神秘","a":"達拉斯飛翼","hp":82.6,"ap":84.5,"php":45.7,"mg":-1.9,"sd":17.59,"st":1,"ok":0,"okm":1,"sc":"75-81","mb":1,"t":"2026-07-31T23:30Z","id":null,"v":"CareFirst Arena","ct":"Washington","nt":0,"po":0,"pr":0,"mv":1},{"h":"波特蘭火焰","a":"印第安那狂熱","hp":89.5,"ap":97.8,"php":25.6,"mg":-8.3,"sd":12.66,"st":1,"ok":1,"okm":1,"sc":"112-98","mb":1,"t":"2026-08-01T02:00Z","id":null,"v":"Moda Center","ct":"Portland","nt":0,"po":0,"pr":0,"mv":1}],"2026-08-01":[{"h":"芝加哥天空","a":"拉斯維加斯王牌","hp":87.8,"ap":94.6,"php":29.7,"mg":-6.8,"sd":12.76,"st":1,"ok":0,"okm":0,"sc":"83-84","mb":1,"t":"2026-08-01T17:00Z","id":null,"v":"Wintrust Arena","ct":"Chicago","nt":0,"po":0,"pr":0,"mv":1},{"h":"鳳凰城水星","a":"紐約自由","hp":87.5,"ap":88.1,"php":48.6,"mg":-0.6,"sd":13.5,"st":1,"ok":1,"okm":0,"sc":"94-92","mb":1,"t":"2026-08-01T19:00Z","id":null,"v":"Mortgage Matchup Center","ct":"Phoenix","nt":0,"po":0,"pr":0,"mv":1}],"2026-08-02":[{"h":"明尼蘇達山貓","a":"印第安那狂熱","hp":97.4,"ap":92.6,"php":63.9,"mg":4.8,"sd":13.49,"st":1,"ok":1,"okm":1,"sc":"100-108","mb":1,"t":"2026-08-02T17:00Z","id":null,"v":"Target Center","ct":"Minneapolis","nt":0,"po":0,"pr":0,"mv":1},{"h":"波特蘭火焰","a":"洛杉磯火花","hp":91.6,"ap":92.9,"php":46.1,"mg":-1.3,"sd":13.28,"st":1,"ok":1,"okm":1,"sc":"106-101","mb":0,"t":"2026-08-02T19:30Z","id":null,"v":"Moda Center","ct":"Portland","nt":0,"po":0,"pr":0,"mv":0},{"h":"達拉斯飛翼","a":"康乃狄克太陽","hp":92.1,"ap":80.1,"php":83.9,"mg":12.0,"sd":12.12,"st":1,"ok":1,"okm":1,"sc":"63-83","mb":1,"t":"2026-08-02T23:00Z","id":null,"v":"College Park Center","ct":"Arlington","nt":0,"po":0,"pr":0,"mv":1},{"h":"金州瓦爾基里","a":"多倫多節奏","hp":90.1,"ap":75.1,"php":88.4,"mg":15.0,"sd":12.55,"st":1,"ok":1,"okm":1,"sc":"79-96","mb":1,"t":"2026-08-03T00:30Z","id":null,"v":"Chase Center","ct":"San Francisco","nt":0,"po":0,"pr":0,"mv":1}],"2026-08-03":[{"h":"亞特蘭大美夢","a":"拉斯維加斯王牌","hp":92.2,"ap":89.9,"php":55.1,"mg":2.3,"sd":17.94,"st":1,"ok":0,"okm":0,"sc":"109-87","mb":1,"t":"2026-08-03T23:00Z","id":null,"v":"State Farm Arena","ct":"Atlanta","nt":0,"po":0,"pr":0,"mv":1},{"h":"紐約自由","a":"西雅圖風暴","hp":93.4,"ap":87.7,"php":67.9,"mg":5.7,"sd":12.26,"st":1,"ok":1,"okm":1,"sc":"83-95","mb":1,"t":"2026-08-03T23:00Z","id":null,"v":"Barclays Center","ct":"Brooklyn","nt":0,"po":0,"pr":0,"mv":1},{"h":"芝加哥天空","a":"鳳凰城水星","hp":87.4,"ap":89.8,"php":42.8,"mg":-2.4,"sd":13.23,"st":1,"ok":1,"okm":1,"sc":"106-101","mb":1,"t":"2026-08-04T01:00Z","id":null,"v":"Wintrust Arena","ct":"Chicago","nt":0,"po":0,"pr":0,"mv":1}],"2026-08-04":[{"h":"金州瓦爾基里","a":"多倫多節奏","hp":90.6,"ap":77.7,"php":84.7,"mg":12.9,"sd":12.6,"st":1,"ok":1,"okm":1,"sc":"81-92","mb":1,"t":"2026-08-05T02:00Z","id":null,"v":"Chase Center","ct":"San Francisco","nt":0,"po":0,"pr":0,"mv":1}],"2026-08-05":[{"h":"亞特蘭大美夢","a":"鳳凰城水星","hp":93.0,"ap":86.7,"php":68.5,"mg":6.3,"sd":13.08,"st":1,"ok":1,"okm":1,"sc":"82-96","mb":1,"t":"2026-08-05T23:00Z","id":null,"v":"Gateway Center","ct":"College Park","nt":0,"po":0,"pr":0,"mv":1},{"h":"紐約自由","a":"西雅圖風暴","hp":94.1,"ap":87.5,"php":70.9,"mg":6.6,"sd":11.99,"st":1,"ok":1,"okm":1,"sc":"86-92","mb":1,"t":"2026-08-05T23:00Z","id":null,"v":"Barclays Center","ct":"Brooklyn","nt":0,"po":0,"pr":0,"mv":1},{"h":"華盛頓神秘","a":"達拉斯飛翼","hp":82.3,"ap":83.9,"php":45.7,"mg":-1.6,"sd":14.82,"st":1,"ok":0,"okm":0,"sc":"92-96","mb":1,"t":"2026-08-05T23:30Z","id":null,"v":"CareFirst Arena","ct":"Washington","nt":0,"po":0,"pr":0,"mv":1},{"h":"芝加哥天空","a":"洛杉磯火花","hp":92.7,"ap":93.0,"php":48.0,"mg":-0.3,"sd":8.0,"st":1,"ok":0,"okm":0,"sc":"88-95","mb":1,"t":"2026-08-06T01:00Z","id":null,"v":"Wintrust Arena","ct":"Chicago","nt":0,"po":0,"pr":0,"mv":1}],"2026-08-06":[{"h":"印第安那狂熱","a":"拉斯維加斯王牌","hp":83.9,"ap":81.7,"php":60.5,"mg":2.2,"sd":8.26,"st":1,"ok":0,"okm":0,"sc":"86-84","mb":0,"t":"2026-08-06T23:00Z","id":null,"v":"Gainbridge Fieldhouse","ct":"Indianapolis","nt":0,"po":0,"pr":0,"mv":0},{"h":"明尼蘇達山貓","a":"洛杉磯火花","hp":99.9,"ap":85.7,"php":86.0,"mg":14.2,"sd":13.14,"st":1,"ok":0,"okm":0,"sc":"89-82","mb":0,"t":"2026-08-07T01:00Z","id":null,"v":"Target Center","ct":"Minneapolis","nt":0,"po":0,"pr":0,"mv":0},{"h":"波特蘭火焰","a":"多倫多節奏","hp":94.3,"ap":91.9,"php":57.5,"mg":2.4,"sd":12.69,"st":1,"ok":1,"okm":1,"sc":"83-97","mb":1,"t":"2026-08-07T02:00Z","id":null,"v":"Moda Center","ct":"Portland","nt":0,"po":0,"pr":0,"mv":1}],"2026-08-07":[{"h":"康乃狄克太陽","a":"鳳凰城水星","hp":83.0,"ap":88.2,"php":34.1,"mg":-5.2,"sd":12.69,"st":1,"ok":0,"okm":0,"sc":"72-75","mb":1,"t":"2026-08-07T23:30Z","id":null,"v":"Mohegan Sun Arena","ct":"Uncasville","nt":0,"po":0,"pr":0,"mv":1},{"h":"華盛頓神秘","a":"亞特蘭大美夢","hp":83.5,"ap":86.6,"php":41.5,"mg":-3.1,"sd":14.44,"st":1,"ok":0,"okm":1,"sc":"74-79","mb":1,"t":"2026-08-07T23:30Z","id":null,"v":"CareFirst Arena","ct":"Washington","nt":0,"po":0,"pr":0,"mv":1},{"h":"達拉斯飛翼","a":"金州瓦爾基里","hp":81.4,"ap":80.4,"php":51.7,"mg":1.0,"sd":13.5,"st":1,"ok":0,"okm":0,"sc":"94-76","mb":0,"t":"2026-08-08T01:30Z","id":null,"v":"American Airlines Center","ct":"Dallas","nt":0,"po":0,"pr":0,"mv":0}],"2026-08-08":[{"h":"明尼蘇達山貓","a":"拉斯維加斯王牌","hp":91.9,"ap":88.3,"php":60.5,"mg":3.6,"sd":13.52,"st":1,"ok":1,"okm":1,"sc":"87-98","mb":1,"t":"2026-08-08T17:00Z","id":null,"v":"Target Center","ct":"Minneapolis","nt":0,"po":0,"pr":0,"mv":1},{"h":"芝加哥天空","a":"印第安那狂熱","hp":87.1,"ap":93.9,"php":15.0,"mg":-6.8,"sd":8.0,"st":1,"ok":1,"okm":1,"sc":"90-86","mb":0,"t":"2026-08-08T19:30Z","id":null,"v":"United Center","ct":"Chicago","nt":0,"po":0,"pr":0,"mv":0},{"h":"波特蘭火焰","a":"西雅圖風暴","hp":88.6,"ap":91.1,"php":44.0,"mg":-2.5,"sd":16.56,"st":1,"ok":0,"okm":0,"sc":"93-100","mb":1,"t":"2026-08-09T00:30Z","id":null,"v":"Moda Center","ct":"Portland","nt":0,"po":0,"pr":0,"mv":1}],"2026-08-09":[{"h":"紐約自由","a":"拉斯維加斯王牌","hp":95.9,"ap":82.1,"php":85.2,"mg":13.8,"sd":13.21,"st":1,"ok":1,"okm":1,"sc":"71-111","mb":1,"t":"2026-08-09T16:30Z","id":null,"v":"Barclays Center","ct":"Brooklyn","nt":0,"po":0,"pr":0,"mv":1},{"h":"華盛頓神秘","a":"鳳凰城水星","hp":84.5,"ap":82.0,"php":56.1,"mg":2.5,"sd":16.29,"st":1,"ok":1,"okm":1,"sc":"75-95","mb":1,"t":"2026-08-09T19:00Z","id":null,"v":"CareFirst Arena","ct":"Washington","nt":0,"po":0,"pr":0,"mv":1},{"h":"明尼蘇達山貓","a":"達拉斯飛翼","hp":91.7,"ap":86.3,"php":66.2,"mg":5.4,"sd":12.92,"st":1,"ok":1,"okm":1,"sc":"90-103","mb":0,"t":"2026-08-09T19:30Z","id":null,"v":"Target Center","ct":"Minneapolis","nt":0,"po":0,"pr":0,"mv":0},{"h":"洛杉磯火花","a":"金州瓦爾基里","hp":82.4,"ap":87.0,"php":36.5,"mg":-4.6,"sd":13.33,"st":1,"ok":1,"okm":1,"sc":"84-78","mb":1,"t":"2026-08-09T23:00Z","id":null,"v":"crypto.com Arena","ct":"Los Angeles","nt":0,"po":0,"pr":0,"mv":1}],"2026-08-10":[{"h":"亞特蘭大美夢","a":"多倫多節奏","hp":98.8,"ap":86.3,"php":83.1,"mg":12.5,"sd":13.05,"st":1,"ok":1,"okm":1,"sc":"95-107","mb":1,"t":"2026-08-11T00:00Z","id":null,"v":"Gateway Center","ct":"College Park","nt":0,"po":0,"pr":0,"mv":1},{"h":"西雅圖風暴","a":"芝加哥天空","hp":88.8,"ap":89.8,"php":48.5,"mg":-1.0,"sd":13.5,"st":1,"ok":0,"okm":1,"sc":"88-97","mb":1,"t":"2026-08-11T02:00Z","id":null,"v":"Climate Pledge Arena","ct":"Seattle","nt":0,"po":0,"pr":0,"mv":1}],"2026-08-11":[{"h":"印第安那狂熱","a":"紐約自由","hp":96.6,"ap":93.2,"php":59.3,"mg":3.4,"sd":14.45,"st":1,"ok":1,"okm":1,"sc":"92-106","mb":0,"t":"2026-08-11T23:30Z","id":null,"v":"Gainbridge Fieldhouse","ct":"Indianapolis","nt":0,"po":0,"pr":0,"mv":0},{"h":"拉斯維加斯王牌","a":"華盛頓神秘","hp":87.4,"ap":83.0,"php":63.8,"mg":4.4,"sd":12.46,"st":1,"ok":1,"okm":1,"sc":"76-86","mb":1,"t":"2026-08-12T02:00Z","id":null,"v":"Michelob ULTRA Arena","ct":"Las Vegas","nt":0,"po":0,"pr":0,"mv":1},{"h":"洛杉磯火花","a":"鳳凰城水星","hp":90.5,"ap":87.3,"php":59.0,"mg":3.2,"sd":14.06,"st":1,"ok":0,"okm":0,"sc":"94-87","mb":1,"t":"2026-08-12T02:00Z","id":null,"v":"Galen Center","ct":"Los Angeles","nt":1,"po":0,"pr":0,"mv":1}],"2026-08-12":[{"h":"達拉斯飛翼","a":"多倫多節奏","hp":94.5,"ap":81.7,"php":88.4,"mg":12.8,"sd":10.71,"st":1,"ok":1,"okm":1,"sc":"88-94","mb":0,"t":"2026-08-13T00:00Z","id":null,"v":"College Park Center","ct":"Arlington","nt":0,"po":0,"pr":0,"mv":0},{"h":"金州瓦爾基里","a":"芝加哥天空","hp":88.8,"ap":78.1,"php":80.3,"mg":10.7,"sd":12.55,"st":1,"ok":1,"okm":1,"sc":"71-91","mb":1,"t":"2026-08-13T02:00Z","id":null,"v":"Chase Center","ct":"San Francisco","nt":0,"po":0,"pr":0,"mv":1},{"h":"波特蘭火焰","a":"明尼蘇達山貓","hp":86.7,"ap":98.7,"php":16.5,"mg":-12.0,"sd":12.32,"st":1,"ok":1,"okm":1,"sc":"85-81","mb":1,"t":"2026-08-13T02:00Z","id":null,"v":"Moda Center","ct":"Portland","nt":0,"po":0,"pr":0,"mv":1}],"2026-08-13":[{"h":"康乃狄克太陽","a":"亞特蘭大美夢","hp":80.9,"ap":90.0,"php":22.9,"mg":-9.1,"sd":12.26,"st":1,"ok":1,"okm":1,"sc":"104-69","mb":0,"t":"2026-08-13T23:00Z","id":null,"v":"Mohegan Sun Arena","ct":"Uncasville","nt":0,"po":0,"pr":0,"mv":0},{"h":"紐約自由","a":"洛杉磯火花","hp":91.1,"ap":73.6,"php":90.6,"mg":17.5,"sd":13.29,"st":1,"ok":1,"okm":1,"sc":"81-85","mb":0,"t":"2026-08-14T00:00Z","id":null,"v":"Barclays Center","ct":"Brooklyn","nt":0,"po":0,"pr":0,"mv":0},{"h":"拉斯維加斯王牌","a":"華盛頓神秘","hp":87.0,"ap":82.6,"php":62.8,"mg":4.4,"sd":13.47,"st":1,"ok":1,"okm":1,"sc":"76-83","mb":1,"t":"2026-08-14T02:00Z","id":null,"v":"Michelob ULTRA Arena","ct":"Las Vegas","nt":0,"po":0,"pr":0,"mv":1}],"2026-08-14":[{"h":"印第安那狂熱","a":"達拉斯飛翼","hp":96.7,"ap":84.5,"php":93.9,"mg":12.2,"sd":8.0,"st":1,"ok":1,"okm":1,"sc":"87-98","mb":0,"t":"2026-08-14T23:30Z","id":null,"v":"Gainbridge Fieldhouse","ct":"Indianapolis","nt":0,"po":0,"pr":0,"mv":0},{"h":"西雅圖風暴","a":"波特蘭火焰","hp":91.7,"ap":88.0,"php":60.5,"mg":3.7,"sd":13.89,"st":1,"ok":0,"okm":0,"sc":"84-82","mb":1,"t":"2026-08-15T02:00Z","id":null,"v":"Climate Pledge Arena","ct":"Seattle","nt":0,"po":0,"pr":0,"mv":1}],"2026-08-15":[{"h":"康乃狄克太陽","a":"紐約自由","hp":81.9,"ap":89.6,"php":25.8,"mg":-7.7,"sd":11.85,"st":1,"ok":1,"okm":1,"sc":"82-75","mb":1,"t":"2026-08-15T17:00Z","id":null,"v":"Mohegan Sun Arena","ct":"Uncasville","nt":0,"po":0,"pr":0,"mv":1},{"h":"華盛頓神秘","a":"洛杉磯火花","hp":89.5,"ap":82.5,"php":71.5,"mg":7.0,"sd":12.32,"st":1,"ok":1,"okm":1,"sc":"70-80","mb":1,"t":"2026-08-15T23:30Z","id":null,"v":"CareFirst Arena","ct":"Washington","nt":0,"po":0,"pr":0,"mv":1},{"h":"拉斯維加斯王牌","a":"明尼蘇達山貓","hp":88.7,"ap":92.0,"php":40.7,"mg":-3.3,"sd":14.03,"st":1,"ok":1,"okm":1,"sc":"92-87","mb":1,"t":"2026-08-16T00:00Z","id":null,"v":"Michelob ULTRA Arena","ct":"Las Vegas","nt":0,"po":0,"pr":0,"mv":1}],"2026-08-16":[{"h":"西雅圖風暴","a":"芝加哥天空","hp":81.0,"ap":85.1,"php":33.6,"mg":-4.1,"sd":9.68,"st":1,"ok":1,"okm":1,"sc":"82-80","mb":0,"t":"2026-08-16T21:00Z","id":null,"v":"Climate Pledge Arena","ct":"Seattle","nt":0,"po":0,"pr":0,"mv":0},{"h":"亞特蘭大美夢","a":"印第安那狂熱","hp":92.1,"ap":90.2,"php":59.3,"mg":1.9,"sd":8.08,"st":1,"ok":0,"okm":1,"sc":"95-91","mb":0,"t":"2026-08-16T21:00Z","id":null,"v":"State Farm Arena","ct":"Atlanta","nt":0,"po":0,"pr":0,"mv":0},{"h":"鳳凰城水星","a":"波特蘭火焰","hp":92.0,"ap":85.8,"php":67.5,"mg":6.2,"sd":13.66,"st":1,"ok":0,"okm":0,"sc":"88-85","mb":1,"t":"2026-08-16T23:00Z","id":null,"v":"Mortgage Matchup Center","ct":"Phoenix","nt":0,"po":0,"pr":0,"mv":1}],"2026-08-17":[{"h":"金州瓦爾基里","a":"達拉斯飛翼","hp":85.6,"ap":77.8,"php":73.6,"mg":7.8,"sd":12.36,"st":1,"ok":1,"okm":1,"sc":"70-78","mb":1,"t":"2026-08-18T02:00Z","id":null,"v":"Chase Center","ct":"San Francisco","nt":0,"po":0,"pr":0,"mv":1}],"2026-08-18":[{"h":"康乃狄克太陽","a":"洛杉磯火花","hp":90.9,"ap":82.1,"php":73.4,"mg":8.8,"sd":14.08,"st":1,"ok":1,"okm":0,"sc":"77-85","mb":0,"t":"2026-08-18T23:00Z","id":null,"v":"TD Garden","ct":"Boston","nt":0,"po":0,"pr":0,"mv":0},{"h":"多倫多節奏","a":"印第安那狂熱","hp":90.2,"ap":104.7,"php":8.5,"mg":-14.5,"sd":10.57,"st":1,"ok":1,"okm":1,"sc":"101-95","mb":0,"t":"2026-08-18T23:00Z","id":null,"v":"Scotiabank Arena","ct":"Toronto","nt":0,"po":0,"pr":0,"mv":0},{"h":"芝加哥天空","a":"紐約自由","hp":88.5,"ap":92.1,"php":39.9,"mg":-3.6,"sd":14.07,"st":1,"ok":0,"okm":0,"sc":"86-93","mb":1,"t":"2026-08-19T01:00Z","id":null,"v":"Wintrust Arena","ct":"Chicago","nt":0,"po":0,"pr":0,"mv":1},{"h":"拉斯維加斯王牌","a":"亞特蘭大美夢","hp":91.1,"ap":87.9,"php":59.4,"mg":3.2,"sd":13.45,"st":1,"ok":0,"okm":0,"sc":"97-82","mb":1,"t":"2026-08-19T01:00Z","id":null,"v":"Michelob ULTRA Arena","ct":"Las Vegas","nt":0,"po":0,"pr":0,"mv":1}],"2026-08-19":[{"h":"華盛頓神秘","a":"多倫多節奏","hp":96.2,"ap":77.1,"php":99.1,"mg":19.1,"sd":8.07,"st":1,"ok":1,"okm":1,"sc":"82-93","mb":0,"t":"2026-08-19T23:30Z","id":null,"v":"CareFirst Arena","ct":"Washington","nt":0,"po":0,"pr":0,"mv":0},{"h":"金州瓦爾基里","a":"明尼蘇達山貓","hp":80.9,"ap":82.7,"php":45.8,"mg":-1.8,"sd":17.07,"st":1,"ok":1,"okm":1,"sc":"77-66","mb":1,"t":"2026-08-20T02:00Z","id":null,"v":"Chase Center","ct":"San Francisco","nt":0,"po":0,"pr":0,"mv":1}],"2026-08-20":[{"h":"達拉斯飛翼","a":"印第安那狂熱","hp":85.5,"ap":90.5,"php":34.2,"mg":-5.0,"sd":12.28,"st":1,"ok":0,"okm":0,"sc":"85-91","mb":0,"t":"2026-08-21T00:00Z","id":null,"v":"American Airlines Center","ct":"Dallas","nt":0,"po":0,"pr":0,"mv":0},{"h":"拉斯維加斯王牌","a":"康乃狄克太陽","hp":91.2,"ap":77.8,"php":86.7,"mg":13.4,"sd":12.05,"st":1,"ok":1,"okm":1,"sc":"78-101","mb":1,"t":"2026-08-21T02:00Z","id":null,"v":"Michelob ULTRA Arena","ct":"Las Vegas","nt":0,"po":0,"pr":0,"mv":1},{"h":"洛杉磯火花","a":"亞特蘭大美夢","hp":87.4,"ap":93.1,"php":32.8,"mg":-5.7,"sd":12.8,"st":1,"ok":1,"okm":0,"sc":"124-88","mb":1,"t":"2026-08-21T02:00Z","id":null,"v":"crypto.com Arena","ct":"Los Angeles","nt":0,"po":0,"pr":0,"mv":1}],"2026-08-21":[{"h":"華盛頓神秘","a":"明尼蘇達山貓","hp":83.7,"ap":82.9,"php":53.1,"mg":0.8,"sd":10.28,"st":1,"ok":0,"okm":0,"sc":"94-84","mb":0,"t":"2026-08-21T23:30Z","id":null,"v":"CareFirst Arena","ct":"Washington","nt":0,"po":0,"pr":0,"mv":0},{"h":"芝加哥天空","a":"金州瓦爾基里","hp":73.2,"ap":75.3,"php":39.1,"mg":-2.1,"sd":8.0,"st":1,"ok":0,"okm":0,"sc":"70-73","mb":0,"t":"2026-08-21T23:30Z","id":null,"v":"Wintrust Arena","ct":"Chicago","nt":0,"po":0,"pr":0,"mv":0},{"h":"多倫多節奏","a":"波特蘭火焰","hp":89.3,"ap":94.1,"php":36.1,"mg":-4.8,"sd":13.49,"st":1,"ok":0,"okm":0,"sc":"79-82","mb":1,"t":"2026-08-22T02:00Z","id":null,"v":"Rogers Arena","ct":"Vancouver","nt":0,"po":0,"pr":0,"mv":1}],"2026-08-22":[{"h":"紐約自由","a":"印第安那狂熱","hp":100.5,"ap":97.1,"php":61.5,"mg":3.4,"sd":11.63,"st":1,"ok":1,"okm":1,"sc":"102-109","mb":0,"t":"2026-08-22T23:00Z","id":null,"v":"Barclays Center","ct":"Brooklyn","nt":0,"po":0,"pr":0,"mv":0},{"h":"洛杉磯火花","a":"康乃狄克太陽","hp":93.6,"ap":83.3,"php":80.9,"mg":10.3,"sd":11.78,"st":1,"ok":1,"okm":null,"sc":"68-77","mb":0,"t":"2026-08-23T01:00Z","id":null,"v":"crypto.com Arena","ct":"Los Angeles","nt":0,"po":0,"pr":0,"mv":0},{"h":"鳳凰城水星","a":"亞特蘭大美夢","hp":85.2,"ap":91.9,"php":30.2,"mg":-6.7,"sd":12.92,"st":1,"ok":1,"okm":1,"sc":"99-89","mb":1,"t":"2026-08-23T02:00Z","id":null,"v":"Mortgage Matchup Center","ct":"Phoenix","nt":0,"po":0,"pr":0,"mv":1}],"2026-08-23":[{"h":"達拉斯飛翼","a":"西雅圖風暴","hp":91.3,"ap":84.1,"php":72.1,"mg":7.2,"sd":12.29,"st":1,"ok":1,"okm":1,"sc":"70-92","mb":1,"t":"2026-08-23T20:00Z","id":null,"v":"College Park Center","ct":"Arlington","nt":0,"po":0,"pr":0,"mv":1},{"h":"芝加哥天空","a":"印第安那狂熱","hp":94.0,"ap":93.7,"php":51.5,"mg":0.3,"sd":13.5,"st":1,"ok":0,"okm":0,"sc":"113-90","mb":1,"t":"2026-08-23T23:00Z","id":null,"v":"Wintrust Arena","ct":"Chicago","nt":0,"po":0,"pr":0,"mv":1},{"h":"波特蘭火焰","a":"華盛頓神秘","hp":81.0,"ap":86.8,"php":32.8,"mg":-5.8,"sd":13.02,"st":1,"ok":1,"okm":1,"sc":"105-100","mb":1,"t":"2026-08-23T23:00Z","id":null,"v":"Moda Center","ct":"Portland","nt":0,"po":0,"pr":0,"mv":1},{"h":"多倫多節奏","a":"拉斯維加斯王牌","hp":82.1,"ap":98.8,"php":12.0,"mg":-16.7,"sd":14.21,"st":1,"ok":1,"okm":1,"sc":"88-78","mb":1,"t":"2026-08-23T23:00Z","id":null,"v":"Rogers Arena","ct":"Vancouver","nt":0,"po":0,"pr":0,"mv":1}],"2026-08-24":[{"h":"明尼蘇達山貓","a":"金州瓦爾基里","hp":81.5,"ap":81.6,"php":49.8,"mg":-0.1,"sd":13.5,"st":1,"ok":1,"okm":null,"sc":"80-66","mb":0,"t":"2026-08-25T00:00Z","id":null,"v":"Target Center","ct":"Minneapolis","nt":0,"po":0,"pr":0,"mv":0},{"h":"洛杉磯火花","a":"亞特蘭大美夢","hp":85.8,"ap":96.0,"php":18.1,"mg":-10.2,"sd":11.19,"st":1,"ok":1,"okm":1,"sc":"78-71","mb":1,"t":"2026-08-25T02:00Z","id":null,"v":"crypto.com Arena","ct":"Los Angeles","nt":0,"po":0,"pr":0,"mv":1}],"2026-08-25":[{"h":"康乃狄克太陽","a":"芝加哥天空","hp":80.7,"ap":89.7,"php":24.0,"mg":-9.0,"sd":12.74,"st":1,"ok":0,"okm":0,"sc":"81-87","mb":1,"t":"2026-08-25T23:00Z","id":null,"v":"Mohegan Sun Arena","ct":"Uncasville","nt":0,"po":0,"pr":0,"mv":1},{"h":"達拉斯飛翼","a":"波特蘭火焰","hp":93.0,"ap":84.8,"php":74.4,"mg":8.2,"sd":12.51,"st":1,"ok":1,"okm":1,"sc":"78-96","mb":1,"t":"2026-08-26T00:00Z","id":null,"v":"College Park Center","ct":"Arlington","nt":0,"po":0,"pr":0,"mv":1},{"h":"鳳凰城水星","a":"華盛頓神秘","hp":83.2,"ap":84.9,"php":44.8,"mg":-1.7,"sd":13.01,"st":1,"ok":1,"okm":1,"sc":"94-84","mb":1,"t":"2026-08-26T02:00Z","id":null,"v":"Mortgage Matchup Center","ct":"Phoenix","nt":0,"po":0,"pr":0,"mv":1}],"2026-08-26":[{"h":"康乃狄克太陽","a":"金州瓦爾基里","hp":68.6,"ap":84.2,"php":10.4,"mg":-15.6,"sd":12.39,"st":1,"ok":1,"okm":1,"sc":"89-64","mb":1,"t":"2026-08-26T23:00Z","id":null,"v":"Mohegan Sun Arena","ct":"Uncasville","nt":0,"po":0,"pr":0,"mv":1},{"h":"西雅圖風暴","a":"多倫多節奏","hp":92.9,"ap":82.8,"php":76.8,"mg":10.1,"sd":13.79,"st":1,"ok":1,"okm":1,"sc":"78-90","mb":1,"t":"2026-08-27T02:00Z","id":null,"v":"Climate Pledge Arena","ct":"Seattle","nt":0,"po":0,"pr":0,"mv":1}],"2026-08-27":[{"h":"紐約自由","a":"金州瓦爾基里","hp":82.9,"ap":80.6,"php":56.5,"mg":2.3,"sd":14.05,"st":1,"ok":0,"okm":0,"sc":"79-60","mb":1,"t":"2026-08-28T00:00Z","id":null,"v":"Barclays Center","ct":"Brooklyn","nt":0,"po":0,"pr":0,"mv":1},{"h":"鳳凰城水星","a":"華盛頓神秘","hp":80.3,"ap":86.0,"php":33.1,"mg":-5.7,"sd":13.04,"st":1,"ok":1,"okm":1,"sc":"80-73","mb":1,"t":"2026-08-28T02:00Z","id":null,"v":"Mortgage Matchup Center","ct":"Phoenix","nt":0,"po":0,"pr":0,"mv":1}],"2026-08-28":[{"h":"亞特蘭大美夢","a":"波特蘭火焰","hp":96.0,"ap":83.7,"php":84.6,"mg":12.3,"sd":12.07,"st":1,"ok":0,"okm":0,"sc":"101-83","mb":1,"t":"2026-08-28T23:30Z","id":null,"v":"Gateway Center","ct":"College Park","nt":0,"po":0,"pr":0,"mv":1},{"h":"印第安那狂熱","a":"康乃狄克太陽","hp":99.2,"ap":79.1,"php":93.8,"mg":20.1,"sd":13.07,"st":1,"ok":1,"okm":1,"sc":"91-111","mb":1,"t":"2026-08-28T23:30Z","id":null,"v":"Gainbridge Fieldhouse","ct":"Indianapolis","nt":0,"po":0,"pr":0,"mv":1},{"h":"拉斯維加斯王牌","a":"多倫多節奏","hp":97.2,"ap":78.4,"php":91.6,"mg":18.8,"sd":13.64,"st":1,"ok":1,"okm":1,"sc":"73-93","mb":1,"t":"2026-08-29T02:00Z","id":null,"v":"Michelob ULTRA Arena","ct":"Las Vegas","nt":0,"po":0,"pr":0,"mv":1},{"h":"洛杉磯火花","a":"華盛頓神秘","hp":81.9,"ap":86.5,"php":36.3,"mg":-4.6,"sd":13.13,"st":1,"ok":0,"okm":0,"sc":"82-88","mb":1,"t":"2026-08-29T02:00Z","id":null,"v":"crypto.com Arena","ct":"Los Angeles","nt":0,"po":0,"pr":0,"mv":1}],"2026-08-29":[{"h":"紐約自由","a":"芝加哥天空","hp":93.9,"ap":86.5,"php":72.3,"mg":7.4,"sd":12.5,"st":1,"ok":1,"okm":1,"sc":"66-85","mb":1,"t":"2026-08-29T17:00Z","id":null,"v":"Barclays Center","ct":"Brooklyn","nt":0,"po":0,"pr":0,"mv":1},{"h":"鳳凰城水星","a":"多倫多節奏","hp":92.8,"ap":81.1,"php":82.0,"mg":11.7,"sd":12.78,"st":1,"ok":1,"okm":1,"sc":"69-101","mb":1,"t":"2026-08-30T02:00Z","id":null,"v":"Mortgage Matchup Center","ct":"Phoenix","nt":0,"po":0,"pr":0,"mv":1}],"2026-08-30":[{"h":"亞特蘭大美夢","a":"明尼蘇達山貓","hp":88.2,"ap":89.7,"php":45.2,"mg":-1.5,"sd":12.44,"st":1,"ok":0,"okm":1,"sc":"81-89","mb":1,"t":"2026-08-30T19:00Z","id":null,"v":"Gateway Center","ct":"College Park","nt":0,"po":0,"pr":0,"mv":1},{"h":"西雅圖風暴","a":"洛杉磯火花","hp":86.4,"ap":88.0,"php":46.5,"mg":-1.6,"sd":18.21,"st":1,"ok":1,"okm":1,"sc":"90-74","mb":1,"t":"2026-08-30T21:00Z","id":null,"v":"Climate Pledge Arena","ct":"Seattle","nt":0,"po":0,"pr":0,"mv":1},{"h":"波特蘭火焰","a":"金州瓦爾基里","hp":78.0,"ap":82.9,"php":36.5,"mg":-4.9,"sd":14.2,"st":1,"ok":1,"okm":1,"sc":"86-69","mb":1,"t":"2026-08-30T23:00Z","id":null,"v":"Moda Center","ct":"Portland","nt":0,"po":0,"pr":0,"mv":1},{"h":"達拉斯飛翼","a":"康乃狄克太陽","hp":91.7,"ap":74.8,"php":91.1,"mg":16.9,"sd":12.55,"st":1,"ok":1,"okm":1,"sc":"71-97","mb":1,"t":"2026-08-31T00:30Z","id":null,"v":"College Park Center","ct":"Arlington","nt":0,"po":0,"pr":0,"mv":1}],"2026-09-17":[{"h":"亞特蘭大美夢","a":"康乃狄克太陽","hp":94.7,"ap":75.0,"php":93.3,"mg":19.7,"sd":13.15,"st":1,"ok":1,"okm":1,"sc":"59-103","mb":1,"t":"2026-09-17T23:30Z","id":"401857190","v":"Gateway Center","ct":"College Park","nt":0,"po":0,"pr":0,"mv":1},{"h":"芝加哥天空","a":"華盛頓神秘","hp":83.3,"ap":84.0,"php":49.2,"mg":-0.7,"sd":13.5,"st":1,"ok":1,"okm":0,"sc":"110-80","mb":1,"t":"2026-09-18T00:00Z","id":"401857191","v":"Wintrust Arena","ct":"Chicago","nt":0,"po":0,"pr":0,"mv":1},{"h":"達拉斯飛翼","a":"洛杉磯火花","hp":91.4,"ap":85.1,"php":69.1,"mg":6.3,"sd":12.63,"st":1,"ok":1,"okm":1,"sc":"77-97","mb":1,"t":"2026-09-18T00:00Z","id":"401857192","v":"College Park Center","ct":"Arlington","nt":0,"po":0,"pr":0,"mv":1},{"h":"波特蘭火焰","a":"鳳凰城水星","hp":85.3,"ap":88.4,"php":41.7,"mg":-3.1,"sd":14.79,"st":1,"ok":1,"okm":1,"sc":"94-91","mb":1,"t":"2026-09-18T02:00Z","id":"401857193","v":"Moda Center","ct":"Portland","nt":0,"po":0,"pr":0,"mv":1},{"h":"西雅圖風暴","a":"拉斯維加斯王牌","hp":82.4,"ap":92.2,"php":21.4,"mg":-9.8,"sd":12.36,"st":1,"ok":1,"okm":1,"sc":"114-77","mb":1,"t":"2026-09-18T02:00Z","id":"401857194","v":"Climate Pledge Arena","ct":"Seattle","nt":0,"po":0,"pr":0,"mv":1}],"2026-09-18":[{"h":"多倫多節奏","a":"印第安那狂熱","hp":84.4,"ap":103.8,"php":7.5,"mg":-19.4,"sd":13.48,"st":1,"ok":1,"okm":1,"sc":"103-85","mb":1,"t":"2026-09-18T23:30Z","id":"401857195","v":"Coca-Cola Coliseum","ct":"Toronto","nt":0,"po":0,"pr":0,"mv":1},{"h":"明尼蘇達山貓","a":"紐約自由","hp":90.9,"ap":86.0,"php":64.2,"mg":4.9,"sd":13.47,"st":1,"ok":0,"okm":0,"sc":"93-81","mb":1,"t":"2026-09-18T23:30Z","id":"401857196","v":"Target Center","ct":"Minneapolis","nt":0,"po":0,"pr":0,"mv":1},{"h":"金州瓦爾基里","a":"波特蘭火焰","hp":85.5,"ap":75.5,"php":78.7,"mg":10.0,"sd":12.56,"st":1,"ok":1,"okm":1,"sc":"66-82","mb":1,"t":"2026-09-19T02:00Z","id":"401857197","v":"Chase Center","ct":"San Francisco","nt":0,"po":0,"pr":0,"mv":1}],"2026-09-19":[{"h":"達拉斯飛翼","a":"鳳凰城水星","hp":91.6,"ap":81.3,"php":79.2,"mg":10.3,"sd":12.66,"st":1,"ok":1,"okm":1,"sc":"82-87","mb":1,"t":"2026-09-19T17:00Z","id":"401857198","v":"College Park Center","ct":"Arlington","nt":0,"po":0,"pr":0,"mv":1},{"h":"亞特蘭大美夢","a":"芝加哥天空","hp":96.8,"ap":80.7,"php":88.7,"mg":16.1,"sd":13.3,"st":1,"ok":1,"okm":1,"sc":"81-106","mb":1,"t":"2026-09-19T23:00Z","id":"401857199","v":"State Farm Arena","ct":"Atlanta","nt":0,"po":0,"pr":0,"mv":1},{"h":"金州瓦爾基里","a":"西雅圖風暴","hp":84.8,"ap":72.5,"php":83.9,"mg":12.3,"sd":12.42,"st":1,"ok":1,"okm":1,"sc":"57-70","mb":1,"t":"2026-09-20T01:00Z","id":"401857200","v":"Chase Center","ct":"San Francisco","nt":0,"po":0,"pr":0,"mv":1}],"2026-09-20":[{"h":"康乃狄克太陽","a":"明尼蘇達山貓","hp":74.7,"ap":93.4,"php":7.4,"mg":-18.7,"sd":12.93,"st":1,"ok":1,"okm":1,"sc":"101-89","mb":1,"t":"2026-09-20T17:00Z","id":"401857201","v":"Mohegan Sun Arena","ct":"Uncasville","nt":0,"po":0,"pr":0,"mv":1},{"h":"多倫多節奏","a":"紐約自由","hp":80.0,"ap":97.2,"php":9.5,"mg":-17.2,"sd":13.12,"st":1,"ok":1,"okm":1,"sc":"106-69","mb":1,"t":"2026-09-20T19:00Z","id":"401857202","v":"Coca-Cola Coliseum","ct":"Toronto","nt":0,"po":0,"pr":0,"mv":1},{"h":"印第安那狂熱","a":"華盛頓神秘","hp":92.7,"ap":86.8,"php":67.2,"mg":5.9,"sd":13.25,"st":1,"ok":0,"okm":0,"sc":"93-77","mb":1,"t":"2026-09-20T20:00Z","id":"401857203","v":"Gainbridge Fieldhouse","ct":"Indianapolis","nt":0,"po":0,"pr":0,"mv":1},{"h":"洛杉磯火花","a":"波特蘭火焰","hp":89.7,"ap":87.5,"php":54.9,"mg":2.2,"sd":17.87,"st":1,"ok":1,"okm":1,"sc":"84-105","mb":1,"t":"2026-09-20T23:00Z","id":"401857204","v":"crypto.com Arena","ct":"Los Angeles","nt":0,"po":0,"pr":0,"mv":1},{"h":"拉斯維加斯王牌","a":"西雅圖風暴","hp":95.8,"ap":80.1,"php":88.6,"mg":15.7,"sd":13.02,"st":1,"ok":1,"okm":1,"sc":"77-98","mb":1,"t":"2026-09-21T01:00Z","id":"401857205","v":"Michelob ULTRA Arena","ct":"Las Vegas","nt":0,"po":0,"pr":0,"mv":1}],"2026-09-21":[{"h":"紐約自由","a":"亞特蘭大美夢","hp":88.2,"ap":89.7,"php":47.1,"mg":-1.5,"sd":20.0,"st":1,"ok":1,"okm":1,"sc":"95-84","mb":1,"t":"2026-09-22T00:00Z","id":"401857206","v":"Barclays Center","ct":"Brooklyn","nt":0,"po":0,"pr":0,"mv":1},{"h":"鳳凰城水星","a":"達拉斯飛翼","hp":83.1,"ap":90.6,"php":29.1,"mg":-7.5,"sd":13.62,"st":1,"ok":0,"okm":0,"sc":"86-87","mb":1,"t":"2026-09-22T02:00Z","id":"401857207","v":"Mortgage Matchup Center","ct":"Phoenix","nt":0,"po":0,"pr":0,"mv":1}],"2026-09-22":[{"h":"華盛頓神秘","a":"康乃狄克太陽","hp":91.7,"ap":71.0,"php":93.5,"mg":20.7,"sd":13.67,"st":1,"ok":1,"okm":1,"sc":"69-79","mb":1,"t":"2026-09-22T23:30Z","id":"401857208","v":"CareFirst Arena","ct":"Washington","nt":0,"po":0,"pr":0,"mv":1},{"h":"印第安那狂熱","a":"明尼蘇達山貓","hp":95.4,"ap":90.5,"php":63.7,"mg":4.9,"sd":13.98,"st":1,"ok":1,"okm":1,"sc":"77-96","mb":1,"t":"2026-09-23T00:00Z","id":"401857209","v":"Gainbridge Fieldhouse","ct":"Indianapolis","nt":0,"po":0,"pr":0,"mv":1},{"h":"芝加哥天空","a":"多倫多節奏","hp":94.2,"ap":86.3,"php":72.1,"mg":7.9,"sd":13.49,"st":1,"ok":1,"okm":1,"sc":"85-97","mb":1,"t":"2026-09-23T00:00Z","id":"401857210","v":"Wintrust Arena","ct":"Chicago","nt":0,"po":0,"pr":0,"mv":1},{"h":"拉斯維加斯王牌","a":"洛杉磯火花","hp":96.4,"ap":82.0,"php":85.7,"mg":14.4,"sd":13.5,"st":1,"ok":1,"okm":1,"sc":"79-89","mb":1,"t":"2026-09-23T02:00Z","id":"401857211","v":"Michelob ULTRA Arena","ct":"Las Vegas","nt":0,"po":0,"pr":0,"mv":1},{"h":"波特蘭火焰","a":"金州瓦爾基里","hp":73.0,"ap":86.3,"php":14.8,"mg":-13.3,"sd":12.73,"st":1,"ok":0,"okm":0,"sc":"82-90","mb":1,"t":"2026-09-23T02:00Z","id":"401857212","v":"Moda Center","ct":"Portland","nt":0,"po":0,"pr":0,"mv":1}],"2026-09-23":[{"h":"紐約自由","a":"亞特蘭大美夢","hp":85.2,"ap":90.2,"php":35.4,"mg":-5.0,"sd":13.35,"st":1,"ok":1,"okm":1,"sc":"83-65","mb":1,"t":"2026-09-24T00:00Z","id":"401857213","v":"Barclays Center","ct":"Brooklyn","nt":0,"po":0,"pr":0,"mv":1},{"h":"西雅圖風暴","a":"達拉斯飛翼","hp":82.8,"ap":90.2,"php":26.6,"mg":-7.4,"sd":11.84,"st":1,"ok":1,"okm":1,"sc":"103-91","mb":1,"t":"2026-09-24T02:00Z","id":"401857214","v":"Climate Pledge Arena","ct":"Seattle","nt":0,"po":0,"pr":0,"mv":1}],"2026-09-24":[{"h":"康乃狄克太陽","a":"多倫多節奏","hp":88.8,"ap":81.5,"php":68.4,"mg":7.3,"sd":15.24,"st":1,"ok":1,"okm":1,"sc":"81-95","mb":1,"t":"2026-09-24T23:00Z","id":"401857215","v":"Mohegan Sun Arena","ct":"Uncasville","nt":0,"po":0,"pr":0,"mv":1},{"h":"華盛頓神秘","a":"芝加哥天空","hp":93.3,"ap":76.6,"php":89.6,"mg":16.7,"sd":13.26,"st":1,"ok":1,"okm":1,"sc":"93-101","mb":1,"t":"2026-09-24T23:30Z","id":"401857216","v":"Capital One Arena","ct":"Washington","nt":0,"po":0,"pr":0,"mv":1},{"h":"明尼蘇達山貓","a":"印第安那狂熱","hp":89.6,"ap":95.1,"php":34.2,"mg":-5.5,"sd":13.51,"st":1,"ok":0,"okm":0,"sc":"66-86","mb":1,"t":"2026-09-25T00:00Z","id":"401857217","v":"Target Center","ct":"Minneapolis","nt":0,"po":0,"pr":0,"mv":1},{"h":"洛杉磯火花","a":"金州瓦爾基里","hp":74.4,"ap":84.8,"php":20.8,"mg":-10.4,"sd":12.79,"st":1,"ok":1,"okm":1,"sc":"76-75","mb":1,"t":"2026-09-25T02:00Z","id":"401857218","v":"crypto.com Arena","ct":"Los Angeles","nt":0,"po":0,"pr":0,"mv":1},{"h":"鳳凰城水星","a":"拉斯維加斯王牌","hp":84.4,"ap":90.3,"php":32.0,"mg":-5.9,"sd":12.61,"st":1,"ok":1,"okm":0,"sc":"100-82","mb":1,"t":"2026-09-25T02:00Z","id":"401857219","v":"Mortgage Matchup Center","ct":"Phoenix","nt":0,"po":0,"pr":0,"mv":1}],"2026-09-27":[{"h":"明尼蘇達山貓","a":"紐約自由","hp":89.8,"ap":84.5,"php":66.3,"mg":5.3,"sd":12.6,"st":1,"ok":0,"okm":0,"sc":"91-75","mb":1,"t":"2026-09-27T18:00Z","id":"401918014","v":"Target Center","ct":"Minneapolis","nt":0,"po":1,"pr":0,"mv":1},{"h":"拉斯維加斯王牌","a":"印第安那狂熱","hp":93.1,"ap":89.9,"php":59.8,"mg":3.2,"sd":12.89,"st":1,"ok":1,"okm":1,"sc":"85-102","mb":1,"t":"2026-09-27T20:00Z","id":"401918015","v":"Michelob ULTRA Arena","ct":"Las Vegas","nt":0,"po":1,"pr":0,"mv":1},{"h":"亞特蘭大美夢","a":"華盛頓神秘","hp":87.0,"ap":80.1,"php":70.2,"mg":6.9,"sd":13.01,"st":1,"ok":1,"okm":1,"sc":"77-92","mb":1,"t":"2026-09-27T23:00Z","id":"401918013","v":"State Farm Arena","ct":"Atlanta","nt":0,"po":1,"pr":0,"mv":1},{"h":"金州瓦爾基里","a":"達拉斯飛翼","hp":81.5,"ap":74.6,"php":70.7,"mg":6.9,"sd":12.67,"st":1,"ok":1,"okm":1,"sc":"80-104","mb":1,"t":"2026-09-28T01:00Z","id":"401918016","v":"Chase Center","ct":"San Francisco","nt":0,"po":1,"pr":0,"mv":1}],"2026-09-29":[{"h":"印第安那狂熱","a":"拉斯維加斯王牌","hp":93.1,"ap":91.1,"php":53.9,"mg":2.0,"sd":20.0,"st":1,"ok":1,"okm":1,"sc":"89-99","mb":1,"t":"2026-09-29T22:30Z","id":"401918018","v":"Gainbridge Fieldhouse","ct":"Indianapolis","nt":0,"po":1,"pr":0,"mv":1},{"h":"紐約自由","a":"明尼蘇達山貓","hp":86.3,"ap":87.5,"php":46.6,"mg":-1.2,"sd":14.06,"st":1,"ok":0,"okm":1,"sc":"71-87","mb":1,"t":"2026-09-30T00:30Z","id":"401918017","v":"Barclays Center","ct":"Brooklyn","nt":0,"po":1,"pr":0,"mv":1}],"2026-09-30":[{"h":"華盛頓神秘","a":"亞特蘭大美夢","hp":83.1,"ap":86.1,"php":41.0,"mg":-3.0,"sd":13.18,"st":1,"ok":1,"okm":1,"sc":"93-75","mb":1,"t":"2026-09-30T23:00Z","id":"401918019","v":"CareFirst Arena","ct":"Washington","nt":0,"po":1,"pr":0,"mv":1},{"h":"達拉斯飛翼","a":"金州瓦爾基里","hp":77.5,"ap":81.8,"php":37.5,"mg":-4.3,"sd":13.49,"st":1,"ok":0,"okm":0,"sc":"100-108","mb":1,"t":"2026-10-01T01:00Z","id":"401918020","v":"College Park Center","ct":"Arlington","nt":0,"po":1,"pr":0,"mv":1}],"2026-10-01":[{"h":"拉斯維加斯王牌","a":"印第安那狂熱","hp":92.9,"ap":90.1,"php":57.9,"mg":2.8,"sd":14.05,"st":1,"ok":1,"okm":0,"sc":"83-94","mb":1,"t":"2026-10-02T01:00Z","id":"401918022","v":"Michelob ULTRA Arena","ct":"Las Vegas","nt":0,"po":1,"pr":0,"mv":1}],"2026-10-02":[{"h":"金州瓦爾基里","a":"達拉斯飛翼","hp":84.9,"ap":77.3,"php":74.0,"mg":7.6,"sd":11.81,"st":1,"ok":1,"okm":1,"sc":"73-77","mb":1,"t":"2026-10-03T01:00Z","id":"401918294","v":"Chase Center","ct":"San Francisco","nt":0,"po":1,"pr":0,"mv":1}],"2026-10-04":[{"h":"亞特蘭大美夢","a":"紐約自由","hp":89.4,"ap":83.9,"php":65.5,"mg":5.5,"sd":13.79,"st":1,"ok":1,"okm":1,"sc":"82-92","mb":1,"t":"2026-10-04T18:00Z","id":"401918295","v":"State Farm Arena","ct":"Atlanta","nt":0,"po":1,"pr":0,"mv":1},{"h":"金州瓦爾基里","a":"拉斯維加斯王牌","hp":81.6,"ap":79.2,"php":56.0,"mg":2.4,"sd":15.9,"st":1,"ok":1,"okm":1,"sc":"60-71","mb":1,"t":"2026-10-04T20:00Z","id":"401918296","v":"Chase Center","ct":"San Francisco","nt":0,"po":1,"pr":0,"mv":1}],"2026-10-07":[{"h":"亞特蘭大美夢","a":"紐約自由","hp":86.8,"ap":85.3,"php":53.4,"mg":1.5,"sd":17.58,"st":1,"ok":1,"okm":1,"sc":"98-101","mb":1,"t":"2026-10-07T23:30Z","id":"401918297","v":"State Farm Arena","ct":"Atlanta","nt":0,"po":1,"pr":0,"mv":1},{"h":"金州瓦爾基里","a":"拉斯維加斯王牌","hp":81.3,"ap":76.7,"php":61.6,"mg":4.6,"sd":15.59,"st":1,"ok":1,"okm":1,"sc":"81-83","mb":1,"t":"2026-10-08T01:30Z","id":"401918298","v":"Chase Center","ct":"San Francisco","nt":0,"po":1,"pr":0,"mv":1}],"2026-10-09":[{"h":"紐約自由","a":"亞特蘭大美夢","hp":88.3,"ap":84.4,"php":62.0,"mg":3.9,"sd":12.77,"st":1,"ok":0,"okm":0,"sc":"85-83","mb":1,"t":"2026-10-09T23:30Z","id":"401918299","v":"Barclays Center","ct":"Brooklyn","nt":0,"po":1,"pr":0,"mv":1},{"h":"拉斯維加斯王牌","a":"金州瓦爾基里","hp":80.2,"ap":78.0,"php":56.5,"mg":2.2,"sd":13.44,"st":1,"ok":0,"okm":1,"sc":"87-77","mb":1,"t":"2026-10-10T01:30Z","id":"401918300","v":"Michelob ULTRA Arena","ct":"Las Vegas","nt":0,"po":1,"pr":0,"mv":1}],"2026-10-17":[{"h":"金州瓦爾基里","a":"亞特蘭大美夢","hp":80.4,"ap":76.6,"php":60.6,"mg":3.8,"sd":14.13,"st":1,"ok":1,"okm":1,"sc":"64-68","mb":1,"t":"2026-10-17T19:30Z","id":"401918305","v":"Chase Center","ct":"San Francisco","nt":0,"po":1,"pr":0,"mv":1}],"2026-10-19":[{"h":"金州瓦爾基里","a":"亞特蘭大美夢","hp":78.6,"ap":77.3,"php":52.5,"mg":1.3,"sd":20.0,"st":1,"ok":0,"okm":0,"sc":"79-65","mb":1,"t":"2026-10-20T00:00Z","id":"401918306","v":"Chase Center","ct":"San Francisco","nt":0,"po":1,"pr":0,"mv":1}],"2026-10-21":[{"h":"亞特蘭大美夢","a":"金州瓦爾基里","cf":2,"st":0,"ok":0,"okm":null,"sc":"","t":"2026-10-22T00:00Z","v":"State Farm Arena","ct":"Atlanta","nt":0,"mb":1,"po":1,"pr":0,"mv":1,"hid":1}]},"order":["2026-10-21","2026-10-19","2026-10-17","2026-10-09","2026-10-07","2026-10-04","2026-10-02","2026-10-01","2026-09-30","2026-09-29","2026-09-27","2026-09-24","2026-09-23","2026-09-22","2026-09-21","2026-09-20","2026-09-19","2026-09-18","2026-09-17","2026-08-30","2026-08-29","2026-08-28","2026-08-27","2026-08-26","2026-08-25","2026-08-24","2026-08-23","2026-08-22","2026-08-21","2026-08-20","2026-08-19","2026-08-18","2026-08-17","2026-08-16","2026-08-15","2026-08-14","2026-08-13","2026-08-12","2026-08-11","2026-08-10","2026-08-09","2026-08-08","2026-08-07","2026-08-06","2026-08-05","2026-08-04","2026-08-03","2026-08-02","2026-08-01","2026-07-31","2026-07-30","2026-07-29","2026-07-28"],"locked":1,"calibration":[{"label":"五成半上下","n":42,"said":55.2,"was":50.0},{"label":"六成","n":40,"said":64.7,"was":62.5},{"label":"七成","n":26,"said":74.3,"was":88.5},{"label":"八成以上","n":38,"said":87.7,"was":92.1}],"settled":146,"strata":[{"label":"看好主隊","n":87,"rate":75.9},{"label":"看好客隊","n":59,"rate":64.4},{"label":"大熱門 65%以上","n":83,"rate":85.5},{"label":"勢均力敵 58%以下","n":32,"rate":50.0}],"rolling":[{"at":"09/20","rate":85.0},{"at":"09/21","rate":90.0},{"at":"09/22","rate":85.0},{"at":"09/24","rate":85.0},{"at":"09/27","rate":75.0},{"at":"09/30","rate":75.0},{"at":"10/04","rate":75.0},{"at":"10/17","rate":70.0}],"brier":{"n":146,"score":0.175},"by_team":[{"team":"多倫多節奏","n":18,"hit":17,"rate":94.4},{"team":"康乃狄克太陽","n":17,"hit":15,"rate":88.2},{"team":"西雅圖風暴","n":15,"hit":12,"rate":80.0},{"team":"拉斯維加斯王牌","n":24,"hit":19,"rate":79.2},{"team":"洛杉磯火花","n":18,"hit":13,"rate":72.2},{"team":"華盛頓神秘","n":20,"hit":14,"rate":70.0},{"team":"印第安那狂熱","n":20,"hit":14,"rate":70.0},{"team":"鳳凰城水星","n":16,"hit":11,"rate":68.8},{"team":"紐約自由","n":22,"hit":15,"rate":68.2},{"team":"金州瓦爾基里","n":25,"hit":17,"rate":68.0},{"team":"達拉斯飛翼","n":20,"hit":13,"rate":65.0},{"team":"波特蘭火焰","n":17,"hit":11,"rate":64.7},{"team":"亞特蘭大美夢","n":25,"hit":16,"rate":64.0},{"team":"明尼蘇達山貓","n":18,"hit":11,"rate":61.1},{"team":"芝加哥天空","n":17,"hit":10,"rate":58.8}],"total_acc":{"n":146,"mae":11.9,"within10":51.4},"phase":{"pre":null,"reg":{"n":128,"hit":92,"rate":71.9,"pm":7.8},"post":{"n":18,"hit":12,"rate":66.7,"pm":21.8}},"generated":"2026-10-21 23:30","gen_ts":1792625455,"data_ts":1792625455,"records":{"亞特蘭大美夢":{"w":30,"l":14,"pf":91.3,"pa":84.5,"st":{"w":true,"n":5}},"金州瓦爾基里":{"w":32,"l":12,"pf":82.2,"pa":75.1,"st":{"w":true,"n":1}},"拉斯維加斯王牌":{"w":31,"l":14,"pf":91.3,"pa":86.0,"st":{"w":true,"n":7}},"紐約自由":{"w":27,"l":18,"pf":89.6,"pa":86.4,"st":{"w":false,"n":2}},"印第安那狂熱":{"w":28,"l":16,"pf":96.0,"pa":90.4,"st":{"w":false,"n":1}},"達拉斯飛翼":{"w":27,"l":17,"pf":89.4,"pa":85.2,"st":{"w":true,"n":1}},"明尼蘇達山貓":{"w":33,"l":11,"pf":90.8,"pa":83.7,"st":{"w":true,"n":1}},"華盛頓神秘":{"w":28,"l":16,"pf":84.0,"pa":82.7,"st":{"w":true,"n":4}},"洛杉磯火花":{"w":16,"l":28,"pf":87.0,"pa":91.3,"st":{"w":false,"n":2},"elim":true},"鳳凰城水星":{"w":16,"l":28,"pf":84.4,"pa":87.6,"st":{"w":false,"n":1},"elim":true},"波特蘭火焰":{"w":17,"l":27,"pf":86.2,"pa":91.0,"st":{"w":true,"n":1},"elim":true},"芝加哥天空":{"w":16,"l":28,"pf":86.8,"pa":90.7,"st":{"w":false,"n":1},"elim":true},"西雅圖風暴":{"w":8,"l":36,"pf":82.2,"pa":88.9,"st":{"w":false,"n":5},"elim":true},"康乃狄克太陽":{"w":11,"l":33,"pf":78.9,"pa":88.1,"st":{"w":true,"n":1},"elim":true},"多倫多節奏":{"w":11,"l":33,"pf":85.7,"pa":94.4,"st":{"w":false,"n":8},"elim":true}},"engine":"4.90","meta":{"亞特蘭大美夢":{"logo":"https://a.espncdn.com/i/teamlogos/wnba/500/atl.png","color":"#e31837","alt":"#5091cc","abbr":"ATL"},"芝加哥天空":{"logo":"https://a.espncdn.com/i/teamlogos/wnba/500/chi.png","color":"#5091cd","alt":"#ffd520","abbr":"CHI"},"康乃狄克太陽":{"logo":"https://a.espncdn.com/i/teamlogos/wnba/500/con.png","color":"#f05023","alt":"#0a2240","abbr":"CON"},"達拉斯飛翼":{"logo":"https://a.espncdn.com/i/teamlogos/wnba/500/dal.png","color":"#002b5c","alt":"#c4d600","abbr":"DAL"},"金州瓦爾基里":{"logo":"https://a.espncdn.com/i/teamlogos/wnba/500/gs.png","color":"#b38fcf","alt":"#000000","abbr":"GS"},"印第安那狂熱":{"logo":"https://a.espncdn.com/i/teamlogos/wnba/500/ind.png","color":"#002d62","alt":"#e03a3e","abbr":"IND"},"拉斯維加斯王牌":{"logo":"https://a.espncdn.com/i/teamlogos/wnba/500/lv.png","color":"#a7a8aa","alt":"#000000","abbr":"LV"},"洛杉磯火花":{"logo":"https://a.espncdn.com/i/teamlogos/wnba/500/la.png","color":"#552583","alt":"#fdb927","abbr":"LA"},"明尼蘇達山貓":{"logo":"https://a.espncdn.com/i/teamlogos/wnba/500/min.png","color":"#266092","alt":"#79bc43","abbr":"MIN"},"紐約自由":{"logo":"https://a.espncdn.com/i/teamlogos/wnba/500/ny.png","color":"#86cebc","alt":"#000000","abbr":"NY"},"鳳凰城水星":{"logo":"https://a.espncdn.com/i/teamlogos/wnba/500/phx.png","color":"#3c286e","alt":"#fa4b0a","abbr":"PHX"},"波特蘭火焰":{"logo":"https://a.espncdn.com/i/teamlogos/wnba/500/por.png","color":"#cee5eb","alt":"#000000","abbr":"POR"},"西雅圖風暴":{"logo":"https://a.espncdn.com/i/teamlogos/wnba/500/sea.png","color":"#2c5235","alt":"#fee11a","abbr":"SEA"},"多倫多節奏":{"logo":"https://a.espncdn.com/i/teamlogos/wnba/500/tor.png","color":"#33476D","alt":"#7B1B38","abbr":"TOR"},"華盛頓神秘":{"logo":"https://a.espncdn.com/i/teamlogos/wnba/500/wsh.png","color":"#e03a3e","alt":"#002b5c","abbr":"WSH"}},"streaks":{"亞特蘭大美夢":{"w":true,"n":5},"金州瓦爾基里":{"w":true,"n":1},"拉斯維加斯王牌":{"w":true,"n":7},"紐約自由":{"w":false,"n":2},"印第安那狂熱":{"w":false,"n":1},"達拉斯飛翼":{"w":true,"n":1},"明尼蘇達山貓":{"w":true,"n":1},"華盛頓神秘":{"w":true,"n":4},"洛杉磯火花":{"w":false,"n":2},"鳳凰城水星":{"w":false,"n":1},"波特蘭火焰":{"w":true,"n":1},"芝加哥天空":{"w":false,"n":1},"西雅圖風暴":{"w":false,"n":5},"康乃狄克太陽":{"w":true,"n":1},"多倫多節奏":{"w":false,"n":8}}};
+var DATA   = {"days":{"2026-07-28":[{"h":"華盛頓神秘","a":"康乃狄克太陽","hp":87.1,"ap":75.1,"php":82.3,"mg":12.0,"sd":12.95,"st":1,"ok":1,"okm":null,"sc":"84-92","mb":0,"t":"2026-07-28T23:30Z","id":null,"v":"CareFirst Arena","ct":"Washington","nt":0,"po":0,"pr":0,"mv":0},{"h":"明尼蘇達山貓","a":"多倫多節奏","hp":100.3,"ap":82.3,"php":91.8,"mg":18.0,"sd":12.93,"st":1,"ok":1,"okm":null,"sc":"93-100","mb":0,"t":"2026-07-29T00:00Z","id":null,"v":"Target Center","ct":"Minneapolis","nt":0,"po":0,"pr":0,"mv":0},{"h":"西雅圖風暴","a":"印第安那狂熱","hp":87.2,"ap":97.9,"php":20.4,"mg":-10.7,"sd":12.93,"st":1,"ok":1,"okm":null,"sc":"105-95","mb":0,"t":"2026-07-29T01:30Z","id":null,"v":"Climate Pledge Arena","ct":"Seattle","nt":0,"po":0,"pr":0,"mv":0},{"h":"拉斯維加斯王牌","a":"波特蘭火焰","hp":93.5,"ap":85.9,"php":72.1,"mg":7.6,"sd":12.97,"st":1,"ok":1,"okm":null,"sc":"83-98","mb":0,"t":"2026-07-29T02:00Z","id":null,"v":"Michelob ULTRA Arena","ct":"Las Vegas","nt":0,"po":0,"pr":0,"mv":0},{"h":"洛杉磯火花","a":"紐約自由","hp":93.2,"ap":90.2,"php":59.2,"mg":3.0,"sd":12.89,"st":1,"ok":0,"okm":null,"sc":"113-109","mb":0,"t":"2026-07-29T02:00Z","id":null,"v":"crypto.com Arena","ct":"Los Angeles","nt":0,"po":0,"pr":0,"mv":0}],"2026-07-29":[{"h":"達拉斯飛翼","a":"亞特蘭大美夢","hp":90.3,"ap":89.9,"php":52.7,"mg":0.4,"sd":8.0,"st":1,"ok":0,"okm":0,"sc":"82-81","mb":1,"t":"2026-07-30T00:00Z","id":null,"v":"College Park Center","ct":"Arlington","nt":0,"po":0,"pr":0,"mv":1},{"h":"鳳凰城水星","a":"金州瓦爾基里","hp":76.7,"ap":78.4,"php":46.3,"mg":-1.7,"sd":18.3,"st":1,"ok":0,"okm":0,"sc":"89-91","mb":0,"t":"2026-07-30T02:00Z","id":null,"v":"Mortgage Matchup Center","ct":"Phoenix","nt":0,"po":0,"pr":0,"mv":0}],"2026-07-30":[{"h":"多倫多節奏","a":"明尼蘇達山貓","hp":86.3,"ap":98.1,"php":17.6,"mg":-11.8,"sd":12.68,"st":1,"ok":1,"okm":1,"sc":"104-72","mb":1,"t":"2026-07-31T00:00Z","id":null,"v":"Scotiabank Arena","ct":"Toronto","nt":0,"po":0,"pr":0,"mv":1},{"h":"芝加哥天空","a":"康乃狄克太陽","hp":89.9,"ap":84.7,"php":65.3,"mg":5.2,"sd":13.22,"st":1,"ok":1,"okm":1,"sc":"88-94","mb":1,"t":"2026-07-31T00:00Z","id":null,"v":"Wintrust Arena","ct":"Chicago","nt":0,"po":0,"pr":0,"mv":1},{"h":"拉斯維加斯王牌","a":"紐約自由","hp":92.9,"ap":87.8,"php":64.3,"mg":5.1,"sd":13.92,"st":1,"ok":1,"okm":1,"sc":"99-104","mb":1,"t":"2026-07-31T02:00Z","id":null,"v":"Michelob ULTRA Arena","ct":"Las Vegas","nt":0,"po":0,"pr":0,"mv":1}],"2026-07-31":[{"h":"亞特蘭大美夢","a":"西雅圖風暴","hp":93.3,"ap":84.4,"php":75.1,"mg":8.9,"sd":13.13,"st":1,"ok":1,"okm":1,"sc":"89-98","mb":1,"t":"2026-07-31T23:30Z","id":null,"v":"Gateway Center","ct":"College Park","nt":0,"po":0,"pr":0,"mv":1},{"h":"華盛頓神秘","a":"達拉斯飛翼","hp":82.6,"ap":84.5,"php":45.7,"mg":-1.9,"sd":17.59,"st":1,"ok":0,"okm":1,"sc":"75-81","mb":1,"t":"2026-07-31T23:30Z","id":null,"v":"CareFirst Arena","ct":"Washington","nt":0,"po":0,"pr":0,"mv":1},{"h":"波特蘭火焰","a":"印第安那狂熱","hp":89.5,"ap":97.8,"php":25.6,"mg":-8.3,"sd":12.66,"st":1,"ok":1,"okm":1,"sc":"112-98","mb":1,"t":"2026-08-01T02:00Z","id":null,"v":"Moda Center","ct":"Portland","nt":0,"po":0,"pr":0,"mv":1}],"2026-08-01":[{"h":"芝加哥天空","a":"拉斯維加斯王牌","hp":87.8,"ap":94.6,"php":29.7,"mg":-6.8,"sd":12.76,"st":1,"ok":0,"okm":0,"sc":"83-84","mb":1,"t":"2026-08-01T17:00Z","id":null,"v":"Wintrust Arena","ct":"Chicago","nt":0,"po":0,"pr":0,"mv":1},{"h":"鳳凰城水星","a":"紐約自由","hp":87.5,"ap":88.1,"php":48.6,"mg":-0.6,"sd":13.5,"st":1,"ok":1,"okm":0,"sc":"94-92","mb":1,"t":"2026-08-01T19:00Z","id":null,"v":"Mortgage Matchup Center","ct":"Phoenix","nt":0,"po":0,"pr":0,"mv":1}],"2026-08-02":[{"h":"明尼蘇達山貓","a":"印第安那狂熱","hp":97.4,"ap":92.6,"php":63.9,"mg":4.8,"sd":13.49,"st":1,"ok":1,"okm":1,"sc":"100-108","mb":1,"t":"2026-08-02T17:00Z","id":null,"v":"Target Center","ct":"Minneapolis","nt":0,"po":0,"pr":0,"mv":1},{"h":"波特蘭火焰","a":"洛杉磯火花","hp":91.6,"ap":92.9,"php":46.1,"mg":-1.3,"sd":13.28,"st":1,"ok":1,"okm":1,"sc":"106-101","mb":0,"t":"2026-08-02T19:30Z","id":null,"v":"Moda Center","ct":"Portland","nt":0,"po":0,"pr":0,"mv":0},{"h":"達拉斯飛翼","a":"康乃狄克太陽","hp":92.1,"ap":80.1,"php":83.9,"mg":12.0,"sd":12.12,"st":1,"ok":1,"okm":1,"sc":"63-83","mb":1,"t":"2026-08-02T23:00Z","id":null,"v":"College Park Center","ct":"Arlington","nt":0,"po":0,"pr":0,"mv":1},{"h":"金州瓦爾基里","a":"多倫多節奏","hp":90.1,"ap":75.1,"php":88.4,"mg":15.0,"sd":12.55,"st":1,"ok":1,"okm":1,"sc":"79-96","mb":1,"t":"2026-08-03T00:30Z","id":null,"v":"Chase Center","ct":"San Francisco","nt":0,"po":0,"pr":0,"mv":1}],"2026-08-03":[{"h":"亞特蘭大美夢","a":"拉斯維加斯王牌","hp":92.2,"ap":89.9,"php":55.1,"mg":2.3,"sd":17.94,"st":1,"ok":0,"okm":0,"sc":"109-87","mb":1,"t":"2026-08-03T23:00Z","id":null,"v":"State Farm Arena","ct":"Atlanta","nt":0,"po":0,"pr":0,"mv":1},{"h":"紐約自由","a":"西雅圖風暴","hp":93.4,"ap":87.7,"php":67.9,"mg":5.7,"sd":12.26,"st":1,"ok":1,"okm":1,"sc":"83-95","mb":1,"t":"2026-08-03T23:00Z","id":null,"v":"Barclays Center","ct":"Brooklyn","nt":0,"po":0,"pr":0,"mv":1},{"h":"芝加哥天空","a":"鳳凰城水星","hp":87.4,"ap":89.8,"php":42.8,"mg":-2.4,"sd":13.23,"st":1,"ok":1,"okm":1,"sc":"106-101","mb":1,"t":"2026-08-04T01:00Z","id":null,"v":"Wintrust Arena","ct":"Chicago","nt":0,"po":0,"pr":0,"mv":1}],"2026-08-04":[{"h":"金州瓦爾基里","a":"多倫多節奏","hp":90.6,"ap":77.7,"php":84.7,"mg":12.9,"sd":12.6,"st":1,"ok":1,"okm":1,"sc":"81-92","mb":1,"t":"2026-08-05T02:00Z","id":null,"v":"Chase Center","ct":"San Francisco","nt":0,"po":0,"pr":0,"mv":1}],"2026-08-05":[{"h":"亞特蘭大美夢","a":"鳳凰城水星","hp":93.0,"ap":86.7,"php":68.5,"mg":6.3,"sd":13.08,"st":1,"ok":1,"okm":1,"sc":"82-96","mb":1,"t":"2026-08-05T23:00Z","id":null,"v":"Gateway Center","ct":"College Park","nt":0,"po":0,"pr":0,"mv":1},{"h":"紐約自由","a":"西雅圖風暴","hp":94.1,"ap":87.5,"php":70.9,"mg":6.6,"sd":11.99,"st":1,"ok":1,"okm":1,"sc":"86-92","mb":1,"t":"2026-08-05T23:00Z","id":null,"v":"Barclays Center","ct":"Brooklyn","nt":0,"po":0,"pr":0,"mv":1},{"h":"華盛頓神秘","a":"達拉斯飛翼","hp":82.3,"ap":83.9,"php":45.7,"mg":-1.6,"sd":14.82,"st":1,"ok":0,"okm":0,"sc":"92-96","mb":1,"t":"2026-08-05T23:30Z","id":null,"v":"CareFirst Arena","ct":"Washington","nt":0,"po":0,"pr":0,"mv":1},{"h":"芝加哥天空","a":"洛杉磯火花","hp":92.7,"ap":93.0,"php":48.0,"mg":-0.3,"sd":8.0,"st":1,"ok":0,"okm":0,"sc":"88-95","mb":1,"t":"2026-08-06T01:00Z","id":null,"v":"Wintrust Arena","ct":"Chicago","nt":0,"po":0,"pr":0,"mv":1}],"2026-08-06":[{"h":"印第安那狂熱","a":"拉斯維加斯王牌","hp":83.9,"ap":81.7,"php":60.5,"mg":2.2,"sd":8.26,"st":1,"ok":0,"okm":0,"sc":"86-84","mb":0,"t":"2026-08-06T23:00Z","id":null,"v":"Gainbridge Fieldhouse","ct":"Indianapolis","nt":0,"po":0,"pr":0,"mv":0},{"h":"明尼蘇達山貓","a":"洛杉磯火花","hp":99.9,"ap":85.7,"php":86.0,"mg":14.2,"sd":13.14,"st":1,"ok":0,"okm":0,"sc":"89-82","mb":0,"t":"2026-08-07T01:00Z","id":null,"v":"Target Center","ct":"Minneapolis","nt":0,"po":0,"pr":0,"mv":0},{"h":"波特蘭火焰","a":"多倫多節奏","hp":94.3,"ap":91.9,"php":57.5,"mg":2.4,"sd":12.69,"st":1,"ok":1,"okm":1,"sc":"83-97","mb":1,"t":"2026-08-07T02:00Z","id":null,"v":"Moda Center","ct":"Portland","nt":0,"po":0,"pr":0,"mv":1}],"2026-08-07":[{"h":"康乃狄克太陽","a":"鳳凰城水星","hp":83.0,"ap":88.2,"php":34.1,"mg":-5.2,"sd":12.69,"st":1,"ok":0,"okm":0,"sc":"72-75","mb":1,"t":"2026-08-07T23:30Z","id":null,"v":"Mohegan Sun Arena","ct":"Uncasville","nt":0,"po":0,"pr":0,"mv":1},{"h":"華盛頓神秘","a":"亞特蘭大美夢","hp":83.5,"ap":86.6,"php":41.5,"mg":-3.1,"sd":14.44,"st":1,"ok":0,"okm":1,"sc":"74-79","mb":1,"t":"2026-08-07T23:30Z","id":null,"v":"CareFirst Arena","ct":"Washington","nt":0,"po":0,"pr":0,"mv":1},{"h":"達拉斯飛翼","a":"金州瓦爾基里","hp":81.4,"ap":80.4,"php":51.7,"mg":1.0,"sd":13.5,"st":1,"ok":0,"okm":0,"sc":"94-76","mb":0,"t":"2026-08-08T01:30Z","id":null,"v":"American Airlines Center","ct":"Dallas","nt":0,"po":0,"pr":0,"mv":0}],"2026-08-08":[{"h":"明尼蘇達山貓","a":"拉斯維加斯王牌","hp":91.9,"ap":88.3,"php":60.5,"mg":3.6,"sd":13.52,"st":1,"ok":1,"okm":1,"sc":"87-98","mb":1,"t":"2026-08-08T17:00Z","id":null,"v":"Target Center","ct":"Minneapolis","nt":0,"po":0,"pr":0,"mv":1},{"h":"芝加哥天空","a":"印第安那狂熱","hp":87.1,"ap":93.9,"php":15.0,"mg":-6.8,"sd":8.0,"st":1,"ok":1,"okm":1,"sc":"90-86","mb":0,"t":"2026-08-08T19:30Z","id":null,"v":"United Center","ct":"Chicago","nt":0,"po":0,"pr":0,"mv":0},{"h":"波特蘭火焰","a":"西雅圖風暴","hp":88.6,"ap":91.1,"php":44.0,"mg":-2.5,"sd":16.56,"st":1,"ok":0,"okm":0,"sc":"93-100","mb":1,"t":"2026-08-09T00:30Z","id":null,"v":"Moda Center","ct":"Portland","nt":0,"po":0,"pr":0,"mv":1}],"2026-08-09":[{"h":"紐約自由","a":"拉斯維加斯王牌","hp":95.9,"ap":82.1,"php":85.2,"mg":13.8,"sd":13.21,"st":1,"ok":1,"okm":1,"sc":"71-111","mb":1,"t":"2026-08-09T16:30Z","id":null,"v":"Barclays Center","ct":"Brooklyn","nt":0,"po":0,"pr":0,"mv":1},{"h":"華盛頓神秘","a":"鳳凰城水星","hp":84.5,"ap":82.0,"php":56.1,"mg":2.5,"sd":16.29,"st":1,"ok":1,"okm":1,"sc":"75-95","mb":1,"t":"2026-08-09T19:00Z","id":null,"v":"CareFirst Arena","ct":"Washington","nt":0,"po":0,"pr":0,"mv":1},{"h":"明尼蘇達山貓","a":"達拉斯飛翼","hp":91.7,"ap":86.3,"php":66.2,"mg":5.4,"sd":12.92,"st":1,"ok":1,"okm":1,"sc":"90-103","mb":0,"t":"2026-08-09T19:30Z","id":null,"v":"Target Center","ct":"Minneapolis","nt":0,"po":0,"pr":0,"mv":0},{"h":"洛杉磯火花","a":"金州瓦爾基里","hp":82.4,"ap":87.0,"php":36.5,"mg":-4.6,"sd":13.33,"st":1,"ok":1,"okm":1,"sc":"84-78","mb":1,"t":"2026-08-09T23:00Z","id":null,"v":"crypto.com Arena","ct":"Los Angeles","nt":0,"po":0,"pr":0,"mv":1}],"2026-08-10":[{"h":"亞特蘭大美夢","a":"多倫多節奏","hp":98.8,"ap":86.3,"php":83.1,"mg":12.5,"sd":13.05,"st":1,"ok":1,"okm":1,"sc":"95-107","mb":1,"t":"2026-08-11T00:00Z","id":null,"v":"Gateway Center","ct":"College Park","nt":0,"po":0,"pr":0,"mv":1},{"h":"西雅圖風暴","a":"芝加哥天空","hp":88.8,"ap":89.8,"php":48.5,"mg":-1.0,"sd":13.5,"st":1,"ok":0,"okm":1,"sc":"88-97","mb":1,"t":"2026-08-11T02:00Z","id":null,"v":"Climate Pledge Arena","ct":"Seattle","nt":0,"po":0,"pr":0,"mv":1}],"2026-08-11":[{"h":"印第安那狂熱","a":"紐約自由","hp":96.6,"ap":93.2,"php":59.3,"mg":3.4,"sd":14.45,"st":1,"ok":1,"okm":1,"sc":"92-106","mb":0,"t":"2026-08-11T23:30Z","id":null,"v":"Gainbridge Fieldhouse","ct":"Indianapolis","nt":0,"po":0,"pr":0,"mv":0},{"h":"拉斯維加斯王牌","a":"華盛頓神秘","hp":87.4,"ap":83.0,"php":63.8,"mg":4.4,"sd":12.46,"st":1,"ok":1,"okm":1,"sc":"76-86","mb":1,"t":"2026-08-12T02:00Z","id":null,"v":"Michelob ULTRA Arena","ct":"Las Vegas","nt":0,"po":0,"pr":0,"mv":1},{"h":"洛杉磯火花","a":"鳳凰城水星","hp":90.5,"ap":87.3,"php":59.0,"mg":3.2,"sd":14.06,"st":1,"ok":0,"okm":0,"sc":"94-87","mb":1,"t":"2026-08-12T02:00Z","id":null,"v":"Galen Center","ct":"Los Angeles","nt":1,"po":0,"pr":0,"mv":1}],"2026-08-12":[{"h":"達拉斯飛翼","a":"多倫多節奏","hp":94.5,"ap":81.7,"php":88.4,"mg":12.8,"sd":10.71,"st":1,"ok":1,"okm":1,"sc":"88-94","mb":0,"t":"2026-08-13T00:00Z","id":null,"v":"College Park Center","ct":"Arlington","nt":0,"po":0,"pr":0,"mv":0},{"h":"金州瓦爾基里","a":"芝加哥天空","hp":88.8,"ap":78.1,"php":80.3,"mg":10.7,"sd":12.55,"st":1,"ok":1,"okm":1,"sc":"71-91","mb":1,"t":"2026-08-13T02:00Z","id":null,"v":"Chase Center","ct":"San Francisco","nt":0,"po":0,"pr":0,"mv":1},{"h":"波特蘭火焰","a":"明尼蘇達山貓","hp":86.7,"ap":98.7,"php":16.5,"mg":-12.0,"sd":12.32,"st":1,"ok":1,"okm":1,"sc":"85-81","mb":1,"t":"2026-08-13T02:00Z","id":null,"v":"Moda Center","ct":"Portland","nt":0,"po":0,"pr":0,"mv":1}],"2026-08-13":[{"h":"康乃狄克太陽","a":"亞特蘭大美夢","hp":80.9,"ap":90.0,"php":22.9,"mg":-9.1,"sd":12.26,"st":1,"ok":1,"okm":1,"sc":"104-69","mb":0,"t":"2026-08-13T23:00Z","id":null,"v":"Mohegan Sun Arena","ct":"Uncasville","nt":0,"po":0,"pr":0,"mv":0},{"h":"紐約自由","a":"洛杉磯火花","hp":91.1,"ap":73.6,"php":90.6,"mg":17.5,"sd":13.29,"st":1,"ok":1,"okm":1,"sc":"81-85","mb":0,"t":"2026-08-14T00:00Z","id":null,"v":"Barclays Center","ct":"Brooklyn","nt":0,"po":0,"pr":0,"mv":0},{"h":"拉斯維加斯王牌","a":"華盛頓神秘","hp":87.0,"ap":82.6,"php":62.8,"mg":4.4,"sd":13.47,"st":1,"ok":1,"okm":1,"sc":"76-83","mb":1,"t":"2026-08-14T02:00Z","id":null,"v":"Michelob ULTRA Arena","ct":"Las Vegas","nt":0,"po":0,"pr":0,"mv":1}],"2026-08-14":[{"h":"印第安那狂熱","a":"達拉斯飛翼","hp":96.7,"ap":84.5,"php":93.9,"mg":12.2,"sd":8.0,"st":1,"ok":1,"okm":1,"sc":"87-98","mb":0,"t":"2026-08-14T23:30Z","id":null,"v":"Gainbridge Fieldhouse","ct":"Indianapolis","nt":0,"po":0,"pr":0,"mv":0},{"h":"西雅圖風暴","a":"波特蘭火焰","hp":91.7,"ap":88.0,"php":60.5,"mg":3.7,"sd":13.89,"st":1,"ok":0,"okm":0,"sc":"84-82","mb":1,"t":"2026-08-15T02:00Z","id":null,"v":"Climate Pledge Arena","ct":"Seattle","nt":0,"po":0,"pr":0,"mv":1}],"2026-08-15":[{"h":"康乃狄克太陽","a":"紐約自由","hp":81.9,"ap":89.6,"php":25.8,"mg":-7.7,"sd":11.85,"st":1,"ok":1,"okm":1,"sc":"82-75","mb":1,"t":"2026-08-15T17:00Z","id":null,"v":"Mohegan Sun Arena","ct":"Uncasville","nt":0,"po":0,"pr":0,"mv":1},{"h":"華盛頓神秘","a":"洛杉磯火花","hp":89.5,"ap":82.5,"php":71.5,"mg":7.0,"sd":12.32,"st":1,"ok":1,"okm":1,"sc":"70-80","mb":1,"t":"2026-08-15T23:30Z","id":null,"v":"CareFirst Arena","ct":"Washington","nt":0,"po":0,"pr":0,"mv":1},{"h":"拉斯維加斯王牌","a":"明尼蘇達山貓","hp":88.7,"ap":92.0,"php":40.7,"mg":-3.3,"sd":14.03,"st":1,"ok":1,"okm":1,"sc":"92-87","mb":1,"t":"2026-08-16T00:00Z","id":null,"v":"Michelob ULTRA Arena","ct":"Las Vegas","nt":0,"po":0,"pr":0,"mv":1}],"2026-08-16":[{"h":"西雅圖風暴","a":"芝加哥天空","hp":81.0,"ap":85.1,"php":33.6,"mg":-4.1,"sd":9.68,"st":1,"ok":1,"okm":1,"sc":"82-80","mb":0,"t":"2026-08-16T21:00Z","id":null,"v":"Climate Pledge Arena","ct":"Seattle","nt":0,"po":0,"pr":0,"mv":0},{"h":"亞特蘭大美夢","a":"印第安那狂熱","hp":92.1,"ap":90.2,"php":59.3,"mg":1.9,"sd":8.08,"st":1,"ok":0,"okm":1,"sc":"95-91","mb":0,"t":"2026-08-16T21:00Z","id":null,"v":"State Farm Arena","ct":"Atlanta","nt":0,"po":0,"pr":0,"mv":0},{"h":"鳳凰城水星","a":"波特蘭火焰","hp":92.0,"ap":85.8,"php":67.5,"mg":6.2,"sd":13.66,"st":1,"ok":0,"okm":0,"sc":"88-85","mb":1,"t":"2026-08-16T23:00Z","id":null,"v":"Mortgage Matchup Center","ct":"Phoenix","nt":0,"po":0,"pr":0,"mv":1}],"2026-08-17":[{"h":"金州瓦爾基里","a":"達拉斯飛翼","hp":85.6,"ap":77.8,"php":73.6,"mg":7.8,"sd":12.36,"st":1,"ok":1,"okm":1,"sc":"70-78","mb":1,"t":"2026-08-18T02:00Z","id":null,"v":"Chase Center","ct":"San Francisco","nt":0,"po":0,"pr":0,"mv":1}],"2026-08-18":[{"h":"康乃狄克太陽","a":"洛杉磯火花","hp":90.9,"ap":82.1,"php":73.4,"mg":8.8,"sd":14.08,"st":1,"ok":1,"okm":0,"sc":"77-85","mb":0,"t":"2026-08-18T23:00Z","id":null,"v":"TD Garden","ct":"Boston","nt":0,"po":0,"pr":0,"mv":0},{"h":"多倫多節奏","a":"印第安那狂熱","hp":90.2,"ap":104.7,"php":8.5,"mg":-14.5,"sd":10.57,"st":1,"ok":1,"okm":1,"sc":"101-95","mb":0,"t":"2026-08-18T23:00Z","id":null,"v":"Scotiabank Arena","ct":"Toronto","nt":0,"po":0,"pr":0,"mv":0},{"h":"芝加哥天空","a":"紐約自由","hp":88.5,"ap":92.1,"php":39.9,"mg":-3.6,"sd":14.07,"st":1,"ok":0,"okm":0,"sc":"86-93","mb":1,"t":"2026-08-19T01:00Z","id":null,"v":"Wintrust Arena","ct":"Chicago","nt":0,"po":0,"pr":0,"mv":1},{"h":"拉斯維加斯王牌","a":"亞特蘭大美夢","hp":91.1,"ap":87.9,"php":59.4,"mg":3.2,"sd":13.45,"st":1,"ok":0,"okm":0,"sc":"97-82","mb":1,"t":"2026-08-19T01:00Z","id":null,"v":"Michelob ULTRA Arena","ct":"Las Vegas","nt":0,"po":0,"pr":0,"mv":1}],"2026-08-19":[{"h":"華盛頓神秘","a":"多倫多節奏","hp":96.2,"ap":77.1,"php":99.1,"mg":19.1,"sd":8.07,"st":1,"ok":1,"okm":1,"sc":"82-93","mb":0,"t":"2026-08-19T23:30Z","id":null,"v":"CareFirst Arena","ct":"Washington","nt":0,"po":0,"pr":0,"mv":0},{"h":"金州瓦爾基里","a":"明尼蘇達山貓","hp":80.9,"ap":82.7,"php":45.8,"mg":-1.8,"sd":17.07,"st":1,"ok":1,"okm":1,"sc":"77-66","mb":1,"t":"2026-08-20T02:00Z","id":null,"v":"Chase Center","ct":"San Francisco","nt":0,"po":0,"pr":0,"mv":1}],"2026-08-20":[{"h":"達拉斯飛翼","a":"印第安那狂熱","hp":85.5,"ap":90.5,"php":34.2,"mg":-5.0,"sd":12.28,"st":1,"ok":0,"okm":0,"sc":"85-91","mb":0,"t":"2026-08-21T00:00Z","id":null,"v":"American Airlines Center","ct":"Dallas","nt":0,"po":0,"pr":0,"mv":0},{"h":"拉斯維加斯王牌","a":"康乃狄克太陽","hp":91.2,"ap":77.8,"php":86.7,"mg":13.4,"sd":12.05,"st":1,"ok":1,"okm":1,"sc":"78-101","mb":1,"t":"2026-08-21T02:00Z","id":null,"v":"Michelob ULTRA Arena","ct":"Las Vegas","nt":0,"po":0,"pr":0,"mv":1},{"h":"洛杉磯火花","a":"亞特蘭大美夢","hp":87.4,"ap":93.1,"php":32.8,"mg":-5.7,"sd":12.8,"st":1,"ok":1,"okm":0,"sc":"124-88","mb":1,"t":"2026-08-21T02:00Z","id":null,"v":"crypto.com Arena","ct":"Los Angeles","nt":0,"po":0,"pr":0,"mv":1}],"2026-08-21":[{"h":"華盛頓神秘","a":"明尼蘇達山貓","hp":83.7,"ap":82.9,"php":53.1,"mg":0.8,"sd":10.28,"st":1,"ok":0,"okm":0,"sc":"94-84","mb":0,"t":"2026-08-21T23:30Z","id":null,"v":"CareFirst Arena","ct":"Washington","nt":0,"po":0,"pr":0,"mv":0},{"h":"芝加哥天空","a":"金州瓦爾基里","hp":73.2,"ap":75.3,"php":39.1,"mg":-2.1,"sd":8.0,"st":1,"ok":0,"okm":0,"sc":"70-73","mb":0,"t":"2026-08-21T23:30Z","id":null,"v":"Wintrust Arena","ct":"Chicago","nt":0,"po":0,"pr":0,"mv":0},{"h":"多倫多節奏","a":"波特蘭火焰","hp":89.3,"ap":94.1,"php":36.1,"mg":-4.8,"sd":13.49,"st":1,"ok":0,"okm":0,"sc":"79-82","mb":1,"t":"2026-08-22T02:00Z","id":null,"v":"Rogers Arena","ct":"Vancouver","nt":0,"po":0,"pr":0,"mv":1}],"2026-08-22":[{"h":"紐約自由","a":"印第安那狂熱","hp":100.5,"ap":97.1,"php":61.5,"mg":3.4,"sd":11.63,"st":1,"ok":1,"okm":1,"sc":"102-109","mb":0,"t":"2026-08-22T23:00Z","id":null,"v":"Barclays Center","ct":"Brooklyn","nt":0,"po":0,"pr":0,"mv":0},{"h":"洛杉磯火花","a":"康乃狄克太陽","hp":93.6,"ap":83.3,"php":80.9,"mg":10.3,"sd":11.78,"st":1,"ok":1,"okm":null,"sc":"68-77","mb":0,"t":"2026-08-23T01:00Z","id":null,"v":"crypto.com Arena","ct":"Los Angeles","nt":0,"po":0,"pr":0,"mv":0},{"h":"鳳凰城水星","a":"亞特蘭大美夢","hp":85.2,"ap":91.9,"php":30.2,"mg":-6.7,"sd":12.92,"st":1,"ok":1,"okm":1,"sc":"99-89","mb":1,"t":"2026-08-23T02:00Z","id":null,"v":"Mortgage Matchup Center","ct":"Phoenix","nt":0,"po":0,"pr":0,"mv":1}],"2026-08-23":[{"h":"達拉斯飛翼","a":"西雅圖風暴","hp":91.3,"ap":84.1,"php":72.1,"mg":7.2,"sd":12.29,"st":1,"ok":1,"okm":1,"sc":"70-92","mb":1,"t":"2026-08-23T20:00Z","id":null,"v":"College Park Center","ct":"Arlington","nt":0,"po":0,"pr":0,"mv":1},{"h":"芝加哥天空","a":"印第安那狂熱","hp":94.0,"ap":93.7,"php":51.5,"mg":0.3,"sd":13.5,"st":1,"ok":0,"okm":0,"sc":"113-90","mb":1,"t":"2026-08-23T23:00Z","id":null,"v":"Wintrust Arena","ct":"Chicago","nt":0,"po":0,"pr":0,"mv":1},{"h":"波特蘭火焰","a":"華盛頓神秘","hp":81.0,"ap":86.8,"php":32.8,"mg":-5.8,"sd":13.02,"st":1,"ok":1,"okm":1,"sc":"105-100","mb":1,"t":"2026-08-23T23:00Z","id":null,"v":"Moda Center","ct":"Portland","nt":0,"po":0,"pr":0,"mv":1},{"h":"多倫多節奏","a":"拉斯維加斯王牌","hp":82.1,"ap":98.8,"php":12.0,"mg":-16.7,"sd":14.21,"st":1,"ok":1,"okm":1,"sc":"88-78","mb":1,"t":"2026-08-23T23:00Z","id":null,"v":"Rogers Arena","ct":"Vancouver","nt":0,"po":0,"pr":0,"mv":1}],"2026-08-24":[{"h":"明尼蘇達山貓","a":"金州瓦爾基里","hp":81.5,"ap":81.6,"php":49.8,"mg":-0.1,"sd":13.5,"st":1,"ok":1,"okm":null,"sc":"80-66","mb":0,"t":"2026-08-25T00:00Z","id":null,"v":"Target Center","ct":"Minneapolis","nt":0,"po":0,"pr":0,"mv":0},{"h":"洛杉磯火花","a":"亞特蘭大美夢","hp":85.8,"ap":96.0,"php":18.1,"mg":-10.2,"sd":11.19,"st":1,"ok":1,"okm":1,"sc":"78-71","mb":1,"t":"2026-08-25T02:00Z","id":null,"v":"crypto.com Arena","ct":"Los Angeles","nt":0,"po":0,"pr":0,"mv":1}],"2026-08-25":[{"h":"康乃狄克太陽","a":"芝加哥天空","hp":80.7,"ap":89.7,"php":24.0,"mg":-9.0,"sd":12.74,"st":1,"ok":0,"okm":0,"sc":"81-87","mb":1,"t":"2026-08-25T23:00Z","id":null,"v":"Mohegan Sun Arena","ct":"Uncasville","nt":0,"po":0,"pr":0,"mv":1},{"h":"達拉斯飛翼","a":"波特蘭火焰","hp":93.0,"ap":84.8,"php":74.4,"mg":8.2,"sd":12.51,"st":1,"ok":1,"okm":1,"sc":"78-96","mb":1,"t":"2026-08-26T00:00Z","id":null,"v":"College Park Center","ct":"Arlington","nt":0,"po":0,"pr":0,"mv":1},{"h":"鳳凰城水星","a":"華盛頓神秘","hp":83.2,"ap":84.9,"php":44.8,"mg":-1.7,"sd":13.01,"st":1,"ok":1,"okm":1,"sc":"94-84","mb":1,"t":"2026-08-26T02:00Z","id":null,"v":"Mortgage Matchup Center","ct":"Phoenix","nt":0,"po":0,"pr":0,"mv":1}],"2026-08-26":[{"h":"康乃狄克太陽","a":"金州瓦爾基里","hp":68.6,"ap":84.2,"php":10.4,"mg":-15.6,"sd":12.39,"st":1,"ok":1,"okm":1,"sc":"89-64","mb":1,"t":"2026-08-26T23:00Z","id":null,"v":"Mohegan Sun Arena","ct":"Uncasville","nt":0,"po":0,"pr":0,"mv":1},{"h":"西雅圖風暴","a":"多倫多節奏","hp":92.9,"ap":82.8,"php":76.8,"mg":10.1,"sd":13.79,"st":1,"ok":1,"okm":1,"sc":"78-90","mb":1,"t":"2026-08-27T02:00Z","id":null,"v":"Climate Pledge Arena","ct":"Seattle","nt":0,"po":0,"pr":0,"mv":1}],"2026-08-27":[{"h":"紐約自由","a":"金州瓦爾基里","hp":82.9,"ap":80.6,"php":56.5,"mg":2.3,"sd":14.05,"st":1,"ok":0,"okm":0,"sc":"79-60","mb":1,"t":"2026-08-28T00:00Z","id":null,"v":"Barclays Center","ct":"Brooklyn","nt":0,"po":0,"pr":0,"mv":1},{"h":"鳳凰城水星","a":"華盛頓神秘","hp":80.3,"ap":86.0,"php":33.1,"mg":-5.7,"sd":13.04,"st":1,"ok":1,"okm":1,"sc":"80-73","mb":1,"t":"2026-08-28T02:00Z","id":null,"v":"Mortgage Matchup Center","ct":"Phoenix","nt":0,"po":0,"pr":0,"mv":1}],"2026-08-28":[{"h":"亞特蘭大美夢","a":"波特蘭火焰","hp":96.0,"ap":83.7,"php":84.6,"mg":12.3,"sd":12.07,"st":1,"ok":0,"okm":0,"sc":"101-83","mb":1,"t":"2026-08-28T23:30Z","id":null,"v":"Gateway Center","ct":"College Park","nt":0,"po":0,"pr":0,"mv":1},{"h":"印第安那狂熱","a":"康乃狄克太陽","hp":99.2,"ap":79.1,"php":93.8,"mg":20.1,"sd":13.07,"st":1,"ok":1,"okm":1,"sc":"91-111","mb":1,"t":"2026-08-28T23:30Z","id":null,"v":"Gainbridge Fieldhouse","ct":"Indianapolis","nt":0,"po":0,"pr":0,"mv":1},{"h":"拉斯維加斯王牌","a":"多倫多節奏","hp":97.2,"ap":78.4,"php":91.6,"mg":18.8,"sd":13.64,"st":1,"ok":1,"okm":1,"sc":"73-93","mb":1,"t":"2026-08-29T02:00Z","id":null,"v":"Michelob ULTRA Arena","ct":"Las Vegas","nt":0,"po":0,"pr":0,"mv":1},{"h":"洛杉磯火花","a":"華盛頓神秘","hp":81.9,"ap":86.5,"php":36.3,"mg":-4.6,"sd":13.13,"st":1,"ok":0,"okm":0,"sc":"82-88","mb":1,"t":"2026-08-29T02:00Z","id":null,"v":"crypto.com Arena","ct":"Los Angeles","nt":0,"po":0,"pr":0,"mv":1}],"2026-08-29":[{"h":"紐約自由","a":"芝加哥天空","hp":93.9,"ap":86.5,"php":72.3,"mg":7.4,"sd":12.5,"st":1,"ok":1,"okm":1,"sc":"66-85","mb":1,"t":"2026-08-29T17:00Z","id":null,"v":"Barclays Center","ct":"Brooklyn","nt":0,"po":0,"pr":0,"mv":1},{"h":"鳳凰城水星","a":"多倫多節奏","hp":92.8,"ap":81.1,"php":82.0,"mg":11.7,"sd":12.78,"st":1,"ok":1,"okm":1,"sc":"69-101","mb":1,"t":"2026-08-30T02:00Z","id":null,"v":"Mortgage Matchup Center","ct":"Phoenix","nt":0,"po":0,"pr":0,"mv":1}],"2026-08-30":[{"h":"亞特蘭大美夢","a":"明尼蘇達山貓","hp":88.2,"ap":89.7,"php":45.2,"mg":-1.5,"sd":12.44,"st":1,"ok":0,"okm":1,"sc":"81-89","mb":1,"t":"2026-08-30T19:00Z","id":null,"v":"Gateway Center","ct":"College Park","nt":0,"po":0,"pr":0,"mv":1},{"h":"西雅圖風暴","a":"洛杉磯火花","hp":86.4,"ap":88.0,"php":46.5,"mg":-1.6,"sd":18.21,"st":1,"ok":1,"okm":1,"sc":"90-74","mb":1,"t":"2026-08-30T21:00Z","id":null,"v":"Climate Pledge Arena","ct":"Seattle","nt":0,"po":0,"pr":0,"mv":1},{"h":"波特蘭火焰","a":"金州瓦爾基里","hp":78.0,"ap":82.9,"php":36.5,"mg":-4.9,"sd":14.2,"st":1,"ok":1,"okm":1,"sc":"86-69","mb":1,"t":"2026-08-30T23:00Z","id":null,"v":"Moda Center","ct":"Portland","nt":0,"po":0,"pr":0,"mv":1},{"h":"達拉斯飛翼","a":"康乃狄克太陽","hp":91.7,"ap":74.8,"php":91.1,"mg":16.9,"sd":12.55,"st":1,"ok":1,"okm":1,"sc":"71-97","mb":1,"t":"2026-08-31T00:30Z","id":null,"v":"College Park Center","ct":"Arlington","nt":0,"po":0,"pr":0,"mv":1}],"2026-09-17":[{"h":"亞特蘭大美夢","a":"康乃狄克太陽","hp":94.7,"ap":75.0,"php":93.3,"mg":19.7,"sd":13.15,"st":1,"ok":1,"okm":1,"sc":"59-103","mb":1,"t":"2026-09-17T23:30Z","id":"401857190","v":"Gateway Center","ct":"College Park","nt":0,"po":0,"pr":0,"mv":1,"hid":"20","aid":"18"},{"h":"芝加哥天空","a":"華盛頓神秘","hp":83.3,"ap":84.0,"php":49.2,"mg":-0.7,"sd":13.5,"st":1,"ok":1,"okm":0,"sc":"110-80","mb":1,"t":"2026-09-18T00:00Z","id":"401857191","v":"Wintrust Arena","ct":"Chicago","nt":0,"po":0,"pr":0,"mv":1,"hid":"19","aid":"16"},{"h":"達拉斯飛翼","a":"洛杉磯火花","hp":91.4,"ap":85.1,"php":69.1,"mg":6.3,"sd":12.63,"st":1,"ok":1,"okm":1,"sc":"77-97","mb":1,"t":"2026-09-18T00:00Z","id":"401857192","v":"College Park Center","ct":"Arlington","nt":0,"po":0,"pr":0,"mv":1,"hid":"3","aid":"6"},{"h":"波特蘭火焰","a":"鳳凰城水星","hp":85.3,"ap":88.4,"php":41.7,"mg":-3.1,"sd":14.79,"st":1,"ok":1,"okm":1,"sc":"94-91","mb":1,"t":"2026-09-18T02:00Z","id":"401857193","v":"Moda Center","ct":"Portland","nt":0,"po":0,"pr":0,"mv":1,"hid":"132052","aid":"11"},{"h":"西雅圖風暴","a":"拉斯維加斯王牌","hp":82.4,"ap":92.2,"php":21.4,"mg":-9.8,"sd":12.36,"st":1,"ok":1,"okm":1,"sc":"114-77","mb":1,"t":"2026-09-18T02:00Z","id":"401857194","v":"Climate Pledge Arena","ct":"Seattle","nt":0,"po":0,"pr":0,"mv":1,"hid":"14","aid":"17"}],"2026-09-18":[{"h":"多倫多節奏","a":"印第安那狂熱","hp":84.4,"ap":103.8,"php":7.5,"mg":-19.4,"sd":13.48,"st":1,"ok":1,"okm":1,"sc":"103-85","mb":1,"t":"2026-09-18T23:30Z","id":"401857195","v":"Coca-Cola Coliseum","ct":"Toronto","nt":0,"po":0,"pr":0,"mv":1,"hid":"131935","aid":"5"},{"h":"明尼蘇達山貓","a":"紐約自由","hp":90.9,"ap":86.0,"php":64.2,"mg":4.9,"sd":13.47,"st":1,"ok":0,"okm":0,"sc":"93-81","mb":1,"t":"2026-09-18T23:30Z","id":"401857196","v":"Target Center","ct":"Minneapolis","nt":0,"po":0,"pr":0,"mv":1,"hid":"8","aid":"9"},{"h":"金州瓦爾基里","a":"波特蘭火焰","hp":85.5,"ap":75.5,"php":78.7,"mg":10.0,"sd":12.56,"st":1,"ok":1,"okm":1,"sc":"66-82","mb":1,"t":"2026-09-19T02:00Z","id":"401857197","v":"Chase Center","ct":"San Francisco","nt":0,"po":0,"pr":0,"mv":1,"hid":"129689","aid":"132052"}],"2026-09-19":[{"h":"達拉斯飛翼","a":"鳳凰城水星","hp":91.6,"ap":81.3,"php":79.2,"mg":10.3,"sd":12.66,"st":1,"ok":1,"okm":1,"sc":"82-87","mb":1,"t":"2026-09-19T17:00Z","id":"401857198","v":"College Park Center","ct":"Arlington","nt":0,"po":0,"pr":0,"mv":1,"hid":"3","aid":"11"},{"h":"亞特蘭大美夢","a":"芝加哥天空","hp":96.8,"ap":80.7,"php":88.7,"mg":16.1,"sd":13.3,"st":1,"ok":1,"okm":1,"sc":"81-106","mb":1,"t":"2026-09-19T23:00Z","id":"401857199","v":"State Farm Arena","ct":"Atlanta","nt":0,"po":0,"pr":0,"mv":1,"hid":"20","aid":"19"},{"h":"金州瓦爾基里","a":"西雅圖風暴","hp":84.8,"ap":72.5,"php":83.9,"mg":12.3,"sd":12.42,"st":1,"ok":1,"okm":1,"sc":"57-70","mb":1,"t":"2026-09-20T01:00Z","id":"401857200","v":"Chase Center","ct":"San Francisco","nt":0,"po":0,"pr":0,"mv":1,"hid":"129689","aid":"14"}],"2026-09-20":[{"h":"康乃狄克太陽","a":"明尼蘇達山貓","hp":74.7,"ap":93.4,"php":7.4,"mg":-18.7,"sd":12.93,"st":1,"ok":1,"okm":1,"sc":"101-89","mb":1,"t":"2026-09-20T17:00Z","id":"401857201","v":"Mohegan Sun Arena","ct":"Uncasville","nt":0,"po":0,"pr":0,"mv":1,"hid":"18","aid":"8"},{"h":"多倫多節奏","a":"紐約自由","hp":80.0,"ap":97.2,"php":9.5,"mg":-17.2,"sd":13.12,"st":1,"ok":1,"okm":1,"sc":"106-69","mb":1,"t":"2026-09-20T19:00Z","id":"401857202","v":"Coca-Cola Coliseum","ct":"Toronto","nt":0,"po":0,"pr":0,"mv":1,"hid":"131935","aid":"9"},{"h":"印第安那狂熱","a":"華盛頓神秘","hp":92.7,"ap":86.8,"php":67.2,"mg":5.9,"sd":13.25,"st":1,"ok":0,"okm":0,"sc":"93-77","mb":1,"t":"2026-09-20T20:00Z","id":"401857203","v":"Gainbridge Fieldhouse","ct":"Indianapolis","nt":0,"po":0,"pr":0,"mv":1,"hid":"5","aid":"16"},{"h":"洛杉磯火花","a":"波特蘭火焰","hp":89.7,"ap":87.5,"php":54.9,"mg":2.2,"sd":17.87,"st":1,"ok":1,"okm":1,"sc":"84-105","mb":1,"t":"2026-09-20T23:00Z","id":"401857204","v":"crypto.com Arena","ct":"Los Angeles","nt":0,"po":0,"pr":0,"mv":1,"hid":"6","aid":"132052"},{"h":"拉斯維加斯王牌","a":"西雅圖風暴","hp":95.8,"ap":80.1,"php":88.6,"mg":15.7,"sd":13.02,"st":1,"ok":1,"okm":1,"sc":"77-98","mb":1,"t":"2026-09-21T01:00Z","id":"401857205","v":"Michelob ULTRA Arena","ct":"Las Vegas","nt":0,"po":0,"pr":0,"mv":1,"hid":"17","aid":"14"}],"2026-09-21":[{"h":"紐約自由","a":"亞特蘭大美夢","hp":88.2,"ap":89.7,"php":47.1,"mg":-1.5,"sd":20.0,"st":1,"ok":1,"okm":1,"sc":"95-84","mb":1,"t":"2026-09-22T00:00Z","id":"401857206","v":"Barclays Center","ct":"Brooklyn","nt":0,"po":0,"pr":0,"mv":1,"hid":"9","aid":"20"},{"h":"鳳凰城水星","a":"達拉斯飛翼","hp":83.1,"ap":90.6,"php":29.1,"mg":-7.5,"sd":13.62,"st":1,"ok":0,"okm":0,"sc":"86-87","mb":1,"t":"2026-09-22T02:00Z","id":"401857207","v":"Mortgage Matchup Center","ct":"Phoenix","nt":0,"po":0,"pr":0,"mv":1,"hid":"11","aid":"3"}],"2026-09-22":[{"h":"華盛頓神秘","a":"康乃狄克太陽","hp":91.7,"ap":71.0,"php":93.5,"mg":20.7,"sd":13.67,"st":1,"ok":1,"okm":1,"sc":"69-79","mb":1,"t":"2026-09-22T23:30Z","id":"401857208","v":"CareFirst Arena","ct":"Washington","nt":0,"po":0,"pr":0,"mv":1,"hid":"16","aid":"18"},{"h":"印第安那狂熱","a":"明尼蘇達山貓","hp":95.4,"ap":90.5,"php":63.7,"mg":4.9,"sd":13.98,"st":1,"ok":1,"okm":1,"sc":"77-96","mb":1,"t":"2026-09-23T00:00Z","id":"401857209","v":"Gainbridge Fieldhouse","ct":"Indianapolis","nt":0,"po":0,"pr":0,"mv":1,"hid":"5","aid":"8"},{"h":"芝加哥天空","a":"多倫多節奏","hp":94.2,"ap":86.3,"php":72.1,"mg":7.9,"sd":13.49,"st":1,"ok":1,"okm":1,"sc":"85-97","mb":1,"t":"2026-09-23T00:00Z","id":"401857210","v":"Wintrust Arena","ct":"Chicago","nt":0,"po":0,"pr":0,"mv":1,"hid":"19","aid":"131935"},{"h":"拉斯維加斯王牌","a":"洛杉磯火花","hp":96.4,"ap":82.0,"php":85.7,"mg":14.4,"sd":13.5,"st":1,"ok":1,"okm":1,"sc":"79-89","mb":1,"t":"2026-09-23T02:00Z","id":"401857211","v":"Michelob ULTRA Arena","ct":"Las Vegas","nt":0,"po":0,"pr":0,"mv":1,"hid":"17","aid":"6"},{"h":"波特蘭火焰","a":"金州瓦爾基里","hp":73.0,"ap":86.3,"php":14.8,"mg":-13.3,"sd":12.73,"st":1,"ok":0,"okm":0,"sc":"82-90","mb":1,"t":"2026-09-23T02:00Z","id":"401857212","v":"Moda Center","ct":"Portland","nt":0,"po":0,"pr":0,"mv":1,"hid":"132052","aid":"129689"}],"2026-09-23":[{"h":"紐約自由","a":"亞特蘭大美夢","hp":85.2,"ap":90.2,"php":35.4,"mg":-5.0,"sd":13.35,"st":1,"ok":1,"okm":1,"sc":"83-65","mb":1,"t":"2026-09-24T00:00Z","id":"401857213","v":"Barclays Center","ct":"Brooklyn","nt":0,"po":0,"pr":0,"mv":1,"hid":"9","aid":"20"},{"h":"西雅圖風暴","a":"達拉斯飛翼","hp":82.8,"ap":90.2,"php":26.6,"mg":-7.4,"sd":11.84,"st":1,"ok":1,"okm":1,"sc":"103-91","mb":1,"t":"2026-09-24T02:00Z","id":"401857214","v":"Climate Pledge Arena","ct":"Seattle","nt":0,"po":0,"pr":0,"mv":1,"hid":"14","aid":"3"}],"2026-09-24":[{"h":"康乃狄克太陽","a":"多倫多節奏","hp":88.8,"ap":81.5,"php":68.4,"mg":7.3,"sd":15.24,"st":1,"ok":1,"okm":1,"sc":"81-95","mb":1,"t":"2026-09-24T23:00Z","id":"401857215","v":"Mohegan Sun Arena","ct":"Uncasville","nt":0,"po":0,"pr":0,"mv":1,"hid":"18","aid":"131935"},{"h":"華盛頓神秘","a":"芝加哥天空","hp":93.3,"ap":76.6,"php":89.6,"mg":16.7,"sd":13.26,"st":1,"ok":1,"okm":1,"sc":"93-101","mb":1,"t":"2026-09-24T23:30Z","id":"401857216","v":"Capital One Arena","ct":"Washington","nt":0,"po":0,"pr":0,"mv":1,"hid":"16","aid":"19"},{"h":"明尼蘇達山貓","a":"印第安那狂熱","hp":89.6,"ap":95.1,"php":34.2,"mg":-5.5,"sd":13.51,"st":1,"ok":0,"okm":0,"sc":"66-86","mb":1,"t":"2026-09-25T00:00Z","id":"401857217","v":"Target Center","ct":"Minneapolis","nt":0,"po":0,"pr":0,"mv":1,"hid":"8","aid":"5"},{"h":"洛杉磯火花","a":"金州瓦爾基里","hp":74.4,"ap":84.8,"php":20.8,"mg":-10.4,"sd":12.79,"st":1,"ok":1,"okm":1,"sc":"76-75","mb":1,"t":"2026-09-25T02:00Z","id":"401857218","v":"crypto.com Arena","ct":"Los Angeles","nt":0,"po":0,"pr":0,"mv":1,"hid":"6","aid":"129689"},{"h":"鳳凰城水星","a":"拉斯維加斯王牌","hp":84.4,"ap":90.3,"php":32.0,"mg":-5.9,"sd":12.61,"st":1,"ok":1,"okm":0,"sc":"100-82","mb":1,"t":"2026-09-25T02:00Z","id":"401857219","v":"Mortgage Matchup Center","ct":"Phoenix","nt":0,"po":0,"pr":0,"mv":1,"hid":"11","aid":"17"}],"2026-09-27":[{"h":"明尼蘇達山貓","a":"紐約自由","hp":89.8,"ap":84.5,"php":66.3,"mg":5.3,"sd":12.6,"st":1,"ok":0,"okm":0,"sc":"91-75","mb":1,"t":"2026-09-27T18:00Z","id":"401918014","v":"Target Center","ct":"Minneapolis","nt":0,"po":1,"pr":0,"mv":1,"hid":"8","aid":"9"},{"h":"拉斯維加斯王牌","a":"印第安那狂熱","hp":93.1,"ap":89.9,"php":59.8,"mg":3.2,"sd":12.89,"st":1,"ok":1,"okm":1,"sc":"85-102","mb":1,"t":"2026-09-27T20:00Z","id":"401918015","v":"Michelob ULTRA Arena","ct":"Las Vegas","nt":0,"po":1,"pr":0,"mv":1,"hid":"17","aid":"5"},{"h":"亞特蘭大美夢","a":"華盛頓神秘","hp":87.0,"ap":80.1,"php":70.2,"mg":6.9,"sd":13.01,"st":1,"ok":1,"okm":1,"sc":"77-92","mb":1,"t":"2026-09-27T23:00Z","id":"401918013","v":"State Farm Arena","ct":"Atlanta","nt":0,"po":1,"pr":0,"mv":1,"hid":"20","aid":"16"},{"h":"金州瓦爾基里","a":"達拉斯飛翼","hp":81.5,"ap":74.6,"php":70.7,"mg":6.9,"sd":12.67,"st":1,"ok":1,"okm":1,"sc":"80-104","mb":1,"t":"2026-09-28T01:00Z","id":"401918016","v":"Chase Center","ct":"San Francisco","nt":0,"po":1,"pr":0,"mv":1,"hid":"129689","aid":"3"}],"2026-09-29":[{"h":"印第安那狂熱","a":"拉斯維加斯王牌","hp":93.1,"ap":91.1,"php":53.9,"mg":2.0,"sd":20.0,"st":1,"ok":1,"okm":1,"sc":"89-99","mb":1,"t":"2026-09-29T22:30Z","id":"401918018","v":"Gainbridge Fieldhouse","ct":"Indianapolis","nt":0,"po":1,"pr":0,"mv":1,"hid":"5","aid":"17"},{"h":"紐約自由","a":"明尼蘇達山貓","hp":86.3,"ap":87.5,"php":46.6,"mg":-1.2,"sd":14.06,"st":1,"ok":0,"okm":1,"sc":"71-87","mb":1,"t":"2026-09-30T00:30Z","id":"401918017","v":"Barclays Center","ct":"Brooklyn","nt":0,"po":1,"pr":0,"mv":1,"hid":"9","aid":"8"}],"2026-09-30":[{"h":"華盛頓神秘","a":"亞特蘭大美夢","hp":83.1,"ap":86.1,"php":41.0,"mg":-3.0,"sd":13.18,"st":1,"ok":1,"okm":1,"sc":"93-75","mb":1,"t":"2026-09-30T23:00Z","id":"401918019","v":"CareFirst Arena","ct":"Washington","nt":0,"po":1,"pr":0,"mv":1,"hid":"16","aid":"20"},{"h":"達拉斯飛翼","a":"金州瓦爾基里","hp":77.5,"ap":81.8,"php":37.5,"mg":-4.3,"sd":13.49,"st":1,"ok":0,"okm":0,"sc":"100-108","mb":1,"t":"2026-10-01T01:00Z","id":"401918020","v":"College Park Center","ct":"Arlington","nt":0,"po":1,"pr":0,"mv":1,"hid":"3","aid":"129689"}],"2026-10-01":[{"h":"拉斯維加斯王牌","a":"印第安那狂熱","hp":92.9,"ap":90.1,"php":57.9,"mg":2.8,"sd":14.05,"st":1,"ok":1,"okm":0,"sc":"83-94","mb":1,"t":"2026-10-02T01:00Z","id":"401918022","v":"Michelob ULTRA Arena","ct":"Las Vegas","nt":0,"po":1,"pr":0,"mv":1,"hid":"17","aid":"5"}],"2026-10-02":[{"h":"金州瓦爾基里","a":"達拉斯飛翼","hp":84.9,"ap":77.3,"php":74.0,"mg":7.6,"sd":11.81,"st":1,"ok":1,"okm":1,"sc":"73-77","mb":1,"t":"2026-10-03T01:00Z","id":"401918294","v":"Chase Center","ct":"San Francisco","nt":0,"po":1,"pr":0,"mv":1,"hid":"129689","aid":"3"}],"2026-10-04":[{"h":"亞特蘭大美夢","a":"紐約自由","hp":89.4,"ap":83.9,"php":65.5,"mg":5.5,"sd":13.79,"st":1,"ok":1,"okm":1,"sc":"82-92","mb":1,"t":"2026-10-04T18:00Z","id":"401918295","v":"State Farm Arena","ct":"Atlanta","nt":0,"po":1,"pr":0,"mv":1,"hid":"20","aid":"9"},{"h":"金州瓦爾基里","a":"拉斯維加斯王牌","hp":81.6,"ap":79.2,"php":56.0,"mg":2.4,"sd":15.9,"st":1,"ok":1,"okm":1,"sc":"60-71","mb":1,"t":"2026-10-04T20:00Z","id":"401918296","v":"Chase Center","ct":"San Francisco","nt":0,"po":1,"pr":0,"mv":1,"hid":"129689","aid":"17"}],"2026-10-07":[{"h":"亞特蘭大美夢","a":"紐約自由","hp":86.8,"ap":85.3,"php":53.4,"mg":1.5,"sd":17.58,"st":1,"ok":1,"okm":1,"sc":"98-101","mb":1,"t":"2026-10-07T23:30Z","id":"401918297","v":"State Farm Arena","ct":"Atlanta","nt":0,"po":1,"pr":0,"mv":1,"hid":"20","aid":"9"},{"h":"金州瓦爾基里","a":"拉斯維加斯王牌","hp":81.3,"ap":76.7,"php":61.6,"mg":4.6,"sd":15.59,"st":1,"ok":1,"okm":1,"sc":"81-83","mb":1,"t":"2026-10-08T01:30Z","id":"401918298","v":"Chase Center","ct":"San Francisco","nt":0,"po":1,"pr":0,"mv":1,"hid":"129689","aid":"17"}],"2026-10-09":[{"h":"紐約自由","a":"亞特蘭大美夢","hp":88.3,"ap":84.4,"php":62.0,"mg":3.9,"sd":12.77,"st":1,"ok":0,"okm":0,"sc":"85-83","mb":1,"t":"2026-10-09T23:30Z","id":"401918299","v":"Barclays Center","ct":"Brooklyn","nt":0,"po":1,"pr":0,"mv":1,"hid":"9","aid":"20"},{"h":"拉斯維加斯王牌","a":"金州瓦爾基里","hp":80.2,"ap":78.0,"php":56.5,"mg":2.2,"sd":13.44,"st":1,"ok":0,"okm":1,"sc":"87-77","mb":1,"t":"2026-10-10T01:30Z","id":"401918300","v":"Michelob ULTRA Arena","ct":"Las Vegas","nt":0,"po":1,"pr":0,"mv":1,"hid":"17","aid":"129689"}],"2026-10-17":[{"h":"金州瓦爾基里","a":"亞特蘭大美夢","hp":80.4,"ap":76.6,"php":60.6,"mg":3.8,"sd":14.13,"st":1,"ok":1,"okm":1,"sc":"64-68","mb":1,"t":"2026-10-17T19:30Z","id":"401918305","v":"Chase Center","ct":"San Francisco","nt":0,"po":1,"pr":0,"mv":1,"hid":"129689","aid":"20"}],"2026-10-19":[{"h":"金州瓦爾基里","a":"亞特蘭大美夢","hp":78.6,"ap":77.3,"php":52.5,"mg":1.3,"sd":20.0,"st":1,"ok":0,"okm":0,"sc":"79-65","mb":1,"t":"2026-10-20T00:00Z","id":"401918306","v":"Chase Center","ct":"San Francisco","nt":0,"po":1,"pr":0,"mv":1,"hid":"129689","aid":"20"}],"2026-10-21":[{"h":"亞特蘭大美夢","a":"金州瓦爾基里","hp":79.8,"ap":75.6,"php":62.3,"mg":4.2,"sd":13.4,"st":1,"ok":1,"okm":1,"sc":"71-97","mb":1,"t":"2026-10-22T00:00Z","id":"401918307","v":"State Farm Arena","ct":"Atlanta","nt":0,"po":1,"pr":0,"mv":1,"hid":"20","aid":"129689","h2h":[{"d":"06/27","h":"金州瓦爾基里","a":"亞特蘭大美夢","hp":78.0,"ap":75.0},{"d":"07/04","h":"亞特蘭大美夢","a":"金州瓦爾基里","hp":83.0,"ap":88.0},{"d":"10/17","h":"金州瓦爾基里","a":"亞特蘭大美夢","hp":68.0,"ap":64.0},{"d":"10/20","h":"金州瓦爾基里","a":"亞特蘭大美夢","hp":65.0,"ap":79.0}],"hf":[{"d":"10/04","o":"紐約自由","H":1,"p":92.0,"op":82.0,"w":1},{"d":"10/07","o":"紐約自由","H":1,"p":101.0,"op":98.0,"w":1},{"d":"10/09","o":"紐約自由","H":0,"p":85.0,"op":83.0,"w":1},{"d":"10/17","o":"金州瓦爾基里","H":0,"p":64.0,"op":68.0,"w":0},{"d":"10/20","o":"金州瓦爾基里","H":0,"p":79.0,"op":65.0,"w":1}],"af":[{"d":"10/04","o":"拉斯維加斯王牌","H":1,"p":71.0,"op":60.0,"w":1},{"d":"10/08","o":"拉斯維加斯王牌","H":1,"p":83.0,"op":81.0,"w":1},{"d":"10/10","o":"拉斯維加斯王牌","H":0,"p":87.0,"op":77.0,"w":1},{"d":"10/17","o":"亞特蘭大美夢","H":1,"p":68.0,"op":64.0,"w":1},{"d":"10/20","o":"亞特蘭大美夢","H":1,"p":65.0,"op":79.0,"w":0}]}]},"order":["2026-10-21","2026-10-19","2026-10-17","2026-10-09","2026-10-07","2026-10-04","2026-10-02","2026-10-01","2026-09-30","2026-09-29","2026-09-27","2026-09-24","2026-09-23","2026-09-22","2026-09-21","2026-09-20","2026-09-19","2026-09-18","2026-09-17","2026-08-30","2026-08-29","2026-08-28","2026-08-27","2026-08-26","2026-08-25","2026-08-24","2026-08-23","2026-08-22","2026-08-21","2026-08-20","2026-08-19","2026-08-18","2026-08-17","2026-08-16","2026-08-15","2026-08-14","2026-08-13","2026-08-12","2026-08-11","2026-08-10","2026-08-09","2026-08-08","2026-08-07","2026-08-06","2026-08-05","2026-08-04","2026-08-03","2026-08-02","2026-08-01","2026-07-31","2026-07-30","2026-07-29","2026-07-28"],"locked":1,"calibration":[{"label":"五成半上下","n":42,"said":55.2,"was":50.0},{"label":"六成","n":41,"said":64.6,"was":63.4},{"label":"七成","n":26,"said":74.3,"was":88.5},{"label":"八成以上","n":38,"said":87.7,"was":92.1}],"settled":147,"strata":[{"label":"看好主隊","n":88,"rate":76.1},{"label":"看好客隊","n":59,"rate":64.4},{"label":"大熱門 65%以上","n":83,"rate":85.5},{"label":"勢均力敵 58%以下","n":32,"rate":50.0}],"rolling":[{"at":"09/20","rate":85.0},{"at":"09/21","rate":90.0},{"at":"09/22","rate":85.0},{"at":"09/24","rate":85.0},{"at":"09/27","rate":75.0},{"at":"09/30","rate":75.0},{"at":"10/04","rate":75.0},{"at":"10/17","rate":70.0}],"brier":{"n":147,"score":0.1748},"by_team":[{"team":"多倫多節奏","n":18,"hit":17,"rate":94.4},{"team":"康乃狄克太陽","n":17,"hit":15,"rate":88.2},{"team":"西雅圖風暴","n":15,"hit":12,"rate":80.0},{"team":"拉斯維加斯王牌","n":24,"hit":19,"rate":79.2},{"team":"洛杉磯火花","n":18,"hit":13,"rate":72.2},{"team":"華盛頓神秘","n":20,"hit":14,"rate":70.0},{"team":"印第安那狂熱","n":20,"hit":14,"rate":70.0},{"team":"金州瓦爾基里","n":26,"hit":18,"rate":69.2},{"team":"鳳凰城水星","n":16,"hit":11,"rate":68.8},{"team":"紐約自由","n":22,"hit":15,"rate":68.2},{"team":"亞特蘭大美夢","n":26,"hit":17,"rate":65.4},{"team":"達拉斯飛翼","n":20,"hit":13,"rate":65.0},{"team":"波特蘭火焰","n":17,"hit":11,"rate":64.7},{"team":"明尼蘇達山貓","n":18,"hit":11,"rate":61.1},{"team":"芝加哥天空","n":17,"hit":10,"rate":58.8}],"total_acc":{"n":147,"mae":11.9,"within10":51.0},"phase":{"pre":null,"reg":{"n":128,"hit":92,"rate":71.9,"pm":7.8},"post":{"n":19,"hit":13,"rate":68.4,"pm":20.9}},"generated":"2026-10-22 03:20","gen_ts":1792639253,"data_ts":1792625455,"records":{"亞特蘭大美夢":{"w":30,"l":14,"pf":91.3,"pa":84.5,"st":{"w":true,"n":5}},"金州瓦爾基里":{"w":32,"l":12,"pf":82.2,"pa":75.1,"st":{"w":true,"n":1}},"拉斯維加斯王牌":{"w":31,"l":14,"pf":91.3,"pa":86.0,"st":{"w":true,"n":7}},"紐約自由":{"w":27,"l":18,"pf":89.6,"pa":86.4,"st":{"w":false,"n":2}},"印第安那狂熱":{"w":28,"l":16,"pf":96.0,"pa":90.4,"st":{"w":false,"n":1}},"達拉斯飛翼":{"w":27,"l":17,"pf":89.4,"pa":85.2,"st":{"w":true,"n":1}},"明尼蘇達山貓":{"w":33,"l":11,"pf":90.8,"pa":83.7,"st":{"w":true,"n":1}},"華盛頓神秘":{"w":28,"l":16,"pf":84.0,"pa":82.7,"st":{"w":true,"n":4}},"洛杉磯火花":{"w":16,"l":28,"pf":87.0,"pa":91.3,"st":{"w":false,"n":2},"elim":true},"鳳凰城水星":{"w":16,"l":28,"pf":84.4,"pa":87.6,"st":{"w":false,"n":1},"elim":true},"波特蘭火焰":{"w":17,"l":27,"pf":86.2,"pa":91.0,"st":{"w":true,"n":1},"elim":true},"芝加哥天空":{"w":16,"l":28,"pf":86.8,"pa":90.7,"st":{"w":false,"n":1},"elim":true},"西雅圖風暴":{"w":8,"l":36,"pf":82.2,"pa":88.9,"st":{"w":false,"n":5},"elim":true},"康乃狄克太陽":{"w":11,"l":33,"pf":78.9,"pa":88.1,"st":{"w":true,"n":1},"elim":true},"多倫多節奏":{"w":11,"l":33,"pf":85.7,"pa":94.4,"st":{"w":false,"n":8},"elim":true}},"engine":"4.91","meta":{"亞特蘭大美夢":{"logo":"https://a.espncdn.com/i/teamlogos/wnba/500/atl.png","color":"#e31837","alt":"#5091cc","abbr":"ATL"},"芝加哥天空":{"logo":"https://a.espncdn.com/i/teamlogos/wnba/500/chi.png","color":"#5091cd","alt":"#ffd520","abbr":"CHI"},"康乃狄克太陽":{"logo":"https://a.espncdn.com/i/teamlogos/wnba/500/con.png","color":"#f05023","alt":"#0a2240","abbr":"CON"},"達拉斯飛翼":{"logo":"https://a.espncdn.com/i/teamlogos/wnba/500/dal.png","color":"#002b5c","alt":"#c4d600","abbr":"DAL"},"金州瓦爾基里":{"logo":"https://a.espncdn.com/i/teamlogos/wnba/500/gs.png","color":"#b38fcf","alt":"#000000","abbr":"GS"},"印第安那狂熱":{"logo":"https://a.espncdn.com/i/teamlogos/wnba/500/ind.png","color":"#002d62","alt":"#e03a3e","abbr":"IND"},"拉斯維加斯王牌":{"logo":"https://a.espncdn.com/i/teamlogos/wnba/500/lv.png","color":"#a7a8aa","alt":"#000000","abbr":"LV"},"洛杉磯火花":{"logo":"https://a.espncdn.com/i/teamlogos/wnba/500/la.png","color":"#552583","alt":"#fdb927","abbr":"LA"},"明尼蘇達山貓":{"logo":"https://a.espncdn.com/i/teamlogos/wnba/500/min.png","color":"#266092","alt":"#79bc43","abbr":"MIN"},"紐約自由":{"logo":"https://a.espncdn.com/i/teamlogos/wnba/500/ny.png","color":"#86cebc","alt":"#000000","abbr":"NY"},"鳳凰城水星":{"logo":"https://a.espncdn.com/i/teamlogos/wnba/500/phx.png","color":"#3c286e","alt":"#fa4b0a","abbr":"PHX"},"波特蘭火焰":{"logo":"https://a.espncdn.com/i/teamlogos/wnba/500/por.png","color":"#cee5eb","alt":"#000000","abbr":"POR"},"西雅圖風暴":{"logo":"https://a.espncdn.com/i/teamlogos/wnba/500/sea.png","color":"#2c5235","alt":"#fee11a","abbr":"SEA"},"多倫多節奏":{"logo":"https://a.espncdn.com/i/teamlogos/wnba/500/tor.png","color":"#33476D","alt":"#7B1B38","abbr":"TOR"},"華盛頓神秘":{"logo":"https://a.espncdn.com/i/teamlogos/wnba/500/wsh.png","color":"#e03a3e","alt":"#002b5c","abbr":"WSH"}},"sim":{"n":5000,"date":"2026-10-21","left":1,"fmt":"top8","teams":[{"team":"亞特蘭大美夢","w":30.0,"l":14.0,"po":100.0,"ch":41.6},{"team":"金州瓦爾基里","w":32.0,"l":12.0,"po":100.0,"ch":13.8},{"team":"拉斯維加斯王牌","w":31.0,"l":14.0,"po":100.0,"ch":11.0},{"team":"紐約自由","w":27.5,"l":18.5,"po":100.0,"ch":9.7},{"team":"印第安那狂熱","w":28.0,"l":16.0,"po":100.0,"ch":6.8},{"team":"明尼蘇達山貓","w":33.0,"l":11.0,"po":100.0,"ch":6.5},{"team":"達拉斯飛翼","w":27.5,"l":17.5,"po":100.0,"ch":5.4},{"team":"華盛頓神秘","w":28.0,"l":16.0,"po":100.0,"ch":5.2},{"team":"波特蘭火焰","w":17.0,"l":27.0,"po":0.0,"ch":0.0},{"team":"芝加哥天空","w":16.0,"l":28.0,"po":0.0,"ch":0.0},{"team":"洛杉磯火花","w":16.0,"l":28.0,"po":0.0,"ch":0.0},{"team":"鳳凰城水星","w":16.0,"l":28.0,"po":0.0,"ch":0.0},{"team":"康乃狄克太陽","w":11.0,"l":33.0,"po":0.0,"ch":0.0},{"team":"多倫多節奏","w":11.0,"l":33.0,"po":0.0,"ch":0.0},{"team":"西雅圖風暴","w":8.0,"l":36.0,"po":0.0,"ch":0.0}],"key":"2026-10-21|662|1"},"tid":{"亞特蘭大美夢":"20","金州瓦爾基里":"129689","拉斯維加斯王牌":"17","紐約自由":"9","印第安那狂熱":"5","達拉斯飛翼":"3","明尼蘇達山貓":"8","華盛頓神秘":"16","洛杉磯火花":"6","鳳凰城水星":"11","波特蘭火焰":"132052","芝加哥天空":"19","西雅圖風暴":"14","康乃狄克太陽":"18","多倫多節奏":"131935"},"streaks":{"亞特蘭大美夢":{"w":true,"n":5},"金州瓦爾基里":{"w":true,"n":1},"拉斯維加斯王牌":{"w":true,"n":7},"紐約自由":{"w":false,"n":2},"印第安那狂熱":{"w":false,"n":1},"達拉斯飛翼":{"w":true,"n":1},"明尼蘇達山貓":{"w":true,"n":1},"華盛頓神秘":{"w":true,"n":4},"洛杉磯火花":{"w":false,"n":2},"鳳凰城水星":{"w":false,"n":1},"波特蘭火焰":{"w":true,"n":1},"芝加哥天空":{"w":false,"n":1},"西雅圖風暴":{"w":false,"n":5},"康乃狄克太陽":{"w":true,"n":1},"多倫多節奏":{"w":false,"n":8}}};
 var TODAY  = "2026-10-21";
 var LEAGUE = "wnba";   /* wnba / nba */
+var TEAM_CN = {"Atlanta Dream": "亞特蘭大美夢", "Chicago Sky": "芝加哥天空", "Connecticut Sun": "康乃狄克太陽", "Dallas Wings": "達拉斯飛翼", "Golden State Valkyries": "金州瓦爾基里", "Indiana Fever": "印第安那狂熱", "Las Vegas Aces": "拉斯維加斯王牌", "Los Angeles Sparks": "洛杉磯火花", "Minnesota Lynx": "明尼蘇達山貓", "New York Liberty": "紐約自由", "Phoenix Mercury": "鳳凰城水星", "Portland Fire": "波特蘭火焰", "Seattle Storm": "西雅圖風暴", "Toronto Tempo": "多倫多節奏", "Washington Mystics": "華盛頓神秘", "Atlanta Hawks": "亞特蘭大老鷹", "Boston Celtics": "波士頓塞爾提克", "Brooklyn Nets": "布魯克林籃網", "Charlotte Hornets": "夏洛特黃蜂", "Chicago Bulls": "芝加哥公牛", "Cleveland Cavaliers": "克里夫蘭騎士", "Dallas Mavericks": "達拉斯獨行俠", "Denver Nuggets": "丹佛金塊", "Detroit Pistons": "底特律活塞", "Golden State Warriors": "金州勇士", "Houston Rockets": "休士頓火箭", "Indiana Pacers": "印第安那溜馬", "LA Clippers": "洛杉磯快艇", "Los Angeles Clippers": "洛杉磯快艇", "Los Angeles Lakers": "洛杉磯湖人", "Memphis Grizzlies": "曼菲斯灰熊", "Miami Heat": "邁阿密熱火", "Milwaukee Bucks": "密爾瓦基公鹿", "Minnesota Timberwolves": "明尼蘇達灰狼", "New Orleans Pelicans": "紐奧良鵜鶘", "New York Knicks": "紐約尼克", "Oklahoma City Thunder": "奧克拉荷馬雷霆", "Orlando Magic": "奧蘭多魔術", "Philadelphia 76ers": "費城76人", "Phoenix Suns": "鳳凰城太陽", "Portland Trail Blazers": "波特蘭拓荒者", "Sacramento Kings": "沙加緬度國王", "San Antonio Spurs": "聖安東尼奧馬刺", "Toronto Raptors": "多倫多暴龍", "Utah Jazz": "猶他爵士", "Washington Wizards": "華盛頓巫師"};    /* 【v2.00】英文隊名 → 中文，ESPN 回來的資料要用 */
+/* ══ 【v2.00】免費資料的新功能 ══
+   資料都是手機直接向 ESPN 要：不經過我們的伺服器、不吃盤口額度、不吃 Actions 分鐘數。
+   ESPN 這些端點允許跨網域讀取（2026-10-22 從 allwin-design.github.io 實測 200）。
+   任何一塊抓不到只會那一塊不顯示，不影響預測本身。 */
+var ESPN_BASE = "https://site.api.espn.com/apis/site/v2/sports/basketball/"+LEAGUE;
+var ESPN_V3 = "https://site.api.espn.com/apis/site/v3/sports/basketball/"+LEAGUE;
+var XC = {};          /* 外部資料快取 {鍵: {st: load|ok|err, t, d}} */
+function xget(key, url, ttl, parse){
+  var c=XC[key], now=Date.now();
+  if(c){
+    if(c.st==="ok" && now-c.t<ttl) return c.d;
+    if(c.st==="load") return c.d;
+    if(c.st==="err" && now-c.t<90000) return c.d;
+  }
+  var keep=c?c.d:null;
+  XC[key]={st:"load", t:now, d:keep};
+  fetch(nosw(url)).then(function(r){ return r.ok?r.json():Promise.reject(r.status); })
+    .then(function(j){
+      var d=null;
+      try{ d=parse?parse(j):j; }catch(e){ d=null; }
+      XC[key]={st:d?"ok":"err", t:Date.now(), d:d||keep}; render();
+    })
+    .catch(function(){ XC[key]={st:"err", t:Date.now(), d:keep}; render(); });
+  return keep;
+}
+function xstate(key){ var c=XC[key]; return c?c.st:""; }
+/* 跨網域請求一律帶 _nosw=1：舊版 sw.js（v8 以前）會把跨網域回應當靜態檔永久快取，
+   帶這個參數它就會放行（v7 起的規則）。新版 sw.js v9 本來就不碰跨網域。 */
+function nosw(u, fresh){
+  return u+(u.indexOf("?")>=0?"&":"?")+"_nosw=1"+(fresh?"&_="+Date.now():"");
+}
+function zh(n){ return (TEAM_CN && TEAM_CN[n]) || n; }
+function sportsDayOf(iso){
+  var t=Date.parse(iso||"");
+  return isFinite(t) ? new Date(t-10*3600*1000).toISOString().slice(0,10) : null;
+}
+
+/* ── 各節比分 ── */
+function lsFromComp(comp){
+  var o={h:[], a:[]};
+  ((comp||{}).competitors||[]).forEach(function(c){
+    var arr=(c.linescores||[]).map(function(x){
+      var v=Number(x.value!=null?x.value:x.displayValue);
+      return isFinite(v)?v:null;
+    });
+    if(c.homeAway==="home") o.h=arr; else o.a=arr;
+  });
+  return (o.h.length||o.a.length)?o:null;
+}
+function parseSB(j){
+  var out={};
+  (j.events||[]).forEach(function(ev){
+    var ls=lsFromComp((ev.competitions||[])[0]);
+    if(ls) out[String(ev.id)]=ls;
+  });
+  return out;
+}
+function dayLines(d, fetchOk){
+  if(!d) return {};
+  var key="sb:"+d;
+  if(!fetchOk) return (XC[key]&&XC[key].d)||{};
+  return xget(key, ESPN_BASE+"/scoreboard?dates="+d.replace(/-/g,""), 6*3600000, parseSB) || {};
+}
+function lsTable(g, ls){
+  if(!ls) return "";
+  var n=Math.max((ls.h||[]).length, (ls.a||[]).length);
+  if(!n) return "";
+  var th="";
+  for(var i=0;i<n;i++) th+='<th>'+(i<4?(i+1):(n===5?"延":"延"+(i-3)))+'</th>';
+  function row(nm, arr){
+    var cells="";
+    for(var i=0;i<n;i++){ var v=arr&&arr[i]; cells+='<td class="num">'+(v==null?"":v)+'</td>'; }
+    return '<tr><td>'+esc(nm)+'</td>'+cells+'</tr>';
+  }
+  return '<table class="lsq"><tr><th>各節</th>'+th+'</tr>'+row(g.a, ls.a)+row(g.h, ls.h)+'</table>';
+}
+
+/* ── 賽後數據 ── */
+var BOXOPEN = {};
+function parseBox(j){
+  var bx=(j.boxscore&&j.boxscore.teams)||[];
+  if(!bx.length) return null;
+  var out={home:{}, away:{}, lead:{home:[], away:[]}}, side={};
+  bx.forEach(function(t){
+    var s=t.homeAway==="home"?"home":"away";
+    side[String((t.team||{}).id)]=s;
+    var m={};
+    (t.statistics||[]).forEach(function(x){ m[x.name]=x.displayValue; });
+    out[s]=m;
+  });
+  (j.leaders||[]).forEach(function(t){
+    var s=side[String((t.team||{}).id)];
+    if(!s) return;
+    (t.leaders||[]).forEach(function(c){
+      var l=(c.leaders||[])[0];
+      if(l) out.lead[s].push([c.name, (l.athlete||{}).displayName||"", l.displayValue||""]);
+    });
+  });
+  return out;
+}
+function boxSection(g){
+  if(!g.id || !BOXOPEN[g.id]) return "";
+  var key="box:"+g.id;
+  var d=xget(key, ESPN_BASE+"/summary?event="+g.id, 6*3600000, parseBox);
+  if(!d) return '<div class="boxs"><div class="hint">'+
+    (xstate(key)==="err"?"暫時抓不到賽後數據，稍後再試。":"讀取賽後數據中…")+'</div></div>';
+  var rows=[["投籃","fieldGoalsMade-fieldGoalsAttempted","fieldGoalPct"],
+            ["三分","threePointFieldGoalsMade-threePointFieldGoalsAttempted","threePointFieldGoalPct"],
+            ["罰球","freeThrowsMade-freeThrowsAttempted","freeThrowPct"],
+            ["籃板","totalRebounds"],["進攻籃板","offensiveRebounds"],["助攻","assists"],
+            ["抄截","steals"],["阻攻","blocks"],["失誤","turnovers"],
+            ["禁區得分","pointsInPaint"],["快攻得分","fastBreakPoints"],["最大領先","largestLead"]];
+  function cell(m, r){
+    var v=m[r[1]];
+    if(v==null) return "\u2014";
+    return esc(v)+(r[2]&&m[r[2]]!=null?'<span class="mut">（'+esc(m[r[2]])+'%）</span>':'');
+  }
+  var t='<table class="cmp boxt"><thead><tr><th></th><th>'+esc(g.a)+'</th><th>'+esc(g.h)+
+    '</th></tr></thead><tbody>'+
+    rows.filter(function(r){ return d.home[r[1]]!=null || d.away[r[1]]!=null; }).map(function(r){
+      return '<tr><td>'+r[0]+'</td><td>'+cell(d.away,r)+'</td><td>'+cell(d.home,r)+'</td></tr>';
+    }).join("")+'</tbody></table>';
+  var CAT={points:"得分", rebounds:"籃板", assists:"助攻"};
+  function leads(s, nm){
+    var l=d.lead[s].filter(function(x){ return CAT[x[0]]; });
+    if(!l.length) return "";
+    return '<div class="krow"><span>'+esc(nm)+'</span><b>'+l.map(function(x){
+      return CAT[x[0]]+' '+esc(x[1])+' <span class="num">'+esc(x[2])+'</span>';
+    }).join("　")+'</b></div>';
+  }
+  return '<div class="boxs"><div class="dtitle">賽後數據</div>'+t+
+    '<div class="dtitle">各隊領先者</div>'+leads("away", g.a)+leads("home", g.h)+
+    '<div class="hint">資料來自 ESPN，球員名稱維持原文。</div></div>';
+}
+
+/* ── 開打前最新傷兵：預測出爐後才確定缺陣的人 ── */
+var INJ_ZH = {"Out":"缺陣", "Doubtful":"可能缺陣", "Questionable":"不確定",
+              "Day-To-Day":"每日觀察", "Probable":"可能出賽", "Suspension":"禁賽"};
+function parseInj(j){
+  var out={};
+  (j.injuries||[]).forEach(function(t){
+    var l=(t.injuries||[]).map(function(x){ return {n:(x.athlete||{}).displayName||"", s:x.status||""}; });
+    out["id:"+t.id]=l;
+    out["nm:"+zh(t.displayName||"")]=l;
+  });
+  return out;
+}
+function injNewList(g){
+  if(g.st || !g.ij) return [];
+  var st=Date.parse(g.t||"");
+  if(isFinite(st) && Date.now()>st) return [];
+  var d=xget("inj", ESPN_BASE+"/injuries", 10*60000, parseInj);
+  if(!d) return [];
+  function nm(s){ return String(s||"").toLowerCase().replace(/[^a-z]/g,""); }
+  var bits=[];
+  [["a", g.a, g.aid], ["h", g.h, g.hid]].forEach(function(x){
+    var now=(x[2]&&d["id:"+x[2]]) || d["nm:"+x[1]] || [];
+    var had={};
+    (g.ij[x[0]]||[]).forEach(function(n){ had[nm(n)]=1; });
+    now.forEach(function(p){
+      if((p.s==="Out"||p.s==="Doubtful") && p.n && !had[nm(p.n)])
+        bits.push(esc(p.n)+'（'+esc(x[1])+'・'+(INJ_ZH[p.s]||esc(p.s))+'）');
+    });
+  });
+  return bits;
+}
+function injNew(g){
+  var bits=injNewList(g);
+  if(!bits.length) return "";
+  return '<div class="injnew">⚠️ 預測出爐後新增：'+bits.join("、")+
+    '<span class="mut">　預測時名單上還沒有他們，這場的數字沒有算進去。</span></div>';
+}
+
+/* ── 每日回顧：前一個比賽日的預測對答案 ── */
+function recapBlock(){
+  if(curTeam) return "";
+  var idx=DATA.order.indexOf(cur);
+  if(idx<0) return "";
+  var cg=DATA.days[cur]||[];
+  if(cg.length && cg.every(function(g){ return g.st; })) return "";
+  var d=null, gs=[];
+  for(var i=idx+1; i<DATA.order.length && i<=idx+3; i++){
+    var dd=DATA.order[i];
+    gs=(DATA.days[dd]||[]).filter(function(g){ return g.st && !g.pr && g.php!=null; });
+    if(gs.length){ d=dd; break; }
+  }
+  if(!d) return "";
+  var hit=gs.filter(function(g){ return cardHit(g); }).length;
+  var rows=gs.map(function(g){
+    var hf=g.mg>0, pick=hf?g.h:g.a, p=hf?g.php:100-g.php, ok=cardHit(g);
+    var sc=String(g.sc||"").split("-");
+    return '<div class="rrow"><span class="'+(ok?"rok":"rng")+'">'+(ok?"✓":"✗")+'</span>'+
+      '<span class="rpick">看好 '+esc(pick)+' <span class="num">'+p.toFixed(0)+'%</span></span>'+
+      '<span class="rsc">'+esc(g.a)+' <b class="num">'+esc(sc[0]||"")+'</b> : <b class="num">'+
+      esc(sc[1]||"")+'</b> '+esc(g.h)+'</span></div>';
+  }).join("");
+  return '<details class="recap"><summary><b>'+d.slice(5).replace("-","/")+' 回顧</b>　'+
+    gs.length+' 場命中 <b class="num">'+hit+'</b> 場（'+Math.round(100*hit/gs.length)+'%）'+
+    '<span class="mut">　點開看每一場 ▾</span></summary>'+rows+
+    '<div class="hint" style="margin:8px 0 0">勝率是賽前發布的預測。打完的比賽全部公開，可以自己翻回去對。</div></details>';
+}
+
+/* ── 季後賽機率 ── */
+var CONF_ZH = {"Eastern Conference":"東區", "Western Conference":"西區"};
+function simView(sim){
+  function pc(v){ return v>=99.5?">99%":(v>0&&v<1?"<1%":Math.round(v)+"%"); }
+  var groups={}, nba=sim.fmt==="nba";
+  sim.teams.forEach(function(t){
+    var c=t.conf?(CONF_ZH[t.conf]||t.conf):"";
+    (groups[c]=groups[c]||[]).push(t);
+  });
+  var h="";
+  Object.keys(groups).sort().forEach(function(c){
+    h+=head((c?c:"")+"季後賽機率", "預估戰績與機率")+
+      '<table><tr><th>球隊</th><th>預估戰績</th><th>季後賽</th>'+(nba?'<th>附加賽</th>':'')+
+      '<th>奪冠</th></tr>'+groups[c].map(function(t){
+        return '<tr><td>'+tlink(t.team)+'</td><td class="num">'+Math.round(t.w)+'-'+Math.round(t.l)+
+          '</td><td class="num was">'+pc(t.po)+'</td>'+(nba?'<td class="num">'+pc(t.pi)+'</td>':'')+
+          '<td class="num">'+pc(t.ch)+'</td></tr>';
+      }).join("")+'</table>';
+  });
+  h+='<div class="hint">依目前的球隊評分，把剩下 '+sim.left+' 場季賽各模擬 '+
+    Number(sim.n).toLocaleString()+' 次（'+esc(sim.date||"")+' 更新，每天一次）。'+
+    (nba?'「季後賽」含打附加賽晉級的機率；「附加賽」是落在分區第 7～10 名的機率。':'')+
+    '球隊評分本身也有誤差，季初尤其大，所以每次模擬都會先替每隊加一點隨機誤差，'+
+    '數字會隨著比賽打下去慢慢收斂。同勝場以抽籤決定，不套用官方的破同分規則。</div>';
+  return h;
+}
+
+/* ── 球隊實力走勢（實力評分表的小圖） ── */
+function miniSpark(vals, lo, hi){
+  var n=vals.length-1;
+  var pts=[];
+  vals.forEach(function(v,i){ if(v!=null) pts.push([i,v]); });
+  if(pts.length<2 || n<1) return '<span class="mut">\u2014</span>';
+  var W=64, H=18, span=(hi-lo)||1;
+  var d=pts.map(function(p,k){
+    return (k?"L":"M")+(p[0]/n*W).toFixed(1)+","+(H-(p[1]-lo)/span*H).toFixed(1);
+  }).join("");
+  return '<svg class="mspark" viewBox="0 0 '+W+' '+H+'"><path d="'+d+
+    '" fill="none" stroke="var(--home)" stroke-width="1.6"/></svg>';
+}
+
+/* ── 完整賽程＋加入行事曆 ── */
+function teamIdMap(){
+  var m={}, T=DATA.tid||{};
+  Object.keys(T).forEach(function(k){ if(T[k]) m[k]=String(T[k]); });
+  Object.keys(DATA.days||{}).forEach(function(d){
+    (DATA.days[d]||[]).forEach(function(g){
+      if(g.hid && !m[g.h]) m[g.h]=String(g.hid);
+      if(g.aid && !m[g.a]) m[g.a]=String(g.aid);
+    });
+  });
+  return m;
+}
+function parseSched(j){
+  var out=[];
+  (j.events||[]).forEach(function(e){
+    var comp=(e.competitions||[])[0]||{}, st=((comp.status||{}).type||{}).state||"", h=null, a=null;
+    (comp.competitors||[]).forEach(function(c){
+      var sc=c.score;
+      if(sc && typeof sc==="object") sc=(sc.displayValue!=null?sc.displayValue:sc.value);
+      var o={n:zh((c.team||{}).displayName||""), s:(sc==null||sc==="")?null:String(sc)};
+      if(c.homeAway==="home") h=o; else a=o;
+    });
+    if(h && a && e.date) out.push({id:String(e.id), t:e.date, st:st, h:h, a:a});
+  });
+  out.sort(function(x,y){ return x.t<y.t?-1:(x.t>y.t?1:0); });
+  return out.length?out:null;
+}
+function fmtWhen(iso){
+  var d=new Date(iso);
+  if(isNaN(d.getTime())) return "";
+  return (d.getMonth()+1)+"/"+d.getDate()+"（"+"日一二三四五六".charAt(d.getDay())+"）"+
+    ("0"+d.getHours()).slice(-2)+":"+("0"+d.getMinutes()).slice(-2);
+}
+function downloadIcs(team){
+  var M=teamIdMap(), c=XC["sch:"+M[team]], ev=c&&c.d;
+  if(!ev) return;
+  var up=ev.filter(function(e){ return e.st!=="post"; });
+  function f(d){ return d.toISOString().replace(/[-:]/g,"").replace(/\.\d{3}/,""); }
+  function es(s){ return String(s).replace(/([,;\\])/g,"\\$1"); }
+  var L=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//AI Hoops//ZH-TW","CALSCALE:GREGORIAN",
+         "METHOD:PUBLISH","X-WR-CALNAME:"+es(team+" 賽程")], stamp=f(new Date());
+  up.forEach(function(e){
+    var s=new Date(e.t);
+    if(isNaN(s.getTime())) return;
+    var en=new Date(s.getTime()+150*60000);
+    L.push("BEGIN:VEVENT","UID:"+e.id+"-"+LEAGUE+"@aihoops","DTSTAMP:"+stamp,
+           "DTSTART:"+f(s),"DTEND:"+f(en),"SUMMARY:"+es(e.a.n+" ＠ "+e.h.n),"END:VEVENT");
+  });
+  L.push("END:VCALENDAR");
+  try{
+    var blob=new Blob([L.join("\r\n")], {type:"text/calendar;charset=utf-8"});
+    var a=document.createElement("a");
+    a.href=URL.createObjectURL(blob);
+    a.download=team+"_"+LEAGUE.toUpperCase()+"賽程.ics";
+    document.body.appendChild(a); a.click();
+    setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 2000);
+  }catch(e){}
+}
+
+/* ── 球員排行榜 ── */
+var LDRCAT = "pointsPerGame";
+var LDR_ZH = {pointsPerGame:"得分", reboundsPerGame:"籃板", assistsPerGame:"助攻",
+              stealsPerGame:"抄截", blocksPerGame:"阻攻", "3PointsMadePerGame":"三分命中數",
+              fieldGoalPercentage:"投籃命中率", FreeThrowPct:"罰球命中率",
+              minutesPerGame:"上場時間", doubleDouble:"雙十次數"};
+function parseLdr(j){
+  var cats=((j.leaders||{}).categories)||[], out={};
+  cats.forEach(function(c){
+    if(!LDR_ZH[c.name]) return;
+    out[c.name]=(c.leaders||[]).slice(0,10).map(function(l){
+      return {n:(l.athlete||{}).displayName||"", t:zh((l.team||{}).displayName||""), v:l.displayValue||""};
+    });
+  });
+  return Object.keys(out).length?out:null;
+}
+function ldrView(){
+  var d=xget("ldr", ESPN_V3+"/leaders", 6*3600000, parseLdr);
+  if(!d) return '<div class="empty">'+(xstate("ldr")==="err"?"暫時抓不到排行榜，稍後再試。":"讀取排行榜中…")+'</div>';
+  var keys=Object.keys(LDR_ZH).filter(function(k){ return d[k] && d[k].length; });
+  if(!keys.length) return '<div class="empty">目前沒有排行資料。</div>';
+  if(keys.indexOf(LDRCAT)<0) LDRCAT=keys[0];
+  return dropdown("ldrsel", "項目", keys.map(function(k){ return [k, LDR_ZH[k]]; }), LDRCAT)+
+    '<table><tr><th>#</th><th>球員</th><th>球隊</th><th>數值</th></tr>'+
+    d[LDRCAT].map(function(r,i){
+      return '<tr><td class="num">'+(i+1)+'</td><td>'+esc(r.n)+'</td><td>'+esc(r.t)+
+        '</td><td class="num was">'+esc(r.v)+'</td></tr>';
+    }).join("")+'</table>'+
+    '<div class="hint">本季場均（命中率與次數除外），資料來自 ESPN，球員名稱維持原文。季初場次少，排名變動會很大。</div>';
+}
+
 var ROOT   = "";     /* 這一頁到網站根目錄的相對路徑：WNBA 是 ""，NBA 是 "../" */
 
 /* 【v1.65】聯盟偏好。點切換鈕時記下來，下次打開直接回到那個聯盟。
@@ -438,9 +882,9 @@ var ROOT   = "";     /* 這一頁到網站根目錄的相對路徑：WNBA 是 ""
     .then(function(v){ if(v && v.today_n > 0) location.replace("nba/" + location.hash); })
     .catch(function(){});
 })();
-var BUILD  = "202610212330";
-var BUILDER_VERSION = "1.98";   /* 產生這頁的 app_builder 版本 */
-var CHANGELOG = [{"d": "2026-10-21", "web": "1.98", "eng": "4.90", "items": ["比賽卡片改為顯示 App 正式採用的預測（綜合模型與市場共識），跟準確度頁的命中率同一個口徑；模型單獨的看法移到深度解析的「模型與市場」", "深度解析的「市場對照」改名「模型與市場」", "模型與市場共識的比例會依驗證結果持續調整，畫面不再列出固定的比例", "快艇的比賽補上市場共識走勢與首次收錄以來的變動（之前隊名對不上，一直是空的）", "同一組隊伍幾天內再交手時，市場共識不再混到另一場的資料"]}, {"d": "2026-10-21", "web": "1.97", "eng": "4.89", "items": ["NBA 的預測更貼近市場共識：依上一季整季比賽的驗證結果，調整了模型與市場共識的比例", "跟市場共識看法差不多的項目，改寫成「跟市場看法一致」，不再列出接近一半一半的數字"]}, {"d": "2026-10-21", "web": "1.96", "eng": "4.88", "items": ["比賽進行中的場次會顯示即時比分；買了一日券的話，另外顯示即時勝率與走勢（依目前比分、剩餘時間與賽前預測推算）", "深度解析的「市場對照」新增市場共識走勢：開打前市場對這場的看法怎麼變化"]}, {"d": "2026-10-20", "web": "1.95", "eng": "4.87", "items": ["一日券只開放購買那一天的比賽：晚上先抓到的隔天賽程，要用隔天的一日券（台灣下午兩點起購買）"]}, {"d": "2026-10-19", "web": "1.94", "eng": "4.87", "items": ["「各種判斷的命中機率」不再列出「領先超過 0 分」「落後在 0 分以內」：門檻是 0 分時，那就是勝負本身，重複列出只會讓數字對不上"]}, {"d": "2026-10-18", "web": "1.93", "eng": "4.85", "items": ["除了每天的免費示範場次，其他還沒開打的比賽，看好哪隊都改為付費內容，免費版只顯示信心等級", "新賽季開打的前幾週，球隊實力會納入休賽季的球員異動：依現在的名單，計入換隊加入與離隊球員的得分貢獻"]}, {"d": "2026-10-16", "web": "1.92", "eng": "4.84", "items": ["每天免費開放的示範場次，改成同一批有 3 場以上還沒開打的比賽時才提供"]}, {"d": "2026-10-11", "web": "1.91", "eng": "4.84", "items": ["「關於」分頁新增常見問題：通知收不到或顯示不對、一日券的有效時間與購買、命中率的計算方式等"]}, {"d": "2026-10-11", "web": "1.88", "eng": "4.84", "items": ["通知卡片改成依手機實際的通知權限顯示；從系統設定開啟通知後回到 App，會自動恢復提醒"]}, {"d": "2026-10-10", "web": "1.85", "eng": "4.84", "items": ["已經打完的比賽全部免費開放：完整預測與深度解析都看得到，只有還沒開打的比賽需要一日券"]}, {"d": "2026-10-10", "web": "1.83", "eng": "4.84", "items": ["比賽卡片的「命中／沒中」改成跟卡片上顯示的預測同一個口徑；合併市場共識後看好另一隊時，卡片上會註明", "實際比分不再顯示小數點"]}, {"d": "2026-10-09", "web": "1.82", "eng": "4.84", "items": ["同一批比賽跨到台灣兩個日期時（例如晚上的海外賽加上隔天早上的比賽），依台灣日期分段顯示，並照開賽時間排序"]}, {"d": "2026-10-09", "web": "1.80", "eng": "4.84", "items": ["每天免費開放一場完整預測：改成挑在下一批還沒開打的比賽裡，晚上打開 App 就看得到", "高信心場次的看好隊伍改為付費內容，免費版顯示信心等級"]}, {"d": "2026-10-09", "web": "1.79", "eng": "4.84", "items": ["購買按鈕上方會列出這張一日券涵蓋的場次（WNBA、NBA 各幾場）", "一日券改以台灣時間 14:00 換日：下午以後購買的券，涵蓋到隔天早上那批比賽", "季前賽期間，該聯盟的深度解析與完整預測免費開放"]}, {"d": "2026-10-09", "web": "1.77", "eng": "4.84", "items": ["購買一日券後，賽事分頁的比賽卡片也會一起解鎖，顯示完整的預期比分與勝率"]}, {"d": "2026-10-09", "web": "1.76", "eng": "4.84", "items": ["一日券到期或伺服器確認未購買時，深度解析會正確上鎖，不再顯示先前保存的內容"]}, {"d": "2026-10-05", "web": "1.75", "eng": "4.84", "items": ["賽事分頁在季前賽的日期加上提醒：這段期間的預測全部採用市場共識，不列入命中率統計"]}, {"d": "2026-10-05", "web": "1.74", "eng": "4.84", "items": ["季前賽的比賽卡片改成顯示市場共識（季前賽實際採用的預測），標示「季前賽：採用市場共識」；原本顯示的是上一季評分算出的純模型，看好的隊伍可能跟實際採用的相反"]}, {"d": "2026-10-05", "web": "1.73", "eng": "4.84", "items": ["只開了 WNBA 通知的人，通知卡片會詢問要不要一起收 NBA，一鍵加入"]}, {"d": "2026-10-05", "web": "1.71", "eng": "4.83", "items": ["通知設定新增「關閉通知」：按下後會立刻刪除伺服器上這台裝置的通知資料，之後隨時可以重新開啟"]}, {"d": "2026-10-04", "web": "1.69", "eng": "4.83", "items": ["季前賽的比賽卡片加上「季前賽」標籤", "季前賽不再算進任何命中率與準確度統計（季前賽的機率全部來自市場共識，不代表模型）；準確度頁改成季前賽、季賽、季後賽三列分開"]}, {"d": "2026-10-03", "web": "1.66", "eng": "4.82", "items": ["通知可以分聯盟選擇：WNBA、NBA 各一個開關，原本開了通知的人預設只收 WNBA"]}, {"d": "2026-10-03", "web": "1.65", "eng": "4.82", "items": ["新增 NBA：頁首可以切換 WNBA／NBA，會記住上次看的聯盟", "NBA 季前賽的機率全部採用市場共識，模型評分沿用上一季，只供參考"]}, {"d": "2026-09-27", "web": "1.63", "eng": "4.80", "items": ["季後賽的比賽卡片加上「季後賽」標籤", "準確度頁的賽季總覽新增季賽與季後賽分開的命中率，附誤差範圍"]}, {"d": "2026-09-27", "web": "1.62", "eng": "4.80", "items": ["預期總分與市場共識的「整體傾向」說明改成看近期：近期明顯偏向哪邊就寫哪邊，沒有明顯傾向就不寫"]}, {"d": "2026-09-25", "web": "1.59", "eng": "4.79", "items": ["季賽結束到季後賽開打之間沒有比賽的日子，賽事分頁會顯示季後賽倒數", "季後賽開打後，球隊戰績維持季賽成績；季後賽的比賽照樣計入近況、交手紀錄與預測"]}, {"d": "2026-09-21", "web": "1.58", "eng": "4.78", "items": ["開啟提醒後，每批比賽開打前與當天對帳完成時各會收到一則通知，內容會寫明是哪幾場", "有新資料時直接自動換成最新內容，不必再下拉重新整理或按更新，而且幾乎不耗流量", "球隊名稱改用中文顯示", "預測摘要裡「哪一隊獲勝」的機率與頁首勝率改成同一個數字，先前兩處算法不同，會差零點幾個百分點", "狀態未定的球員不再一律當作會上場：預測改依這類球員歷史上實際缺陣的比例，部分計入他們的影響。說明文字與「若全部缺陣」的對照也一併改成這個算法"]}, {"d": "2026-09-09", "web": "1.44", "eng": "4.75", "items": ["賽事分頁新增「開啟賽事提醒」：可以選擇讓比賽開打前和結果出爐時通知你。不開也不影響任何內容", "分差分布曲線與近期走勢圖改為等比例顯示：先前在橫向、平板與摺疊機上會被橫向拉扁，走勢圖上的圓點變成橢圓形。現在轉動畫面也維持原本形狀"]}, {"d": "2026-09-05", "web": "1.42", "eng": "4.74", "items": ["支援從主畫面長按圖示直接跳到指定分頁（賽事／解析／球隊／模型），不必每次都從頭找", "沒有網路又還沒載入過內容時，改為顯示說明頁面，不再是瀏覽器的錯誤畫面；連線恢復會自動回到主畫面", "「有新資料，點一下更新」的提示先前因為訊息沒有真的送出而從未出現，現已修復"]}, {"d": "2026-08-31", "web": "1.41", "eng": "4.74", "items": ["賽季空窗期（8/31–9/17）新增倒數畫面：距離賽事恢復還有幾天、接下來的賽程節點，以及本季至今與最近 30 場的命中率。9/18 賽事回來後會自動消失", "新增單日解鎖：可只解鎖當天的內容，不必一次買斷。當日有效，隔天會明確提示需要重新解鎖，而不是默默顯示上鎖畫面", "解鎖憑證改為在裝置本機保存並自動補救未完成的流程，避免付款成功卻解不開內容"]}, {"d": "2026-08-30", "web": "1.40", "eng": "4.74", "items": ["預測摘要整頁改用同一套機率：先前最上面的結論是網頁自己重算的，跟下方的命中機率不同源，同一件事會出現兩個數字（最多差 2.8 個百分點）。現在一律以命中機率為準，用詞也統一"]}, {"d": "2026-08-30", "web": "1.39", "eng": "4.73", "items": ["「各種判斷的命中機率」移到預測摘要、「合併區間」移到機率分布 ——市場對照那頁該講的是模型與市場的差別，其他內容各歸各位"]}, {"d": "2026-08-30", "web": "1.38", "eng": "4.72", "items": ["市場對照新增「長期缺陣」：確定缺陣但已久到球隊評分本身就反映了的球員，先前完全不顯示，看起來像漏算。現在會列出來並說明為什麼不重複扣分", "市場對照新增「合併區間」：領先 1~10 分／超過 10 分／超過 15 分的機率。單一分差格的機率天生就低，合併之後才看得出傾向", "市場對照新增「各種判斷的命中機率」，並標明那是合併市場共識後的結果", "模型預期總分旁新增「其中實測校準修正」：那個數字一直含有依實測校準出來的修正值，先前沒有說明"]}, {"d": "2026-08-30", "web": "1.37", "eng": "4.70", "items": ["「更新於」先前顯示的是網頁產生的時間，而網站每天會重新產生好幾次，即使預測內容一個數字都沒變。現在改成顯示資料本身最後變動的時間；若網頁比資料新，會另外註明期間資料沒有變動", "「綜合來源家數」「與共識分歧較大」「分差／總分共識自首次收錄以來的變動」這幾項先前因資料未存檔而始終不顯示，現已修復", "共識變動改為至少要有 4 個綜合來源家數才計算：先前少數來源時，單一來源報錯就會算出十幾二十分的誇張變動，並誤觸「變動劇烈」提示。來源不足時該項不顯示，而不是顯示一個不可靠的數字", "「共識變動劇烈」提示現在也會看總分共識的變動；先前只看分差共識", "「模型與市場共識的落差近期擴大中」先前是拿後半段（約 40 場、橫跨三週）跟全樣本比，一個早已過去的高峰會讓它一直亮著。改成看最近 20 場，並要求差距超出誤差範圍才顯示", "單隊缺陣產能損失超出校準範圍時會標示，提醒該場的缺陣修正是外推值"]}, {"d": "2026-08-23", "web": "1.30", "eng": "4.55", "items": ["新增這個「更新紀錄」區塊，同時標示網頁與預測引擎的版本", "修正市場共識資料的一個重大問題：先前在比賽開打後才更新的場次，會誤把「場中即時變動共識」當成賽前共識收進來。已回頭清除受影響的 22 場，並加上防止再次發生的檢查"]}, {"d": "2026-08-22", "web": "1.29", "eng": "4.53", "items": ["修正窄螢幕上比分被切掉、以及表格把整頁推寬的問題", "「分享這場」改成產生圖卡，圖上會一併標示分差的可能範圍"]}, {"d": "2026-08-21", "web": "1.26", "eng": "4.51", "items": ["傷勢部位的中英對照補齊（含複數寫法），不再出現英文原文", "調整行距與換行，長隊名不再和數值擠在一起"]}, {"d": "2026-08-20", "web": "1.25", "eng": "4.48", "items": ["新增：若傷缺球員全部缺陣，預期總分會移動多少（統計上顯著時才顯示，測不出來就不列）", "更新時間改用你所在時區顯示"]}, {"d": "2026-08-19", "web": "1.24", "eng": "4.47", "items": ["修正季後賽資格判定：已打完賽季但追不上的球隊，先前標記會消失", "新增市場內容 「超出共識的頻率」"]}, {"d": "2026-08-18", "web": "1.22", "eng": "4.41", "items": ["球員傷缺狀態與部位改為中文顯示", "數學上已無緣季後賽的球隊會加註標示", "修正季中交易後的名單歸屬：被交易的球員原本仍掛在原球隊，導致陣容深度與缺陣影響都算錯"]}, {"d": "2026-08-17", "web": "1.20", "eng": "4.38", "items": ["傷缺資料當時未取得時，明確標示該場預測未計入球員缺陣", "待觀察名單改為只列真正未定的球員，並依「越可能不打」排序"]}];      /* 更新紀錄，由 Python 端的 CHANGELOG 注入 */
+var BUILD  = "202610220320";
+var BUILDER_VERSION = "2.00";   /* 產生這頁的 app_builder 版本 */
+var CHANGELOG = [{"d": "2026-10-22", "web": "2.00", "eng": "4.91", "items": ["介面全面改版：選單移到畫面底部，分成賽事、排行、準確度、關於四頁", "賽事頁改成精簡清單，一眼看到對戰、開賽時間或比分、看好哪隊；上方的日期列左右滑就能換日期", "點任一場比賽進入比賽詳情：完整預測、各節比分、賽後數據與深度解析都在同一頁，原本的「解析」分頁併入這裡", "新增球隊頁：點隊名就能看該隊接下來的賽程、最近戰績、本季每一場的預測紀錄，還能一鍵把剩下的比賽加入手機行事曆", "排行頁新增「季後賽機率」：用目前的球隊評分把剩下的賽程模擬 5,000 次，每天更新各隊的預估戰績、進季後賽與奪冠機率", "排行頁新增「球員排行」：得分、籃板、助攻等項目的聯盟前十名", "比賽新增各節比分（進行中與打完的比賽），打完的比賽可以點開「賽後數據」看兩隊數據與得分王", "賽事頁新增前一個比賽日的回顧：每一場的預測與結果對照", "還沒開打的比賽，如果預測出爐後才有球員確定缺陣，會標示「新增缺陣」", "實力評分表新增最近 30 天的實力走勢小圖", "通知設定移到「關於」頁", "修正即時比分卡住不更新"]}, {"d": "2026-10-22", "web": "1.99", "eng": "4.90", "items": ["比賽進行中的即時比分修正：之前大多數場次不會出現，現在每一場開打後都會顯示"]}, {"d": "2026-10-21", "web": "1.98", "eng": "4.90", "items": ["比賽卡片改為顯示 App 正式採用的預測（綜合模型與市場共識），跟準確度頁的命中率同一個口徑；模型單獨的看法移到深度解析的「模型與市場」", "深度解析的「市場對照」改名「模型與市場」", "模型與市場共識的比例會依驗證結果持續調整，畫面不再列出固定的比例", "快艇的比賽補上市場共識走勢與首次收錄以來的變動（之前隊名對不上，一直是空的）", "同一組隊伍幾天內再交手時，市場共識不再混到另一場的資料"]}, {"d": "2026-10-21", "web": "1.97", "eng": "4.89", "items": ["NBA 的預測更貼近市場共識：依上一季整季比賽的驗證結果，調整了模型與市場共識的比例", "跟市場共識看法差不多的項目，改寫成「跟市場看法一致」，不再列出接近一半一半的數字"]}, {"d": "2026-10-21", "web": "1.96", "eng": "4.88", "items": ["比賽進行中的場次會顯示即時比分；買了一日券的話，另外顯示即時勝率與走勢（依目前比分、剩餘時間與賽前預測推算）", "深度解析的「市場對照」新增市場共識走勢：開打前市場對這場的看法怎麼變化"]}, {"d": "2026-10-20", "web": "1.95", "eng": "4.87", "items": ["一日券只開放購買那一天的比賽：晚上先抓到的隔天賽程，要用隔天的一日券（台灣下午兩點起購買）"]}, {"d": "2026-10-19", "web": "1.94", "eng": "4.87", "items": ["「各種判斷的命中機率」不再列出「領先超過 0 分」「落後在 0 分以內」：門檻是 0 分時，那就是勝負本身，重複列出只會讓數字對不上"]}, {"d": "2026-10-18", "web": "1.93", "eng": "4.85", "items": ["除了每天的免費示範場次，其他還沒開打的比賽，看好哪隊都改為付費內容，免費版只顯示信心等級", "新賽季開打的前幾週，球隊實力會納入休賽季的球員異動：依現在的名單，計入換隊加入與離隊球員的得分貢獻"]}, {"d": "2026-10-16", "web": "1.92", "eng": "4.84", "items": ["每天免費開放的示範場次，改成同一批有 3 場以上還沒開打的比賽時才提供"]}, {"d": "2026-10-11", "web": "1.91", "eng": "4.84", "items": ["「關於」分頁新增常見問題：通知收不到或顯示不對、一日券的有效時間與購買、命中率的計算方式等"]}, {"d": "2026-10-11", "web": "1.88", "eng": "4.84", "items": ["通知卡片改成依手機實際的通知權限顯示；從系統設定開啟通知後回到 App，會自動恢復提醒"]}, {"d": "2026-10-10", "web": "1.85", "eng": "4.84", "items": ["已經打完的比賽全部免費開放：完整預測與深度解析都看得到，只有還沒開打的比賽需要一日券"]}, {"d": "2026-10-10", "web": "1.83", "eng": "4.84", "items": ["比賽卡片的「命中／沒中」改成跟卡片上顯示的預測同一個口徑；合併市場共識後看好另一隊時，卡片上會註明", "實際比分不再顯示小數點"]}, {"d": "2026-10-09", "web": "1.82", "eng": "4.84", "items": ["同一批比賽跨到台灣兩個日期時（例如晚上的海外賽加上隔天早上的比賽），依台灣日期分段顯示，並照開賽時間排序"]}, {"d": "2026-10-09", "web": "1.80", "eng": "4.84", "items": ["每天免費開放一場完整預測：改成挑在下一批還沒開打的比賽裡，晚上打開 App 就看得到", "高信心場次的看好隊伍改為付費內容，免費版顯示信心等級"]}, {"d": "2026-10-09", "web": "1.79", "eng": "4.84", "items": ["購買按鈕上方會列出這張一日券涵蓋的場次（WNBA、NBA 各幾場）", "一日券改以台灣時間 14:00 換日：下午以後購買的券，涵蓋到隔天早上那批比賽", "季前賽期間，該聯盟的深度解析與完整預測免費開放"]}, {"d": "2026-10-09", "web": "1.77", "eng": "4.84", "items": ["購買一日券後，賽事分頁的比賽卡片也會一起解鎖，顯示完整的預期比分與勝率"]}, {"d": "2026-10-09", "web": "1.76", "eng": "4.84", "items": ["一日券到期或伺服器確認未購買時，深度解析會正確上鎖，不再顯示先前保存的內容"]}, {"d": "2026-10-05", "web": "1.75", "eng": "4.84", "items": ["賽事分頁在季前賽的日期加上提醒：這段期間的預測全部採用市場共識，不列入命中率統計"]}, {"d": "2026-10-05", "web": "1.74", "eng": "4.84", "items": ["季前賽的比賽卡片改成顯示市場共識（季前賽實際採用的預測），標示「季前賽：採用市場共識」；原本顯示的是上一季評分算出的純模型，看好的隊伍可能跟實際採用的相反"]}, {"d": "2026-10-05", "web": "1.73", "eng": "4.84", "items": ["只開了 WNBA 通知的人，通知卡片會詢問要不要一起收 NBA，一鍵加入"]}, {"d": "2026-10-05", "web": "1.71", "eng": "4.83", "items": ["通知設定新增「關閉通知」：按下後會立刻刪除伺服器上這台裝置的通知資料，之後隨時可以重新開啟"]}, {"d": "2026-10-04", "web": "1.69", "eng": "4.83", "items": ["季前賽的比賽卡片加上「季前賽」標籤", "季前賽不再算進任何命中率與準確度統計（季前賽的機率全部來自市場共識，不代表模型）；準確度頁改成季前賽、季賽、季後賽三列分開"]}, {"d": "2026-10-03", "web": "1.66", "eng": "4.82", "items": ["通知可以分聯盟選擇：WNBA、NBA 各一個開關，原本開了通知的人預設只收 WNBA"]}, {"d": "2026-10-03", "web": "1.65", "eng": "4.82", "items": ["新增 NBA：頁首可以切換 WNBA／NBA，會記住上次看的聯盟", "NBA 季前賽的機率全部採用市場共識，模型評分沿用上一季，只供參考"]}, {"d": "2026-09-27", "web": "1.63", "eng": "4.80", "items": ["季後賽的比賽卡片加上「季後賽」標籤", "準確度頁的賽季總覽新增季賽與季後賽分開的命中率，附誤差範圍"]}, {"d": "2026-09-27", "web": "1.62", "eng": "4.80", "items": ["預期總分與市場共識的「整體傾向」說明改成看近期：近期明顯偏向哪邊就寫哪邊，沒有明顯傾向就不寫"]}, {"d": "2026-09-25", "web": "1.59", "eng": "4.79", "items": ["季賽結束到季後賽開打之間沒有比賽的日子，賽事分頁會顯示季後賽倒數", "季後賽開打後，球隊戰績維持季賽成績；季後賽的比賽照樣計入近況、交手紀錄與預測"]}, {"d": "2026-09-21", "web": "1.58", "eng": "4.78", "items": ["開啟提醒後，每批比賽開打前與當天對帳完成時各會收到一則通知，內容會寫明是哪幾場", "有新資料時直接自動換成最新內容，不必再下拉重新整理或按更新，而且幾乎不耗流量", "球隊名稱改用中文顯示", "預測摘要裡「哪一隊獲勝」的機率與頁首勝率改成同一個數字，先前兩處算法不同，會差零點幾個百分點", "狀態未定的球員不再一律當作會上場：預測改依這類球員歷史上實際缺陣的比例，部分計入他們的影響。說明文字與「若全部缺陣」的對照也一併改成這個算法"]}, {"d": "2026-09-09", "web": "1.44", "eng": "4.75", "items": ["賽事分頁新增「開啟賽事提醒」：可以選擇讓比賽開打前和結果出爐時通知你。不開也不影響任何內容", "分差分布曲線與近期走勢圖改為等比例顯示：先前在橫向、平板與摺疊機上會被橫向拉扁，走勢圖上的圓點變成橢圓形。現在轉動畫面也維持原本形狀"]}, {"d": "2026-09-05", "web": "1.42", "eng": "4.74", "items": ["支援從主畫面長按圖示直接跳到指定分頁（賽事／解析／球隊／模型），不必每次都從頭找", "沒有網路又還沒載入過內容時，改為顯示說明頁面，不再是瀏覽器的錯誤畫面；連線恢復會自動回到主畫面", "「有新資料，點一下更新」的提示先前因為訊息沒有真的送出而從未出現，現已修復"]}, {"d": "2026-08-31", "web": "1.41", "eng": "4.74", "items": ["賽季空窗期（8/31–9/17）新增倒數畫面：距離賽事恢復還有幾天、接下來的賽程節點，以及本季至今與最近 30 場的命中率。9/18 賽事回來後會自動消失", "新增單日解鎖：可只解鎖當天的內容，不必一次買斷。當日有效，隔天會明確提示需要重新解鎖，而不是默默顯示上鎖畫面", "解鎖憑證改為在裝置本機保存並自動補救未完成的流程，避免付款成功卻解不開內容"]}, {"d": "2026-08-30", "web": "1.40", "eng": "4.74", "items": ["預測摘要整頁改用同一套機率：先前最上面的結論是網頁自己重算的，跟下方的命中機率不同源，同一件事會出現兩個數字（最多差 2.8 個百分點）。現在一律以命中機率為準，用詞也統一"]}, {"d": "2026-08-30", "web": "1.39", "eng": "4.73", "items": ["「各種判斷的命中機率」移到預測摘要、「合併區間」移到機率分布 ——市場對照那頁該講的是模型與市場的差別，其他內容各歸各位"]}, {"d": "2026-08-30", "web": "1.38", "eng": "4.72", "items": ["市場對照新增「長期缺陣」：確定缺陣但已久到球隊評分本身就反映了的球員，先前完全不顯示，看起來像漏算。現在會列出來並說明為什麼不重複扣分", "市場對照新增「合併區間」：領先 1~10 分／超過 10 分／超過 15 分的機率。單一分差格的機率天生就低，合併之後才看得出傾向", "市場對照新增「各種判斷的命中機率」，並標明那是合併市場共識後的結果", "模型預期總分旁新增「其中實測校準修正」：那個數字一直含有依實測校準出來的修正值，先前沒有說明"]}, {"d": "2026-08-30", "web": "1.37", "eng": "4.70", "items": ["「更新於」先前顯示的是網頁產生的時間，而網站每天會重新產生好幾次，即使預測內容一個數字都沒變。現在改成顯示資料本身最後變動的時間；若網頁比資料新，會另外註明期間資料沒有變動", "「綜合來源家數」「與共識分歧較大」「分差／總分共識自首次收錄以來的變動」這幾項先前因資料未存檔而始終不顯示，現已修復", "共識變動改為至少要有 4 個綜合來源家數才計算：先前少數來源時，單一來源報錯就會算出十幾二十分的誇張變動，並誤觸「變動劇烈」提示。來源不足時該項不顯示，而不是顯示一個不可靠的數字", "「共識變動劇烈」提示現在也會看總分共識的變動；先前只看分差共識", "「模型與市場共識的落差近期擴大中」先前是拿後半段（約 40 場、橫跨三週）跟全樣本比，一個早已過去的高峰會讓它一直亮著。改成看最近 20 場，並要求差距超出誤差範圍才顯示", "單隊缺陣產能損失超出校準範圍時會標示，提醒該場的缺陣修正是外推值"]}, {"d": "2026-08-23", "web": "1.30", "eng": "4.55", "items": ["新增這個「更新紀錄」區塊，同時標示網頁與預測引擎的版本", "修正市場共識資料的一個重大問題：先前在比賽開打後才更新的場次，會誤把「場中即時變動共識」當成賽前共識收進來。已回頭清除受影響的 22 場，並加上防止再次發生的檢查"]}, {"d": "2026-08-22", "web": "1.29", "eng": "4.53", "items": ["修正窄螢幕上比分被切掉、以及表格把整頁推寬的問題", "「分享這場」改成產生圖卡，圖上會一併標示分差的可能範圍"]}, {"d": "2026-08-21", "web": "1.26", "eng": "4.51", "items": ["傷勢部位的中英對照補齊（含複數寫法），不再出現英文原文", "調整行距與換行，長隊名不再和數值擠在一起"]}, {"d": "2026-08-20", "web": "1.25", "eng": "4.48", "items": ["新增：若傷缺球員全部缺陣，預期總分會移動多少（統計上顯著時才顯示，測不出來就不列）", "更新時間改用你所在時區顯示"]}, {"d": "2026-08-19", "web": "1.24", "eng": "4.47", "items": ["修正季後賽資格判定：已打完賽季但追不上的球隊，先前標記會消失", "新增市場內容 「超出共識的頻率」"]}, {"d": "2026-08-18", "web": "1.22", "eng": "4.41", "items": ["球員傷缺狀態與部位改為中文顯示", "數學上已無緣季後賽的球隊會加註標示", "修正季中交易後的名單歸屬：被交易的球員原本仍掛在原球隊，導致陣容深度與缺陣影響都算錯"]}, {"d": "2026-08-17", "web": "1.20", "eng": "4.38", "items": ["傷缺資料當時未取得時，明確標示該場預測未計入球員缺陣", "待觀察名單改為只列真正未定的球員，並依「越可能不打」排序"]}];      /* 更新紀錄，由 Python 端的 CHANGELOG 注入 */
 var API    = "https://hoops-premium.etet7575.workers.dev";
 var VAPID  = "BHXgMbUQAuJ1yGx8RrUjaHkkoz3NOFTl9zxHp7TILDnYQrv0uRlU5VkbYoNqQM1qr7BWP-8BHQt2J3JKv9Fy3DA";   /* 推播公鑰。空字串＝發送端還沒上線，只做授權 */
 /* 【v1.54】推播的 Worker 網址。刻意跟 API 分開 ——
@@ -852,19 +1296,27 @@ function hitText(g){
 function lockedCard(g){
   var R=DATA.records||{};
   function rec(n){ var r=R[n]; return r?'<span class="rec num">'+r.w+'勝'+r.l+'敗</span>':""; }
-  var h='<article class="card">'+liveBlock(g)+
-    (g.po?'<div class="ginfo"><span class="badge po">季後賽</span></div>':'')+
-    (g.pr?'<div class="ginfo"><span class="badge pr">季前賽</span></div>':'')+
-    '<div class="row">'+
-    '<div class="team">'+esc(g.a)+rec(g.a)+'</div>'+
-    '<div class="at">＠</div>'+
-    '<div class="team">'+esc(g.h)+rec(g.h)+'</div></div>';
+  /* 【v2.00】跟完整卡片同一個骨架：原本隊名貼著卡片邊、兩隊擠在同一行 */
+  function trow(n, side){
+    return '<div class="row '+side+'">'+teamMark(n)+'<span class="star'+(isFav(n)?" on":"")+
+      '" data-fav="'+esc(n)+'">★</span><span class="tname tap" data-team="'+esc(n)+'">'+esc(n)+'</span>'+
+      elimTag(n)+streakTag(n)+rec(n)+'</div>';
+  }
+  var info=[];
+  if(g.po) info.push('<span class="badge po">季後賽</span>');
+  if(g.pr) info.push('<span class="badge pr">季前賽</span>');
+  var tt=tipoff(g.t);
+  if(tt) info.push('<span class="num">'+tt+'</span>');
+  if(g.v) info.push(esc(g.v)+(g.ct?"・"+esc(g.ct):""));
+  if(g.nt) info.push('<span class="badge">中立場</span>');
+  var h='<article class="card">'+(info.length?'<div class="ginfo">'+info.join("　")+'</div>':'')+
+    liveBlock(g)+'<div class="teams">'+trow(g.a,"a")+trow(g.h,"h")+'</div>';
 
   if(g.pick){
     var lv=["","接近五五","中等信心","高信心"][g.cf||0];
     h+='<div class="tags"><span class="tag strong">'+pickLabel(g)+esc(g.pick)+'</span>'+
        '<span class="badge">'+lv+'</span></div>';
-  }else if(g.hid){
+  }else if(g.hk){
     /* 【v1.80】高信心場次：只給信心等級，看好哪隊要付費
        【v1.93】示範場次以外的每一場都這樣顯示，信心等級照實寫 */
     h+='<div class="tags"><span class="tag strong">'+(["","接近五五","中等信心","高信心"][g.cf||0]||"信心等級")+'</span>'+
@@ -874,6 +1326,7 @@ function lockedCard(g){
     h+='<div class="kv"><div class="mk">實際比分</div>'+
        '<div class="mv num">'+esc(g.sc)+'　'+hitText(g)+'</div></div>';
   }
+  h+=injNew(g);            /* 【v2.00】公開資訊，鎖住的卡片也提醒 */
   h+='<div class="lockrow">'+
      (g.past ? '完整預測紀錄為付費內容'
              : '預期比分、勝率、分差分布為付費內容')+'</div>';
@@ -951,13 +1404,18 @@ function gameCard(g, showExtra){
     '<span class="num">'+hp.toFixed(0)+'%</span></div>'+
     curveSVG(g.mg,g.sd,homeFav)+
     '<div class="axis"><span>客隊贏 35</span><span>平手</span><span>主隊贏 35</span></div>'+
-    tag+featNote(g)+
+    tag+featNote(g)+injNew(g)+
     '<div class="meta">'+
     '<div><div class="mk">預期分差</div><div class="mv num">'+Math.abs(g.mg).toFixed(1)+' 分</div></div>'+
     '<div><div class="mk">預期總分</div><div class="mv num">'+(g.hp+g.ap).toFixed(0)+'</div></div>'+
     settled+'</div>'+
+    /* 【v2.00】打完的比賽：各節比分（日期頁才去抓，球隊頁只用抓過的）與賽後數據 */
+    (g.st && g.id ? lsTable(g, dayLines(sportsDayOf(g.t), showExtra)[String(g.id)]) +
+      '<div class="actions"><div class="act" data-box="'+esc(g.id)+'">'+
+      (BOXOPEN[g.id]?'收起賽後數據 ▴':'賽後數據 ▾')+'</div></div>'+boxSection(g) : '')+
     '<div class="actions"><div class="act" data-share="'+esc(g.a)+"|"+esc(g.h)+'">分享這場</div>'+
-    '<div class="act" data-team="'+esc(g.h)+'">看 '+esc(g.h)+' 全部預測</div></div>'+
+    '<div class="act" data-team="'+esc(g.a)+'">'+esc(g.a)+' ›</div>'+
+    '<div class="act" data-team="'+esc(g.h)+'">'+esc(g.h)+' ›</div></div>'+
     extra+'</article>';
 }
 
@@ -1291,130 +1749,7 @@ function notifyAsk(){
   }catch(e){ done(); }
 }
 
-function viewGames(){
-  var h="";
-  if(curTeam){
-    var rows=teamGames(curTeam);
-    /* 【v1.69】季前賽照常列出，但不算進對答案的次數 */
-    var done=rows.filter(function(r){ return r.g.st && !r.g.pr; });
-    var hit=done.filter(function(r){ return cardHit(r.g); }).length;
-    h+='<div class="thead"><button class="back" id="backbtn">← 回到日期</button>'+
-      '<span>'+esc(curTeam)+'　本季 <b class="num">'+rows.length+'</b> 場預測'+
-      (done.length?'，對過答案 <b class="num">'+hit+'/'+done.length+'</b>':'')+'</span></div>';
-    h+=rows.map(function(r){
-      return '<div class="gdate num">'+r.d.slice(5).replace("-","/")+'</div>'+gameCard(r.g,false);
-    }).join("");
-    return h;
-  }
-
-  h+=freshness();
-  h+=offseasonPanel();
-  h+=notifyBlock();
-  /* DATA.order 是降冪（最新在前），所以清單天然就是新的在上面；
-     相對地箭頭的索引方向是反的 —— 往前一天等於索引 +1。 */
-  var MON=[], seenM={};
-  DATA.order.forEach(function(d){
-    var m=d.slice(0,7);
-    if(!seenM[m]){ seenM[m]=1; MON.push(m); }
-  });
-  var curM=cur.slice(0,7), curI=DATA.order.indexOf(cur);
-  var inM=DATA.order.filter(function(d){ return d.slice(0,7)===curM; });
-
-  function dayLabel(d){
-    /* 【v1.69】季前賽不算命中。整天都是季前賽就標「季前賽」 */
-    var gs=DATA.days[d]||[], reg=gs.filter(function(g){ return !g.pr; });
-    var done=reg.filter(function(g){ return g.st; });
-    var hit=done.filter(function(g){ return cardHit(g); }).length;
-    var tail=done.length ? "命中 "+hit+"/"+done.length
-           : (!reg.length ? "季前賽" : "未開打");
-    return d.slice(5).replace("-","/")+"　"+gs.length+"場　"+tail;
-  }
-
-  h+='<div class="dbar">'+
-    '<select id="msel" aria-label="選擇月份">'+MON.map(function(m){
-      var mp=m.split("-");
-      return '<option value="'+m+'"'+(m===curM?" selected":"")+'>'+
-             mp[0]+"/"+mp[1]+'</option>';
-    }).join("")+'</select>'+
-    '<button class="nav" id="dprev" aria-label="前一天"'+
-      (curI>=DATA.order.length-1?" disabled":"")+'>‹</button>'+
-    '<select id="dsel" aria-label="選擇日期">'+inM.map(function(d){
-      return '<option value="'+d+'"'+(d===cur?" selected":"")+'>'+
-             esc(dayLabel(d))+'</option>';
-    }).join("")+'</select>'+
-    '<button class="nav" id="dnext" aria-label="後一天"'+
-      (curI<=0?" disabled":"")+'>›</button>'+
-    '</div>';
-
-  /* 【v1.75】季前賽提醒：選到的日期有季前賽才出現 */
-  var dayPr=(DATA.days[cur]||[]).filter(function(g){ return g.pr; }).length;
-  if(dayPr){
-    h+='<div class="ntf"><b>季前賽：預測全部採用市場資料</b>'+
-      '<span>季前賽各隊常讓主力休息、輪換也還沒定型，沿用上一季的模型評分參考價值很低，'+
-      '所以這段期間的勝率與預期比分全部採用市場共識，模型只放在對照裡供參考。'+
-      '季前賽也不列入任何命中率與準確度統計。'+
-      (BASE_LOCKED ? '' : '季前賽期間，深度解析免費開放。')+'</span></div>';
-  }
-  if(DATA.calibration && DATA.calibration.length){
-    var pool=DATA.calibration.filter(function(c){ return c.n>=4; });
-    if(!pool.length) pool=DATA.calibration;
-    var best=pool.reduce(function(a,b){ return b.said>a.said?b:a; });
-    h+='<div class="receipt">預測說有<b>'+esc(best.label)+'</b>把握的那些比賽，實際打完命中 '+
-      '<b class="num">'+best.was.toFixed(0)+'%</b>（'+best.n+' 場）。'+
-      '宣稱幾成就真的是幾成，這一欄我們攤開來給你看。</div>';
-  }
-  /* 今日重點：一行講完今天最值得看的一場，省得使用者自己掃 */
-  var gsAll=DATA.days[cur];
-  /* 【v1.80】付費牆模式下多數場次沒有勝率（php），不能拿來排「最有把握」——
-     會算出 NaN，或把高信心場次的看好隊伍洩漏出來。改成只講場數。 */
-  var locked0=gsAll.some(function(g){ return g.php==null; });
-  if(gsAll.length && locked0){
-    var nHi=gsAll.filter(function(g){ return g.cf===3 || (g.php!=null && Math.max(g.php,100-g.php)>=65); }).length;
-    h+='<div class="receipt">今天 <b class="num">'+gsAll.length+'</b> 場'+
-      (nHi?'，其中 <b class="num">'+nHi+'</b> 場高信心。':'。')+'</div>';
-  }else if(gsAll.length){
-    var best=gsAll.slice().sort(function(a,b){
-      return Math.max(b.php,100-b.php)-Math.max(a.php,100-a.php); })[0];
-    var bp=Math.max(best.php,100-best.php), bt=best.mg>0?best.h:best.a;
-    var close=gsAll.filter(function(g){ return Math.abs(g.mg)<4; }).length;
-    h+='<div class="receipt">今天 <b class="num">'+gsAll.length+'</b> 場。'+
-      (best.mv?(best.pr?'市場共識最有把握的是 <b>':'最有把握的是 <b>'):'模型最有把握的是 <b>')+esc(bt)+'</b>（<b class="num">'+bp.toFixed(0)+'%</b>）'+
-      (close?'，另有 <b class="num">'+close+'</b> 場勢均力敵。':'。')+'</div>';
-  }
-  h+=head(cur>=TODAY?"今日賽事":"當日賽事","點★收藏球隊，收藏的會排在前面");
-  /* 【v1.82】一個賽事日可能跨台灣兩個日期：海外賽在台灣晚上開打，
-     美國本土的比賽在台灣隔天早上。原本全部混在同一串、也不照時間排，
-     晚上 8 點那場跟隔天早上 8 點的看起來像同一批。
-     改成：先依台灣日期分段（跨日才加分段標題），段內收藏的球隊排前面，再照開賽時間。 */
-  function twKey(g){
-    if(!g.t) return "";
-    var d=new Date(g.t); if(isNaN(d.getTime())) return "";
-    return d.getFullYear()+"-"+("0"+(d.getMonth()+1)).slice(-2)+"-"+("0"+d.getDate()).slice(-2);
-  }
-  function fav(g){ return (isFav(g.h)||isFav(g.a))?1:0; }
-  var gs=DATA.days[cur].slice().sort(function(a,b){
-    var ka=twKey(a), kb=twKey(b);
-    if(ka!==kb) return ka<kb?-1:1;
-    var f=fav(b)-fav(a); if(f) return f;
-    return String(a.t||"")<String(b.t||"")?-1:(String(a.t||"")>String(b.t||"")?1:0);
-  });
-  var keys={}; gs.forEach(function(g){ keys[twKey(g)]=1; });
-  var split=Object.keys(keys).filter(function(k){ return k; }).length>1, last=null;
-  var WD="日一二三四五六";
-  gs.forEach(function(g){
-    var k=twKey(g);
-    if(split && k && k!==last){
-      var d=new Date(g.t), hr=d.getHours();
-      h+='<div class="gsep">'+(d.getMonth()+1)+'/'+d.getDate()+'（'+WD.charAt(d.getDay())+'）'+
-         (hr<12?'早上':(hr<18?'下午':'晚上'))+'開打</div>';
-    }
-    last=k;
-    h+=gameCard(g,true);
-  });
-  return h;
-}
-
-/* ── 解析分頁（付費） ── */
+/* ── 深度解析（付費） ── */
 
 function lockPanel(what){
   return head("深度解析","進階內容")+
@@ -1423,8 +1758,8 @@ function lockPanel(what){
       ? '<p class="expired">你先前購買的一日券涵蓋的是那一天的賽事。'+
         '今天的比賽需要重新解鎖。</p>'
       : '')+
-    '<p>免費版是模型自己的判斷。深度解析再加上市場共識修正，以及每場的完整拆解。</p>'+
-    '<ul><li>修正後的預期比分與勝率</li>'+
+    '<p>一日券開放這一批每一場的完整預測，以及逐場的深度拆解。</p>'+
+    '<ul><li>每一場看好哪隊、勝率與預期比分</li>'+
     '<li>四種可能結果的機率（大勝／小勝／小敗／大敗）</li>'+
     '<li>贏球幅度：贏 5／10／15／20 分以上的機率</li>'+
     '<li>分差落在各區間的完整機率</li>'+
@@ -1438,48 +1773,15 @@ function lockPanel(what){
     '<div class="diag" id="diagbox">'+esc(diagText())+'</div></div>';
 }
 
-function deepGame(){
-  var list=(PREM&&PREM.days&&PREM.days[cur])||[];
-  if(!list.length) return null;
-  if(gi>=list.length) gi=0;
-  return list[gi];
-}
-
-function viewDeep(){
-  if(LOCKED||!PREM) return lockPanel();
-  /* 【v1.85】只有已結算的公開內容時：這一天沒有打完的比賽就顯示上鎖畫面，
-     有的話列出打完的那幾場，並註明還沒開打的要購買 */
-  var partNote="";
-  if(PREM._partial){
-    var plist=(PREM.days&&PREM.days[cur])||[];
-    var pend=(DATA.days[cur]||[]).filter(function(g){ return !g.st; }).length;
-    if(!plist.length) return lockPanel();
-    if(pend) partNote='<div class="stale">這裡列出已經打完的比賽（免費開放）。'+
-      '還沒開打的 '+pend+' 場，購買一日券後就能看深度解析。</div>';
-  }
-  var pre="";
-  if(PREM._cached && (Date.now()-PREM._cached)/3600000 > 26){
-    pre='<div class="stale">⚠️ 目前顯示的是離線保存的內容，暫時連不上更新。</div>';
-  }
-  pre+=partNote;
-  var list=(PREM.days&&PREM.days[cur])||[];
-  /* 【v1.95】一日券只開放購買那一天的比賽。晚上先抓到的隔天賽程，要用隔天的券 */
-  if(!list.length && !PREM._partial && cur > passDayNow() && (DATA.days[cur]||[]).length){
-    var pp=cur.split("-");
-    return pre+'<div class="empty">這一批比賽要用台灣 '+(+pp[1])+'/'+(+pp[2])+
-      ' 下午兩點以後購買的一日券才會開放。<br>你目前的一日券涵蓋的是前一批。</div>';
-  }
-  if(!list.length) return pre+'<div class="empty">這一天沒有可解析的場次。</div>';
-
-  var h=pre+dropdown("gamesel", "選擇比賽",
-    list.map(function(g,i){ return [i, g.away+" ＠ "+g.home]; }), gi);
-
+/* 【v2.00】原本的「解析」分頁併進比賽詳情（viewDetail → detailDeep），這裡只負責畫一場 */
+function deepBody(g){
+  var h="";
   var tabs=[["sum","預測摘要"],["dist","機率分布"],["mkt","模型與市場"],["team","球隊狀況"]];
   h+='<div class="subs" id="deepsub">'+tabs.map(function(t){
     return '<div class="sub'+(SUB.deep===t[0]?" on":"")+'" data-s="'+t[0]+'">'+t[1]+'</div>';
   }).join("")+'</div>';
 
-  var g=list[gi], b=g.blend, s=[];
+  var b=g.blend, s=[];
   s.push('<article class="card"><div class="deep">');
   s.push('<div class="dtitle">'+esc(g.away)+' ＠ '+esc(g.home)+'</div>');
 
@@ -1924,52 +2226,84 @@ function viewDeep(){
 
 function viewTeams(){
   var L=PREM&&PREM.league;
+  if(L && (!L.teams || !L.teams.length)) L=null;
   var R=DATA.records||{};
-  if(!L||!L.teams||!L.teams.length){
-    var names=Object.keys(R);
-    if(!names.length) return '<div class="empty">還沒有球隊資料。<br><br>'+
-      '全聯盟評分、戰績與四要素要等程式跑過一次之後才會產生。'+
-      '如果你是在電腦上直接開啟檔案，瀏覽器會擋掉這部分的讀取 —— '+
-      '要用網址開才看得到。</div>';
-    names.sort(function(a,b){ return (R[b].w-R[b].l)-(R[a].w-R[a].l); });
-    return head("戰績","免費版")+
-      '<table><tr><th>球隊</th><th>戰績</th><th>場均得/失</th></tr>'+
-      names.map(function(n){
-        var r=R[n];
-        return '<tr><td>'+esc(n)+'</td><td class="num was">'+r.w+'-'+r.l+
-          '</td><td class="num">'+num(r.pf)+'/'+num(r.pa)+'</td></tr>';
-      }).join("")+'</table>'+
-      '<div class="hint">實力評分、四要素與節奏排行在深度解析裡。</div>';
+  /* 【v2.00】季後賽機率免費（DATA.sim）；買了就用付費那份（同一份資料，比較新） */
+  var sim=(L&&L.sim)||DATA.sim;
+  /* 【v2.00】「賽程」改成「球隊」：選一隊進球隊頁（賽程、預測紀錄、實力走勢、輪替都在那裡），
+     原本的「陣容」也併進球隊頁 */
+  var opts=[];
+  if(L){
+    opts.push(["rating","實力評分"]);
+    if(L.teams.some(function(t){ return t.w!=null; })) opts.push(["record","戰績主客"]);
+    if(L.teams.some(function(t){ return t.seed!=null||t.conf; })) opts.push(["conf","分區排名"]);
+  }else if(Object.keys(R).length){
+    opts.push(["free","戰績"]);
   }
-
-  var opts=[["rating","實力評分"]];
-  if(L.teams.some(function(t){ return t.w!=null; })) opts.push(["record","戰績主客"]);
-  if(L.teams.some(function(t){ return t.seed!=null||t.conf; })) opts.push(["conf","分區排名"]);
-  if(L.teams.some(function(t){ return t.ff; })) opts.push(["ff","四要素"]);
-  if(L.teams.some(function(t){ return t.pace!=null; })) opts.push(["pace","節奏"]);
-  if(L.rotations && Object.keys(L.rotations).length) opts.push(["rot","陣容"]);
+  if(sim && sim.teams && sim.teams.length) opts.push(["sim","季後賽機率"]);
+  opts.push(["list","球隊"]);
+  opts.push(["ldr","球員排行"]);
+  if(L){
+    if(L.teams.some(function(t){ return t.ff; })) opts.push(["ff","四要素"]);
+    if(L.teams.some(function(t){ return t.pace!=null; })) opts.push(["pace","節奏"]);
+  }
   if(!opts.some(function(o){ return o[0]===SUB.teams; })) SUB.teams=opts[0][0];
 
   var h='<div class="subs" id="teamsub">'+opts.map(function(o){
     return '<div class="sub'+(SUB.teams===o[0]?" on":"")+'" data-s="'+o[0]+'">'+o[1]+'</div>';
   }).join("")+'</div>';
 
+  if(SUB.teams==="free"){
+    var names=Object.keys(R);
+    names.sort(function(a,b){ return (R[b].w-R[b].l)-(R[a].w-R[a].l); });
+    h+=head("戰績","")+
+      '<table><tr><th>球隊</th><th>戰績</th><th>場均得/失</th></tr>'+
+      names.map(function(n){
+        var r=R[n];
+        return '<tr><td>'+tlink(n)+'</td><td class="num was">'+r.w+'-'+r.l+
+          '</td><td class="num">'+num(r.pf)+'/'+num(r.pa)+'</td></tr>';
+      }).join("")+'</table>'+
+      (API?'<div class="hint">購買一日券後，這裡會多出實力評分、分區排名、四要素與節奏排行。</div>':'');
+  }
+  if(SUB.teams==="sim") h+=simView(sim);
+  if(SUB.teams==="list") h+=teamGrid();
+  if(SUB.teams==="ldr") h+=ldrView();
+
   if(SUB.teams==="rating"){
+    /* 【v2.00】實力走勢：最近 30 天的綜合評分。每隊用自己的尺度（最小刻度 3 分），
+       旁邊標這段期間的變化量。全聯盟同一個尺度的話，隊與隊的差距比每天的變化大得多，
+       每條線都會被壓成平的。 */
+    var HH=L.history, hv=null, hn=0;
+    if(HH && HH.v && HH.d && HH.d.length>=2){
+      hn=Math.min(30, HH.d.length); hv={};
+      Object.keys(HH.v).forEach(function(k){ hv[k]=HH.v[k].slice(-hn); });
+    }
+    function trendCell(vals){
+      var xs=vals.filter(function(x){ return x!=null; });
+      if(xs.length<2) return '<span class="mut">\u2014</span>';
+      var lo=Math.min.apply(null, xs), hi=Math.max.apply(null, xs);
+      if(hi-lo<3){ var mid=(hi+lo)/2; lo=mid-1.5; hi=mid+1.5; }
+      var dlt=xs[xs.length-1]-xs[0];
+      return miniSpark(vals, lo, hi)+' <span class="num '+(dlt>=0.05?"rok":(dlt<=-0.05?"rng":"mut"))+
+        '" style="font-size:11px;font-weight:600">'+(dlt>0?"+":"")+dlt.toFixed(1)+'</span>';
+    }
     h+=head("實力評分","對手強度調整後，0＝聯盟平均")+
-      '<table><tr><th>球隊</th><th>綜合</th><th>進攻</th><th>防守</th></tr>'+
+      '<table><tr><th>球隊</th><th>綜合</th><th>進攻</th><th>防守</th>'+(hv?'<th>近 '+hn+' 天</th>':'')+'</tr>'+
       L.teams.map(function(t){
-        return '<tr><td>'+esc(t.team)+'</td><td class="num was">'+sign1(t.overall)+
-          '</td><td class="num">'+sign1(t.off)+'</td><td class="num">'+sign1(t["def"])+'</td></tr>';
+        return '<tr><td>'+tlink(t.team)+'</td><td class="num was">'+sign1(t.overall)+
+          '</td><td class="num">'+sign1(t.off)+'</td><td class="num">'+sign1(t["def"])+'</td>'+
+          (hv?'<td style="white-space:nowrap">'+trendCell(hv[t.team]||[])+'</td>':'')+'</tr>';
       }).join("")+'</table>'+
       '<div class="hint">進攻是每場比聯盟平均多得幾分，防守是少讓幾分。'+
-      '綜合＝兩者相加。</div>';
+      '綜合＝兩者相加。</div>'+
+      (hv?'<div class="hint">「近 '+hn+' 天」是各隊自己的綜合評分走勢，往上代表變強；旁邊的數字是這段期間總共變了幾分。</div>':'');
   }
   if(SUB.teams==="record"){
     h+=head("戰績與主客表現","主客判若兩隊的球隊值得留意")+
       '<table><tr><th>球隊</th><th>戰績</th><th>得/失</th><th>主場</th><th>客場</th></tr>'+
       L.teams.filter(function(t){ return t.w!=null; }).map(function(t){
         function wl(x){ return x?x.w+"-"+x.l:"\u2014"; }
-        return '<tr><td>'+esc(t.team)+'</td><td class="num was">'+t.w+'-'+t.l+
+        return '<tr><td>'+tlink(t.team)+'</td><td class="num was">'+t.w+'-'+t.l+
           '</td><td class="num">'+num(t.pf)+'/'+num(t.pa)+
           '</td><td class="num">'+wl(t.home)+'</td><td class="num">'+wl(t.away)+'</td></tr>';
       }).join("")+'</table>';
@@ -1990,7 +2324,7 @@ function viewTeams(){
         '<table><tr><th>#</th><th>球隊</th><th>戰績</th><th>勝差</th><th>近10</th><th>連續</th></tr>'+
         rows.map(function(t){
           return '<tr><td class="num was">'+(t.seed!=null?t.seed:"\u2014")+'</td>'+
-            '<td>'+esc(t.team)+'</td>'+
+            '<td>'+tlink(t.team)+'</td>'+
             '<td class="num">'+(t.w!=null?t.w+"-"+t.l:"\u2014")+'</td>'+
             '<td class="num">'+(t.gb!=null?(t.gb===0?"\u2014":num(t.gb)):"\u2014")+'</td>'+
             '<td class="num said">'+esc(t.l10||"\u2014")+'</td>'+
@@ -2005,7 +2339,7 @@ function viewTeams(){
       '<table><tr><th>球隊</th><th>命中率</th><th>失誤率</th><th>進攻籃板</th><th>罰球率</th></tr>'+
       L.teams.filter(function(t){ return t.ff; }).map(function(t){
         var f=t.ff;
-        return '<tr><td>'+esc(t.team)+'</td><td class="num was">'+num(f.efg)+
+        return '<tr><td>'+tlink(t.team)+'</td><td class="num was">'+num(f.efg)+
           '</td><td class="num">'+num(f.tov)+'</td><td class="num">'+num(f.oreb)+
           '</td><td class="num">'+num(f.ftr)+'</td></tr>';
       }).join("")+'</table>'+
@@ -2014,7 +2348,7 @@ function viewTeams(){
       '<th>對手進攻籃板</th><th>對手罰球率</th></tr>'+
       L.teams.filter(function(t){ return t.ff&&t.ff.d_efg!=null; }).map(function(t){
         var f=t.ff;
-        return '<tr><td>'+esc(t.team)+'</td><td class="num was">'+num(f.d_efg)+
+        return '<tr><td>'+tlink(t.team)+'</td><td class="num was">'+num(f.d_efg)+
           '</td><td class="num">'+num(f.d_tov)+'</td><td class="num">'+num(f.d_oreb)+
           '</td><td class="num">'+num(f.d_ftr)+'</td></tr>';
       }).join("")+'</table>'+
@@ -2025,37 +2359,11 @@ function viewTeams(){
       '進攻籃板率是自家進攻籃板佔可搶籃板的比例。'+
       '<b>兩隊綜合評分一樣，靠的可能是完全不同的東西</b> —— 這張表看得出打法。</div>';
   }
-  if(SUB.teams==="rot"){
-    var rot=L.rotations, names=Object.keys(rot);
-    /* 依實力評分的順序排，跟上面幾張表一致 */
-    var order=L.teams.map(function(t){ return t.team; })
-      .filter(function(n){ return rot[n]; });
-    names.forEach(function(n){ if(order.indexOf(n)<0) order.push(n); });
-    if(order.indexOf(ROTTEAM)<0) ROTTEAM=order[0];
-    h+=dropdown("rotsel","選擇球隊",order.map(function(n){ return [n,n]; }),ROTTEAM);
-    h+=head("主要輪替陣容","場均上場時間與得分")+
-      [ROTTEAM].map(function(n){
-        var l=rot[n]||[];
-        return '<article class="card"><div class="deep">'+
-          '<div class="dtitle">'+esc(n)+'</div>'+
-          l.map(function(pl){
-            var ex=[];
-            if(pl.reb!=null) ex.push(num(pl.reb)+" 籃板");
-            if(pl.ast!=null) ex.push(num(pl.ast)+" 助攻");
-            if(pl.pm!=null) ex.push((pl.pm>0?"+":"")+num(pl.pm));
-            return '<div class="krow"><span>'+esc(pl.name)+'</span>'+
-              '<b class="num">'+num(pl.min)+' 分鐘　'+num(pl.pts)+' 分'+
-              (ex.length?'　'+ex.join("　"):"")+'</b></div>';
-          }).join("")+'</div></article>';
-      }).join("")+
-      '<div class="hint">依場均上場時間排序。缺陣影響就是用這份名單換算的 —— '+
-      '缺一個場均 18 分的球員，跟缺一個場均 3 分的，不會被算成一樣。</div>';
-  }
   if(SUB.teams==="pace"){
     h+=head("節奏與效率","每場回合數、每百回合得失分")+
       '<table><tr><th>球隊</th><th>節奏</th><th>進攻效率</th><th>防守效率</th></tr>'+
       L.teams.filter(function(t){ return t.pace!=null; }).map(function(t){
-        return '<tr><td>'+esc(t.team)+'</td><td class="num was">'+num(t.pace)+
+        return '<tr><td>'+tlink(t.team)+'</td><td class="num was">'+num(t.pace)+
           '</td><td class="num">'+num(t.ortg)+'</td><td class="num">'+num(t.drtg)+'</td></tr>';
       }).join("")+'</table>';
     if(L.avg_pace) h+='<div class="hint">聯盟平均每場 <b class="num">'+L.avg_pace+
@@ -2315,10 +2623,10 @@ var FAQ = [
   ["換手機或重新安裝後，已購買的一日券還在嗎？",
    "用同一個 Google 帳號登入，一日券在有效時間內會自動恢復。"+
    "如需退款，請透過 Google Play 的訂單紀錄申請。"],
-  ["比賽卡片的「命中」和「模型」分頁的命中率為什麼不一樣？",
-   "比賽卡片上顯示的是模型自己的判斷，卡片的命中與否也以它為準；"+
-   "「模型」分頁的命中率則以合併市場共識後的預測計算，那是本 App 正式採用的版本。"+
-   "兩者看好不同隊的場次，卡片上會另外註明。季前賽不列入任何命中率。"]
+  ["比賽卡片的「命中」跟「準確度」分頁的命中率是同一套嗎？",
+   "是。有市場共識資料的場次，卡片顯示的就是本 App 正式採用的預測（綜合模型與市場共識），"+
+   "卡片的命中與否、「準確度」分頁的命中率都以它為準。少數沒有市場資料的場次只有模型自己的判斷，"+
+   "卡片上會標「純模型預測」；跟正式採用的預測看好不同隊時，卡片上會另外註明。季前賽不列入任何命中率。"]
 ];
 function faqBlock(){
   return '<h3>常見問題</h3>'+FAQ.map(function(q){
@@ -2327,7 +2635,9 @@ function faqBlock(){
 }
 
 function viewAbout(){
-  return head("關於這個模型","怎麼來的、怎麼讀")+
+  /* 【v2.00】通知設定從賽事清單移到這裡（清單只留還沒決定時的詢問） */
+  return (notifyState()!=="none" ? head("賽事提醒","開啟、關閉與選擇聯盟")+notifyBlock() : "")+
+    head("關於這個模型","怎麼來的、怎麼讀")+
     '<div class="about">'+
     '<h3>數字是怎麼算出來的</h3>'+
     '<p>模型用整季每一場比賽重建全聯盟的球隊評分，而且會扣掉對手強弱 —— '+
@@ -2341,7 +2651,7 @@ function viewAbout(){
     '<p>每場比賽的曲線寬度不一樣。窄的是模型比較有把握，寬的代表這場本身就難預測。'+
     '看曲線比看單一數字誠實。</p>'+
     '<h3>我們公開自己的成績</h3>'+
-    '<p>「模型」分頁裡有走勢前推回測：每一場都只用該場開打前的資料重算一次，'+
+    '<p>「準確度」分頁裡有走勢前推回測：每一場都只用該場開打前的資料重算一次，'+
     '不讓模型偷看未來。那個數字通常比宣傳數字難看，但它才是真的。'+
     '連「偏誤會漂移」這種對我們不利的發現也一起公開。</p>'+
     '<h3>資料來源</h3>'+
@@ -2372,55 +2682,505 @@ function viewAbout(){
     testPanel();
 }
 
+/* ══ 【v2.00】新版介面 ══════════════════════════════════════════
+   功能越加越多，原本每張卡片把所有資訊攤開、上方五個分頁、日期用兩個下拉選單，
+   整頁又長又雜。改成：
+   - 底部選單四頁：賽事、排行、準確度、關於（手機 App 的慣例，單手按得到）
+   - 賽事頁是精簡清單：對戰、時間或比分、看好哪隊，一眼看完；上方日期列左右滑
+   - 點一場進「比賽詳情」：完整卡片＋深度解析都在這頁。原本的「解析」分頁併進來
+     （#tab=deep 捷徑仍然有效，會回到清單並提示點比賽看解析）
+   - 點隊名進「球隊頁」：賽程、最近戰績、本季每場預測紀錄、實力走勢、輪替
+   - 返回：畫面上的「← 返回」與 Android 返回鍵（history）都回到上一層 */
+var DETAIL = null;      /* 打開的比賽 {d: 賽事日, k: 比賽鍵} */
+var TEAMPAGE = null;    /* 打開的球隊（隊名） */
+var DEEPHINT = false;   /* 從「解析」捷徑進來：提示點比賽看深度解析 */
+var NAV = [];           /* 返回用的堆疊 */
+var SKIPPOP = false;    /* 按底部選單時一次退掉堆疊，那次 popstate 不處理 */
+
+/* 比賽鍵用隊名：同一個賽事日兩隊不會碰兩次，而且免費卡片跟購買後換上的完整卡片都對得上 */
+function gkey(g){ return g.a+"|"+g.h; }
+function findGame(d, k){
+  var l=DATA.days[d]||[];
+  for(var i=0;i<l.length;i++) if(gkey(l[i])===k) return l[i];
+  return null;
+}
+/* 付費內容裡同一場的深度解析（只看指定的那一天） */
+function premGameFor(d, g){
+  var l=(PREM&&PREM.days&&PREM.days[d])||[];
+  for(var i=0;i<l.length;i++){
+    var p=l[i];
+    if((g.id && p.id && String(p.id)===String(g.id)) || (p.home===g.h && p.away===g.a)) return p;
+  }
+  return null;
+}
+function liveOf(g){
+  /* LIVE 宣告在後面，第一次 render 比它早跑 */
+  var L=(typeof LIVE!=="undefined" && LIVE && g.id) ? LIVE[String(g.id)] : null;
+  return (L && L.s==="in") ? L : null;
+}
+function periodText(L){
+  return L.p<=4 ? ("第"+"一二三四".charAt(Math.max(0,L.p-1))+"節")
+                : (L.p===5 ? "延長賽" : "第"+(L.p-4)+"次延長");
+}
+
+/* ── 返回 ── */
+function navState(){
+  return {TAB:TAB, DETAIL:DETAIL, TEAMPAGE:TEAMPAGE, cur:cur,
+          y:window.scrollY||window.pageYOffset||0};
+}
+function navPush(){
+  var s=navState();
+  try{ history.pushState({hoops:NAV.length+1}, ""); s.h=1; }catch(e){ s.h=0; }
+  NAV.push(s);
+}
+function navRestore(){
+  var s=NAV.pop();
+  if(s){ TAB=s.TAB; DETAIL=s.DETAIL; TEAMPAGE=s.TEAMPAGE; cur=s.cur; }
+  else { DETAIL=null; TEAMPAGE=null; }
+  render();
+  var y=s?s.y:0;
+  setTimeout(function(){ window.scrollTo(0, y); }, 0);
+}
+function goBack(){
+  var top=NAV[NAV.length-1];
+  if(top && top.h){ history.back(); return; }     /* popstate 會接手 */
+  navRestore();
+}
+/* 按底部選單＝回到那一頁的最上層，堆疊整個清掉，history 也一起退回去，
+   不然之後按 Android 返回鍵會有幾下「按了沒反應」 */
+function navReset(){
+  var n=0;
+  NAV.forEach(function(s){ if(s.h) n++; });
+  NAV=[]; DETAIL=null; TEAMPAGE=null;
+  if(n){ SKIPPOP=true; try{ history.go(-n); }catch(e){ SKIPPOP=false; } }
+}
+window.addEventListener("popstate", function(){
+  if(SKIPPOP){ SKIPPOP=false; return; }
+  if(NAV.length) navRestore();
+});
+function openDetail(d, k){
+  if(!findGame(d, k)) return;
+  navPush();
+  DETAIL={d:d, k:k}; TEAMPAGE=null; TAB="games"; cur=d; DEEPHINT=false;
+  render(); window.scrollTo(0,0);
+}
+function openTeam(n){
+  if(!n) return;
+  navPush();
+  TEAMPAGE=n; DETAIL=null; TAB="teams";
+  render(); window.scrollTo(0,0);
+}
+
+/* ── 底部選單的圖示（內嵌 SVG，不另外載入檔案） ── */
+var TAB_ICON = {
+  games:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c3.2 3 3.2 14 0 17M12 3.5c-3.2 3-3.2 14 0 17"/></svg>',
+  teams:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 20V11M12 20V5M19 20v-6"/></svg>',
+  model:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M8 12.5l2.7 2.7L16.5 9"/></svg>',
+  about:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5.5M12 7.6v.1"/></svg>'
+};
+
+/* ── 日期列：舊的在左、新的在右，選到的那天自動捲到中間（fixStrip） ── */
+function dateStrip(){
+  var ds=DATA.order.slice().reverse(), WD="日一二三四五六";
+  if(!ds.length) return "";
+  return '<div class="dstrip" id="dstrip">'+ds.map(function(d){
+    var gs=DATA.days[d]||[], reg=gs.filter(function(g){ return !g.pr; });
+    var done=reg.filter(function(g){ return g.st; });
+    var hit=done.filter(function(g){ return cardHit(g); }).length;
+    var p=d.split("-"), dt=new Date(+p[0], +p[1]-1, +p[2], 12);
+    var lab=(reg.length && done.length===reg.length) ? ("中 "+hit+"/"+done.length)
+           : (!reg.length && gs.length ? "季前賽" : gs.length+" 場");
+    return '<div class="dchip'+(d===cur?" on":"")+(d===TODAY?" today":"")+'" data-date="'+d+'">'+
+      '<div class="dw">'+(d===TODAY?"今天":"週"+WD.charAt(dt.getDay()))+'</div>'+
+      '<div class="dday num">'+(+p[1])+'/'+(+p[2])+'</div>'+
+      '<div class="dn">'+lab+'</div></div>';
+  }).join("")+'</div>';
+}
+function fixStrip(sl){
+  var s=$("dstrip");
+  if(!s) return;
+  var on=s.querySelector(".dchip.on");
+  if(!on) return;
+  if(sl!=null) s.scrollLeft=sl;
+  var l=on.offsetLeft, r=l+on.offsetWidth;
+  if(sl==null || l<s.scrollLeft || r>s.scrollLeft+s.clientWidth)
+    s.scrollLeft=Math.max(0, l-(s.clientWidth-on.offsetWidth)/2);
+}
+function dayBar(){
+  var gs=DATA.days[cur]||[];
+  if(!gs.length) return "";
+  var reg=gs.filter(function(g){ return !g.pr; });
+  var done=reg.filter(function(g){ return g.st; });
+  var hit=done.filter(function(g){ return cardHit(g); }).length;
+  var live=gs.filter(function(g){ return liveOf(g); }).length;
+  var hi=gs.filter(function(g){
+    return !g.st && (g.cf===3 || (g.php!=null && Math.max(g.php,100-g.php)>=65)); }).length;
+  var bits=['<b class="num">'+gs.length+'</b> 場'];
+  if(live) bits.push('<span class="lv">● '+live+' 場進行中</span>');
+  if(done.length) bits.push('打完 <b class="num">'+done.length+'</b> 場，命中 <b class="num">'+hit+'</b>');
+  if(hi) bits.push('<b class="num">'+hi+'</b> 場高信心');
+  return '<div class="daybar">'+bits.join('<span class="sep">·</span>')+'</div>';
+}
+
+/* ── 精簡比賽卡（清單用）。完整內容在點進去的詳情頁 ── */
+function compactCard(g){
+  var L=liveOf(g), locked=g.php==null;
+  var homeFav=!locked && g.mg>0;
+  var pick=locked?null:(homeFav?g.h:g.a), pp=locked?null:(homeFav?g.php:100-g.php);
+  var sc=String(g.sc||"").split("-");
+  var as=g.st?sc[0]:(L?L.a:null), hs=g.st?sc[1]:(L?L.h:null);
+  var hasSc=as!=null && hs!=null && String(as)!=="" && String(hs)!=="";
+  var top=L ? '<span class="lv"><span class="ldot"></span>'+periodText(L)+' '+esc(L.dc||"")+'</span>'
+          : (g.st ? '<span>終場</span>' : '<span class="num">'+(tipoff(g.t)||"")+'</span>');
+  var bd=[];
+  if(g.po) bd.push('<span class="badge po">季後賽</span>');
+  if(g.pr) bd.push('<span class="badge pr">季前賽</span>');
+  if(g.feat) bd.push('<span class="badge lockb">今日免費</span>');
+  if(!g.st && injNewList(g).length) bd.push('<span class="badge warn">新增缺陣</span>');
+  function row(name, score, side){
+    var p=locked?null:(side==="h"?g.php:100-g.php);
+    var win=hasSc && ((side==="h")===(Number(hs)>Number(as)));
+    var rr=(DATA.records||{})[name];
+    var right=hasSc ? '<span class="sc num">'+esc(String(score))+'</span>'
+            : (p!=null ? '<span class="pp num">'+p.toFixed(0)+'%</span>'
+                       : (rr ? '<span class="rc num">'+rr.w+'-'+rr.l+'</span>' : ''));
+    var cls="tr"+((!g.st && !hasSc && pick===name)?" fav":"")+((g.st && hasSc)?(win?" win":" lose"):"");
+    return '<div class="'+cls+'">'+teamMark(name)+'<span class="tn">'+esc(name)+
+      (isFav(name)?'<span class="favmk"> ★</span>':'')+'</span>'+right+'</div>';
+  }
+  var bot;
+  if(locked){
+    var lvT=["","接近五五","中等信心","高信心"][g.cf||0]||"";
+    bot=(lvT?'<span class="cf">'+lvT+'</span>':'')+'<span class="mut">🔒 '+
+      (g.past?'完整預測紀錄為付費內容':'看好哪隊為付費內容')+'</span>';
+  }else if(g.st){
+    var ok=cardHit(g);
+    bot='<span class="'+(ok?"rok":"rng")+'">'+(ok?"✓ 命中":"✗ 沒中")+'</span>'+
+        '<span>賽前看好 '+esc(pick)+' <span class="num">'+pp.toFixed(0)+'%</span></span>';
+  }else if(L){
+    bot='<span>賽前看好 '+esc(pick)+' <span class="num">'+pp.toFixed(0)+'%</span></span>';
+  }else{
+    bot=(Math.abs(g.mg)<4 ? '<span class="cf">勢均力敵</span>'
+                          : '<span class="pk">'+pickLabel(g)+esc(pick)+'</span>')+confBadge(g)+
+        '<span class="mut">預期 <span class="num">'+g.ap.toFixed(0)+'－'+g.hp.toFixed(0)+'</span></span>';
+  }
+  var bar="";
+  if(!locked && !g.st && !L){
+    var hp=Math.max(3,Math.min(97,g.php));
+    bar='<div class="mini"><i style="width:'+(100-hp).toFixed(1)+'%;background:'+teamColor(g.a,"var(--away)")+'"></i>'+
+        '<i style="width:'+hp.toFixed(1)+'%;background:'+teamColor(g.h,"var(--home)")+'"></i></div>';
+  }
+  return '<div class="gc" data-open="'+esc(gkey(g))+'" data-day="'+esc(cur)+'">'+
+    '<div class="gtop">'+top+'<span>'+bd.join("")+'</span></div>'+
+    row(g.a, as, "a")+row(g.h, hs, "h")+bar+
+    '<div class="gbot">'+bot+'<span class="chev">›</span></div></div>';
+}
+
+/* ── 通知：清單上只放「還沒決定」的詢問與 NBA 加收提醒，其餘設定在「關於」 ── */
+function notifyMini(){
+  var st=notifyState();
+  if(st==="default"){
+    if(NOTIFYSTEP) return notifyBlock();
+    if(lsGet("ntf_hide", false)) return "";
+    return '<div class="ntf"><b>開啟賽事提醒</b>'+
+      '<span>比賽開打前和結果出爐時提醒你，不用自己回來看。</span>'+
+      '<button class="ntfbtn" id="ntfopen">開啟提醒</button>'+
+      '<button class="ntfbtn ghost" id="ntfhide">先不用（之後可以在「關於」開啟）</button></div>';
+  }
+  if(st==="granted" && VAPID && !pushOff()){
+    var lgs=pushLeagues();
+    if(lgs.length && lgs.indexOf("nba")<0 && !lsGet("nba_nudge_off", false))
+      return '<div class="ntf"><b>NBA 新球季開始了</b>'+
+        '<span>你目前只收 WNBA 的通知。要一起收 NBA 的嗎？</span>'+
+        '<button class="ntfbtn" id="ntfaddnba">一起收 NBA</button>'+
+        '<button class="ntfbtn ghost" id="ntfnonba">不用</button></div>';
+  }
+  return "";
+}
+
+/* ── 賽事頁 ── */
+function viewGames(){
+  var h="", fr=freshness(), gs0=DATA.days[cur]||[];
+  if(fr.indexOf('class="stale"')>=0){ h+=fr; fr=""; }   /* 資料過期的警告放最上面，平常的更新時間放最下面 */
+  h+=offseasonPanel();
+  h+=notifyMini();
+  h+=dateStrip();
+  h+=dayBar();
+  if(DEEPHINT) h+='<div class="ntf"><b>深度解析在每一場比賽裡</b>'+
+    '<span>點任一場比賽，就能看到它的機率分布、模型與市場對照、球隊狀況。</span></div>';
+  h+=recapBlock();
+  /* 【v1.75】季前賽提醒：選到的日期有季前賽才出現 */
+  if(gs0.some(function(g){ return g.pr; })){
+    h+='<div class="hint">季前賽各隊常讓主力休息、輪換也還沒定型，這段期間的勝率與預期比分'+
+      '全部採用市場共識，也不列入任何命中率統計。'+(BASE_LOCKED?'':'季前賽期間深度解析免費開放。')+'</div>';
+  }
+  if(!gs0.length) h+='<div class="empty">這一天沒有比賽。</div>';
+  /* 【v1.82】一個賽事日可能跨台灣兩個日期（海外賽在台灣晚上、美國本土在隔天早上）：
+     先依台灣日期分段（跨日才加分段標題），段內收藏的球隊排前面，再照開賽時間 */
+  function twKey(g){
+    if(!g.t) return "";
+    var d=new Date(g.t); if(isNaN(d.getTime())) return "";
+    return d.getFullYear()+"-"+("0"+(d.getMonth()+1)).slice(-2)+"-"+("0"+d.getDate()).slice(-2);
+  }
+  function fav(g){ return (isFav(g.h)||isFav(g.a))?1:0; }
+  var gs=gs0.slice().sort(function(a,b){
+    var ka=twKey(a), kb=twKey(b);
+    if(ka!==kb) return ka<kb?-1:1;
+    var f=fav(b)-fav(a); if(f) return f;
+    return String(a.t||"")<String(b.t||"")?-1:(String(a.t||"")>String(b.t||"")?1:0);
+  });
+  var keys={}; gs.forEach(function(g){ keys[twKey(g)]=1; });
+  var split=Object.keys(keys).filter(function(k){ return k; }).length>1, last=null;
+  var WD="日一二三四五六";
+  gs.forEach(function(g){
+    var k=twKey(g);
+    if(split && k && k!==last){
+      var d=new Date(g.t), hr=d.getHours();
+      h+='<div class="gsep">'+(d.getMonth()+1)+'/'+d.getDate()+'（'+WD.charAt(d.getDay())+'）'+
+         (hr<12?'早上':(hr<18?'下午':'晚上'))+'開打</div>';
+    }
+    last=k;
+    h+=compactCard(g);
+  });
+  if(DATA.calibration && DATA.calibration.length){
+    var pool=DATA.calibration.filter(function(c){ return c.n>=4; });
+    if(!pool.length) pool=DATA.calibration;
+    var best=pool.reduce(function(a,b){ return b.said>a.said?b:a; });
+    h+='<div class="receipt tap" id="gomodel">預測說有<b>'+esc(best.label)+'</b>把握的比賽，實際打完命中 '+
+      '<b class="num">'+best.was.toFixed(0)+'%</b>（'+best.n+' 場）<span class="mut">　看完整成績 ›</span></div>';
+  }
+  h+=fr;
+  h+='<div class="disc">勝率是機率，不是保證。所有內容由統計模型依歷史數據產生，僅供資訊參考及娛樂用途。</div>';
+  return h;
+}
+
+/* ── 比賽詳情 ── */
+function viewDetail(){
+  var g=findGame(DETAIL.d, DETAIL.k);
+  if(!g){ DETAIL=null; return viewGames(); }
+  cur=DETAIL.d;
+  var p=DETAIL.d.split("-");
+  var h='<div class="detbar"><button class="back" id="detback">← 返回</button>'+
+    '<span class="mut">'+(+p[1])+'/'+(+p[2])+' 的比賽</span></div>';
+  h+=(g.php==null ? lockedCard(g) : gameCard(g, true));
+  h+=detailDeep(g);
+  h+='<div class="disc">勝率是機率，不是保證。所有內容由統計模型依歷史數據產生，僅供資訊參考及娛樂用途。</div>';
+  return h;
+}
+function detailDeep(g){
+  var pg=premGameFor(DETAIL.d, g);
+  var part=!!(PREM && PREM._partial);
+  if(pg && !(part && !g.st)){
+    var pre="";
+    if(PREM._cached && (Date.now()-PREM._cached)/3600000 > 26)
+      pre='<div class="stale">⚠️ 目前顯示的是離線保存的內容，暫時連不上更新。</div>';
+    return '<section>'+head("深度解析", g.st?"打完的比賽免費開放":"")+pre+deepBody(pg)+'</section>';
+  }
+  if(g.st) return "";
+  /* 【v1.95】一日券只開放購買那一天的比賽。晚上先抓到的隔天賽程，要用隔天的券 */
+  if(!LOCKED && PREM && !part && DETAIL.d > passDayNow()){
+    var pp=DETAIL.d.split("-");
+    return '<div class="empty">這一批比賽的深度解析要用台灣 '+(+pp[1])+'/'+(+pp[2])+
+      ' 下午兩點以後購買的一日券才會開放。<br>你目前的一日券涵蓋的是前一批。</div>';
+  }
+  if(LOCKED || !PREM || part) return '<section>'+lockPanel()+'</section>';
+  return "";
+}
+
+/* ── 排行裡的隊名、球隊清單 ── */
+function tlink(n){ return '<span class="tl" data-team="'+esc(n)+'">'+esc(n)+'</span>'; }
+function allTeams(){
+  var seen={}, out=[];
+  function add(n){ if(n && !seen[n]){ seen[n]=1; out.push(n); } }
+  var L=PREM&&PREM.league;
+  if(L&&L.teams) L.teams.forEach(function(t){ add(t.team); });
+  Object.keys(DATA.records||{}).forEach(add);
+  Object.keys(teamIdMap()).forEach(add);
+  out.sort(function(a,b){
+    var f=(isFav(b)?1:0)-(isFav(a)?1:0);
+    return f || a.localeCompare(b,"zh-Hant");
+  });
+  return out;
+}
+function teamGrid(){
+  var names=allTeams();
+  if(!names.length) return '<div class="empty">球隊資料還在準備中，下一次更新後就會出現。</div>';
+  return head("選擇球隊","賽程、預測紀錄與實力走勢")+
+    '<div class="tgrid">'+names.map(function(n){
+      return '<div class="tb" data-team="'+esc(n)+'">'+teamMark(n)+'<span class="tbn">'+esc(n)+'</span>'+
+        (isFav(n)?'<span class="favmk">★</span>':'')+'</div>';
+    }).join("")+'</div>'+
+    '<div class="hint">收藏的球隊排在最前面；其他排行表上的隊名也可以直接點。</div>';
+}
+
+/* ── 球隊頁：賽程（ESPN）、最近戰績、本季預測紀錄、實力走勢、輪替 ── */
+function schedBlock(name){
+  var id=teamIdMap()[name];
+  if(!id) return "";
+  var key="sch:"+id;
+  var ev=xget(key, ESPN_BASE+"/teams/"+id+"/schedule", 3*3600000, parseSched);
+  var h=head("接下來的比賽","時間為手機的當地時間");
+  if(!ev) return h+'<div class="empty">'+(xstate(key)==="err"?"暫時抓不到賽程，稍後再試。":"讀取賽程中…")+'</div>';
+  var up=ev.filter(function(e){ return e.st!=="post"; });
+  var done=ev.filter(function(e){ return e.st==="post"; });
+  h+=up.length ? up.slice(0,8).map(function(e){
+      var home=e.h.n===name, opp=home?e.a.n:e.h.n;
+      return '<div class="srow"><span class="num">'+fmtWhen(e.t)+'</span><span>'+
+        (home?'主場　vs ':'客場　＠ ')+esc(opp)+(e.st==="in"?'　<b class="lv">進行中</b>':'')+'</span></div>';
+    }).join("")
+    : '<div class="empty">這個階段已經沒有排定的比賽。</div>';
+  if(up.length) h+='<div class="actions" style="padding:12px 18px 0"><div class="act" data-ics="'+esc(name)+
+    '">📅 把剩下 '+up.length+' 場加入手機行事曆</div></div>'+
+    '<div class="hint">行事曆檔案在手機上產生，加入後比賽時間有異動不會自動更新，要的話再加一次就好。</div>';
+  if(done.length){
+    h+='<div style="height:20px"></div>'+head("最近戰績","");
+    h+=done.slice(-5).reverse().map(function(e){
+      var home=e.h.n===name, me=home?e.h:e.a, op=home?e.a:e.h;
+      var win=me.s!=null && op.s!=null && Number(me.s)>Number(op.s);
+      return '<div class="srow"><span class="num">'+fmtWhen(e.t).replace(/ ?\d\d:\d\d$/,"")+'</span><span>'+
+        (home?'vs ':'＠ ')+esc(op.n)+'　<b class="'+(win?"rok":"rng")+'">'+(win?"勝":"敗")+'</b> <span class="num">'+
+        esc(me.s||"")+'-'+esc(op.s||"")+'</span></span></div>';
+    }).join("");
+  }
+  return h;
+}
+function viewTeamPage(name){
+  var L=PREM&&PREM.league;
+  if(L && (!L.teams || !L.teams.length)) L=null;
+  var lt=L ? L.teams.filter(function(t){ return t.team===name; })[0] : null;
+  var R=(DATA.records||{})[name];
+  var sim=(L&&L.sim)||DATA.sim;
+  var st=(sim&&sim.teams) ? sim.teams.filter(function(t){ return t.team===name; })[0] : null;
+  function pc(v){ return v>=99.5?">99%":(v>0&&v<1?"<1%":Math.round(v)+"%"); }
+  var stats=[];
+  var w=(lt&&lt.w!=null)?lt.w:(R?R.w:null), l=(lt&&lt.w!=null)?lt.l:(R?R.l:null);
+  if(w!=null) stats.push('戰績<b>'+w+'-'+l+'</b>');
+  if(lt && lt.seed!=null) stats.push((CONF_ZH[lt.conf]||lt.conf||"")+'排名<b>'+lt.seed+'</b>');
+  var sk=R&&R.st;
+  if(sk && sk.n>=2) stats.push((sk.w?"連勝":"連敗")+'<b>'+sk.n+'</b>');
+  if(lt) stats.push('實力評分<b>'+sign1(lt.overall)+'</b>');
+  var h='<div class="detbar"><button class="back" id="detback">← 返回</button></div>'+
+    '<div class="tph"><div class="tpn">'+teamMark(name)+'<span>'+esc(name)+'</span>'+
+    '<span class="star'+(isFav(name)?" on":"")+'" data-fav="'+esc(name)+'">★</span></div>'+
+    (stats.length?'<div class="tps">'+stats.map(function(x){ return '<span>'+x+'</span>'; }).join("")+'</div>':'');
+  if(st) h+='<div class="tps"><span>預估戰績<b>'+Math.round(st.w)+'-'+Math.round(st.l)+'</b></span>'+
+    '<span>進季後賽<b>'+pc(st.po)+'</b></span><span>奪冠<b>'+pc(st.ch)+'</b></span></div>';
+  var HH=L&&L.history, hv=HH&&HH.v&&HH.v[name];
+  if(hv){
+    var sl=hv.slice(-30), xs=sl.filter(function(x){ return x!=null; });
+    if(xs.length>=2){
+      var lo=Math.min.apply(null,xs), hi=Math.max.apply(null,xs);
+      if(hi-lo<3){ var mid=(hi+lo)/2; lo=mid-1.5; hi=mid+1.5; }
+      var dl=xs[xs.length-1]-xs[0];
+      h+='<div class="tptr"><span class="mut">近 '+sl.length+' 天實力走勢</span>'+miniSpark(sl, lo, hi)+
+        '<span class="num '+(dl>=0.05?"rok":(dl<=-0.05?"rng":"mut"))+'">'+(dl>0?"+":"")+dl.toFixed(1)+'</span></div>';
+    }
+  }
+  h+='<div class="hint" style="margin:8px 0 0">點右上角的 ★ 收藏，賽事清單會把這隊的比賽排在前面。</div></div>';
+  var sb=schedBlock(name);
+  if(sb) h+='<section>'+sb+'</section>';
+  var rows=teamGames(name);
+  if(rows.length){
+    var done=rows.filter(function(r){ return r.g.st && !r.g.pr && r.g.php!=null; });
+    var hit=done.filter(function(r){ return cardHit(r.g); }).length;
+    h+='<section>'+head("本季預測紀錄", done.length?("對過答案 "+hit+"/"+done.length+"，點一場看完整內容"):"點一場看完整內容");
+    h+=rows.slice(0,40).map(function(r){
+      var g=r.g, opp=g.h===name?g.a:g.h, home=g.h===name, locked=g.php==null;
+      var res="";
+      if(g.st){
+        var sc=String(g.sc||"").split("-"), me=home?sc[1]:sc[0], op=home?sc[0]:sc[1];
+        res=(locked||g.pr?"":'<b class="'+(cardHit(g)?"rok":"rng")+'">'+(cardHit(g)?"✓":"✗")+'</b> ')+
+          '<span class="num">'+esc(me||"")+'-'+esc(op||"")+'</span>';
+      }else if(!locked){
+        var pk=g.mg>0?g.h:g.a, pp=g.mg>0?g.php:100-g.php;
+        res='<span class="mut">看好 '+esc(pk)+' '+pp.toFixed(0)+'%</span>';
+      }else res='<span class="mut">🔒</span>';
+      var p=r.d.split("-");
+      return '<div class="srow tap" data-open="'+esc(gkey(g))+'" data-day="'+esc(r.d)+'"><span class="num">'+
+        (+p[1])+'/'+(+p[2])+'</span><span>'+(home?'vs ':'＠ ')+esc(opp)+'　'+res+' <span class="mut">›</span></span></div>';
+    }).join("")+'</section>';
+  }
+  var rot=L&&L.rotations&&L.rotations[name];
+  if(rot && rot.length){
+    h+='<section>'+head("主要輪替","場均上場時間與得分");
+    h+='<article class="card"><div class="deep">'+rot.map(function(pl){
+      var ex=[];
+      if(pl.reb!=null) ex.push(num(pl.reb)+" 籃板");
+      if(pl.ast!=null) ex.push(num(pl.ast)+" 助攻");
+      if(pl.pm!=null) ex.push((pl.pm>0?"+":"")+num(pl.pm));
+      return '<div class="krow"><span>'+esc(pl.name)+'</span><b class="num">'+num(pl.min)+' 分鐘　'+
+        num(pl.pts)+' 分'+(ex.length?'　'+ex.join("　"):"")+'</b></div>';
+    }).join("")+'</div></article>'+
+    '<div class="hint">依場均上場時間排序。缺陣影響就是用這份名單換算的。</div></section>';
+  }
+  return h;
+}
+
 /* ── 分派與事件 ── */
 
-var TABS=[["games","賽事"],["deep","解析"],["teams","球隊"],["model","模型"],["about","關於"]];
+/* 【v2.00】底部選單四頁。"deep"（舊的解析分頁）只留給捷徑與舊的 last_tab，render 會轉回賽事 */
+var TABS=[["games","賽事"],["teams","排行"],["model","準確度"],["about","關於"]];
 
 function renderTabs(){
+  var on=(TAB==="deep")?"games":TAB;
   $("tabs").innerHTML=TABS.map(function(t){
-    return '<div class="tab'+(TAB===t[0]?" on":"")+'" data-t="'+t[0]+'">'+t[1]+'</div>';
+    return '<div class="tab'+(on===t[0]?" on":"")+'" data-t="'+t[0]+'">'+(TAB_ICON[t[0]]||"")+
+      '<span>'+t[1]+'</span></div>';
   }).join("");
   $("tabs").querySelectorAll(".tab").forEach(function(el){
     el.addEventListener("click",function(){
-      TAB=el.getAttribute("data-t");
-      lsSet("last_tab",TAB);
-      if(TAB!=="games") curTeam=null;
-      render(); window.scrollTo({top:0,behavior:"smooth"});
+      var t=el.getAttribute("data-t");
+      var top=(t===TAB && !DETAIL && !TEAMPAGE);   /* 已經在這頁的最上層：平滑捲回頂端 */
+      navReset(); DEEPHINT=false; curTeam=null;
+      TAB=t; lsSet("last_tab",TAB);
+      render(); window.scrollTo({top:0,behavior:top?"smooth":"auto"});
     });
   });
 }
 
 function renderHeader(){
-  if(TAB==="games"&&curTeam){
-    var rows=teamGames(curTeam);
-    $("hd").innerHTML='<span class="d num">'+rows.length+'</span> 場預測紀錄';
-    $("sub").textContent=curTeam+" 本季";
-    return;
-  }
-  if(TAB==="games"||TAB==="deep"){
-    var p=cur.split("-"), n=DATA.days[cur].length;
-    $("hd").innerHTML='<span class="d num">'+parseInt(p[1],10)+'/'+parseInt(p[2],10)+
-      '</span> 共 <span class="d num">'+n+'</span> 場';
-    $("sub").textContent=(cur>=TODAY)
-      ? "用整季資料重建的球隊評分，算出每場的機率分布"
-      : "以下是 "+cur+" 的預測";
-    return;
-  }
-  var titles={teams:["球隊資料","全聯盟的實力、戰績與打法"],
-              model:["模型表現","我們自己的成績，攤開來看"],
-              about:["關於","這些數字是怎麼來的"]};
-  var t=titles[TAB]||["",""];
-  $("hd").textContent=t[0];
-  $("sub").textContent=t[1];
+  var t;
+  if(TAB==="games" && DETAIL) t="比賽詳情";
+  else if(TAB==="teams") t=TEAMPAGE?"球隊":"排行";
+  else if(TAB==="model") t="準確度";
+  else if(TAB==="about") t="關於";
+  else t=LEAGUE.toUpperCase()+" 賽事預測";
+  $("hd").textContent=t;
+  $("sub").textContent="";
 }
 
 function bind(){
   var host=$("view");
+  /* 【v2.00】隊名 → 球隊頁；比賽 → 詳情；日期列；返回 */
   host.querySelectorAll("[data-team]").forEach(function(el){
-    el.addEventListener("click",function(){
-      curTeam=el.getAttribute("data-team"); TAB="games";
-      render(); window.scrollTo({top:0,behavior:"smooth"});
+    el.addEventListener("click",function(ev){
+      if(ev && ev.stopPropagation) ev.stopPropagation();
+      openTeam(el.getAttribute("data-team"));
     });
+  });
+  host.querySelectorAll("[data-open]").forEach(function(el){
+    el.addEventListener("click",function(){
+      openDetail(el.getAttribute("data-day")||cur, el.getAttribute("data-open"));
+    });
+  });
+  host.querySelectorAll("[data-date]").forEach(function(el){
+    el.addEventListener("click",function(){
+      var d=el.getAttribute("data-date");
+      if(!d || !DATA.days[d] || d===cur) return;
+      cur=d; gi=0; render();
+    });
+  });
+  host.querySelectorAll("#detback").forEach(function(el){
+    el.addEventListener("click", goBack);
+  });
+  host.querySelectorAll("#gomodel").forEach(function(el){
+    el.addEventListener("click",function(){
+      navReset(); TAB="model"; lsSet("last_tab",TAB);
+      render(); window.scrollTo(0,0);
+    });
+  });
+  host.querySelectorAll("#ntfhide").forEach(function(el){
+    el.addEventListener("click",function(){ lsSet("ntf_hide", true); render(); });
   });
   host.querySelectorAll("#lockhd").forEach(function(el){
     el.addEventListener("click",function(){
@@ -2565,6 +3325,17 @@ function bind(){
   onChange("gamesel", function(v){ gi=parseInt(v,10)||0; render(); });
   onChange("modelsub", function(v){ SUB.model=v; render(); });
   onChange("rotsel", function(v){ ROTTEAM=v; render(); });
+  /* 【v2.00】賽程、球員排行、賽後數據、行事曆 */
+  onChange("ldrsel", function(v){ LDRCAT=v; render(); });
+  host.querySelectorAll("[data-box]").forEach(function(el){
+    el.addEventListener("click",function(){
+      var id=el.getAttribute("data-box");
+      BOXOPEN[id]=!BOXOPEN[id]; render();
+    });
+  });
+  host.querySelectorAll("[data-ics]").forEach(function(el){
+    el.addEventListener("click",function(){ downloadIcs(el.getAttribute("data-ics")); });
+  });
 }
 
 /* 【v1.77】付費內容裡帶著完整版的比賽卡片（PREM.cards）。
@@ -2584,11 +3355,17 @@ function applyPremCards(){
 
 function render(){
   applyPremCards();
+  if(TAB==="deep"){ TAB="games"; DEEPHINT=true; lsSet("last_tab","games"); }
+  if(DETAIL && !findGame(DETAIL.d, DETAIL.k)) DETAIL=null;
+  var ds=$("dstrip"), sl=ds?ds.scrollLeft:null;     /* 日期列重畫後捲回原位 */
   renderTabs(); renderHeader();
-  var v={games:viewGames,deep:viewDeep,teams:viewTeams,
-         model:viewModel,about:viewAbout}[TAB];
+  var v;
+  if(TAB==="games" && DETAIL) v=viewDetail;
+  else if(TAB==="teams" && TEAMPAGE) v=function(){ return viewTeamPage(TEAMPAGE); };
+  else v={games:viewGames,teams:viewTeams,model:viewModel,about:viewAbout}[TAB];
   $("view").innerHTML=v?v():"";
   bind();
+  fixStrip(sl);
 }
 
 /* ── 取得付費內容 ── */
@@ -3238,7 +4015,8 @@ function liveBlock(g){
   if(!L || L.s!=="in") return "";
   var per=L.p<=4?("第"+"一二三四".charAt(L.p-1)+"節"):(L.p===5?"延長賽":"第"+(L.p-4)+"次延長");
   var h='<div class="live"><div class="lhead"><span class="ldot"></span>比賽進行中　'+per+' '+
-    esc(L.dc||"")+'　'+esc(g.a)+' <b class="num">'+L.a+'</b> : <b class="num">'+L.h+'</b> '+esc(g.h)+'</div>';
+    esc(L.dc||"")+'　'+esc(g.a)+' <b class="num">'+L.a+'</b> : <b class="num">'+L.h+'</b> '+esc(g.h)+'</div>'+
+    lsTable(g, L.ls);
   var pg=premGame(g);
   if(pg && pg.blend && pg.margin_sd){
     var p=liveProb(L, pg.blend.margin, pg.margin_sd);
@@ -3276,17 +4054,57 @@ function liveWanted(){
   });
   return out;
 }
+/* 【v1.99】Worker 轉 ESPN 會被擋（ESPN 擋 Cloudflare 機房 IP，回 upstream 403）。
+   拿不到就由手機直接問 ESPN —— 各人自己的網路不會被擋，這個端點也允許跨網域讀取。
+   轉成跟 Worker 一樣的格式：{比賽ID: {s, p, c, dc, h, a}} */
+var ESPN_SB_URL = {
+  nba: "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard",
+  wnba: "https://site.api.espn.com/apis/site/v2/sports/basketball/wnba/scoreboard"
+};
+function espnToLive(d){
+  var out={};
+  (d.events||[]).forEach(function(ev){
+    var st=ev.status||{}, comp=(ev.competitions||[])[0]||{}, h=null, a=null;
+    (comp.competitors||[]).forEach(function(c){
+      var sc=Number(c.score);
+      if(c.homeAway==="home") h=isFinite(sc)?sc:null; else a=isFinite(sc)?sc:null;
+    });
+    out[String(ev.id)]={s:(st.type||{}).state||"", p:st.period||0,
+      c:Math.round(Number(st.clock)||0), dc:st.displayClock||"", h:h, a:a,
+      ls:lsFromComp(comp)};       /* 【v2.00】各節比分 */
+  });
+  return out;
+}
+function fetchLive(){
+  /* 【v2.00】先問 ESPN（手機自己的網路不會被擋，帶時間戳拿到的一定是最新的），
+     失敗才問 Worker；Worker 被 ESPN 擋的時候會一直回最後一份，超過 2 分鐘的不用 */
+  var viaWorker=function(){
+    if(!API || API.indexOf("__")===0) return null;
+    return fetch(nosw(API.replace(/\/+$/,"")+"/live?league="+LEAGUE, true))
+      .then(function(r){ return r.ok?r.json():null; })
+      .then(function(d){
+        if(!d || !d.games || !Object.keys(d.games).length) return null;
+        if(d.t && Date.now()-d.t>120000) return null;
+        return d.games;
+      })
+      .catch(function(){ return null; });
+  };
+  if(!ESPN_SB_URL[LEAGUE]) return viaWorker();
+  return fetch(nosw(ESPN_SB_URL[LEAGUE], true))
+    .then(function(r){ return r.ok?r.json():null; })
+    .then(function(j){ return j?espnToLive(j):null; })
+    .catch(function(){ return null; })
+    .then(function(g){ return (g && Object.keys(g).length) ? g : viaWorker(); });
+}
 function pollLive(){
   clearTimeout(LIVET);
-  if(!API || API.indexOf("__")===0){ return; }
   if(document.visibilityState!=="visible" || !liveWanted()){
     LIVET=setTimeout(pollLive, 300000); return;
   }
-  fetch(API.replace(/\/+$/,"")+"/live?league="+LEAGUE)
-    .then(function(r){ return r.ok?r.json():null; })
-    .then(function(d){
-      if(d && d.games){
-        var before=JSON.stringify(LIVE); LIVE=d.games;
+  Promise.resolve(fetchLive())
+    .then(function(g){
+      if(g){
+        var before=JSON.stringify(LIVE); LIVE=g;
         if(TAB==="games" && JSON.stringify(LIVE)!==before) render();
       }
     })
@@ -3329,7 +4147,7 @@ try{
 /* App 已經開著時再按捷徑，只會改 hash 不會重新載入 */
 window.addEventListener("hashchange",function(){
   var t=tabFromHash();
-  if(t && t!==TAB){ TAB=t; lsSet("last_tab",t); render(); }
+  if(t && (t!==TAB || DETAIL || TEAMPAGE)){ navReset(); TAB=t; lsSet("last_tab",t); render(); }
 });
 
 function updBanner(msg, click){
