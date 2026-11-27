@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://allwin-design.github.io/sitemap.xml

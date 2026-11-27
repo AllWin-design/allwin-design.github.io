@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="zh-Hant"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>模型怎麼算、機率怎麼讀｜籃球賽事預測</title>
+<meta name="description" content="NBA、WNBA 賽事預測模型的說明：看哪些資料、勝率怎麼讀、各種判斷是什麼、怎麼驗證準不準。">
+<link rel="canonical" href="https://allwin-design.github.io/guide.html">
+<link rel="icon" href="icon-192.png">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5661648631944918" crossorigin="anonymous"></script>
+<style>
+body{margin:0;background:#0E151C;color:#E6EDF3;font:16px/1.75 -apple-system,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}
+main{max-width:720px;margin:0 auto;padding:22px 18px 40px}
+a{color:#7fb6ff}
+h1{font-size:23px;line-height:1.4;margin:6px 0 10px}
+h2{font-size:18px;margin:28px 0 8px;color:#E6EDF3}
+h3{font-size:16px;margin:20px 0 4px;color:#cfe0ee}
+p{margin:8px 0}
+ul{margin:4px 0 10px;padding-left:20px}
+li{margin:2px 0}
+.crumb{font-size:13px;color:#8B98A5}
+.crumb a{color:#8B98A5}
+.lead{font-size:17px;color:#cfe0ee}
+.box{background:#16212B;border-radius:12px;padding:12px 16px;margin:14px 0}
+.cta{display:block;text-align:center;background:#2F81F7;color:#fff;text-decoration:none;border-radius:12px;padding:12px;margin:22px 0;font-weight:600}
+.nav{display:flex;justify-content:space-between;gap:12px;font-size:14px;margin-top:26px}
+.ad{margin:26px 0;min-height:60px}
+footer{max-width:720px;margin:0 auto;padding:16px 18px 30px;border-top:1px solid #22303c;font-size:12.5px;color:#8B98A5;line-height:1.8}
+footer a{color:#8B98A5}
+</style>
+</head><body>
+<main>
+
+<div class="crumb"><a href="./">首頁</a> › 模型說明</div>
+<h1>模型怎麼算、機率怎麼讀</h1>
+<p class="lead">這個網站每天替每一場 NBA、WNBA 比賽算出勝率、預期比分和各種判斷，比賽開打前公開，打完後全部對答案。這一頁說明數字是怎麼來的、該怎麼解讀。</p>
+
+<h2>一、模型看哪些東西</h2>
+<ul>
+<li><b>攻守評分</b>：每隊每一百個回合平均得幾分、失幾分，並依照對手強弱調整。打一堆弱隊打出來的漂亮數字，會被修正回比較合理的水準。</li>
+<li><b>比賽節奏</b>：兩隊平常一場打多少回合，決定這場大概會打出多高的分數。</li>
+<li><b>休息與賽程</b>：背靠背（連續兩天出賽）、長途客場、休息天數，都會讓表現往下掉一點。</li>
+<li><b>主力缺陣</b>：看缺陣球員平常上場多久、貢獻多少，換算成球隊大約少幾分。這是我們測過的所有改法裡，唯一經過整季回測確定有幫助的一項。</li>
+<li><b>市場共識</b>：各家公開機構對這場比賽的綜合預期。它是最難打敗的基準，所以最後的數字是模型和市場共識合起來算的，比例依驗證結果調整。</li>
+</ul>
+<p>資料全部來自公開網站，每天定時更新；比賽開打前會再更新幾次，傷兵消息出來後數字會跟著變。</p>
+
+<h2>二、勝率怎麼讀</h2>
+<p>勝率是「這種比賽打很多次，這隊大概贏幾成」，不代表一定會發生。</p>
+<ul>
+<li><b>70% 以上</b>：模型很有把握，但十場還是會輸三場左右。</li>
+<li><b>55%～70%</b>：看好一邊，但爆冷很常見。</li>
+<li><b>55% 以下</b>：跟五五波差不多，十場會輸四到五場。</li>
+</ul>
+<p>籃球單場的分差波動很大，標準差大約 13 分。所以模型看好某隊贏 10 分，實際打出 20 分或反而輸球，都是正常範圍內的事。</p>
+
+<h2>三、各種判斷是什麼</h2>
+<ul>
+<li><b>勝負</b>：哪一隊會贏。勝率 70% 以上標金框，65%～70% 標銀框。</li>
+<li><b>贏 5 分以上</b>：模型看好的那隊，能不能贏超過 5 分。</li>
+<li><b>分差判斷</b>：某隊「贏超過幾分」或「贏球、或輸在幾分以內」，分數取自綜合來源。</li>
+<li><b>上半場、第一節</b>：誰領先、兩隊合計或單隊得分高於或低於某個分數。</li>
+<li><b>⭐ 首選判斷</b>：每一種判斷都用本季實際結果找出「最準的機率區間」，當天落在區間裡的才標 ⭐。命中跌破五成就自動下架，每天重算。</li>
+</ul>
+
+<h2>四、怎麼證明準不準</h2>
+<p>我們用三個原則驗證：</p>
+<ul>
+<li><b>只用賽前拿得到的資料</b>：回測時不能偷看結果，每一場都假裝自己站在開打前。</li>
+<li><b>跟基準比</b>：不是只看「猜中幾場」，而是跟市場共識、跟「永遠猜主場」這類基準比，看有沒有真的比較好。</li>
+<li><b>校準</b>：模型說 70% 的比賽，實際要中七成左右才算誠實。App 的「準確度」頁直接列出每個機率區間的預測與實際命中。</li>
+</ul>
+<p>每一場賽前公開的預測都留在網站上，打完後在<a href="nba/daily/">每日賽果文章</a>逐場對答案，猜錯的也在裡面。這是唯一能讓人相信我們沒有挑著講的方法。</p>
+
+<h2>五、這些數字適合怎麼用</h2>
+<p>這是給球迷理解比賽用的資訊參考：哪場勢均力敵、哪隊被高估、傷兵影響多大。它不能預知結果，單場的運氣成分很大，請把它當成看球時的另一個角度，而不是答案。</p>
+<a class="cta" href="nba/#tab=games">打開 App 看今天的預測</a><p style="font-size:14px;color:#8B98A5;text-align:center">Android：Google Play 搜尋「籃球賽事預測」・iPhone／iPad 用 Safari 開本網站・🎁 新用戶免費試用 3 天</p>
+<div class="ad"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5661648631944918" data-ad-slot="7968217717" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div>
+</main>
+<footer>
+所有內容由統計模型與歷史數據產生，僅供資訊參考及娛樂用途；機率只代表可能性，猜錯的場次也全部公開。<br>
+<a href="nba/daily/">每日賽果文章</a>　·　<a href="guide.html">模型說明</a>　·
+<a href="terms.html">服務條款</a>　·　<a href="privacy.html">隱私權政策</a>　·
+<a href="https://line.me/R/ti/p/@809bdyfw" target="_blank" rel="noopener">LINE 客服 @809bdyfw</a>
+</footer>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "697868a2ee6746fc865d65490a29acaa"}'></script><!-- End Cloudflare Web Analytics -->
+</body></html>
